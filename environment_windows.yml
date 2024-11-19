@@ -1,0 +1,15 @@
+name: cv4rs
+channels:
+  - pytorch
+  - conda-forge
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cudatoolkit=11.8  # Passe die Version an dein System an
+  - pip:
+      - timm
