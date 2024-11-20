@@ -29,6 +29,7 @@ from utils.pytorch_utils import (
     update_results,
     start_cuda
 )
+from utils.pruning_utils import apply_pruning
 
 
 # data_dirs = {
@@ -144,6 +145,7 @@ class FLCLient:
         self.criterion_kwargs = criterion_kwargs
         self.num_classes = num_classes
         self.dataset_filter = dataset_filter
+        self.pruning_mask = None  # Initialize pruning mask
         self.results = init_results(self.num_classes)
         self.dataset = BENv2DataSet(
         data_dirs=data_dirs,
@@ -179,8 +181,18 @@ class FLCLient:
             pin_memory=True,
         )
 
+    # def set_model(self, model: torch.nn.Module):
+    #     self.model = copy.deepcopy(model)
+
     def set_model(self, model: torch.nn.Module):
         self.model = copy.deepcopy(model)
+        if self.pruning_mask is not None:
+            # Apply pruning mask to the model
+            state_dict = self.model.state_dict()
+            for name, mask in self.pruning_mask.items():
+                if name in state_dict:
+                    state_dict[name] = state_dict[name] * mask  # Apply mask
+            self.model.load_state_dict(state_dict)
 
     def train_one_round(self, epochs: int, validate: bool = False):
         state_before = copy.deepcopy(self.model.state_dict())
@@ -306,8 +318,31 @@ class GlobalClient:
             elif isinstance(model, ResNet50):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
 
+    # def train(self, communication_rounds: int, epochs: int):
+    #     start = time.perf_counter()
+    #     for com_round in range(1, communication_rounds + 1):
+    #         print("Round {}/{}".format(com_round, communication_rounds))
+    #         print("-" * 10)
+    #
+    #         self.communication_round(epochs)
+    #         report = self.validation_round()
+    #
+    #         self.results = update_results(self.results, report, self.num_classes)
+    #         print_micro_macro(report)
+    #
+    #         for client in self.clients:
+    #             client.set_model(self.model)
+    #     self.train_time = time.perf_counter() - start
+    #
+    #     self.client_results = [client.get_validation_results() for client in self.clients]
+    #     self.save_results()
+    #     self.save_state_dict()
+    #     return self.results, self.client_results
+
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
+        pruning_ratio = 0.8  # Define pruning ratio
+
         for com_round in range(1, communication_rounds + 1):
             print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
@@ -318,8 +353,21 @@ class GlobalClient:
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
 
-            for client in self.clients:
-                client.set_model(self.model)
+            # Pruning logic after every 5 communication rounds
+            if com_round % 5 == 0:
+                print(f"Applying pruning after round {com_round}...")
+                pruning_result = apply_pruning(self.model, pruning_ratio, visualize=True)
+                pruned_state_dict = pruning_result["pruned_state_dict"]
+                pruning_mask = pruning_result["pruning_mask"]
+
+                # Update the global model with pruned weights
+                self.model.load_state_dict(pruned_state_dict)
+
+                # Distribute the pruned weights and mask to clients
+                for client in self.clients:
+                    client.set_model(copy.deepcopy(self.model))
+                    client.pruning_mask = pruning_mask  # Send pruning mask to clients
+
         self.train_time = time.perf_counter() - start
 
         self.client_results = [client.get_validation_results() for client in self.clients]
