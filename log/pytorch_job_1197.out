@@ -1,0 +1,97 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Starting Round 1/5...
+----------
+Training and communication for Round 1...
+Epoch 1/1
+----------
+Communication round completed.
+Bug fix for empty classification report.
+Validation completed.
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3873
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.2384
+
+Applying pruning after round 1...
+Pruned state_dict successfully loaded.
+Pruning mask reapplied successfully.
+End of Round 1/5. Moving to next round...
+Starting Round 2/5...
+----------
+Pruning mask reapplied successfully for this round.
+Training and communication for Round 2...
+Epoch 1/1
+----------
+Communication round completed.
+Bug fix for empty classification report.
+Validation completed.
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.4943
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3035
+
+End of Round 2/5. Moving to next round...
+Starting Round 3/5...
+----------
+Pruning mask reapplied successfully for this round.
+Training and communication for Round 3...
+Epoch 1/1
+----------
+Communication round completed.
+Bug fix for empty classification report.
+Validation completed.
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.5088
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3295
+
+End of Round 3/5. Moving to next round...
+Starting Round 4/5...
+----------
+Pruning mask reapplied successfully for this round.
+Training and communication for Round 4...
+Epoch 1/1
+----------
+Communication round completed.
+Bug fix for empty classification report.
+Validation completed.
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.4778
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3383
+
+End of Round 4/5. Moving to next round...
+Starting Round 5/5...
+----------
+Pruning mask reapplied successfully for this round.
+Training and communication for Round 5...
+Epoch 1/1
+----------
+Communication round completed.
+Bug fix for empty classification report.
+Validation completed.
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.6100
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3948
+
+End of Round 5/5. Moving to next round...
+Training completed successfully.
+[{'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}]

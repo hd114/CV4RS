@@ -352,53 +352,70 @@ class GlobalClient:
         global_pruning_mask = None  # Initialize pruning mask
 
         for com_round in range(1, communication_rounds + 1):
-            print(f"Start of Round {com_round}/{communication_rounds}")
+            print(f"Starting Round {com_round}/{communication_rounds}...")
             print("-" * 10)
 
-            # Apply pruning mask if it exists
+            # Prüfen, ob die Maske existiert, und anwenden
             if global_pruning_mask is not None:
-                print("Applying pruning mask before training...")
                 state_dict = self.model.state_dict()
                 for name, mask in global_pruning_mask.items():
                     if name in state_dict:
-                        state_dict[name] = state_dict[name] * mask  # Apply mask
+                        state_dict[name] = state_dict[name] * mask  # Anwenden der Maske
                 self.model.load_state_dict(state_dict)
+                print("Pruning mask reapplied successfully for this round.")
 
-            # Run training and validation
+            # Kommunikation und Training
+            print(f"Training and communication for Round {com_round}...")
             self.communication_round(epochs)
-            report = self.validation_round()
+            print("Communication round completed.")
 
-            # Update results and print metrics
+            # Validierung
+            report = self.validation_round()
+            print("Validation completed.")
+
+            # Ergebnisse aktualisieren und ausgeben
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
 
-            # Apply pruning after the first communication round
+            # Pruning nach der ersten Kommunikationsrunde anwenden
             if com_round == 1:
                 print(f"Applying pruning after round {com_round}...")
-                pruning_result = apply_pruning(self.model, pruning_ratio)
-                global_pruning_mask = pruning_result["pruning_mask"]
-
-                # Update the global model with pruned weights
-                pruned_state_dict = pruning_result["pruned_state_dict"]
                 try:
+                    pruning_result = apply_pruning(self.model, pruning_ratio)
+                    global_pruning_mask = pruning_result["pruning_mask"]
+
+                    # Geprunte Gewichte laden
+                    pruned_state_dict = pruning_result["pruned_state_dict"]
                     self.model.load_state_dict(pruned_state_dict)
                     print("Pruned state_dict successfully loaded.")
+
+                    # Sicherstellen, dass die Maske direkt angewendet bleibt
+                    for name, mask in global_pruning_mask.items():
+                        if name in pruned_state_dict:
+                            pruned_state_dict[name] = pruned_state_dict[name] * mask
+                    self.model.load_state_dict(pruned_state_dict)
+                    print("Pruning mask reapplied successfully.")
+
+                    # Maske an alle Clients senden
+                    for client in self.clients:
+                        client.set_model(copy.deepcopy(self.model))
+                        client.pruning_mask = global_pruning_mask
+
                 except Exception as e:
-                    print(f"Error during loading pruned state_dict: {e}")
-                    return  # Exit if loading fails
+                    print(f"Error during pruning: {e}")
+                    raise
 
-                # Distribute pruning mask to all clients
-                for client in self.clients:
-                    client.set_model(copy.deepcopy(self.model))
-                    client.pruning_mask = global_pruning_mask
+            print(f"End of Round {com_round}/{communication_rounds}. Moving to next round...")
 
-            print(f"End of Round {com_round}/{communication_rounds}")
-
+        # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start
-        print("Training completed. Saving results and state dict.")
+
+        # Ergebnisse der Clients sammeln
         self.client_results = [client.get_validation_results() for client in self.clients]
         self.save_results()
         self.save_state_dict()
+
+        print("Training completed successfully.")
         return self.results, self.client_results
 
     def change_sizes(self, labels):
@@ -437,13 +454,13 @@ class GlobalClient:
         y_true = np.asarray(y_true)
 
         # Ausgabe für Debugging
-        print(f"True labels shape: {y_true.shape}")
-        print(f"Predicted labels shape: {y_predicted.shape}")
-        print(f"Predicted probabilities shape: {predicted_probs.shape}")
-
-        print(f"True labels sample: {y_true[:5]}")
-        print(f"Predicted labels sample: {y_predicted[:5]}")
-        print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+        # print(f"True labels shape: {y_true.shape}")
+        # print(f"Predicted labels shape: {y_predicted.shape}")
+        # print(f"Predicted probabilities shape: {predicted_probs.shape}")
+        #
+        # print(f"True labels sample: {y_true[:5]}")
+        # print(f"Predicted labels sample: {y_predicted[:5]}")
+        # print(f"Predicted probabilities sample: {predicted_probs[:5]}")
 
         report = get_classification_report(
             y_true, y_predicted.numpy(), predicted_probs, self.dataset_filter

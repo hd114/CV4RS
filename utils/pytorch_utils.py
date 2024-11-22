@@ -69,10 +69,13 @@ def get_classification_report(
     exclude them from evaluation. Can be done analogous with any filter
     applied to BigEarthNet.
     """
-    print(f"y_true shape: {y_true.shape}")
-    print(f"y_predicted shape: {y_predicted.shape}")
-    print(f"y_true sample for classification_report: {y_true[:5]}")
-    print(f"y_predicted sample for classification_report: {y_predicted[:5]}")
+
+
+    # print(f"y_true shape: {y_true.shape}")
+    # print(f"y_predicted shape: {y_predicted.shape}")
+    # print(f"y_true sample for classification_report: {y_true[:5]}")
+    # print(f"y_predicted sample for classification_report: {y_predicted[:5]}")
+
 
     try:
         report = classification_report(y_true, y_predicted, output_dict=True)
