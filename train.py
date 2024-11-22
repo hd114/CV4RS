@@ -8,21 +8,11 @@ from models.MLPMixer import create_mlp_mixer
 from utils.clients import GlobalClient
 from utils.pytorch_utils import start_cuda
 
-# import pydevd_pycharm
-#
-# pydevd_pycharm.settrace(
-#     'localhost',  # Deine lokale IP oder Hostname
-#     port=12345,   # Debugging-Port (kann angepasst werden)
-#     stdoutToServer=True,
-#     stderrToServer=True,
-#     suspend=True
-# )
-
 
 def train():
-	csv_paths = ["Finland","Ireland","Serbia"] #this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
-	epochs = 3
-	communication_rounds = 4  #40
+	csv_paths = ["Finland"] # ,"Ireland","Serbia"  this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
+	epochs = 1
+	communication_rounds = 5  #40
 	channels = 10
 	num_classes = 19
 	#model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)

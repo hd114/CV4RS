@@ -238,6 +238,12 @@ class FLCLient:
         #    data, labels, index = batch["data"], batch["label"], batch["index"]
             data = batch[1]
             labels = batch[4]
+
+            # print(f"Batch {idx}:")
+            # print(f"  Data shape: {data.shape}")
+            # print(f"  Labels shape: {labels.shape}")
+            # print(f"  Sample label: {labels[0]}")
+            # break  # Stop after the first batch for inspection
             
             data = data.cuda()
             label_new=np.copy(labels)
@@ -246,6 +252,7 @@ class FLCLient:
             self.optimizer.zero_grad()
 
             logits = self.model(data)
+            # print(f"Logits sample: {logits[0]}")
             loss = self.criterion(logits, label_new)
             loss.backward()
             self.optimizer.step()
@@ -342,34 +349,53 @@ class GlobalClient:
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
         pruning_ratio = 0.8  # Define pruning ratio
+        global_pruning_mask = None  # Initialize pruning mask
 
         for com_round in range(1, communication_rounds + 1):
-            print("Round {}/{}".format(com_round, communication_rounds))
+            print(f"Start of Round {com_round}/{communication_rounds}")
             print("-" * 10)
 
+            # Apply pruning mask if it exists
+            if global_pruning_mask is not None:
+                print("Applying pruning mask before training...")
+                state_dict = self.model.state_dict()
+                for name, mask in global_pruning_mask.items():
+                    if name in state_dict:
+                        state_dict[name] = state_dict[name] * mask  # Apply mask
+                self.model.load_state_dict(state_dict)
+
+            # Run training and validation
             self.communication_round(epochs)
             report = self.validation_round()
 
+            # Update results and print metrics
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
 
-            # Pruning logic after every 5 communication rounds
-            if com_round % 5 == 0:
+            # Apply pruning after the first communication round
+            if com_round == 1:
                 print(f"Applying pruning after round {com_round}...")
-                pruning_result = apply_pruning(self.model, pruning_ratio, visualize=True)
-                pruned_state_dict = pruning_result["pruned_state_dict"]
-                pruning_mask = pruning_result["pruning_mask"]
+                pruning_result = apply_pruning(self.model, pruning_ratio)
+                global_pruning_mask = pruning_result["pruning_mask"]
 
                 # Update the global model with pruned weights
-                self.model.load_state_dict(pruned_state_dict)
+                pruned_state_dict = pruning_result["pruned_state_dict"]
+                try:
+                    self.model.load_state_dict(pruned_state_dict)
+                    print("Pruned state_dict successfully loaded.")
+                except Exception as e:
+                    print(f"Error during loading pruned state_dict: {e}")
+                    return  # Exit if loading fails
 
-                # Distribute the pruned weights and mask to clients
+                # Distribute pruning mask to all clients
                 for client in self.clients:
                     client.set_model(copy.deepcopy(self.model))
-                    client.pruning_mask = pruning_mask  # Send pruning mask to clients
+                    client.pruning_mask = global_pruning_mask
+
+            print(f"End of Round {com_round}/{communication_rounds}")
 
         self.train_time = time.perf_counter() - start
-
+        print("Training completed. Saving results and state dict.")
         self.client_results = [client.get_validation_results() for client in self.clients]
         self.save_results()
         self.save_state_dict()
@@ -381,7 +407,6 @@ class GlobalClient:
             for j in range(len(labels)): #19
                 new_labels[i,j] =  int(labels[j][i])
         return new_labels
-    
 
     def validation_round(self):
         self.model.eval()
@@ -392,22 +417,36 @@ class GlobalClient:
             for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
                 data = batch[1].to(self.device)
                 labels = batch[4]
-                label_new=np.copy(labels)
-               # label_new=self.change_sizes(label_new)
 
+                label_new = np.copy(labels)
                 logits = self.model(data)
-                probs = torch.sigmoid(logits).cpu().numpy()
+                probs = torch.sigmoid(logits).cpu()  # Wahrscheinlichkeiten berechnen
 
-                predicted_probs += list(probs)
+                # Variante 1: Threshold-basiert
+                threshold = 0.5
+                y_predicted = (probs >= threshold).float()  # Binäre Schwellenwert-basierte Vorhersage
 
+                # Variante 2: Argmax-basiert
+                # y_predicted = torch.zeros_like(probs)
+                # y_predicted[torch.arange(probs.size(0)), probs.argmax(dim=1)] = 1  # Argmax-Vorhersage für eine Klasse
+
+                predicted_probs += list(probs.numpy())  # Wahrscheinlichkeiten bleiben für andere Metriken erhalten
                 y_true += list(label_new)
 
         predicted_probs = np.asarray(predicted_probs)
-        y_predicted = (predicted_probs >= 0.5).astype(np.float32)
-
         y_true = np.asarray(y_true)
+
+        # Ausgabe für Debugging
+        print(f"True labels shape: {y_true.shape}")
+        print(f"Predicted labels shape: {y_predicted.shape}")
+        print(f"Predicted probabilities shape: {predicted_probs.shape}")
+
+        print(f"True labels sample: {y_true[:5]}")
+        print(f"Predicted labels sample: {y_predicted[:5]}")
+        print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+
         report = get_classification_report(
-            y_true, y_predicted, predicted_probs, self.dataset_filter
+            y_true, y_predicted.numpy(), predicted_probs, self.dataset_filter
         )
         return report
 
