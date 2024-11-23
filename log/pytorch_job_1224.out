@@ -32,8 +32,8 @@ Training and communication for Round 1...
 Epoch 1/1
 ----------
 Bug fix for empty classification report.
-micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.5363
-macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.2911
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.5186
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.2992
 
 Applying pruning after round 1...
 Layer: conv1.weight | Mask shape: torch.Size([64, 10, 7, 7]) | Pruned: 9408/31360 (0.30)
@@ -310,8 +310,8 @@ Training and communication for Round 2...
 Epoch 1/1
 ----------
 Bug fix for empty classification report.
-micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3024
-macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.2375
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.4881
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.3104
 
 Round 3/5
 ----------
