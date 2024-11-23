@@ -49,3 +49,35 @@ def apply_pruning(model: torch.nn.Module, pruning_ratio: float = 0.8, verbose: b
             print(f"Layer: {name} | Mask shape: {mask.shape} | Pruned: {num_pruned}/{num_weights} ({pruning_ratio:.2f})")
 
     return {"pruned_state_dict": pruned_state_dict, "pruning_mask": pruning_mask}
+
+
+def apply_lrp_pruning(self, composite, component_attributor, pruning_rate=0.3):
+    """
+    Führt LRP-basiertes Pruning für das Modell durch.
+
+    Args:
+        composite: Der Composite für LRP-Regeln.
+        component_attributor: Der Attribution-Handler.
+        pruning_rate: Der Anteil der zu prunenden Parameter.
+    """
+    # Relevanzen berechnen
+    components_relevances = component_attributor.attribute(
+        model=self.model,
+        dataloader=self.train_loader,
+        composite=composite,
+        abs_flag=True,
+        device=self.device
+    )
+    print(f"Relevances computed: {components_relevances}")
+
+    # Pruning-Maske generieren
+    pruning_mask = generate_pruning_mask(
+        components_relevances,
+        pruning_rate=pruning_rate,
+        least_relevant_first=True,
+    )
+    print(f"Generated pruning mask: {pruning_mask}")
+
+    # Pruning-Maske anwenden
+    apply_pruning_mask(self.model, pruning_mask)
+    print("Pruning mask applied successfully.")

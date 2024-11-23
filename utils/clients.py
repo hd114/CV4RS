@@ -30,6 +30,7 @@ from utils.pytorch_utils import (
     start_cuda
 )
 from utils.pruning_utils import apply_pruning
+from pxp import get_cnn_composite, ComponentAttribution
 
 
 # data_dirs = {
@@ -135,8 +136,9 @@ class FLCLient:
         criterion_constructor: callable = torch.nn.BCEWithLogitsLoss,
         criterion_kwargs: dict = {"reduction": "mean"},
         num_classes: int = 19,
-        device: torch.device = torch.device('cpu'),
+        device: torch.device = torch.device("cpu"),
         dataset_filter: str = "serbia",
+        data_dirs: dict = None,  # Neu hinzugefügt
     ) -> None:
         self.model = model
         self.optimizer_constructor = optimizer_constructor
@@ -147,14 +149,23 @@ class FLCLient:
         self.dataset_filter = dataset_filter
         self.pruning_mask = None  # Initialize pruning mask
         self.results = init_results(self.num_classes)
+
+        # Speichern von data_dirs
+        if data_dirs is None:
+            raise ValueError("data_dirs cannot be None.")
+        self.data_dirs = data_dirs
+
         self.dataset = BENv2DataSet(
-        data_dirs=data_dirs,
-        # For Mars use these paths
-        split="train",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons=["Summer"]),
+            data_dirs=self.data_dirs,
+            split="train",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(
+                pd.read_parquet(self.data_dirs["metadata_parquet"]),
+                countries=[csv_path],
+                seasons=["Summer"],
+            ),
         )
         self.train_loader = DataLoader(
             self.dataset,
@@ -166,12 +177,16 @@ class FLCLient:
         self.device = device
 
         self.validation_set = BENv2DataSet(
-        data_dirs=data_dirs,
-        split="test",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons="Summer"),
+            data_dirs=self.data_dirs,
+            split="test",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(
+                pd.read_parquet(self.data_dirs["metadata_parquet"]),
+                countries=[csv_path],
+                seasons="Summer",
+            ),
         )
         self.val_loader = DataLoader(
             self.validation_set,
@@ -180,6 +195,7 @@ class FLCLient:
             shuffle=False,
             pin_memory=True,
         )
+
 
     # def set_model(self, model: torch.nn.Module):
     #     self.model = copy.deepcopy(model)
@@ -262,40 +278,70 @@ class FLCLient:
     def get_validation_results(self):
         return self.results
 
+
 class GlobalClient:
     def __init__(
-        self,
-        model: torch.nn.Module,
-        lmdb_path: str,
-        val_path: str,
-        csv_paths: list[str],
-        batch_size: int = 128,
-        num_workers: int = 0,
-        num_classes: int = 19,
-        dataset_filter: str = "serbia",
-        state_dict_path: str = None,
-        results_path: str = None
+            self,
+            model: torch.nn.Module,
+            lmdb_path: str,
+            val_path: str,
+            csv_paths: list[str],
+            batch_size: int = 128,
+            num_workers: int = 0,
+            num_classes: int = 19,
+            dataset_filter: str = "serbia",
+            state_dict_path: str = None,
+            results_path: str = None,
+            data_dirs: dict = None,
     ) -> None:
+        # Überprüfen, ob data_dirs definiert ist
+        if data_dirs is None:
+            raise ValueError("data_dirs cannot be None. Please provide the necessary data directories.")
+
+        # Daten speichern
+        self.data_dirs = data_dirs
         self.model = model
         self.device = torch.device(0) if torch.cuda.is_available() else torch.device('cpu')
         print(f'Using device: {self.device}')
         self.model.to(self.device)
+
+        # Initialisierungen
         self.num_classes = num_classes
         self.dataset_filter = dataset_filter
         self.aggregator = Aggregator()
         self.results = init_results(self.num_classes)
+
+        # Clients initialisieren
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
+            FLCLient(
+                copy.deepcopy(self.model),
+                lmdb_path,
+                val_path,
+                csv_path,
+                num_classes=num_classes,
+                dataset_filter=dataset_filter,
+                device=self.device,
+                data_dirs=self.data_dirs,  # Datenverzeichnisse weitergeben
+            )
             for csv_path in csv_paths
         ]
+
+        # Validierungs-Dataset
+        self.countries = ["Finland", "Ireland", "Serbia"]  # Standard-Länder
         self.validation_set = BENv2DataSet(
-        data_dirs=data_dirs,
-        split="test",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+            data_dirs=self.data_dirs,
+            split="test",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(
+                pd.read_parquet(self.data_dirs["metadata_parquet"]),
+                countries=self.countries,  # Länderfilter dynamisch
+                seasons="Summer",
+            ),
         )
+
+        # DataLoader für Validierung
         self.val_loader = DataLoader(
             self.validation_set,
             batch_size=batch_size,
@@ -303,7 +349,7 @@ class GlobalClient:
             shuffle=False,
             pin_memory=True,
         )
-        
+
         dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         if state_dict_path is None:
             if isinstance(model, ConvMixer):
@@ -324,6 +370,83 @@ class GlobalClient:
                 self.results_path = f'results/poolformer_results_{dt}.pkl'
             elif isinstance(model, ResNet50):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
+
+    def get_country_dataloader(self, country: str, batch_size: int, num_workers: int):
+        """
+        Erstellt einen DataLoader, der nur Daten eines bestimmten Landes enthält.
+
+        Args:
+            country (str): Das gewünschte Land (z. B. "Finland").
+            batch_size (int): Batch-Größe für den DataLoader.
+            num_workers (int): Anzahl der Worker-Threads.
+
+        Returns:
+            DataLoader: Ein DataLoader, der Daten aus dem spezifischen Land enthält.
+        """
+        print(f"Erstelle DataLoader für Land: {country}")
+        filtered_dataset = BENv2DataSet(
+            data_dirs=self.data_dirs,
+            split="train",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(
+                pd.read_parquet(self.data_dirs["metadata_parquet"]),
+                countries=[country],  # Filter auf das gewünschte Land
+                seasons="Summer",
+            ),
+        )
+        return DataLoader(
+            filtered_dataset,
+            batch_size=batch_size,
+            num_workers=num_workers,
+            shuffle=True,
+            pin_memory=True,
+        )
+
+    def compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate=0.3, country="Finland"):
+        """
+        Berechnet die LRP-Pruning-Maske basierend auf Daten eines bestimmten Landes.
+
+        Args:
+            composite: Das LRP Composite-Objekt.
+            component_attributor: Das Component Attribution-Objekt.
+            pruning_rate (float): Der Pruning-Rate.
+            country (str): Das Land, dessen Daten verwendet werden sollen.
+
+        Returns:
+            dict: Die berechnete Pruning-Maske.
+        """
+        print(f"Berechne LRP-Pruning-Maske für Land: {country}")
+        dataloader = self.get_country_dataloader(country, batch_size=16, num_workers=4)
+
+        # Debugging: Batchstruktur inspizieren
+        # Debugging: Batchstruktur inspizieren
+        for batch in dataloader:
+            images, labels = batch[0], batch[-1]  # Passe an die richtige Batch-Struktur an
+            images = images.to(self.device).float()  # Konvertiere zu float
+            print(f"Image shape in attribute: {images.shape}")  # Debugging
+
+        components_relevances = component_attributor.attribute(
+            model=self.model,
+            dataloader=(
+                (batch[0].float(), batch[-1])  # Konvertiere die Bilddaten zu float
+                for batch in dataloader
+            ),
+            attribution_composite=composite,
+            abs_flag=True,
+            device=self.device,
+        )
+
+        print(f"Relevanzen berechnet: {components_relevances}")
+
+        pruning_mask = generate_pruning_mask(
+            components_relevances,
+            pruning_rate=pruning_rate,
+            least_relevant_first=True,
+        )
+        print(f"Pruning-Maske generiert: {pruning_mask}")
+        return pruning_mask
 
     # def train(self, communication_rounds: int, epochs: int):
     #     start = time.perf_counter()
@@ -348,11 +471,15 @@ class GlobalClient:
 
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
-        pruning_ratio = 0.3  # Define pruning ratio
-        global_pruning_mask = None  # Initialize pruning mask
+        pruning_rate = 0.1  # Pruning-Rate
+        global_pruning_mask = None  # Pruning-Maske
+
+        print("Initializing LRP Pruning...")
+        composite, component_attributor = self.initialize_lrp_pruning("resnet50", torch.nn.Conv2d)
+        print("LRP initialized successfully.")
 
         for com_round in range(1, communication_rounds + 1):
-            print("Round {}/{}".format(com_round, communication_rounds))
+            print(f"=== Round {com_round}/{communication_rounds} ===")
             print("-" * 10)
 
             # Prüfen, ob die Maske existiert, und anwenden
@@ -361,10 +488,6 @@ class GlobalClient:
                 for name, mask in global_pruning_mask.items():
                     if name in state_dict:
                         pruned_param = state_dict[name] * mask
-                        # Überprüfen auf NaN-Werte nach dem Pruning
-                        if torch.isnan(pruned_param).any():
-                            print(f"NaN detected in layer {name} after pruning.")
-                            raise ValueError("Pruned parameter contains NaN values.")
                         state_dict[name] = pruned_param  # Anwenden der Maske
                 self.model.load_state_dict(state_dict)
 
@@ -377,30 +500,16 @@ class GlobalClient:
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
 
-            # Pruning nach der ersten Kommunikationsrunde anwenden
-            if com_round == 1:
-                print(f"Applying pruning after round {com_round}...")
-                pruning_result = apply_pruning(self.model, pruning_ratio)
-                global_pruning_mask = pruning_result["pruning_mask"]
-
-                # Geprunte Gewichte laden
-                pruned_state_dict = pruning_result["pruned_state_dict"]
-                self.model.load_state_dict(pruned_state_dict)
-
-                # Sicherstellen, dass die Maske direkt angewendet bleibt
-                for name, mask in global_pruning_mask.items():
-                    if name in pruned_state_dict:
-                        pruned_param = pruned_state_dict[name] * mask
-                        if torch.isnan(pruned_param).any():
-                            print(f"NaN detected in layer {name} after pruning.")
-                            raise ValueError("Pruned parameter contains NaN values.")
-                        pruned_state_dict[name] = pruned_param
-                self.model.load_state_dict(pruned_state_dict)
-
-                # Maske an alle Clients senden
-                for client in self.clients:
-                    client.set_model(copy.deepcopy(self.model))
-                    client.pruning_mask = global_pruning_mask
+            # LRP-Pruning nach der ersten Kommunikationsrunde
+            if com_round == 1:  # Beispiel: Nur nach der ersten Runde prunen
+                print(f"Führe LRP-Pruning in Runde {com_round} durch...")
+                global_pruning_mask = self.compute_lrp_pruning_mask(
+                    composite=composite,
+                    component_attributor=component_attributor,
+                    pruning_rate=0.3,
+                    country="Finland",  # Verwende Daten aus Finnland
+                )
+                print(f"LRP Pruning applied successfully in Round {com_round}.")
 
         # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start
@@ -496,3 +605,34 @@ class GlobalClient:
             Path(self.results_path).parent.mkdir(parents=True)  
         res = {'global':self.results, 'clients':self.client_results, 'train_time': self.train_time}
         torch.save(res, self.results_path)
+
+    def initialize_lrp_pruning(self, model_name, layer_type):
+        """
+        Initialisiert LRP-Pruning-Komponenten.
+
+        Args:
+            model_name (str): Der Name des Modells (z. B. "resnet50").
+            layer_type: Der Layer-Typ, der für das Pruning verwendet wird (z. B. torch.nn.Conv2d).
+
+        Returns:
+            tuple: Ein Composite-Objekt und ein ComponentAttribution-Objekt.
+        """
+
+        # LRP Composite-Regeln definieren
+        composite_rules = {
+            "low_level_hidden_layer_rule": "Epsilon",
+            "mid_level_hidden_layer_rule": "Epsilon",
+            "high_level_hidden_layer_rule": "Epsilon",
+            "fully_connected_layers_rule": "Epsilon",
+            "softmax_rule": "Epsilon",
+        }
+
+        composite = get_cnn_composite(model_name, composite_rules)
+        component_attributor = ComponentAttribution(
+            "Relevance", "CNN", layer_type
+        )
+
+        return composite, component_attributor
+
+
+
