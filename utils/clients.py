@@ -352,63 +352,122 @@ class GlobalClient:
         global_pruning_mask = None  # Initialize pruning mask
 
         for com_round in range(1, communication_rounds + 1):
-            print("Round {}/{}".format(com_round, communication_rounds))
+            print(f"=== Round {com_round}/{communication_rounds} ===")
             print("-" * 10)
 
             # Prüfen, ob die Maske existiert, und anwenden
             if global_pruning_mask is not None:
+                print("Applying global pruning mask...")
                 state_dict = self.model.state_dict()
                 for name, mask in global_pruning_mask.items():
                     if name in state_dict:
                         pruned_param = state_dict[name] * mask
                         # Überprüfen auf NaN-Werte nach dem Pruning
                         if torch.isnan(pruned_param).any():
-                            print(f"NaN detected in layer {name} after pruning.")
-                            raise ValueError("Pruned parameter contains NaN values.")
+                            print(f"NaN detected in layer {name} after applying pruning mask.")
+                            raise ValueError(f"Pruned parameter in {name} contains NaN values.")
+                        print(f"Applied mask to layer {name} | Shape: {mask.shape}")
                         state_dict[name] = pruned_param  # Anwenden der Maske
                 self.model.load_state_dict(state_dict)
+                print("Pruning mask successfully applied.")
 
             # Kommunikation und Training
             print(f"Training and communication for Round {com_round}...")
-            self.communication_round(epochs)
-            report = self.validation_round()
+            try:
+                self.communication_round(epochs)
+                print("Communication and training completed successfully.")
+            except Exception as e:
+                print(f"Error during communication or training: {e}")
+                raise
+
+            # Überprüfen der Modellparameter auf NaN-Werte nach dem Training
+            for name, param in self.model.state_dict().items():
+                if torch.isnan(param).any():
+                    print(f"NaN detected in model parameter: {name} after training.")
+                    raise ValueError(f"Model parameter {name} contains NaN values.")
+
+            # Validation
+            print("Running validation...")
+            try:
+                report = self.validation_round()
+                print("Validation completed successfully.")
+            except Exception as e:
+                print(f"Error during validation: {e}")
+                raise
 
             # Ergebnisse aktualisieren und ausgeben
-            self.results = update_results(self.results, report, self.num_classes)
-            print_micro_macro(report)
+            try:
+                print("Updating results...")
+                self.results = update_results(self.results, report, self.num_classes)
+                print_micro_macro(report)
+                print("Results updated successfully.")
+            except Exception as e:
+                print(f"Error while updating results or printing metrics: {e}")
+                raise
+
+            print(f"Debug: Results successfully updated for Round {com_round}. Proceeding to pruning...")
 
             # Pruning nach der ersten Kommunikationsrunde anwenden
             if com_round == 1:
                 print(f"Applying pruning after round {com_round}...")
-                pruning_result = apply_pruning(self.model, pruning_ratio)
+                try:
+                    pruning_result = apply_pruning(self.model, pruning_ratio)
+                    print("Pruning completed successfully.")
+                except Exception as e:
+                    print(f"Error during pruning: {e}")
+                    raise
+
                 global_pruning_mask = pruning_result["pruning_mask"]
+
+                # Debugging: Überprüfen der Maske und geprunten Werte
+                print("Generated pruning mask and pruned state_dict:")
+                for name, mask in global_pruning_mask.items():
+                    print(
+                        f"Layer: {name} | Mask shape: {mask.shape} | Non-zero elements: {mask.sum().item()}/{mask.numel()}")
 
                 # Geprunte Gewichte laden
                 pruned_state_dict = pruning_result["pruned_state_dict"]
+                for name, param in pruned_state_dict.items():
+                    if torch.isnan(param).any():
+                        print(f"NaN detected in pruned parameter: {name}")
+                        raise ValueError(f"Pruned parameter {name} contains NaN values.")
                 self.model.load_state_dict(pruned_state_dict)
+                print("Pruned state_dict successfully loaded.")
 
                 # Sicherstellen, dass die Maske direkt angewendet bleibt
+                print("Reapplying pruning mask directly...")
                 for name, mask in global_pruning_mask.items():
                     if name in pruned_state_dict:
                         pruned_param = pruned_state_dict[name] * mask
                         if torch.isnan(pruned_param).any():
-                            print(f"NaN detected in layer {name} after pruning.")
+                            print(f"NaN detected in layer {name} after reapplying pruning mask.")
                             raise ValueError("Pruned parameter contains NaN values.")
                         pruned_state_dict[name] = pruned_param
                 self.model.load_state_dict(pruned_state_dict)
+                print("Pruning mask reapplied successfully.")
 
                 # Maske an alle Clients senden
+                print("Distributing pruning mask to all clients...")
                 for client in self.clients:
                     client.set_model(copy.deepcopy(self.model))
                     client.pruning_mask = global_pruning_mask
+                print("Pruning mask distributed to all clients.")
+
+            print(f"=== End of Round {com_round}/{communication_rounds} ===\n")
 
         # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start
+        print(f"Training completed in {self.train_time:.2f} seconds.")
 
         # Ergebnisse der Clients sammeln
+        print("Collecting client results...")
         self.client_results = [client.get_validation_results() for client in self.clients]
+        print("Client results collected.")
+
+        print("Saving results and state_dict...")
         self.save_results()
         self.save_state_dict()
+        print("Results and state_dict saved successfully.")
 
         return self.results, self.client_results
 
@@ -429,38 +488,37 @@ class GlobalClient:
                 data = batch[1].to(self.device)
                 labels = batch[4]
 
-                label_new = np.copy(labels)
+                if torch.isnan(data).any():
+                    print("NaN detected in validation input data.")
+                    raise ValueError("Validation input data contains NaN values.")
+
                 logits = self.model(data)
-                probs = torch.sigmoid(logits).cpu()  # Wahrscheinlichkeiten berechnen
 
-                # Variante 1: Threshold-basiert
+                if torch.isnan(logits).any():
+                    print("NaN detected in logits during validation.")
+                    raise ValueError("Logits contain NaN values during validation.")
+
+                probs = torch.sigmoid(logits).cpu()
+
+                if torch.isnan(probs).any():
+                    print("NaN detected in predicted probabilities during validation.")
+                    raise ValueError("Predicted probabilities contain NaN values during validation.")
+
+                # Threshold-based prediction
                 threshold = 0.5
-                y_predicted = (probs >= threshold).float()  # Binäre Schwellenwert-basierte Vorhersage
+                y_predicted = (probs >= threshold).float()
 
-                # Variante 2: Argmax-basiert
-                # y_predicted = torch.zeros_like(probs)
-                # y_predicted[torch.arange(probs.size(0)), probs.argmax(dim=1)] = 1  # Argmax-Vorhersage für eine Klasse
-
-                predicted_probs += list(probs.numpy())  # Wahrscheinlichkeiten bleiben für andere Metriken erhalten
-                y_true += list(label_new)
+                predicted_probs += list(probs.numpy())
+                y_true += list(labels)
 
         predicted_probs = np.asarray(predicted_probs)
         y_true = np.asarray(y_true)
 
-        # Ausgabe für Debugging
-        # print(f"True labels shape: {y_true.shape}")
-        # print(f"Predicted labels shape: {y_predicted.shape}")
-        # print(f"Predicted probabilities shape: {predicted_probs.shape}")
-        #
-        # print(f"True labels sample: {y_true[:5]}")
-        # print(f"Predicted labels sample: {y_predicted[:5]}")
-        # print(f"Predicted probabilities sample: {predicted_probs[:5]}")
-
-        # Überprüfen auf NaN-Werte in Arrays
         if np.isnan(predicted_probs).any():
             print("NaN detected in predicted probabilities array.")
             print(predicted_probs)
             raise ValueError("Predicted probabilities contain NaN values.")
+
         if np.isnan(y_true).any():
             print("NaN detected in true labels array.")
             print(y_true)
