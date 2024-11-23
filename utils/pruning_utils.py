@@ -1,7 +1,9 @@
+# alt, funktioniert
+
 import torch
 import numpy as np
 
-def apply_pruning(model: torch.nn.Module, pruning_ratio: float = 0.8) -> dict:
+def apply_pruning(model: torch.nn.Module, pruning_ratio: float = 0.8, verbose: bool = True) -> dict:
     """
     Apply structured pruning to the model by setting a fraction of parameters to zero.
 
@@ -37,7 +39,13 @@ def apply_pruning(model: torch.nn.Module, pruning_ratio: float = 0.8) -> dict:
         pruning_mask[name] = mask
         pruned_state_dict[name] = param * mask  # Apply mask to parameters
 
-        # Log the pruning details
-        print(f"Layer: {name} | Mask shape: {mask.shape} | Pruned: {num_pruned}/{num_weights} ({pruning_ratio:.2f})")
+        # Debugging: Check for NaN values
+        if torch.isnan(pruned_state_dict[name]).any():
+            print(f"NaN detected in pruned parameter: {name}")
+            raise ValueError(f"Pruned parameter {name} contains NaN values.")
+
+        # Log pruning details
+        if verbose:
+            print(f"Layer: {name} | Mask shape: {mask.shape} | Pruned: {num_pruned}/{num_weights} ({pruning_ratio:.2f})")
 
     return {"pruned_state_dict": pruned_state_dict, "pruning_mask": pruning_mask}

@@ -348,11 +348,11 @@ class GlobalClient:
 
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
-        pruning_ratio = 0.8  # Define pruning ratio
+        pruning_ratio = 0.3  # Define pruning ratio
         global_pruning_mask = None  # Initialize pruning mask
 
         for com_round in range(1, communication_rounds + 1):
-            print(f"Starting Round {com_round}/{communication_rounds}...")
+            print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
 
             # Prüfen, ob die Maske existiert, und anwenden
@@ -360,18 +360,18 @@ class GlobalClient:
                 state_dict = self.model.state_dict()
                 for name, mask in global_pruning_mask.items():
                     if name in state_dict:
-                        state_dict[name] = state_dict[name] * mask  # Anwenden der Maske
+                        pruned_param = state_dict[name] * mask
+                        # Überprüfen auf NaN-Werte nach dem Pruning
+                        if torch.isnan(pruned_param).any():
+                            print(f"NaN detected in layer {name} after pruning.")
+                            raise ValueError("Pruned parameter contains NaN values.")
+                        state_dict[name] = pruned_param  # Anwenden der Maske
                 self.model.load_state_dict(state_dict)
-                print("Pruning mask reapplied successfully for this round.")
 
             # Kommunikation und Training
             print(f"Training and communication for Round {com_round}...")
             self.communication_round(epochs)
-            print("Communication round completed.")
-
-            # Validierung
             report = self.validation_round()
-            print("Validation completed.")
 
             # Ergebnisse aktualisieren und ausgeben
             self.results = update_results(self.results, report, self.num_classes)
@@ -380,32 +380,27 @@ class GlobalClient:
             # Pruning nach der ersten Kommunikationsrunde anwenden
             if com_round == 1:
                 print(f"Applying pruning after round {com_round}...")
-                try:
-                    pruning_result = apply_pruning(self.model, pruning_ratio)
-                    global_pruning_mask = pruning_result["pruning_mask"]
+                pruning_result = apply_pruning(self.model, pruning_ratio)
+                global_pruning_mask = pruning_result["pruning_mask"]
 
-                    # Geprunte Gewichte laden
-                    pruned_state_dict = pruning_result["pruned_state_dict"]
-                    self.model.load_state_dict(pruned_state_dict)
-                    print("Pruned state_dict successfully loaded.")
+                # Geprunte Gewichte laden
+                pruned_state_dict = pruning_result["pruned_state_dict"]
+                self.model.load_state_dict(pruned_state_dict)
 
-                    # Sicherstellen, dass die Maske direkt angewendet bleibt
-                    for name, mask in global_pruning_mask.items():
-                        if name in pruned_state_dict:
-                            pruned_state_dict[name] = pruned_state_dict[name] * mask
-                    self.model.load_state_dict(pruned_state_dict)
-                    print("Pruning mask reapplied successfully.")
+                # Sicherstellen, dass die Maske direkt angewendet bleibt
+                for name, mask in global_pruning_mask.items():
+                    if name in pruned_state_dict:
+                        pruned_param = pruned_state_dict[name] * mask
+                        if torch.isnan(pruned_param).any():
+                            print(f"NaN detected in layer {name} after pruning.")
+                            raise ValueError("Pruned parameter contains NaN values.")
+                        pruned_state_dict[name] = pruned_param
+                self.model.load_state_dict(pruned_state_dict)
 
-                    # Maske an alle Clients senden
-                    for client in self.clients:
-                        client.set_model(copy.deepcopy(self.model))
-                        client.pruning_mask = global_pruning_mask
-
-                except Exception as e:
-                    print(f"Error during pruning: {e}")
-                    raise
-
-            print(f"End of Round {com_round}/{communication_rounds}. Moving to next round...")
+                # Maske an alle Clients senden
+                for client in self.clients:
+                    client.set_model(copy.deepcopy(self.model))
+                    client.pruning_mask = global_pruning_mask
 
         # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start
@@ -415,7 +410,6 @@ class GlobalClient:
         self.save_results()
         self.save_state_dict()
 
-        print("Training completed successfully.")
         return self.results, self.client_results
 
     def change_sizes(self, labels):
@@ -461,6 +455,16 @@ class GlobalClient:
         # print(f"True labels sample: {y_true[:5]}")
         # print(f"Predicted labels sample: {y_predicted[:5]}")
         # print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+
+        # Überprüfen auf NaN-Werte in Arrays
+        if np.isnan(predicted_probs).any():
+            print("NaN detected in predicted probabilities array.")
+            print(predicted_probs)
+            raise ValueError("Predicted probabilities contain NaN values.")
+        if np.isnan(y_true).any():
+            print("NaN detected in true labels array.")
+            print(y_true)
+            raise ValueError("True labels contain NaN values.")
 
         report = get_classification_report(
             y_true, y_predicted.numpy(), predicted_probs, self.dataset_filter
