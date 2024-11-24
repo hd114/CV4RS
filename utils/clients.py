@@ -29,6 +29,7 @@ from utils.pytorch_utils import (
     update_results,
     start_cuda
 )
+from utils.pruning_utils import apply_pruning
 
 
 # data_dirs = {
@@ -144,6 +145,7 @@ class FLCLient:
         self.criterion_kwargs = criterion_kwargs
         self.num_classes = num_classes
         self.dataset_filter = dataset_filter
+        self.pruning_mask = None  # Initialize pruning mask
         self.results = init_results(self.num_classes)
         self.dataset = BENv2DataSet(
         data_dirs=data_dirs,
@@ -179,8 +181,18 @@ class FLCLient:
             pin_memory=True,
         )
 
+    # def set_model(self, model: torch.nn.Module):
+    #     self.model = copy.deepcopy(model)
+
     def set_model(self, model: torch.nn.Module):
         self.model = copy.deepcopy(model)
+        if self.pruning_mask is not None:
+            # Apply pruning mask to the model
+            state_dict = self.model.state_dict()
+            for name, mask in self.pruning_mask.items():
+                if name in state_dict:
+                    state_dict[name] = state_dict[name] * mask  # Apply mask
+            self.model.load_state_dict(state_dict)
 
     def train_one_round(self, epochs: int, validate: bool = False):
         state_before = copy.deepcopy(self.model.state_dict())
@@ -226,6 +238,12 @@ class FLCLient:
         #    data, labels, index = batch["data"], batch["label"], batch["index"]
             data = batch[1]
             labels = batch[4]
+
+            # print(f"Batch {idx}:")
+            # print(f"  Data shape: {data.shape}")
+            # print(f"  Labels shape: {labels.shape}")
+            # print(f"  Sample label: {labels[0]}")
+            # break  # Stop after the first batch for inspection
             
             data = data.cuda()
             label_new=np.copy(labels)
@@ -234,6 +252,7 @@ class FLCLient:
             self.optimizer.zero_grad()
 
             logits = self.model(data)
+            # print(f"Logits sample: {logits[0]}")
             loss = self.criterion(logits, label_new)
             loss.backward()
             self.optimizer.step()
@@ -306,25 +325,91 @@ class GlobalClient:
             elif isinstance(model, ResNet50):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
 
+    # def train(self, communication_rounds: int, epochs: int):
+    #     start = time.perf_counter()
+    #     for com_round in range(1, communication_rounds + 1):
+    #         print("Round {}/{}".format(com_round, communication_rounds))
+    #         print("-" * 10)
+    #
+    #         self.communication_round(epochs)
+    #         report = self.validation_round()
+    #
+    #         self.results = update_results(self.results, report, self.num_classes)
+    #         print_micro_macro(report)
+    #
+    #         for client in self.clients:
+    #             client.set_model(self.model)
+    #     self.train_time = time.perf_counter() - start
+    #
+    #     self.client_results = [client.get_validation_results() for client in self.clients]
+    #     self.save_results()
+    #     self.save_state_dict()
+    #     return self.results, self.client_results
+
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
+        pruning_ratio = 0.3  # Define pruning ratio
+        global_pruning_mask = None  # Initialize pruning mask
+
         for com_round in range(1, communication_rounds + 1):
             print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
 
+            # Prüfen, ob die Maske existiert, und anwenden
+            if global_pruning_mask is not None:
+                state_dict = self.model.state_dict()
+                for name, mask in global_pruning_mask.items():
+                    if name in state_dict:
+                        pruned_param = state_dict[name] * mask
+                        # Überprüfen auf NaN-Werte nach dem Pruning
+                        if torch.isnan(pruned_param).any():
+                            print(f"NaN detected in layer {name} after pruning.")
+                            raise ValueError("Pruned parameter contains NaN values.")
+                        state_dict[name] = pruned_param  # Anwenden der Maske
+                self.model.load_state_dict(state_dict)
+
+            # Kommunikation und Training
+            print(f"Training and communication for Round {com_round}...")
             self.communication_round(epochs)
             report = self.validation_round()
 
+            # Ergebnisse aktualisieren und ausgeben
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
 
-            for client in self.clients:
-                client.set_model(self.model)
+            # Pruning nach der ersten Kommunikationsrunde anwenden
+            if com_round == 1:
+                print(f"Applying pruning after round {com_round}...")
+                pruning_result = apply_pruning(self.model, pruning_ratio)
+                global_pruning_mask = pruning_result["pruning_mask"]
+
+                # Geprunte Gewichte laden
+                pruned_state_dict = pruning_result["pruned_state_dict"]
+                self.model.load_state_dict(pruned_state_dict)
+
+                # Sicherstellen, dass die Maske direkt angewendet bleibt
+                for name, mask in global_pruning_mask.items():
+                    if name in pruned_state_dict:
+                        pruned_param = pruned_state_dict[name] * mask
+                        if torch.isnan(pruned_param).any():
+                            print(f"NaN detected in layer {name} after pruning.")
+                            raise ValueError("Pruned parameter contains NaN values.")
+                        pruned_state_dict[name] = pruned_param
+                self.model.load_state_dict(pruned_state_dict)
+
+                # Maske an alle Clients senden
+                for client in self.clients:
+                    client.set_model(copy.deepcopy(self.model))
+                    client.pruning_mask = global_pruning_mask
+
+        # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start
 
+        # Ergebnisse der Clients sammeln
         self.client_results = [client.get_validation_results() for client in self.clients]
         self.save_results()
         self.save_state_dict()
+
         return self.results, self.client_results
 
     def change_sizes(self, labels):
@@ -333,7 +418,6 @@ class GlobalClient:
             for j in range(len(labels)): #19
                 new_labels[i,j] =  int(labels[j][i])
         return new_labels
-    
 
     def validation_round(self):
         self.model.eval()
@@ -344,22 +428,46 @@ class GlobalClient:
             for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
                 data = batch[1].to(self.device)
                 labels = batch[4]
-                label_new=np.copy(labels)
-               # label_new=self.change_sizes(label_new)
 
+                label_new = np.copy(labels)
                 logits = self.model(data)
-                probs = torch.sigmoid(logits).cpu().numpy()
+                probs = torch.sigmoid(logits).cpu()  # Wahrscheinlichkeiten berechnen
 
-                predicted_probs += list(probs)
+                # Variante 1: Threshold-basiert
+                threshold = 0.5
+                y_predicted = (probs >= threshold).float()  # Binäre Schwellenwert-basierte Vorhersage
 
+                # Variante 2: Argmax-basiert
+                # y_predicted = torch.zeros_like(probs)
+                # y_predicted[torch.arange(probs.size(0)), probs.argmax(dim=1)] = 1  # Argmax-Vorhersage für eine Klasse
+
+                predicted_probs += list(probs.numpy())  # Wahrscheinlichkeiten bleiben für andere Metriken erhalten
                 y_true += list(label_new)
 
         predicted_probs = np.asarray(predicted_probs)
-        y_predicted = (predicted_probs >= 0.5).astype(np.float32)
-
         y_true = np.asarray(y_true)
+
+        # Ausgabe für Debugging
+        # print(f"True labels shape: {y_true.shape}")
+        # print(f"Predicted labels shape: {y_predicted.shape}")
+        # print(f"Predicted probabilities shape: {predicted_probs.shape}")
+        #
+        # print(f"True labels sample: {y_true[:5]}")
+        # print(f"Predicted labels sample: {y_predicted[:5]}")
+        # print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+
+        # Überprüfen auf NaN-Werte in Arrays
+        if np.isnan(predicted_probs).any():
+            print("NaN detected in predicted probabilities array.")
+            print(predicted_probs)
+            raise ValueError("Predicted probabilities contain NaN values.")
+        if np.isnan(y_true).any():
+            print("NaN detected in true labels array.")
+            print(y_true)
+            raise ValueError("True labels contain NaN values.")
+
         report = get_classification_report(
-            y_true, y_predicted, predicted_probs, self.dataset_filter
+            y_true, y_predicted.numpy(), predicted_probs, self.dataset_filter
         )
         return report
 

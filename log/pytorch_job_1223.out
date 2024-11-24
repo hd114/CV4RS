@@ -1,0 +1,38 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+=== Starting Round 1/5 ===
+----------
+Training and communication for Round 1...
+Epoch 1/1
+----------
+Running validation...
+Bug fix for empty classification report.
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.5513
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.2881
+
