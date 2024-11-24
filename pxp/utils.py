@@ -21,18 +21,40 @@ def one_hot_max(output, targets):
 
 def one_hot(output, targets):
     """
-    Get the one-hot encoded at the original indices in dim=1
+    Get the one-hot encoded at the original indices in dim=1.
 
     Args:
-        output (torch.tensor): the output of the model
-        targets (torch.tensor): the targets of the model
+        output (torch.tensor): the output of the model (e.g., [batch_size, num_classes]).
+        targets (torch.tensor): the targets of the model (e.g., [batch_size]).
 
     Returns:
-        torch.tensor: the one-hot encoded matrix multiplied by
-                        the targets logit at the original indices in dim=1
+        torch.tensor: the one-hot encoded matrix of shape [batch_size, num_classes].
     """
+    # Sicherstellen, dass targets korrekt sind
+    if len(targets.shape) > 1:
+        raise ValueError(f"Targets shape is invalid for one-hot encoding: {targets.shape}. Expected 1D tensor.")
+    if targets.dtype != torch.long:
+        print(f"Converting targets from {targets.dtype} to torch.long")
+        targets = targets.long()
+
+    # Erstelle eine Einheitsmatrix
     eye_matrix = torch.eye(output.shape[-1]).to(output.device)
-    return eye_matrix[targets]
+
+    # Debugging-Ausgaben
+    print(f"Targets shape: {targets.shape}")
+    print(f"Eye matrix shape: {eye_matrix.shape}")
+    print(f"Output shape: {output.shape}")
+
+    # Indizieren, um die One-Hot-Matrix zu erstellen
+    one_hot_matrix = eye_matrix[targets]
+
+    # Sicherstellen, dass die Form übereinstimmt
+    assert one_hot_matrix.shape == output.shape, (
+        f"Mismatch: one-hot shape {one_hot_matrix.shape}, output shape {output.shape}"
+    )
+
+    return one_hot_matrix
+
 
 
 class ModelLayerUtils:

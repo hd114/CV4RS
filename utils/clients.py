@@ -31,6 +31,7 @@ from utils.pytorch_utils import (
 )
 from utils.pruning_utils import apply_pruning
 from pxp import get_cnn_composite, ComponentAttribution
+from pxp import GlobalPruningOperations
 
 
 # data_dirs = {
@@ -260,6 +261,14 @@ class FLCLient:
             # print(f"  Labels shape: {labels.shape}")
             # print(f"  Sample label: {labels[0]}")
             # break  # Stop after the first batch for inspection
+
+            # Debugging: Ausgabe der Batch-Dimensionen
+            print(f"Batch {idx}:")
+            print(f"  Data shape: {data.shape}")  # Eingabedatenform prüfen
+            print(f"  Labels shape: {labels.shape}")  # Label-Form prüfen
+
+            # Debugging: Conv1-Gewichte überprüfen
+            print(f"  Conv1 weight shape: {self.model.encoder[0].weight.shape}")
             
             data = data.cuda()
             label_new=np.copy(labels)
@@ -404,49 +413,49 @@ class GlobalClient:
             pin_memory=True,
         )
 
-    def compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate=0.3, country="Finland"):
+    def compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate=0.3):
         """
-        Berechnet die LRP-Pruning-Maske basierend auf Daten eines bestimmten Landes.
+        Berechnet die LRP-Pruning-Maske basierend auf globalen Relevanzwerten.
 
         Args:
-            composite: Das LRP Composite-Objekt.
+            composite: Das Composite-Objekt für LRP.
             component_attributor: Das Component Attribution-Objekt.
-            pruning_rate (float): Der Pruning-Rate.
-            country (str): Das Land, dessen Daten verwendet werden sollen.
+            pruning_rate (float): Der Anteil der zu prunenden Parameter.
 
         Returns:
-            dict: Die berechnete Pruning-Maske.
+            dict: Die generierte globale Pruning-Maske.
         """
-        print(f"Berechne LRP-Pruning-Maske für Land: {country}")
-        dataloader = self.get_country_dataloader(country, batch_size=16, num_workers=4)
+        print(f"Berechne LRP-Pruning-Maske für Land: Finland")
+        dataloader = self.get_country_dataloader("Finland", batch_size=16, num_workers=4)
 
-        # Debugging: Batchstruktur inspizieren
-        # Debugging: Batchstruktur inspizieren
-        for batch in dataloader:
-            images, labels = batch[0], batch[-1]  # Passe an die richtige Batch-Struktur an
-            images = images.to(self.device).float()  # Konvertiere zu float
-            print(f"Image shape in attribute: {images.shape}")  # Debugging
-
-        components_relevances = component_attributor.attribute(
+        # Berechnung der Relevanzwerte
+        global_relevance_maps = component_attributor.attribute(
             model=self.model,
             dataloader=(
-                (batch[0].float(), batch[-1])  # Konvertiere die Bilddaten zu float
+                (batch[0].float(), batch[-1])  # Passe die Struktur der Batch an
                 for batch in dataloader
             ),
             attribution_composite=composite,
             abs_flag=True,
             device=self.device,
         )
+        print(f"Relevanzkarten berechnet: {list(global_relevance_maps.keys())}")
 
-        print(f"Relevanzen berechnet: {components_relevances}")
-
-        pruning_mask = generate_pruning_mask(
-            components_relevances,
-            pruning_rate=pruning_rate,
-            least_relevant_first=True,
+        # Globale Pruning-Maske erstellen
+        pruning_operations = GlobalPruningOperations(
+            target_layer=torch.nn.Conv2d,
+            layer_names=[name for name, _ in self.model.named_modules() if isinstance(_, torch.nn.Conv2d)],
         )
-        print(f"Pruning-Maske generiert: {pruning_mask}")
-        return pruning_mask
+        global_pruning_mask = pruning_operations.generate_global_pruning_mask(
+            model=self.model,
+            global_concept_maps=global_relevance_maps,
+            pruning_precentage=pruning_rate,
+            subsequent_layer_pruning="Both",
+            least_relevant_first=True,
+            device=self.device,
+        )
+        print(f"Globale Pruning-Maske generiert: {len(global_pruning_mask)} Layer")
+        return global_pruning_mask
 
     # def train(self, communication_rounds: int, epochs: int):
     #     start = time.perf_counter()
@@ -471,45 +480,80 @@ class GlobalClient:
 
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
-        pruning_rate = 0.1  # Pruning-Rate
-        global_pruning_mask = None  # Pruning-Maske
+        pruning_rate = 0.3  # Pruning-Rate
+        global_pruning_mask = None  # Pruning-Maske initialisieren
 
+        # LRP-Pruning initialisieren
         print("Initializing LRP Pruning...")
         composite, component_attributor = self.initialize_lrp_pruning("resnet50", torch.nn.Conv2d)
         print("LRP initialized successfully.")
 
         for com_round in range(1, communication_rounds + 1):
-            print(f"=== Round {com_round}/{communication_rounds} ===")
-            print("-" * 10)
+            print(f"=== Runde {com_round}/{communication_rounds} ===")
 
-            # Prüfen, ob die Maske existiert, und anwenden
+            # Pruning-Maske anwenden (falls vorhanden)
             if global_pruning_mask is not None:
+                print(f"Pruning-Maske anwenden für Runde {com_round}...")
                 state_dict = self.model.state_dict()
                 for name, mask in global_pruning_mask.items():
                     if name in state_dict:
-                        pruned_param = state_dict[name] * mask
-                        state_dict[name] = pruned_param  # Anwenden der Maske
+                        print(f"Anwenden der Maske auf Layer: {name}")
+                        try:
+                            pruned_param = state_dict[name] * mask["weight"]
+                            if torch.isnan(pruned_param).any() or torch.isinf(pruned_param).any():
+                                print(f"NaN or Inf detected in Layer: {name} after applying mask.")
+                                raise ValueError(f"Invalid values in Layer: {name}.")
+                            state_dict[name].copy_(pruned_param)
+                        except KeyError as e:
+                            print(f"KeyError: {e}. Ensure the mask has 'weight' and/or 'bias'.")
+                    else:
+                        print(f"Layer {name} not found in model state_dict. Skipping...")
                 self.model.load_state_dict(state_dict)
 
-            # Kommunikation und Training
+                # Reinitialisiere BatchNorm-Statistiken
+                for name, module in self.model.named_modules():
+                    if isinstance(module, torch.nn.BatchNorm2d):
+                        print(f"Reinitializing BatchNorm stats for Layer: {name}")
+                        module.reset_running_stats()
+
+            # Training und Kommunikation
             print(f"Training and communication for Round {com_round}...")
             self.communication_round(epochs)
-            report = self.validation_round()
 
-            # Ergebnisse aktualisieren und ausgeben
-            self.results = update_results(self.results, report, self.num_classes)
-            print_micro_macro(report)
+            # Validierung und Fehlerbehandlung
+            print(f"Starting validation after Round {com_round}...")
+            try:
+                report = self.validation_round()
+                self.results = update_results(self.results, report, self.num_classes)
+                print_micro_macro(report)
+            except Exception as e:
+                print(f"Validation failed due to: {e}")
+                raise
 
             # LRP-Pruning nach der ersten Kommunikationsrunde
             if com_round == 1:  # Beispiel: Nur nach der ersten Runde prunen
                 print(f"Führe LRP-Pruning in Runde {com_round} durch...")
-                global_pruning_mask = self.compute_lrp_pruning_mask(
-                    composite=composite,
-                    component_attributor=component_attributor,
-                    pruning_rate=0.3,
-                    country="Finland",  # Verwende Daten aus Finnland
-                )
-                print(f"LRP Pruning applied successfully in Round {com_round}.")
+                try:
+                    global_concept_maps = self.compute_lrp_pruning_mask(
+                        composite=composite,
+                        component_attributor=component_attributor,
+                        pruning_rate=pruning_rate,
+                    )
+                    pruning_ops = GlobalPruningOperations(
+                        target_layer=torch.nn.Conv2d,
+                        layer_names=list(global_concept_maps.keys())
+                    )
+                    global_pruning_mask = pruning_ops.generate_global_pruning_mask(
+                        model=self.model,
+                        global_concept_maps=global_concept_maps,
+                        pruning_precentage=pruning_rate,
+                        subsequent_layer_pruning="Both",
+                        least_relevant_first=True,
+                    )
+                    print(f"LRP Pruning applied successfully in Round {com_round}.")
+                except Exception as e:
+                    print(f"Failed to compute pruning mask: {e}")
+                    raise
 
         # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start

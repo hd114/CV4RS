@@ -67,31 +67,78 @@ class LatentRelevanceAttributor:
         return relevance
 
     def compute_relevance(
-        self, model, inputs, targets, initial_relevance_function, device
+            self, model, inputs, targets, initial_relevance_function, device
     ):
         self.clear_latent_info()
         self.hook_handles = self.register_hooks(model)
 
-        # Debugging: Eingabeform überprüfen
         print(f"Input shape before model forward: {inputs.shape}")
+        if len(inputs.shape) < 4:
+            print(f"Unexpected input shape for LRP: {inputs.shape}. Adding dummy dimensions.")
+            inputs = inputs.unsqueeze(0).unsqueeze(0)
+            print(f"Modified input shape for LRP: {inputs.shape}")
 
-        print(f"Input shape before unsqueeze: {inputs.shape}")  # Debugging
-        if len(inputs.shape) == 1:
-            # Beispiel: [16] -> [16, 1, 1, 1] oder gewünschtes Format
-            inputs = inputs.unsqueeze(1).unsqueeze(2).unsqueeze(3)
-        print(f"Input shape after unsqueeze: {inputs.shape}")
+        # Adjust input channels if necessary
+        first_layer_channels = model.encoder[0].weight.shape[1]
+        if inputs.shape[1] != first_layer_channels:
+            print(f"Adjusting input channels from {inputs.shape[1]} to {first_layer_channels}")
+            inputs = inputs.repeat(1, first_layer_channels, 1, 1)
 
-        output = model(inputs)
-        (relevance,) = torch.autograd.grad(
-            outputs=output,
-            inputs=inputs,
-            grad_outputs=initial_relevance_function(output, targets).to(device),
-            retain_graph=False,
-            create_graph=False,
-        )
+        # Adjust batch size to match targets
+        if inputs.shape[0] != targets.shape[0]:
+            print(f"Adjusting input batch size from {inputs.shape[0]} to match targets batch size {targets.shape[0]}")
+            inputs = inputs.repeat(targets.shape[0], 1, 1, 1)
 
-        # detach the relevance to avoid memory leak
-        return relevance.detach().cpu()
+        print(f"Input shape before relevance computation: {inputs.shape}")
+
+        try:
+            output = model(inputs)
+            print(f"Model output shape: {output.shape}")
+        except Exception as e:
+            print(f"Error during model forward pass: {e}")
+            raise
+
+        if targets.dtype != torch.long:
+            print(f"Converting targets from {targets.dtype} to torch.long")
+            targets = targets.long()
+
+        if targets.shape[0] != output.shape[0]:
+            print(
+                f"Mismatch between targets batch size ({targets.shape[0]}) and model output batch size ({output.shape[0]}).")
+            raise ValueError("Batch size mismatch between targets and model output.")
+
+        if len(targets.shape) > 1 and targets.shape[1] == output.shape[-1]:
+            print(f"Reducing targets shape from {targets.shape} to {targets.shape[0]} for one-hot encoding.")
+            targets = torch.argmax(targets, dim=1)  # Konvertiere zu Klassenindizes
+
+        try:
+            grad_outputs = initial_relevance_function(output, targets).to(device)
+
+            # Debugging: Grad-Output-Formen überprüfen
+            print(f"Grad output shape: {grad_outputs.shape}")
+            if grad_outputs.shape != output.shape:
+                raise ValueError(
+                    f"Mismatch in shape: grad_outputs {grad_outputs.shape} and model output {output.shape}")
+
+            (relevance,) = torch.autograd.grad(
+                outputs=output,
+                inputs=inputs,
+                grad_outputs=grad_outputs,
+                retain_graph=False,
+                create_graph=False,
+            )
+            print(f"Relevance computation successful. Relevance shape: {relevance.shape}")
+        except Exception as e:
+            print(f"Error during relevance computation: {e}")
+            raise
+
+        relevance = relevance.detach().cpu()
+
+        if torch.isnan(relevance).any() or torch.isinf(relevance).any():
+            print(f"NaN or Inf detected in relevance values.")
+            raise ValueError("Relevance contains invalid values (NaN or Inf).")
+
+        return relevance
 
     def remove_hooks(self):
         """
