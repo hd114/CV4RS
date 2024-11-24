@@ -10,24 +10,37 @@ from utils.pytorch_utils import start_cuda
 
 
 def train():
-	csv_paths = ["Finland"] # ,"Ireland","Serbia"  this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
-	epochs = 1
-	communication_rounds = 5  #40
-	channels = 10
-	num_classes = 19
-	#model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)
-	#model = create_mlp_mixer(channels, num_classes)
-	#model = create_convmixer(channels=channels, num_classes=num_classes, pretrained=False)
-    #model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)
-	model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
-	global_client = GlobalClient(
-		model=model,
-		lmdb_path="",
-		val_path="",
-		csv_paths=csv_paths,
-	)
-	global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
-	print(global_results)
+    csv_paths = ["Finland"]  # Liste der Länder für die Clients
+    epochs = 1
+    communication_rounds = 5
+    channels = 10
+    num_classes = 19
+
+    # Modell initialisieren (ResNet50 in diesem Fall)
+    model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+
+    # Datenverzeichnisse definieren
+    data_dirs = {
+        "images_lmdb": "/faststorage/BigEarthNet-V2/BigEarthNet-V2-LMDB",
+        "metadata_parquet": "/faststorage/BigEarthNet-V2/metadata.parquet",
+        "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
+    }
+
+    # GlobalClient instanziieren
+    global_client = GlobalClient(
+        model=model,
+        lmdb_path="",
+        val_path="",
+        csv_paths=csv_paths,
+        data_dirs=data_dirs,  # Hier wird `data_dirs` übergeben
+    )
+
+    # Training starten
+    global_model, global_results = global_client.train(
+        communication_rounds=communication_rounds,
+        epochs=epochs
+    )
+    print(global_results)
 
 
 if __name__ == '__main__':
