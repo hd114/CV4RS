@@ -631,18 +631,20 @@ class GlobalClient:
         return report
 
     def communication_round(self, epochs: int):
-        # here the clients train
-        # TODO: could be parallelized
+        # Clients trainieren
         model_updates = [client.train_one_round(epochs) for client in self.clients]
 
-        # parameter aggregation
+        # Parameteraggregation
         update_aggregation = self.aggregator.fed_avg(model_updates)
 
-        # update the global model
+        # Globales Modell aktualisieren
         global_state_dict = self.model.state_dict()
         for key, value in global_state_dict.items():
-            update = update_aggregation[key].to(self.device)
-            global_state_dict[key] = value + update
+            if key in update_aggregation:
+                update = update_aggregation[key].to(self.device)
+                global_state_dict[key] = value + update
+            else:
+                print(f"Skipping missing parameter: {key}")
         self.model.load_state_dict(global_state_dict)
 
     def save_state_dict(self):
