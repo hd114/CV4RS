@@ -1,0 +1,271 @@
+Lines that potentially need to be canonized 309
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Initializing LRP Pruning...
+LRP initialized successfully.
+=== Runde 1/5 ===
+Training and communication for Round 1...
+Epoch 1/1
+----------
+Batch 0:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 1:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 2:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 3:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 4:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 5:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 6:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 7:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 8:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 9:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 10:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 11:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 12:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 13:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 14:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 15:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 16:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 17:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 18:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 19:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 20:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 21:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 22:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 23:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 24:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 25:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 26:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 27:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 28:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 29:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 30:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 31:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 32:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 33:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 34:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 35:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 36:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 37:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 38:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 39:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 40:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 41:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 42:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 43:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 44:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 45:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 46:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 47:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 48:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 49:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 50:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 51:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 52:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 53:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 54:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 55:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 56:
+  Data shape: torch.Size([256, 10, 120, 120])
+  Labels shape: torch.Size([256, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Batch 57:
+  Data shape: torch.Size([213, 10, 120, 120])
+  Labels shape: torch.Size([213, 19])
+  Conv1 weight shape: torch.Size([64, 10, 7, 7])
+Starting validation after Round 1...
+RuntimeError during forward pass in batch 0: Expected 3D (unbatched) or 4D (batched) input to conv2d, but got input of size: [128, 19]
+Data shape: torch.Size([128, 10, 120, 120]), Labels shape: torch.Size([128, 19])
+Validation failed due to: Expected 3D (unbatched) or 4D (batched) input to conv2d, but got input of size: [128, 19]

@@ -1,0 +1,24 @@
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/pandas/core/computation/expressions.py:21: UserWarning: Pandas requires version '2.8.4' or newer of 'numexpr' (version '2.7.3' currently installed).
+  from pandas.core.computation.check import NUMEXPR_INSTALLED
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+/home/paul/projects/CV4RS-main/utils/clients.py:386: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load("PATH_ZUM_STATE_DICT")  # Lade das gespeicherte Modell
+Traceback (most recent call last):
+  File "/home/paul/projects/CV4RS-main/train.py", line 47, in <module>
+    train()
+  File "/home/paul/projects/CV4RS-main/train.py", line 30, in train
+    global_client = GlobalClient(
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 373, in __init__
+    self.initialize_model_with_state_dict()
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 386, in initialize_model_with_state_dict
+    state_dict = torch.load("PATH_ZUM_STATE_DICT")  # Lade das gespeicherte Modell
+  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/serialization.py", line 1319, in load
+    with _open_file_like(f, "rb") as opened_file:
+  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/serialization.py", line 659, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/serialization.py", line 640, in __init__
+    super().__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: 'PATH_ZUM_STATE_DICT'

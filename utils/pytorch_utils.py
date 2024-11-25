@@ -124,3 +124,16 @@ class MetricTracker(object):
         self.sum += val * n
         self.count += n
         self.avg = self.sum / self.count
+
+# In utils/pytorch_utils.py hinzufügen
+def forward_debug(model, x):
+    print(f"Input to model: {x.shape}")  # Eingabeform ausgeben
+    for name, module in model.named_children():
+        try:
+            x = module(x)
+            print(f"After {name}: {x.shape}")  # Form nach jeder Schicht ausgeben
+        except Exception as e:
+            print(f"Error in layer {name}: {e}")
+            print(f"Input shape at error: {x.shape}")
+            raise
+    return x

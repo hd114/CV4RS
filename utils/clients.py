@@ -27,7 +27,8 @@ from utils.pytorch_utils import (
     init_results,
     print_micro_macro,
     update_results,
-    start_cuda
+    start_cuda,
+    forward_debug
 )
 from utils.pruning_utils import apply_pruning
 from pxp import get_cnn_composite, ComponentAttribution
@@ -247,20 +248,14 @@ class FLCLient:
             for j in range(len(labels)): #19
                 new_labels[i,j] =  int(labels[j][i])
         return new_labels
-    
+
     def train_epoch(self):
         self.model.train()
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
-            
-        #    data, labels, index = batch["data"], batch["label"], batch["index"]
+
+            # Daten extrahieren
             data = batch[1]
             labels = batch[4]
-
-            # print(f"Batch {idx}:")
-            # print(f"  Data shape: {data.shape}")
-            # print(f"  Labels shape: {labels.shape}")
-            # print(f"  Sample label: {labels[0]}")
-            # break  # Stop after the first batch for inspection
 
             # Debugging: Ausgabe der Batch-Dimensionen
             print(f"Batch {idx}:")
@@ -269,21 +264,36 @@ class FLCLient:
 
             # Debugging: Conv1-Gewichte überprüfen
             print(f"  Conv1 weight shape: {self.model.encoder[0].weight.shape}")
-            
-            data = data.cuda()
-            label_new=np.copy(labels)
-           # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).cuda()
-            self.optimizer.zero_grad()
 
+            data = data.cuda()
+            label_new = np.copy(labels)
+            label_new = torch.from_numpy(label_new).cuda()
+
+            # Debugging: Überprüfung der Eingabedaten auf NaN/Inf
+            if torch.isnan(data).any() or torch.isinf(data).any():
+                print(f"NaN or Inf detected in input data for batch {idx}")
+                raise ValueError("Invalid input data detected")
+
+            self.optimizer.zero_grad()
             logits = self.model(data)
-            # print(f"Logits sample: {logits[0]}")
+
+            # Debugging: Überprüfung der Logits auf NaN/Inf
+            if torch.isnan(logits).any() or torch.isinf(logits).any():
+                print(f"NaN or Inf detected in logits for batch {idx}")
+                print(f"Logits stats - max: {logits.max()}, min: {logits.min()}, mean: {logits.mean()}")
+                raise ValueError("Invalid logits detected")
+
             loss = self.criterion(logits, label_new)
+
+            # Debugging: Überprüfung des Loss auf NaN/Inf
+            if torch.isnan(loss).any() or torch.isinf(loss).any():
+                print(f"NaN or Inf detected in loss for batch {idx}")
+                print(f"Logits stats - max: {logits.max()}, min: {logits.min()}, mean: {logits.mean()}")
+                raise ValueError("Invalid loss detected")
+
             loss.backward()
             self.optimizer.step()
-    
-    
-    
+
     def get_validation_results(self):
         return self.results
 
@@ -358,6 +368,47 @@ class GlobalClient:
             shuffle=False,
             pin_memory=True,
         )
+
+        # State Dict-Initialisierung prüfen und laden
+        self.initialize_model_with_state_dict()
+
+    def initialize_model_with_state_dict(self):
+        # Überprüfen der Modellarchitektur
+        print("\n=== Modellarchitektur ===")
+        for name, module in self.model.named_modules():
+            if hasattr(module, 'weight') and module.weight is not None:
+                print(f"{name}: weight shape = {module.weight.shape}")
+            if hasattr(module, 'bias') and module.bias is not None:
+                print(f"{name}: bias shape = {module.bias.shape}")
+
+        # Überprüfen des state_dict
+        print("\n=== State Dict Parameter ===")
+        state_dict = torch.load("PATH_ZUM_STATE_DICT")  # Lade das gespeicherte Modell
+        for key, value in state_dict.items():
+            print(f"{key}: shape = {value.shape}")
+
+        # Vergleiche die Shapes
+        print("\n=== Vergleich der Shapes ===")
+        for name, module in self.model.named_modules():
+            if hasattr(module, 'weight') and module.weight is not None:
+                key = f"{name}.weight"
+                if key in state_dict and module.weight.shape != state_dict[key].shape:
+                    print(
+                        f"Inkompatible Gewicht-Form: {key}, expected = {module.weight.shape}, found = {state_dict[key].shape}")
+            if hasattr(module, 'bias') and module.bias is not None:
+                key = f"{name}.bias"
+                if key in state_dict and module.bias.shape != state_dict[key].shape:
+                    print(
+                        f"Inkompatible Bias-Form: {key}, expected = {module.bias.shape}, found = {state_dict[key].shape}")
+
+        # Laden des state_dict mit Fehlerbehandlung
+        try:
+            self.model.load_state_dict(state_dict)
+        except RuntimeError as e:
+            print("\n=== Fehler beim Laden des state_dict ===")
+            print(e)
+            raise
+
 
         dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         if state_dict_path is None:
@@ -484,6 +535,9 @@ class GlobalClient:
     #     return self.results, self.client_results
 
     def train(self, communication_rounds: int, epochs: int):
+        # Modell initialisieren (falls nicht im Konstruktor geschehen)
+        self.initialize_model_with_state_dict()
+
         start = time.perf_counter()
         pruning_rate = 0.3  # Pruning-Rate
         global_pruning_mask = None  # Pruning-Maske initialisieren
@@ -514,6 +568,13 @@ class GlobalClient:
                     else:
                         print(f"Layer {name} not found in model state_dict. Skipping...")
                 self.model.load_state_dict(state_dict)
+
+                for name, param in self.model.named_parameters():
+                    if param.requires_grad:
+                        if torch.isnan(param).any() or torch.isinf(param).any():
+                            print(f"NaN or Inf detected in parameter {name}")
+                        if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
+                            print(f"NaN or Inf detected in gradient of parameter {name}")
 
                 # Reinitialisiere BatchNorm-Statistiken
                 for name, module in self.model.named_modules():
@@ -583,51 +644,93 @@ class GlobalClient:
         y_true = []
         predicted_probs = []
 
+
         with torch.no_grad():
             for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
-                data = batch[1].to(self.device)
-                labels = batch[4]
+                data = batch[1].to(self.device)  # Eingabedaten
+                labels = batch[4]  # Labels
 
-                label_new = np.copy(labels)
-                logits = self.model(data)
-                probs = torch.sigmoid(logits).cpu()  # Wahrscheinlichkeiten berechnen
+                # Ensure data has the correct shape for Conv2D
+                if data.ndim != 4:  # Expected shape: [Batch, Channels, Height, Width]
+                    print(f"Reshaping data in batch {batch_idx} from shape {data.shape} to match Conv2D input")
+                    # Beispiel für Transformation, falls `data` flach ist:
+                    # data = data.view(batch_size, channels, height, width)
+                    # Passe die Zielgrößen entsprechend an deinen Datensatz an
+                    data = data.view(data.size(0), 1, int(data.size(1) ** 0.5), int(data.size(1) ** 0.5))  # Beispiel
 
-                # Variante 1: Threshold-basiert
+                # Debugging: Eingabedaten überprüfen
+                if torch.isnan(data).any() or torch.isinf(data).any():
+                    print(f"NaN or Inf detected in input data in batch {batch_idx}")
+                    print(f"Data stats - max: {data.max()}, min: {data.min()}, mean: {data.mean()}")
+                    raise ValueError("Invalid input data detected")
+
+                # Debugging: Labels überprüfen
+                if torch.isnan(labels).any() or torch.isinf(labels).any():
+                    print(f"NaN or Inf detected in labels in batch {batch_idx}")
+                    print(f"Labels: {labels}")
+                    raise ValueError("Invalid labels detected")
+
+                # Modellvorhersage mit Debugging
+                try:
+                    logits = forward_debug(self.model, data)
+                except RuntimeError as e:
+                    print(f"RuntimeError during forward pass in batch {batch_idx}: {e}")
+                    print(f"Data shape: {data.shape}, Labels shape: {labels.shape}")
+                    raise
+
+                # Debugging: Logits überprüfen
+                if torch.isnan(logits).any() or torch.isinf(logits).any():
+                    print(f"NaN or Inf detected in logits in batch {batch_idx}")
+                    print(f"Logits stats - max: {logits.max()}, min: {logits.min()}, mean: {logits.mean()}")
+                    raise ValueError("Invalid logits detected")
+
+                # Wahrscheinlichkeiten berechnen
+                probs = torch.sigmoid(logits).cpu()
+
+                # Debugging: Wahrscheinlichkeiten überprüfen
+                if torch.isnan(probs).any() or torch.isinf(probs).any():
+                    print(f"NaN or Inf detected in predicted probabilities in batch {batch_idx}")
+                    print(f"Probabilities stats - max: {probs.max()}, min: {probs.min()}, mean: {probs.mean()}")
+                    raise ValueError("Invalid predicted probabilities detected")
+
+                # Beispielausgabe für Debugging
+                print(f"Sample probabilities (batch {batch_idx}): {probs[0]}")
+
+                # Threshold-basierte binäre Vorhersage
                 threshold = 0.5
-                y_predicted = (probs >= threshold).float()  # Binäre Schwellenwert-basierte Vorhersage
+                y_predicted = (probs >= threshold).float()
 
-                # Variante 2: Argmax-basiert
-                # y_predicted = torch.zeros_like(probs)
-                # y_predicted[torch.arange(probs.size(0)), probs.argmax(dim=1)] = 1  # Argmax-Vorhersage für eine Klasse
-
-                predicted_probs += list(probs.numpy())  # Wahrscheinlichkeiten bleiben für andere Metriken erhalten
-                y_true += list(label_new)
+                # Ergebnisse speichern
+                predicted_probs += list(probs.numpy())  # Wahrscheinlichkeiten für andere Metriken erhalten
+                y_true += list(np.copy(labels))  # Labels kopieren und anhängen
 
         predicted_probs = np.asarray(predicted_probs)
         y_true = np.asarray(y_true)
 
-        # Ausgabe für Debugging
-        # print(f"True labels shape: {y_true.shape}")
-        # print(f"Predicted labels shape: {y_predicted.shape}")
-        # print(f"Predicted probabilities shape: {predicted_probs.shape}")
-        #
-        # print(f"True labels sample: {y_true[:5]}")
-        # print(f"Predicted labels sample: {y_predicted[:5]}")
-        # print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+        # Debugging: Überprüfen von Größen und Beispielwerten
+        print(f"True labels shape: {y_true.shape}, Predicted probabilities shape: {predicted_probs.shape}")
+        print(f"True labels sample: {y_true[:5]}")
+        print(f"Predicted probabilities sample: {predicted_probs[:5]}")
 
-        # Überprüfen auf NaN-Werte in Arrays
+        # Überprüfen auf NaN/Inf in den finalen Arrays
         if np.isnan(predicted_probs).any():
-            print("NaN detected in predicted probabilities array.")
+            print("NaN detected in predicted probabilities array after aggregation.")
             print(predicted_probs)
             raise ValueError("Predicted probabilities contain NaN values.")
         if np.isnan(y_true).any():
-            print("NaN detected in true labels array.")
+            print("NaN detected in true labels array after aggregation.")
             print(y_true)
             raise ValueError("True labels contain NaN values.")
 
-        report = get_classification_report(
-            y_true, y_predicted.numpy(), predicted_probs, self.dataset_filter
-        )
+        # Bericht generieren
+        try:
+            report = get_classification_report(
+                y_true, predicted_probs >= threshold, predicted_probs, self.dataset_filter
+            )
+        except Exception as e:
+            print(f"Error generating classification report: {e}")
+            raise
+
         return report
 
     def communication_round(self, epochs: int):
