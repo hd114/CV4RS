@@ -429,7 +429,7 @@ class GlobalClient:
         dataloader = self.get_country_dataloader("Finland", batch_size=16, num_workers=4)
 
         # Berechnung der Relevanzwerte
-        global_relevance_maps = component_attributor.attribute(
+        global_concept_maps = component_attributor.attribute(
             model=self.model,
             dataloader=(
                 (batch[0].float(), batch[-1])  # Passe die Struktur der Batch an
@@ -439,20 +439,25 @@ class GlobalClient:
             abs_flag=True,
             device=self.device,
         )
-        print(f"Relevanzkarten berechnet: {list(global_relevance_maps.keys())}")
+        print(f"Relevanzkarten berechnet: {list(global_concept_maps.keys())}")
+
+        # Prüfen, ob global_concept_maps bereits ein korrektes Format hat
+        assert isinstance(global_concept_maps, dict), "global_concept_maps must be a dictionary."
 
         # Globale Pruning-Maske erstellen
         pruning_operations = GlobalPruningOperations(
             target_layer=torch.nn.Conv2d,
             layer_names=[name for name, _ in self.model.named_modules() if isinstance(_, torch.nn.Conv2d)],
         )
+        print(f"Calling generate_global_pruning_mask with pruning_rate: {pruning_rate}")
+
+        # Verwenden der berechneten Relevanzkarten für das Pruning
         global_pruning_mask = pruning_operations.generate_global_pruning_mask(
             model=self.model,
-            global_concept_maps=global_relevance_maps,
-            pruning_precentage=pruning_rate,
-            subsequent_layer_pruning="Both",
+            global_concept_maps=global_concept_maps,
+            pruning_percentage=pruning_rate,
             least_relevant_first=True,
-            device=self.device,
+            device=self.device
         )
         print(f"Globale Pruning-Maske generiert: {len(global_pruning_mask)} Layer")
         return global_pruning_mask
@@ -546,10 +551,11 @@ class GlobalClient:
                     global_pruning_mask = pruning_ops.generate_global_pruning_mask(
                         model=self.model,
                         global_concept_maps=global_concept_maps,
-                        pruning_precentage=pruning_rate,
-                        subsequent_layer_pruning="Both",
+                        pruning_percentage=pruning_rate,
                         least_relevant_first=True,
+                        device=self.device
                     )
+
                     print(f"LRP Pruning applied successfully in Round {com_round}.")
                 except Exception as e:
                     print(f"Failed to compute pruning mask: {e}")

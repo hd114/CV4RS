@@ -212,6 +212,26 @@ class ModelLayerUtils:
         last_layer_module.weight.data = weight
         last_layer_module.bias.data = bias
 
+    def unify_global_concept_maps(global_concept_maps):
+        """
+        Convert all relevance maps in global_concept_maps to torch.Tensor.
+
+        Args:
+            global_concept_maps (dict): Relevance maps for each layer.
+
+        Returns:
+            dict: Relevance maps with all values as torch.Tensor.
+        """
+        unified_maps = {}
+        for layer_name, relevance_map in global_concept_maps.items():
+            if isinstance(relevance_map, dict):
+                unified_maps[layer_name] = torch.tensor(list(relevance_map.values()))
+            elif isinstance(relevance_map, torch.Tensor):
+                unified_maps[layer_name] = relevance_map
+            else:
+                raise TypeError(f"Unsupported type for relevance map: {type(relevance_map)}")
+        return unified_maps
+
     @staticmethod
     def disable_inplace_operations(model):
         for _, module in model.named_modules():

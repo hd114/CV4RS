@@ -42,9 +42,15 @@ class LatentRelevanceAttributor:
 
         with torch.enable_grad():
             inputs.requires_grad = True
-            # If composite has not been registered
-            # in the model and is specified
-            if composite != None:
+
+            # Debugging: Validate input types
+            if not isinstance(inputs, torch.Tensor):
+                raise TypeError(f"Expected inputs to be torch.Tensor, got {type(inputs)}")
+            if not isinstance(targets, torch.Tensor):
+                raise TypeError(f"Expected targets to be torch.Tensor, got {type(targets)}")
+
+            # If composite has not been registered in the model and is specified
+            if composite is not None:
                 composite = composite
                 with composite.context(model) as modeified_model:
                     relevance = self.compute_relevance(
@@ -60,6 +66,14 @@ class LatentRelevanceAttributor:
                 relevance = self.compute_relevance(
                     model, inputs, targets, initial_relevance_function, device
                 )
+
+        # Validate that relevance is a torch.Tensor
+        if not isinstance(relevance, torch.Tensor):
+            raise ValueError(f"Expected relevance to be torch.Tensor, got {type(relevance)}")
+
+        # Check for invalid values in relevance
+        if torch.isnan(relevance).any() or torch.isinf(relevance).any():
+            raise ValueError("Relevance contains NaN or Inf values.")
 
         self.remove_hooks()
         self.parse_latent_relevances(model)
