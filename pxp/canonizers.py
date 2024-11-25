@@ -1,37 +1,25 @@
-from zennit.torchvision import VGGCanonizer, ResNetCanonizer
-from pxp.LiT_utils.vit_canonizer import (
-    VitTorchvisionSumCanonizer,
-    ReplaceAttentionNorm,
-    ReplaceAttention,
-)
+from zennit.core import Canonizer
+from zennit.types import Convolution, Linear, Additive, Container
 
-
-def get_cnn_canonizer(model_architecture):
+class ReplaceAttentionCanonizer(Canonizer):
     """
-    Get the canonizer for the model architecture (CNN-based)
-
-    Args:
-        model_architecture (str): model architecture
-
-    Returns:
-        zennit.canonizer: canonizer for the model architecture
+    Canonizer for vision transformer models to replace attention layers with linear approximations.
     """
-    canonizer_wrapper = {
-        "vgg16_bn": VGGCanonizer,
-        "resnet18": ResNetCanonizer,
-        "resnet50": ResNetCanonizer,
-    }
-    if model_architecture not in ["Linear", "vgg16"]:
-        return [canonizer_wrapper[model_architecture]()]
-    else:
-        return None
+    def __init__(self):
+        super().__init__()
+        self.rules = [
+            (Convolution, Linear),
+            (Additive, Linear),
+        ]
 
+    def apply(self, model):
+        """
+        Apply the canonizer to modify the model for relevance propagation.
 
-def get_vit_canonizer(canonizations):
-
-    canonizer_wrapper = {
-        "VitTorchvisionSumCanonizer": VitTorchvisionSumCanonizer,
-        "ReplaceAttentionNorm": ReplaceAttentionNorm,
-        "ReplaceAttention": ReplaceAttention,
-    }
-    return [canonizer_wrapper[canonization]() for canonization in canonizations]
+        Args:
+            model (torch.nn.Module): The model to apply the canonizer on.
+        """
+        for name, module in model.named_modules():
+            for rule in self.rules:
+                if isinstance(module, rule[0]):
+                    setattr(model, name, rule[1]())

@@ -1,47 +1,64 @@
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from pathlib import Path
-from utils.pytorch_models import ResNet50
-from models.poolformer import create_poolformer_s12
-from models.ConvMixer import create_convmixer
-from models.MLPMixer import create_mlp_mixer
+import torch
+import argparse
+from models.pytorch_models import ResNet50
 from utils.clients import GlobalClient
 from utils.pytorch_utils import start_cuda
 
+def parse_args():
+    """
+    Parses command line arguments for training configurations.
+    """
+    parser = argparse.ArgumentParser(description="Train a federated learning model with optional pruning.")
+    parser.add_argument("--epochs", type=int, default=5, help="Number of epochs for client training.")
+    parser.add_argument("--rounds", type=int, default=5, help="Number of federated communication rounds.")
+    parser.add_argument("--pruning", action="store_true", help="Enable pruning functionality.")
+    parser.add_argument("--pruning_rate", type=float, default=0.3, help="Pruning rate if pruning is enabled.")
+    parser.add_argument("--batch_size", type=int, default=128, help="Batch size for training.")
+    parser.add_argument("--num_clients", type=int, default=3, help="Number of clients.")
+    parser.add_argument("--device", type=str, default="cuda", help="Device for training: 'cuda' or 'cpu'.")
+    parser.add_argument("--data_dirs", type=dict, default=None, help="Dictionary for dataset directories.")
+    args = parser.parse_args()
+    return args
 
-def train():
-    csv_paths = ["Finland"]  # Liste der Länder für die Clients
-    epochs = 1
-    communication_rounds = 5
-    channels = 10
-    num_classes = 19
+def main():
+    """
+    Main function for initializing and executing federated learning.
+    """
+    args = parse_args()
 
-    # Modell initialisieren (ResNet50 in diesem Fall)
-    model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+    # Start CUDA if available
+    device = start_cuda() if args.device == "cuda" else torch.device("cpu")
 
-    # Datenverzeichnisse definieren
+    # Initialize model
+    model = ResNet50(num_classes=19)
+
+    # Define data directories (update as needed)
     data_dirs = {
-        "images_lmdb": "/faststorage/BigEarthNet-V2/BigEarthNet-V2-LMDB",
-        "metadata_parquet": "/faststorage/BigEarthNet-V2/metadata.parquet",
-        "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
+        "images_lmdb": "/path/to/images.lmdb",
+        "metadata_parquet": "/path/to/metadata.parquet",
+        "metadata_snow_cloud_parquet": "/path/to/metadata_snow_cloud.parquet",
     }
 
-    # GlobalClient instanziieren
+    # Create GlobalClient for federated learning
     global_client = GlobalClient(
         model=model,
-        lmdb_path="",
-        val_path="",
-        csv_paths=csv_paths,
-        data_dirs=data_dirs,  # Hier wird `data_dirs` übergeben
+        lmdb_path=data_dirs["images_lmdb"],
+        val_path=data_dirs["metadata_parquet"],
+        csv_paths=["Finland", "Ireland", "Serbia"],  # Replace with actual CSV paths
+        batch_size=args.batch_size,
+        num_classes=19,
+        data_dirs=data_dirs,
+        device=device,
     )
 
-    # Training starten
-    global_model, global_results = global_client.train(
-        communication_rounds=communication_rounds,
-        epochs=epochs
-    )
-    print(global_results)
+    # Train the model
+    print(f"Starting federated learning with {args.rounds} rounds and {args.epochs} epochs per client...")
+    results, client_results = global_client.train(communication_rounds=args.rounds, epochs=args.epochs)
 
+    # Save the final model and results
+    global_client.save_state_dict()
+    global_client.save_results()
+    print("Training completed successfully.")
 
-if __name__ == '__main__':
-    train()
+if __name__ == "__main__":
+    main()
