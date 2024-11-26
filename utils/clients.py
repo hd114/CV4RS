@@ -33,6 +33,8 @@ from utils.pruning_utils import apply_pruning
 from pxp import get_cnn_composite, ComponentAttribution
 from pxp import GlobalPruningOperations
 
+from pyinstrument import Profiler
+import cProfile
 
 # data_dirs = {
 #         "images_lmdb": "/data/kaiclasen/BENv2.lmdb",
@@ -535,10 +537,19 @@ class GlobalClient:
                 print(f"Validation failed due to: {e}")
                 raise
 
+            #profile_compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate, com_round)
+
             # LRP-Pruning nach der ersten Kommunikationsrunde
             if com_round == 1:  # Beispiel: Nur nach der ersten Runde prunen
                 print(f"Führe LRP-Pruning in Runde {com_round} durch...")
+
+                # Profiling starten
+                profiler = Profiler()
+                profiler.start()
+
                 try:
+                    # Der relevante Codeblock
+                    print(f"Führe LRP-Pruning in Runde {com_round} durch...")
                     global_concept_maps = self.compute_lrp_pruning_mask(
                         composite=composite,
                         component_attributor=component_attributor,
@@ -560,6 +571,14 @@ class GlobalClient:
                 except Exception as e:
                     print(f"Failed to compute pruning mask: {e}")
                     raise
+
+                # Profiling stoppen und Ergebnis anzeigen
+                profiler.stop()
+                #print(profiler.output_text(unicode=True, color=True))
+                with open("pruning_callgraph.txt", "w") as f:
+                    f.write(profiler.output_text(unicode=True, color=False))
+                with open("pruning_callgraph.html", "w") as f:
+                    f.write(profiler.output_html())
 
         # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start
@@ -686,5 +705,64 @@ class GlobalClient:
 
         return composite, component_attributor
 
+# Hilfsfunktion für cProfile
+import cProfile
 
+def profile_compute_lrp_pruning_mask(client, composite, component_attributor, pruning_rate, com_round):
+    """
+    Führt die compute_lrp_pruning_mask-Methode aus und profiliert sie mit cProfile.
+    """
+    if com_round == 1:
+        print(f"Führe LRP-Pruning in Runde {com_round} durch...")
 
+        # Profiling mit pyinstrument starten
+        profiler = Profiler()
+        profiler.start()
+
+        # Profiling mit cProfile starten
+        print("Starte cProfile für compute_lrp_pruning_mask...")
+        pr = cProfile.Profile()
+        pr.runctx(
+            "client.compute_lrp_pruning_mask(composite=composite, component_attributor=component_attributor, pruning_rate=pruning_rate)",
+            globals(),
+            locals()
+        )
+        pr.dump_stats("output.prof")
+
+        try:
+            # Der relevante Codeblock
+            global_concept_maps = client.compute_lrp_pruning_mask(
+                composite=composite,
+                component_attributor=component_attributor,
+                pruning_rate=pruning_rate,
+            )
+            pruning_ops = GlobalPruningOperations(
+                target_layer=torch.nn.Conv2d,
+                layer_names=list(global_concept_maps.keys())
+            )
+            global_pruning_mask = pruning_ops.generate_global_pruning_mask(
+                model=client.model,
+                global_concept_maps=global_concept_maps,
+                pruning_percentage=pruning_rate,
+                least_relevant_first=True,
+                device=client.device
+            )
+
+            print(f"LRP Pruning applied successfully in Round {com_round}.")
+        except Exception as e:
+            print(f"Failed to compute pruning mask: {e}")
+            raise
+
+        # Profiling mit pyinstrument stoppen und Ergebnisse speichern
+        profiler.stop()
+
+        # Profiling-Ergebnisse mit pyinstrument speichern
+        with open("pruning_callgraph.txt", "w") as f:
+            f.write(profiler.output_text(unicode=True, color=False))
+        with open("pruning_callgraph.html", "w") as f:
+            f.write(profiler.output_html())
+
+        # Optional: Ergebnisse von cProfile in einen visuellen Callgraph konvertieren
+        print("Erstelle Callgraph aus cProfile-Daten...")
+        import os
+        os.system("gprof2dot -f pstats output.prof | dot -Tpng -o callgraph.png")
