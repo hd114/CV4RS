@@ -1,39 +1,52 @@
 
-  _     ._   __/__   _ _  _  _ _/_   Recorded: 15:54:50  Samples:  105015
- /_//_/// /_\ / //_// / //_'/ //     Duration: 166.364   CPU time: 179.279
+  _     ._   __/__   _ _  _  _ _/_   Recorded: 11:37:51  Samples:  9071
+ /_//_/// /_\ / //_// / //_'/ //     Duration: 19.917    CPU time: 21.807
 /   _/                      v5.0.0
 
-Profile at /home/paul/projects/CV4RS-main/utils/clients.py:548
+Profile at /home/paul/projects/CV4RS-main/utils/clients.py:582
 
-166.362 GlobalClient.train  utils/clients.py:488
-├─ 164.388 GlobalClient.compute_lrp_pruning_mask  utils/clients.py:418
-│  ├─ 153.649 ComponentAttribution.attribute  pxp/attribute.py:568
-│  │  └─ 150.829 ZennitLatentRelevanceAttributor.lrp_pass  pxp/attribute.py:23
-│  │     ├─ 113.884 ZennitLatentRelevanceAttributor.compute_relevance  pxp/attribute.py:83
-│  │     │  ├─ 48.358 ResNet50._wrapped_call_impl  torch/nn/modules/module.py:1732
-│  │     │  │  └─ 48.354 tuple._call_impl  torch/nn/modules/module.py:1740
-│  │     │  │     └─ 48.343 ResNet50.forward  utils/pytorch_models.py:73
-│  │     │  │        └─ 48.318 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
-│  │     │  │              [34 frames hidden]  torch, zennit, <built-in>, functools
-│  │     │  ├─ 39.056 grad  torch/autograd/__init__.py:358
-│  │     │  │  └─ 38.986 _engine_run_backward  torch/autograd/graph.py:816
-│  │     │  │     └─ 38.979 _EngineBase.run_backward  <built-in>
-│  │     │  └─ 24.864 ZennitLatentRelevanceAttributor.register_hooks  pxp/attribute.py:231
-│  │     │     ├─ 21.997 ResNet50.named_modules  torch/nn/modules/module.py:2778
-│  │     │     │     [8 frames hidden]  torch
-│  │     │     └─ 2.378 [self]  pxp/attribute.py
-│  │     └─ 36.751 ZennitLatentRelevanceAttributor.parse_latent_relevances  pxp/attribute.py:176
-│  │        ├─ 23.014 ResNet50.named_modules  torch/nn/modules/module.py:2778
-│  │        │     [8 frames hidden]  torch
-│  │        ├─ 5.610 Tensor.cpu  <built-in>
-│  │        ├─ 4.360 Tensor.sum  <built-in>
-│  │        └─ 3.089 [self]  pxp/attribute.py
-│  └─ 9.524 GlobalClient.get_country_dataloader  utils/clients.py:385
-│     └─ 6.852 BENv2DataSet.__init__  utils/BENv2_dataset.py:88
-│        ├─ 3.595 BENv2LDMBReader.__init__  utils/BENv2_utils.py:559
-│        └─ 2.664 read_parquet  pandas/io/parquet.py:498
-│              [2 frames hidden]  pandas, pyarrow
-└─ 1.742 GlobalPruningOperations.generate_global_pruning_mask  pxp/prune.py:236
-   └─ 1.711 Tensor.__repr__  torch/_tensor.py:517
-         [3 frames hidden]  torch
+19.916 GlobalClient.train  utils/clients.py:523
+├─ 18.030 GlobalClient.compute_lrp_pruning_mask  utils/clients.py:453
+│  ├─ 11.697 ComponentAttribution.attribute  pxp/attribute.py:568
+│  │  ├─ 11.157 ZennitLatentRelevanceAttributor.lrp_pass  pxp/attribute.py:23
+│  │  │  ├─ 8.643 ZennitLatentRelevanceAttributor.compute_relevance  pxp/attribute.py:83
+│  │  │  │  ├─ 3.827 ResNet50._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │  └─ 3.827 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     └─ 3.825 ResNet50.forward  utils/pytorch_models.py:73
+│  │  │  │  │        └─ 3.823 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │              [24 frames hidden]  torch, zennit, <built-in>, functools
+│  │  │  │  ├─ 3.124 grad  torch/autograd/__init__.py:358
+│  │  │  │  │     [2 frames hidden]  torch, <built-in>
+│  │  │  │  └─ 1.592 ZennitLatentRelevanceAttributor.register_hooks  pxp/attribute.py:231
+│  │  │  │     └─ 1.432 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │           [5 frames hidden]  torch
+│  │  │  └─ 2.511 ZennitLatentRelevanceAttributor.parse_latent_relevances  pxp/attribute.py:176
+│  │  │     ├─ 1.626 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │  │     │     [5 frames hidden]  torch
+│  │  │     ├─ 0.345 Tensor.cpu  <built-in>
+│  │  │     ├─ 0.279 Tensor.sum  <built-in>
+│  │  │     └─ 0.221 [self]  pxp/attribute.py
+│  │  └─ 0.246 <genexpr>  utils/clients.py:471
+│  │     └─ 0.215 _MultiProcessingDataLoaderIter.__next__  torch/utils/data/dataloader.py:696
+│  ├─ 5.729 GlobalClient.get_country_dataloader  utils/clients.py:420
+│  │  ├─ 3.427 BENv2DataSet.__init__  utils/BENv2_dataset.py:88
+│  │  │  ├─ 2.052 BENv2LDMBReader.__init__  utils/BENv2_utils.py:559
+│  │  │  │  ├─ 1.232 read_parquet  pandas/io/parquet.py:498
+│  │  │  │  │     [4 frames hidden]  pandas, pyarrow, <built-in>
+│  │  │  │  ├─ 0.382 <dictcomp>  utils/BENv2_utils.py:585
+│  │  │  │  └─ 0.266 <dictcomp>  utils/BENv2_utils.py:592
+│  │  │  └─ 1.060 read_parquet  pandas/io/parquet.py:498
+│  │  │        [4 frames hidden]  pandas, pyarrow, <built-in>
+│  │  ├─ 1.529 read_parquet  pandas/io/parquet.py:498
+│  │  │     [4 frames hidden]  pandas, pyarrow, <built-in>
+│  │  └─ 0.669 PreFilter.__init__  utils/clients.py:63
+│  │     ├─ 0.231 <listcomp>  utils/clients.py:104
+│  │     └─ 0.227 StringMethods.__getitem__  pandas/core/strings/accessor.py:248
+│  │           [3 frames hidden]  pandas
+│  └─ 0.431 DataLoader.__iter__  torch/utils/data/dataloader.py:471
+│        [7 frames hidden]  torch, multiprocessing
+├─ 1.612 GlobalPruningOperations.generate_global_pruning_mask  pxp/prune.py:236
+│  └─ 1.548 Tensor.__repr__  torch/_tensor.py:517
+│        [8 frames hidden]  torch, <built-in>
+└─ 0.274 [self]  utils/clients.py
 

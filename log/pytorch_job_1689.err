@@ -1,0 +1,7 @@
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/pandas/core/computation/expressions.py:21: UserWarning: Pandas requires version '2.8.4' or newer of 'numexpr' (version '2.7.3' currently installed).
+  from pandas.core.computation.check import NUMEXPR_INSTALLED
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+training:   0%|          | 0/58 [00:00<?, ?it/s]slurmstepd: error: *** JOB 1689 ON erde CANCELLED AT 2024-11-28T12:28:46 ***

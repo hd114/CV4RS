@@ -10,9 +10,9 @@ from utils.pytorch_utils import start_cuda
 
 
 def train():
-    csv_paths = ["Finland"]  # Liste der Länder für die Clients
-    epochs = 1
-    communication_rounds = 5
+    csv_paths = ["Finland", "Ireland", "Serbia"]  # this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
+    epochs = 2
+    communication_rounds = 3
     channels = 10
     num_classes = 19
 
@@ -32,7 +32,7 @@ def train():
         lmdb_path="",
         val_path="",
         csv_paths=csv_paths,
-        data_dirs=data_dirs,  # Hier wird `data_dirs` übergeben
+        data_dirs=data_dirs,
     )
 
     # Training starten
