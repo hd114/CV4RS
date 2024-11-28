@@ -3,8 +3,7 @@
 Traceback (most recent call last):
   File "/home/paul/projects/CV4RS-main/train.py", line 8, in <module>
     from utils.clients import GlobalClient
-  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 130, in <module>
-    class FLCLient:
-  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 220, in FLCLient
-    for name, param in self.model.named_parameters():
-NameError: name 'self' is not defined
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 493
+    elif isinstance(value, torch.Tensor):
+    ^
+IndentationError: expected an indented block after 'elif' statement on line 491
