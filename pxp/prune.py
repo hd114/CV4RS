@@ -182,7 +182,7 @@ class GlobalPruningOperations(LocalPruningOperations):
             global_concept_maps (dict): Dictionary of relevance maps for each layer.
             pruning_percentage (float): Percentage of the concepts/filters to prune.
             subsequent_layer_pruning (str, optional): Specifies whether to include subsequent layers in pruning.
-                Options are ["Conv2d", "Both", "BatchNorm2d"]. Defaults to "Conv2d".
+                Options are ["Conv2d", "BatchNorm2d", "Both"]. Defaults to "Conv2d".
             least_relevant_first (bool, optional): Whether to prune the least relevant parameters first.
                 Defaults to True.
             device (str, optional): Device to run on. Defaults to "cuda".
@@ -284,6 +284,10 @@ class GlobalPruningOperations(LocalPruningOperations):
                 subsequent_layer_pruning=subsequent_layer_pruning,
                 device=device,
             )
+
+        # Debugging: Überprüfe die erstellten Masken
+        #for layer_name, mask in global_pruning_mask.items():
+        #    print(f"[DEBUG] Layer {layer_name} - Weight mask non-zero elements: {torch.sum(mask['weight'] > 0)}")
 
         return global_pruning_mask
 

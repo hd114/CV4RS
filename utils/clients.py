@@ -581,10 +581,13 @@ class GlobalClient:
         """
         Entfernt alle registrierten Forward Hooks.
         """
-        if hasattr(self, "pruning_hook_handles"):
+        if hasattr(self, "pruning_hook_handles") and self.pruning_hook_handles is not None:
             for hook in self.pruning_hook_handles:
                 hook.remove()
+            self.pruning_hook_handles = []
             print("All forward hooks removed.")
+        else:
+            print("[WARNING] No pruning hooks to remove.")
 
     # def train(self, communication_rounds: int, epochs: int):
     #     start = time.perf_counter()
