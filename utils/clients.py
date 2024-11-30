@@ -137,15 +137,12 @@ class FLCLient:
         lmdb_path: str,
         val_path: str,
         csv_path: list[str],
-        batch_size: int = 256,
+        batch_size: int = 32, #256,
         num_workers: int = 2,
         optimizer_constructor: callable = torch.optim.Adam,
         optimizer_kwargs: dict = {"lr": 0.0002, "weight_decay": 0},    # 0.001
         criterion_constructor: callable = torch.nn.BCEWithLogitsLoss,
-        criterion_kwargs: dict = {
-            "reduction": "mean",
-            "pos_weight": torch.tensor([2.0]).cuda(),   # Regulation
-        },
+        criterion_kwargs: dict = {"reduction": "mean",},   #"pos_weight": torch.tensor([2.0]).cuda(),   # Regulation
         num_classes: int = 19,
         device: torch.device = torch.device("cpu"),
         dataset_filter: str = "serbia",
@@ -283,8 +280,8 @@ class FLCLient:
         epsilon = 1e-8  # Small value to avoid numerical instability
 
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
-            data = batch[1].cuda()
-            labels = torch.from_numpy(np.copy(batch[4])).cuda()
+            data = batch[1].to('cpu') #.cuda()
+            labels = torch.from_numpy(np.copy(batch[4])).to('cpu') #.cuda()
 
             # Debugging: Check input and label tensors
             if torch.isnan(data).any() or torch.isinf(data).any():
@@ -483,41 +480,11 @@ class GlobalClient:
         )
         print("[DEBUG] Relevanzwerte berechnet. Anzahl der Layer mit Relevanzwerten:", len(global_concept_maps))
 
-        # Debugging: Überprüfe Struktur und Inhalt von global_concept_maps
-        print("[DEBUG] Überprüfe Struktur und Inhalt von global_concept_maps vor Pruning-Maske...")
-        for layer_name, value in global_concept_maps.items():
-            if value is None:
-                print(f"[ERROR] Layer '{layer_name}' hat None-Wert in global_concept_maps.")
-            elif isinstance(value, dict):
-                print(f"[DEBUG] Layer '{layer_name}' enthält Dictionary: Keys = {list(value.keys())}")
-            elif isinstance(value, torch.Tensor):
-                print(f"[DEBUG] Layer '{layer_name}' enthält Tensor: Shape = {value.shape}")
-            else:
-                print(f"[WARNING] Layer '{layer_name}' enthält unbekannten Typ: {type(value)}")
-
-        # Validierung der global_concept_maps
-        for layer_name, value in global_concept_maps.items():
-            if value is None:
-                raise ValueError(
-                    f"[ERROR] Layer '{layer_name}' hat None-Wert in global_concept_maps. Überprüfe die Attributberechnung.")
-            if isinstance(value, dict):
-                if "relevance" not in value:
-                    raise KeyError(
-                        f"[ERROR] Layer '{layer_name}' enthält Dictionary ohne Key 'relevance'. Inhalt: {list(value.keys())}")
-            elif not isinstance(value, torch.Tensor):
-                raise TypeError(
-                    f"[ERROR] Layer '{layer_name}' enthält ungültigen Typ: {type(value)}. Erwartet: torch.Tensor oder dict.")
-
         # Initialisiere GlobalPruningOperations
         print("[DEBUG] Initialisiere GlobalPruningOperations...")
-        target_layer = torch.nn.Conv2d
-        layer_names = [
-            name for name, _ in self.model.named_modules() if isinstance(_, target_layer)
-        ]
-
         pruning_operations = GlobalPruningOperations(
-            target_layer=target_layer,
-            layer_names=layer_names,
+            target_layer=torch.nn.Conv2d,
+            layer_names=[name for name, _ in self.model.named_modules() if isinstance(_, torch.nn.Conv2d)],
         )
         print(f"[DEBUG] Ziel-Layer: {pruning_operations.layer_names}")
 
@@ -527,53 +494,11 @@ class GlobalClient:
             model=self.model,
             global_concept_maps=global_concept_maps,
             pruning_percentage=pruning_rate,
-            subsequent_layer_pruning="Both",  # Passe dies je nach Bedarf an
+            subsequent_layer_pruning="Both",
             least_relevant_first=True,
             device=self.device,
         )
-        print(f"[DEBUG] Globale Pruning-Maske generiert für {len(global_pruning_mask)} Layer")
-
-        # Debug-Print für die globale Pruning-Maske
-        for layer_name, mask in global_pruning_mask.items():
-            print(f"[DEBUG] Layer: {layer_name} | Masken-Typen: {list(mask.keys())}")
-            if "weight" in mask:
-                print(
-                    f"  Gewicht-Maske - Shape: {mask['weight'].shape}, Min: {mask['weight'].min()}, Max: {mask['weight'].max()}")
-
-        # Validierung: Existieren alle Layer in global_pruning_mask im Modell?
-        missing_layers = [
-            layer_name for layer_name in global_pruning_mask.keys()
-            if ModelLayerUtils.get_module_from_name(self.model, layer_name) is None
-        ]
-        if missing_layers:
-            raise ValueError(f"[ERROR] Die folgenden Layer existieren nicht im Modell: {missing_layers}")
-
-        # Registriere Forward Hooks
-        print("[DEBUG] Registriere Forward Hooks für Pruning...")
-        if global_pruning_mask:
-            self.pruning_hook_handles = pruning_operations.fit_pruning_mask(self.model, global_pruning_mask)
-            print(
-                f"[DEBUG] Forward Hooks registriert: {len(self.pruning_hook_handles) if self.pruning_hook_handles else 'Keine Hooks'}")
-        else:
-            print("[ERROR] Keine gültigen Pruning-Masken verfügbar.")
-            raise ValueError("Pruning-Masken konnten nicht generiert werden.")
-
-        # Debugging: Überprüfe Zustand von global_concept_maps nach Hook-Registrierung
-        print("[DEBUG] Überprüfe Struktur von global_concept_maps nach Hook-Registrierung...")
-        for layer_name, value in global_concept_maps.items():
-            if value is None:
-                print(f"[ERROR] Layer '{layer_name}' hat None-Wert.")
-            elif isinstance(value, torch.Tensor):
-                print(f"[DEBUG] Layer '{layer_name}' hat Tensor mit Shape {value.shape}.")
-            else:
-                print(f"[WARNING] Layer '{layer_name}' hat unbekannten Typ: {type(value)}.")
-
-        # Validierung: Funktioniert 'conv1' korrekt nach der Pruning-Maske?
-        conv1_layer = ModelLayerUtils.get_module_from_name(self.model, "conv1")
-        if conv1_layer is None:
-            print("[ERROR] Layer 'conv1' konnte nach der Pruning-Maske nicht gefunden werden.")
-        else:
-            print(f"[DEBUG] Layer 'conv1' nach Pruning-Maske erfolgreich gefunden: {conv1_layer}.")
+        print(f"[DEBUG] Globale Pruning-Maske generiert für {len(global_pruning_mask)} Layer.")
 
         return global_pruning_mask
 
