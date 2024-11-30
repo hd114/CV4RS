@@ -653,7 +653,8 @@ class GlobalClient:
                     print(f"[ERROR] Failed to save model state: {save_error}")
                 raise
 
-            # Perform LRP Pruning after the first communication round
+            # Perform LRP Pruning only after the first communication round
+            if com_round == 1:
                 print(f"[INFO] Performing LRP Pruning in Round {com_round}...")
                 profiler = Profiler()
                 profiler.start()

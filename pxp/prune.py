@@ -7,15 +7,15 @@ from pxp.utils import ModelLayerUtils
 
 
 class LocalPruningOperations:
-    class LocalPruningOperations:
-        def __init__(self, device=None):
-            """
-            Konstruktor für LocalPruningOperations.
-            Args:
-                device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
-            """
-            self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
-            print(f"[INFO] Using device: {self.device}")
+    def __init__(self, device=None):
+        """
+        Konstruktor für LocalPruningOperations.
+        Args:
+            device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
+        """
+        self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"[INFO] Using device: {self.device}")
+
 
     def bind_mask_to_module(
         self,
@@ -92,29 +92,37 @@ class LocalPruningOperations:
                 )
 
     def generate_local_pruning_mask(
-        self,
-        pruning_mask_shape,
-        pruning_indices,
-        subsequent_layer_pruning="Conv2d",
+            self,
+            pruning_mask_shape,
+            pruning_indices,
+            subsequent_layer_pruning="Conv2d",
+            device=None,  # Neues Argument hinzugefügt
     ):
         """
         Generate a binary pruning mask for the specified layer types.
+
+        Args:
+            pruning_mask_shape (tuple): Shape of the pruning mask.
+            pruning_indices (tensor): Indices of parameters to prune.
+            subsequent_layer_pruning (str): Specifies which layers to include in pruning.
+            device (str, optional): Device to use for mask generation.
         """
+        device = device if device else self.device  # Verwende das übergebene Gerät oder das Standardgerät
         final_pruning_mask = {}
 
         if "Conv2d" in subsequent_layer_pruning or subsequent_layer_pruning == "Both":
             if len(pruning_mask_shape) != 0:  # Valid shape
-                conv_weight_mask = torch.ones(pruning_mask_shape).to(self.device)
+                conv_weight_mask = torch.ones(pruning_mask_shape).to(device)
                 conv_weight_mask[pruning_indices] = 0
                 final_pruning_mask["Conv2d"] = {
                     "weight": conv_weight_mask,
-                    "bias": torch.ones(pruning_mask_shape[0]).to(self.device),  # Default bias mask
+                    "bias": torch.ones(pruning_mask_shape[0]).to(device),  # Default bias mask
                 }
             else:
                 print(f"[WARNING] Invalid mask shape for Conv2d: {pruning_mask_shape}. Skipping layer.")
 
         if "BatchNorm2d" in subsequent_layer_pruning or subsequent_layer_pruning == "Both":
-            bn_weight_mask = torch.ones(pruning_mask_shape[0]).to(self.device)
+            bn_weight_mask = torch.ones(pruning_mask_shape[0]).to(device)
             bn_weight_mask[pruning_indices] = 0
             final_pruning_mask["BatchNorm2d"] = {
                 "weight": bn_weight_mask,
@@ -133,10 +141,9 @@ class GlobalPruningOperations(LocalPruningOperations):
             layer_names (list): Namen der Layer, die geprunt werden sollen.
             device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
         """
-        super().__init__(device=device)  # Initialisiere die Basisklasse
+        super().__init__(device=device)  # Rufe den Konstruktor von LocalPruningOperations auf
         self.target_layer = target_layer
         self.layer_names = layer_names
-
 
     def generate_global_pruning_mask(
             self,
@@ -145,7 +152,7 @@ class GlobalPruningOperations(LocalPruningOperations):
             pruning_percentage,
             subsequent_layer_pruning="Conv2d",
             least_relevant_first=True,
-            device="cuda",
+            device=None,  # Standardwert auf None gesetzt
     ):
         """
         Generate a global pruning mask for the model based on the LRP relevances.
@@ -154,15 +161,16 @@ class GlobalPruningOperations(LocalPruningOperations):
             model (torch.nn.Module): The model to prune.
             global_concept_maps (dict): Dictionary of relevance maps for each layer.
             pruning_percentage (float): Percentage of the concepts/filters to prune.
-            subsequent_layer_pruning (str, optional): Specifies whether to include subsequent layers in pruning.
+            subsequent_layer_pruning (str, optional): Specifies which layers to include in pruning.
                 Options are ["Conv2d", "BatchNorm2d", "Both"]. Defaults to "Conv2d".
             least_relevant_first (bool, optional): Whether to prune the least relevant parameters first.
                 Defaults to True.
-            device (str, optional): Device to run on. Defaults to "cuda".
-
-        Returns:
-            dict: Dictionary of binary pruning masks or pruning indices, depending on the layer type.
+            device (str, optional): Device to use for computation. Defaults to None, which selects "cuda" if available.
         """
+        # Dynamisch das Gerät auswählen
+        device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"[INFO] Using device: {device} for pruning mask generation.")
+
         print("[DEBUG] Validierung von global_concept_maps vor Beginn der Maskengenerierung...")
         for layer_name, value in global_concept_maps.items():
             if value is None:
@@ -185,24 +193,18 @@ class GlobalPruningOperations(LocalPruningOperations):
                                 f"[DEBUG] Layer '{layer_name}' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.")
                             global_concept_maps[layer_name] = global_concept_maps[layer_name]["Conv2d"]["weight"]
                         else:
-                            raise KeyError(
-                                f"[ERROR] Layer '{layer_name}' enthält 'Conv2d', aber kein 'weight'-Key. Verfügbare Keys: {list(global_concept_maps[layer_name]['Conv2d'].keys())}"
-                            )
+                            raise KeyError(f"[ERROR] Layer '{layer_name}' enthält 'Conv2d', aber kein 'weight'-Key.")
                     else:
                         global_concept_maps[layer_name] = global_concept_maps[layer_name]["Conv2d"]
                 elif "BatchNorm2d" in global_concept_maps[layer_name]:
                     print(f"[DEBUG] Layer '{layer_name}' enthält 'BatchNorm2d'-Key. Verwende als Relevanz.")
                     global_concept_maps[layer_name] = global_concept_maps[layer_name]["BatchNorm2d"]
                 else:
-                    raise KeyError(
-                        f"[ERROR] Layer '{layer_name}' enthält keine unterstützten Keys. Verfügbare Keys: {list(global_concept_maps[layer_name].keys())}"
-                    )
+                    raise KeyError(f"[ERROR] Layer '{layer_name}' enthält keine unterstützten Keys.")
 
             # Sicherstellen, dass der Wert ein Tensor ist
             if not isinstance(global_concept_maps[layer_name], torch.Tensor):
-                raise ValueError(
-                    f"[ERROR] Unerwartete Struktur in Layer '{layer_name}'. Erwartet Tensor, aber {type(global_concept_maps[layer_name])} gefunden."
-                )
+                raise ValueError(f"[ERROR] Unerwartete Struktur in Layer '{layer_name}'. Erwartet Tensor.")
 
         print(f"[DEBUG] Überprüfung abgeschlossen. Alle relevanten Layer sind jetzt Tensoren.")
 
@@ -239,9 +241,7 @@ class GlobalPruningOperations(LocalPruningOperations):
             subsequent_layer_pruning = "Conv2d" if subsequent_layer_pruning else "None"
         elif subsequent_layer_pruning not in valid_options:
             raise ValueError(
-                f"[ERROR] Unsupported option for subsequent_layer_pruning: {subsequent_layer_pruning}. "
-                f"Valid options are: {valid_options}"
-            )
+                f"[ERROR] Unsupported option for subsequent_layer_pruning: {subsequent_layer_pruning}. Valid options are: {valid_options}")
 
         print(f"[DEBUG] Verwende 'subsequent_layer_pruning': {subsequent_layer_pruning}")
 
@@ -257,10 +257,6 @@ class GlobalPruningOperations(LocalPruningOperations):
                 subsequent_layer_pruning=subsequent_layer_pruning,
                 device=device,
             )
-
-        # Debugging: Überprüfe die erstellten Masken
-        #for layer_name, mask in global_pruning_mask.items():
-        #    print(f"[DEBUG] Layer {layer_name} - Weight mask non-zero elements: {torch.sum(mask['weight'] > 0)}")
 
         return global_pruning_mask
 

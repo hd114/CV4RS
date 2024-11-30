@@ -1,0 +1,1740 @@
+Lines that potentially need to be canonized 309
+/home/paul/projects/CV4RS-main/pxp/prune.py
+Using device: cuda:0
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    7150 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    4263 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+[INFO] Initializing LRP Pruning...
+[INFO] LRP initialized successfully.
+=== Round 1/3 ===
+[INFO] Training and communication for Round 1...
+Epoch 1/2
+----------
+Updated learning rate: [0.0002]
+Epoch 2/2
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 1...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.14408789086768753, 'ap_mac': 0.1344487861054962}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1441
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1344
+
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+=== Round 2/3 ===
+[INFO] Training and communication for Round 2...
+Epoch 1/2
+----------
+Updated learning rate: [0.0002]
+Epoch 2/2
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 2...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.16183651333751276, 'ap_mac': 0.13453528860318734}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1618
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1345
+
+[INFO] Performing LRP Pruning in Round 2...
+[DEBUG] Starte Berechnung der LRP-Pruning-Maske für Land: Finland
+[DEBUG] Pruning-Rate: 0.3
+Erstelle DataLoader für Land: Finland
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+[DEBUG] Dataloader für 'Finland' geladen mit Batch-Größe 16 und 4 Arbeitern.
+[DEBUG] Starte Berechnung der Relevanzwerte...
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([256])
+Unexpected input shape for LRP: torch.Size([256]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 256])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 256
+Input shape before relevance computation: torch.Size([256, 10, 1, 256])
+Model output shape: torch.Size([256, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([256, 19]) to 256 for one-hot encoding.
+Targets shape: torch.Size([256])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([256, 19])
+Grad output shape: torch.Size([256, 19])
+Relevance computation successful. Relevance shape: torch.Size([256, 10, 1, 256])
+Input shape before model forward: torch.Size([213])
+Unexpected input shape for LRP: torch.Size([213]). Adding dummy dimensions.
+Modified input shape for LRP: torch.Size([1, 1, 213])
+Adjusting input channels from 1 to 10
+Adjusting input batch size from 1 to match targets batch size 213
+Input shape before relevance computation: torch.Size([213, 10, 1, 213])
+Model output shape: torch.Size([213, 19])
+Converting targets from torch.float64 to torch.long
+Reducing targets shape from torch.Size([213, 19]) to 213 for one-hot encoding.
+Targets shape: torch.Size([213])
+Eye matrix shape: torch.Size([19, 19])
+Output shape: torch.Size([213, 19])
+Grad output shape: torch.Size([213, 19])
+Relevance computation successful. Relevance shape: torch.Size([213, 10, 1, 213])
+[DEBUG] Relevanzwerte berechnet. Anzahl der Layer mit Relevanzwerten: 53
+[DEBUG] Überprüfe Struktur und Inhalt von global_concept_maps vor Pruning-Maske...
+[DEBUG] Layer 'conv1' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.0.conv1' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.0.conv2' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.0.conv3' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.4.0.downsample.0' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.4.1.conv1' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.1.conv2' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.1.conv3' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.4.2.conv1' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.2.conv2' enthält Tensor: Shape = torch.Size([64])
+[DEBUG] Layer 'encoder.4.2.conv3' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.5.0.conv1' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.0.conv2' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.0.conv3' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.5.0.downsample.0' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.5.1.conv1' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.1.conv2' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.1.conv3' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.5.2.conv1' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.2.conv2' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.2.conv3' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.5.3.conv1' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.3.conv2' enthält Tensor: Shape = torch.Size([128])
+[DEBUG] Layer 'encoder.5.3.conv3' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.6.0.conv1' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.0.conv2' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.0.conv3' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.6.0.downsample.0' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.6.1.conv1' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.1.conv2' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.1.conv3' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.6.2.conv1' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.2.conv2' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.2.conv3' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.6.3.conv1' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.3.conv2' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.3.conv3' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.6.4.conv1' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.4.conv2' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.4.conv3' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.6.5.conv1' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.5.conv2' enthält Tensor: Shape = torch.Size([256])
+[DEBUG] Layer 'encoder.6.5.conv3' enthält Tensor: Shape = torch.Size([1024])
+[DEBUG] Layer 'encoder.7.0.conv1' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.7.0.conv2' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.7.0.conv3' enthält Tensor: Shape = torch.Size([2048])
+[DEBUG] Layer 'encoder.7.0.downsample.0' enthält Tensor: Shape = torch.Size([2048])
+[DEBUG] Layer 'encoder.7.1.conv1' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.7.1.conv2' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.7.1.conv3' enthält Tensor: Shape = torch.Size([2048])
+[DEBUG] Layer 'encoder.7.2.conv1' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.7.2.conv2' enthält Tensor: Shape = torch.Size([512])
+[DEBUG] Layer 'encoder.7.2.conv3' enthält Tensor: Shape = torch.Size([2048])
+[DEBUG] Initialisiere GlobalPruningOperations...
+[INFO] LocalPruningOperations initialized on device: cuda:0
+[INFO] GlobalPruningOperations initialized for 53 layers on device: cuda:0
+[DEBUG] Ziel-Layer: ['conv1', 'encoder.4.0.conv1', 'encoder.4.0.conv2', 'encoder.4.0.conv3', 'encoder.4.0.downsample.0', 'encoder.4.1.conv1', 'encoder.4.1.conv2', 'encoder.4.1.conv3', 'encoder.4.2.conv1', 'encoder.4.2.conv2', 'encoder.4.2.conv3', 'encoder.5.0.conv1', 'encoder.5.0.conv2', 'encoder.5.0.conv3', 'encoder.5.0.downsample.0', 'encoder.5.1.conv1', 'encoder.5.1.conv2', 'encoder.5.1.conv3', 'encoder.5.2.conv1', 'encoder.5.2.conv2', 'encoder.5.2.conv3', 'encoder.5.3.conv1', 'encoder.5.3.conv2', 'encoder.5.3.conv3', 'encoder.6.0.conv1', 'encoder.6.0.conv2', 'encoder.6.0.conv3', 'encoder.6.0.downsample.0', 'encoder.6.1.conv1', 'encoder.6.1.conv2', 'encoder.6.1.conv3', 'encoder.6.2.conv1', 'encoder.6.2.conv2', 'encoder.6.2.conv3', 'encoder.6.3.conv1', 'encoder.6.3.conv2', 'encoder.6.3.conv3', 'encoder.6.4.conv1', 'encoder.6.4.conv2', 'encoder.6.4.conv3', 'encoder.6.5.conv1', 'encoder.6.5.conv2', 'encoder.6.5.conv3', 'encoder.7.0.conv1', 'encoder.7.0.conv2', 'encoder.7.0.conv3', 'encoder.7.0.downsample.0', 'encoder.7.1.conv1', 'encoder.7.1.conv2', 'encoder.7.1.conv3', 'encoder.7.2.conv1', 'encoder.7.2.conv2', 'encoder.7.2.conv3']
+[DEBUG] Starte Generierung der globalen Pruning-Maske...
+[DEBUG] Validierung von global_concept_maps vor Beginn der Maskengenerierung...
+[DEBUG] Layer 'conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.0.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.0.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.0.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.0.downsample.0' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.1.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.1.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.1.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.2.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.2.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.4.2.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.0.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.0.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.0.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.0.downsample.0' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.1.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.1.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.1.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.2.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.2.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.2.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.3.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.3.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.5.3.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.0.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.0.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.0.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.0.downsample.0' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.1.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.1.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.1.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.2.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.2.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.2.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.3.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.3.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.3.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.4.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.4.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.4.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.5.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.5.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.6.5.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.0.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.0.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.0.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.0.downsample.0' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.1.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.1.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.1.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.2.conv1' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.2.conv2' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Layer 'encoder.7.2.conv3' hat Typ: <class 'torch.Tensor'>.
+[DEBUG] Überprüfe Layer 'conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.0.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.0.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.0.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.0.downsample.0' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.1.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.1.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.1.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.2.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.2.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.4.2.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.0.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.0.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.0.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.0.downsample.0' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.1.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.1.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.1.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.2.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.2.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.2.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.3.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.3.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.5.3.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.0.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.0.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.0.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.0.downsample.0' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.1.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.1.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.1.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.2.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.2.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.2.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.3.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.3.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.3.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.4.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.4.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.4.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.5.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.5.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.6.5.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.0.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.0.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.0.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.0.downsample.0' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.1.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.1.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.1.conv3' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.2.conv1' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.2.conv2' in global_concept_maps...
+[DEBUG] Überprüfe Layer 'encoder.7.2.conv3' in global_concept_maps...
+[DEBUG] Überprüfung abgeschlossen. Alle relevanten Layer sind jetzt Tensoren.
+[DEBUG] Intervallindizes initialisiert: OrderedDict([('conv1', (0, 63)), ('encoder.4.0.conv1', (64, 127)), ('encoder.4.0.conv2', (128, 191)), ('encoder.4.0.conv3', (192, 447)), ('encoder.4.0.downsample.0', (448, 703)), ('encoder.4.1.conv1', (704, 767)), ('encoder.4.1.conv2', (768, 831)), ('encoder.4.1.conv3', (832, 1087)), ('encoder.4.2.conv1', (1088, 1151)), ('encoder.4.2.conv2', (1152, 1215)), ('encoder.4.2.conv3', (1216, 1471)), ('encoder.5.0.conv1', (1472, 1599)), ('encoder.5.0.conv2', (1600, 1727)), ('encoder.5.0.conv3', (1728, 2239)), ('encoder.5.0.downsample.0', (2240, 2751)), ('encoder.5.1.conv1', (2752, 2879)), ('encoder.5.1.conv2', (2880, 3007)), ('encoder.5.1.conv3', (3008, 3519)), ('encoder.5.2.conv1', (3520, 3647)), ('encoder.5.2.conv2', (3648, 3775)), ('encoder.5.2.conv3', (3776, 4287)), ('encoder.5.3.conv1', (4288, 4415)), ('encoder.5.3.conv2', (4416, 4543)), ('encoder.5.3.conv3', (4544, 5055)), ('encoder.6.0.conv1', (5056, 5311)), ('encoder.6.0.conv2', (5312, 5567)), ('encoder.6.0.conv3', (5568, 6591)), ('encoder.6.0.downsample.0', (6592, 7615)), ('encoder.6.1.conv1', (7616, 7871)), ('encoder.6.1.conv2', (7872, 8127)), ('encoder.6.1.conv3', (8128, 9151)), ('encoder.6.2.conv1', (9152, 9407)), ('encoder.6.2.conv2', (9408, 9663)), ('encoder.6.2.conv3', (9664, 10687)), ('encoder.6.3.conv1', (10688, 10943)), ('encoder.6.3.conv2', (10944, 11199)), ('encoder.6.3.conv3', (11200, 12223)), ('encoder.6.4.conv1', (12224, 12479)), ('encoder.6.4.conv2', (12480, 12735)), ('encoder.6.4.conv3', (12736, 13759)), ('encoder.6.5.conv1', (13760, 14015)), ('encoder.6.5.conv2', (14016, 14271)), ('encoder.6.5.conv3', (14272, 15295)), ('encoder.7.0.conv1', (15296, 15807)), ('encoder.7.0.conv2', (15808, 16319)), ('encoder.7.0.conv3', (16320, 18367)), ('encoder.7.0.downsample.0', (18368, 20415)), ('encoder.7.1.conv1', (20416, 20927)), ('encoder.7.1.conv2', (20928, 21439)), ('encoder.7.1.conv3', (21440, 23487)), ('encoder.7.2.conv1', (23488, 23999)), ('encoder.7.2.conv2', (24000, 24511)), ('encoder.7.2.conv3', (24512, 26559))])
+[DEBUG] Generierte Pruning-Indizes überprüft:
+  Layer: conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.4.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.4.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.4.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.4.2.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.5.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.2.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.3.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.3.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.3.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.6.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.2.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.3.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.3.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.3.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.4.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.4.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.4.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.5.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.5.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.5.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.conv3 | Indizes: torch.Size([1366])
+  Layer: encoder.7.0.downsample.0 | Indizes: torch.Size([1359])
+  Layer: encoder.7.1.conv1 | Indizes: torch.Size([130])
+  Layer: encoder.7.1.conv2 | Indizes: torch.Size([2])
+  Layer: encoder.7.1.conv3 | Indizes: torch.Size([2039])
+  Layer: encoder.7.2.conv1 | Indizes: torch.Size([512])
+  Layer: encoder.7.2.conv2 | Indizes: torch.Size([512])
+  Layer: encoder.7.2.conv3 | Indizes: torch.Size([2048])
+[DEBUG] Verwende 'subsequent_layer_pruning': Both
+[DEBUG] Generiere Pruning-Maske für Layer 'conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.2.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.2.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.3.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.3.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.3.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.2.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.3.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.3.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.3.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.4.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.4.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.4.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.5.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.5.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.5.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.2.conv3'...
+[DEBUG] Globale Pruning-Maske generiert für 53 Layer
+[DEBUG] Layer: conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.0.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.0.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.0.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.0.downsample.0 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.1.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.1.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.1.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.2.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.2.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.4.2.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.0.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.0.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.0.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.0.downsample.0 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.1.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.1.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.1.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.2.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.2.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.2.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.3.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.3.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.5.3.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.0.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.0.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.0.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.0.downsample.0 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.1.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.1.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.1.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.2.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.2.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.2.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.3.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.3.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.3.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.4.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.4.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.4.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.5.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.5.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.6.5.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.0.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.0.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.0.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.0.downsample.0 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.1.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.1.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.1.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.2.conv1 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.2.conv2 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer: encoder.7.2.conv3 | Masken-Typen: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Registriere Forward Hooks für Pruning...
+[DEBUG] Applying pruning mask to 53 layers...
+[ERROR] Missing 'weight' in pruning mask for layer 'conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.2.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.2.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.3.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.3.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.3.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.2.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.3.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.3.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.3.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.4.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.4.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.4.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.5.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.5.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.5.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.2.conv3'. Skipping...
+[DEBUG] Forward Hooks registriert: Keine Hooks
+[DEBUG] Überprüfe Struktur von global_concept_maps nach Hook-Registrierung...
+[DEBUG] Layer 'conv1' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.0.conv1' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.0.conv2' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.0.conv3' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.4.0.downsample.0' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.4.1.conv1' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.1.conv2' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.1.conv3' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.4.2.conv1' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.2.conv2' hat Tensor mit Shape torch.Size([64]).
+[DEBUG] Layer 'encoder.4.2.conv3' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.5.0.conv1' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.0.conv2' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.0.conv3' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.5.0.downsample.0' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.5.1.conv1' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.1.conv2' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.1.conv3' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.5.2.conv1' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.2.conv2' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.2.conv3' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.5.3.conv1' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.3.conv2' hat Tensor mit Shape torch.Size([128]).
+[DEBUG] Layer 'encoder.5.3.conv3' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.6.0.conv1' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.0.conv2' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.0.conv3' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.6.0.downsample.0' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.6.1.conv1' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.1.conv2' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.1.conv3' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.6.2.conv1' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.2.conv2' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.2.conv3' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.6.3.conv1' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.3.conv2' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.3.conv3' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.6.4.conv1' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.4.conv2' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.4.conv3' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.6.5.conv1' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.5.conv2' hat Tensor mit Shape torch.Size([256]).
+[DEBUG] Layer 'encoder.6.5.conv3' hat Tensor mit Shape torch.Size([1024]).
+[DEBUG] Layer 'encoder.7.0.conv1' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.7.0.conv2' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.7.0.conv3' hat Tensor mit Shape torch.Size([2048]).
+[DEBUG] Layer 'encoder.7.0.downsample.0' hat Tensor mit Shape torch.Size([2048]).
+[DEBUG] Layer 'encoder.7.1.conv1' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.7.1.conv2' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.7.1.conv3' hat Tensor mit Shape torch.Size([2048]).
+[DEBUG] Layer 'encoder.7.2.conv1' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.7.2.conv2' hat Tensor mit Shape torch.Size([512]).
+[DEBUG] Layer 'encoder.7.2.conv3' hat Tensor mit Shape torch.Size([2048]).
+[DEBUG] Layer 'conv1' nach Pruning-Maske erfolgreich gefunden: Conv2d(10, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3)).
+[DEBUG] Global concept maps computed with 53 layers.
+[INFO] LocalPruningOperations initialized on device: cpu
+[INFO] GlobalPruningOperations initialized for 53 layers on device: cpu
+[DEBUG] Validierung von global_concept_maps vor Beginn der Maskengenerierung...
+[DEBUG] Layer 'conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.0.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.0.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.0.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.0.downsample.0' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.1.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.1.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.1.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.2.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.2.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.4.2.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.0.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.0.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.0.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.0.downsample.0' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.1.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.1.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.1.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.2.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.2.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.2.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.3.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.3.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.5.3.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.0.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.0.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.0.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.0.downsample.0' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.1.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.1.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.1.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.2.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.2.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.2.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.3.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.3.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.3.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.4.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.4.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.4.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.5.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.5.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.6.5.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.0.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.0.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.0.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.0.downsample.0' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.1.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.1.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.1.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.2.conv1' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.2.conv2' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Layer 'encoder.7.2.conv3' enthält Keys: ['Conv2d', 'BatchNorm2d']
+[DEBUG] Überprüfe Layer 'conv1' in global_concept_maps...
+[DEBUG] Layer 'conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.0.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.0.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.0.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.0.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.0.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.0.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.0.downsample.0' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.0.downsample.0' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.1.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.1.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.1.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.1.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.1.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.1.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.2.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.2.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.2.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.2.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.4.2.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.4.2.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.0.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.0.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.0.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.0.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.0.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.0.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.0.downsample.0' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.0.downsample.0' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.1.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.1.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.1.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.1.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.1.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.1.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.2.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.2.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.2.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.2.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.2.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.2.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.3.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.3.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.3.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.3.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.5.3.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.5.3.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.0.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.0.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.0.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.0.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.0.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.0.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.0.downsample.0' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.0.downsample.0' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.1.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.1.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.1.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.1.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.1.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.1.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.2.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.2.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.2.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.2.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.2.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.2.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.3.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.3.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.3.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.3.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.3.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.3.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.4.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.4.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.4.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.4.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.4.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.4.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.5.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.5.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.5.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.5.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.6.5.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.6.5.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.0.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.0.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.0.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.0.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.0.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.0.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.0.downsample.0' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.0.downsample.0' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.1.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.1.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.1.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.1.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.1.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.1.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.2.conv1' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.2.conv1' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.2.conv2' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.2.conv2' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfe Layer 'encoder.7.2.conv3' in global_concept_maps...
+[DEBUG] Layer 'encoder.7.2.conv3' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.
+[DEBUG] Überprüfung abgeschlossen. Alle relevanten Layer sind jetzt Tensoren.
+[DEBUG] Intervallindizes initialisiert: OrderedDict([('conv1', (0, 63)), ('encoder.4.0.conv1', (64, 127)), ('encoder.4.0.conv2', (128, 191)), ('encoder.4.0.conv3', (192, 447)), ('encoder.4.0.downsample.0', (448, 703)), ('encoder.4.1.conv1', (704, 767)), ('encoder.4.1.conv2', (768, 831)), ('encoder.4.1.conv3', (832, 1087)), ('encoder.4.2.conv1', (1088, 1151)), ('encoder.4.2.conv2', (1152, 1215)), ('encoder.4.2.conv3', (1216, 1471)), ('encoder.5.0.conv1', (1472, 1599)), ('encoder.5.0.conv2', (1600, 1727)), ('encoder.5.0.conv3', (1728, 2239)), ('encoder.5.0.downsample.0', (2240, 2751)), ('encoder.5.1.conv1', (2752, 2879)), ('encoder.5.1.conv2', (2880, 3007)), ('encoder.5.1.conv3', (3008, 3519)), ('encoder.5.2.conv1', (3520, 3647)), ('encoder.5.2.conv2', (3648, 3775)), ('encoder.5.2.conv3', (3776, 4287)), ('encoder.5.3.conv1', (4288, 4415)), ('encoder.5.3.conv2', (4416, 4543)), ('encoder.5.3.conv3', (4544, 5055)), ('encoder.6.0.conv1', (5056, 5311)), ('encoder.6.0.conv2', (5312, 5567)), ('encoder.6.0.conv3', (5568, 6591)), ('encoder.6.0.downsample.0', (6592, 7615)), ('encoder.6.1.conv1', (7616, 7871)), ('encoder.6.1.conv2', (7872, 8127)), ('encoder.6.1.conv3', (8128, 9151)), ('encoder.6.2.conv1', (9152, 9407)), ('encoder.6.2.conv2', (9408, 9663)), ('encoder.6.2.conv3', (9664, 10687)), ('encoder.6.3.conv1', (10688, 10943)), ('encoder.6.3.conv2', (10944, 11199)), ('encoder.6.3.conv3', (11200, 12223)), ('encoder.6.4.conv1', (12224, 12479)), ('encoder.6.4.conv2', (12480, 12735)), ('encoder.6.4.conv3', (12736, 13759)), ('encoder.6.5.conv1', (13760, 14015)), ('encoder.6.5.conv2', (14016, 14271)), ('encoder.6.5.conv3', (14272, 15295)), ('encoder.7.0.conv1', (15296, 15807)), ('encoder.7.0.conv2', (15808, 16319)), ('encoder.7.0.conv3', (16320, 18367)), ('encoder.7.0.downsample.0', (18368, 20415)), ('encoder.7.1.conv1', (20416, 20927)), ('encoder.7.1.conv2', (20928, 21439)), ('encoder.7.1.conv3', (21440, 23487)), ('encoder.7.2.conv1', (23488, 23999)), ('encoder.7.2.conv2', (24000, 24511)), ('encoder.7.2.conv3', (24512, 26559))])
+[DEBUG] Generierte Pruning-Indizes überprüft:
+  Layer: conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.4.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.4.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.4.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.4.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.4.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.4.2.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.5.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.2.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.5.3.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.5.3.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.5.3.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.6.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.2.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.3.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.3.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.3.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.4.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.4.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.4.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.6.5.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.6.5.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.6.5.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.7.0.downsample.0 | Indizes: torch.Size([0])
+  Layer: encoder.7.1.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.7.1.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.7.1.conv3 | Indizes: torch.Size([0])
+  Layer: encoder.7.2.conv1 | Indizes: torch.Size([0])
+  Layer: encoder.7.2.conv2 | Indizes: torch.Size([0])
+  Layer: encoder.7.2.conv3 | Indizes: torch.Size([0])
+[WARNING] 'subsequent_layer_pruning' war bool: True. Konvertiere zu 'Conv2d'.
+[DEBUG] Verwende 'subsequent_layer_pruning': Conv2d
+[DEBUG] Generiere Pruning-Maske für Layer 'conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.4.2.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.2.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.3.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.3.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.5.3.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.2.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.3.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.3.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.3.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.4.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.4.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.4.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.5.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.5.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.6.5.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.0.downsample.0'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.1.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.1.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.1.conv3'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.2.conv1'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.2.conv2'...
+[DEBUG] Generiere Pruning-Maske für Layer 'encoder.7.2.conv3'...
+[INFO] LRP Pruning applied successfully in Round 2.
+[DEBUG] Pruning mask generated for 53 layers.
+[DEBUG] Pruning call graph saved to 'pruning_callgraph.txt'.
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+=== Round 3/3 ===
+[INFO] Applying pruning mask for round 3...
+[INFO] LocalPruningOperations initialized on device: cpu
+[INFO] GlobalPruningOperations initialized for 53 layers on device: cpu
+[DEBUG] Applying pruning mask to 53 layers...
+[ERROR] Missing 'weight' in pruning mask for layer 'conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.4.2.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.2.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.3.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.3.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.5.3.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.2.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.3.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.3.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.3.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.4.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.4.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.4.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.5.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.5.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.6.5.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.0.downsample.0'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.1.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.1.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.1.conv3'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.2.conv1'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.2.conv2'. Skipping...
+[ERROR] Missing 'weight' in pruning mask for layer 'encoder.7.2.conv3'. Skipping...
+[DEBUG] Pruning mask applied successfully.
+[INFO] Training and communication for Round 3...
+Epoch 1/2
+----------
+Updated learning rate: [0.0002]
+Epoch 2/2
+----------
+Updated learning rate: [0.0002]
+[WARNING] Missing parameter: conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.0.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.0.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.0.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.0.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.0.downsample.0.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.1.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.1.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.1.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.2.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.2.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.4.2.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.0.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.0.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.0.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.0.downsample.0.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.1.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.1.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.1.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.2.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.2.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.2.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.3.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.3.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.5.3.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.0.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.0.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.0.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.0.downsample.0.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.1.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.1.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.1.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.2.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.2.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.2.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.3.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.3.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.3.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.4.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.4.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.4.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.5.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.5.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.6.5.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.0.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.0.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.0.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.0.downsample.0.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.1.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.1.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.1.conv3.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.2.conv1.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.2.conv2.bias. Setting to zeros.
+[WARNING] Missing parameter: encoder.7.2.conv3.bias. Setting to zeros.
+[INFO] Starting validation after Round 3...
+[ERROR] NaN or Inf in logits for batch 0. Stats: max=nan, min=nan, mean=nan
+[DEBUG] Validation report: {'error': 'NaN in logits'}
+[ERROR] Missing key in eval_result: '0'
+[DEBUG] Current primary key: 0, secondary key: precision
+[DEBUG] Available keys in eval_result: ['error']
+[DEBUG] Available keys in eval_result[0]: N/A
+[ERROR] Error during training or validation: '0'
+[DEBUG] Attempting to log model state for debugging...
+[ERROR] Failed to save model state: GlobalClient.save_state_dict() got an unexpected keyword argument 'path'
