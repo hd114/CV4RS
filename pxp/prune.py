@@ -7,8 +7,15 @@ from pxp.utils import ModelLayerUtils
 
 
 class LocalPruningOperations:
-    def __init__(self):
-        pass
+    class LocalPruningOperations:
+        def __init__(self, device=None):
+            """
+            Konstruktor für LocalPruningOperations.
+            Args:
+                device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
+            """
+            self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+            print(f"[INFO] Using device: {self.device}")
 
     def bind_mask_to_module(
         self,
@@ -85,211 +92,177 @@ class LocalPruningOperations:
                 )
 
     def generate_local_pruning_mask(
-            self,
-            pruning_mask_shape,
-            pruning_indices,
-            subsequent_layer_pruning,
-            device="cuda",
+        self,
+        pruning_mask_shape,
+        pruning_indices,
+        subsequent_layer_pruning="Conv2d",
     ):
         """
         Generate a binary pruning mask for the specified layer types.
-
-        Args:
-            pruning_mask_shape (tuple): Shape of the pruning mask.
-            pruning_indices (list): Indices of the concepts to prune.
-            subsequent_layer_pruning (str): Specifies which layers to prune.
-                Options: ["Conv2d", "Both", "BatchNorm2d", "Linear", "Softmax"].
-            device (str): Device to run on ("cuda" or "cpu").
-
-        Returns:
-            dict: Binary pruning mask for the specified layer types.
         """
-        # Initialize masks
         final_pruning_mask = {}
 
-        if subsequent_layer_pruning == "Linear":
-            linear_weight_mask = torch.ones(pruning_mask_shape).to(device)
-            linear_bias_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            # Apply pruning
-            linear_weight_mask[pruning_indices] = 0
-            linear_bias_mask[pruning_indices] = 0
-            final_pruning_mask["Linear"] = {
-                "weight": linear_weight_mask,
-                "bias": linear_bias_mask,
-            }
+        if "Conv2d" in subsequent_layer_pruning or subsequent_layer_pruning == "Both":
+            if len(pruning_mask_shape) != 0:  # Valid shape
+                conv_weight_mask = torch.ones(pruning_mask_shape).to(self.device)
+                conv_weight_mask[pruning_indices] = 0
+                final_pruning_mask["Conv2d"] = {
+                    "weight": conv_weight_mask,
+                    "bias": torch.ones(pruning_mask_shape[0]).to(self.device),  # Default bias mask
+                }
+            else:
+                print(f"[WARNING] Invalid mask shape for Conv2d: {pruning_mask_shape}. Skipping layer.")
 
-        if subsequent_layer_pruning in ["Conv2d", "Both"]:
-            cnn_weight_mask = torch.ones(pruning_mask_shape).to(device)
-            cnn_bias_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            # Apply pruning
-            cnn_weight_mask[pruning_indices] = 0
-            cnn_bias_mask[pruning_indices] = 0
-            final_pruning_mask["Conv2d"] = {
-                "weight": cnn_weight_mask,
-                "bias": cnn_bias_mask,
-            }
-
-        if subsequent_layer_pruning in ["BatchNorm2d", "Both"]:
-            bn_weight_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            bn_bias_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            # Apply pruning
+        if "BatchNorm2d" in subsequent_layer_pruning or subsequent_layer_pruning == "Both":
+            bn_weight_mask = torch.ones(pruning_mask_shape[0]).to(self.device)
             bn_weight_mask[pruning_indices] = 0
-            bn_bias_mask[pruning_indices] = 0
             final_pruning_mask["BatchNorm2d"] = {
                 "weight": bn_weight_mask,
-                "bias": bn_bias_mask,
+                "bias": bn_weight_mask.clone(),
             }
 
-        if subsequent_layer_pruning == "Softmax":
-            softmax_weight_mask = torch.ones(pruning_mask_shape).to(device)
-            # Apply pruning
-            softmax_weight_mask[pruning_indices] = 0
-            final_pruning_mask["Softmax"] = {"weight": softmax_weight_mask}
-
-        # Return the constructed mask dictionary
-        if not final_pruning_mask:
-            raise ValueError(
-                f"Invalid option for subsequent_layer_pruning: {subsequent_layer_pruning}"
-            )
         return final_pruning_mask
 
 
 class GlobalPruningOperations(LocalPruningOperations):
-    def __init__(self, target_layer, layer_names):
+    def __init__(self, target_layer, layer_names, device=None):
+        """
+        Konstruktor für GlobalPruningOperations.
+        Args:
+            target_layer: Ziel-Layer, z. B. torch.nn.Conv2d.
+            layer_names (list): Namen der Layer, die geprunt werden sollen.
+            device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
+        """
+        super().__init__(device=device)  # Initialisiere die Basisklasse
         self.target_layer = target_layer
         self.layer_names = layer_names
 
-    # def generate_global_pruning_mask(
-    #     self,
-    #     model,
-    #     global_concept_maps,
-    #     pruning_precentage,
-    #     subsequent_layer_pruning="Conv2d",
-    #     least_relevant_first=True,
-    #     device="cuda",
-    # ):
-    #     """
-    #     Generate a global pruning mask for the model based on the LRP relevances
-    #
-    #     Args:
-    #         mode (str): whether to use "Relevance", "Activation", or "Random" for concept attribution
-    #         model (torch.module): the model
-    #         pruning_precentage (float): the precentage of the concepts to prune
-    #         dataset (torchvision.datasets): the dataset which holds tbe images used for pruning
-    #         sample_indices (list): indices of the samples to use for pruning from the dataset
-    #         device (str, optional): device to run on. Defaults to "cuda".
-    #         subsequent_layer_pruning (str, optional): Whether or not to prune the subsequent layers(BatchNorm). Options are ["Conv2d", "Both", "BatchNorm2d"].
-    #                                                         When "Conv2d" is chosen, only the Conv2d will be pruned. When "Both" is chosen, both the batchnorm
-    #                                                         and the subsequent BatchNorm will be pruned. But if "BatchNorm2d" is chosen, only
-    #                                                         the BatchNorm of the subsequent layer will be pruned, not the Conv2d! Defaults to None.
-    #         lrp_composite (zennit.composites, optional): LRP composites used for Relevance-Based Concept Pruning. Defaults to EpsilonPlusFlat.
-    #         abs_norm (bool, optional): Whether or not to use absolute normalization when computing the concept relevences via zennit-crp. Defaults to True.
-    #         abs_sort (bool, optional): Whether or not to sort the concepts by their absolute value. Defaults to True.
-    #         least_relevant_first (bool, optional): Whether or not to prune the least values(Relevance/Activation)
-    #                                               or the most values(Relevance/Activation). Defaults to True(least).
-    #
-    #     Returns:
-    #         dict: Dictionary of binary mask of the concepts to prune for each layer
-    #     """
-    #     global_pruning_masks_shapes = OrderedDict([])
-    #     if self.target_layer != torch.nn.Softmax:
-    #         for layer_name in self.layer_names:
-    #             global_pruning_masks_shapes[layer_name] = (
-    #                 ModelLayerUtils.get_module_from_name(model, layer_name).weight.shape
-    #             )
-    #
-    #     interval_indices = OrderedDict([])
-    #     old_start_index = 0
-    #     for layer_name in self.layer_names:
-    #         if layer_name not in interval_indices.keys():
-    #             interval_indices[layer_name] = (
-    #                 old_start_index,
-    #                 old_start_index + global_concept_maps[layer_name].shape[0] - 1,
-    #             )
-    #             old_start_index += global_concept_maps[layer_name].shape[0]
-    #
-    #     # Generate the indices of concepts/filters to prune from each layer
-    #     global_pruning_indices = self.generate_global_pruning_indices(
-    #         global_concept_maps,
-    #         interval_indices,
-    #         pruning_precentage,
-    #         least_relevant_first,
-    #     )
-    #
-    #     # Generate the pruning masks for each layer
-    #     if self.target_layer != torch.nn.Softmax:
-    #         global_pruning_mask = OrderedDict([])
-    #         for layer_name, layer_pruning_indices in global_pruning_indices.items():
-    #
-    #             global_pruning_mask[layer_name] = self.generate_local_pruning_mask(
-    #                 global_pruning_masks_shapes[layer_name],
-    #                 layer_pruning_indices,
-    #                 subsequent_layer_pruning=subsequent_layer_pruning,
-    #                 device=device,
-    #             )
-    #
-    #         return global_pruning_mask
-    #
-    #     else:
-    #         return global_pruning_indices
 
     def generate_global_pruning_mask(
-            self, model, global_concept_maps, pruning_percentage, least_relevant_first=True, device="cuda"
+            self,
+            model,
+            global_concept_maps,
+            pruning_percentage,
+            subsequent_layer_pruning="Conv2d",
+            least_relevant_first=True,
+            device="cuda",
     ):
         """
-        Generate a global pruning mask based on relevance maps.
+        Generate a global pruning mask for the model based on the LRP relevances.
 
         Args:
             model (torch.nn.Module): The model to prune.
-            global_concept_maps (dict): Relevance maps for each layer.
-            pruning_percentage (float): Fraction of parameters to prune.
-            least_relevant_first (bool): Whether to prune the least relevant parameters.
-            device (str): Device to allocate masks.
+            global_concept_maps (dict): Dictionary of relevance maps for each layer.
+            pruning_percentage (float): Percentage of the concepts/filters to prune.
+            subsequent_layer_pruning (str, optional): Specifies whether to include subsequent layers in pruning.
+                Options are ["Conv2d", "BatchNorm2d", "Both"]. Defaults to "Conv2d".
+            least_relevant_first (bool, optional): Whether to prune the least relevant parameters first.
+                Defaults to True.
+            device (str, optional): Device to run on. Defaults to "cuda".
 
         Returns:
-            dict: Pruning masks for all relevant layers.
+            dict: Dictionary of binary pruning masks or pruning indices, depending on the layer type.
         """
-        # Ensure global_concept_maps is in the correct format
-        assert isinstance(global_concept_maps, dict), "global_concept_maps must be a dictionary."
+        print("[DEBUG] Validierung von global_concept_maps vor Beginn der Maskengenerierung...")
+        for layer_name, value in global_concept_maps.items():
+            if value is None:
+                print(f"[ERROR] Layer '{layer_name}' hat None-Wert vor Maskengenerierung.")
+            elif isinstance(value, dict):
+                print(f"[DEBUG] Layer '{layer_name}' enthält Keys: {list(value.keys())}")
+            else:
+                print(f"[DEBUG] Layer '{layer_name}' hat Typ: {type(value)}.")
 
-        global_pruning_masks = OrderedDict()
-        for layer_name, relevance_map in global_concept_maps.items():
-            print(f"Layer: {layer_name}")
-            print(f"Type of relevance_map: {type(relevance_map)}")
-            print(f"Content of relevance_map: {relevance_map}")
-
-            # Falls relevance_map ein dict ist, die relevanten Daten extrahieren
-            if isinstance(relevance_map, dict):
-                if "Conv2d" in relevance_map:
-                    relevance_map = relevance_map["Conv2d"]["weight"]
-                elif "BatchNorm2d" in relevance_map:
-                    relevance_map = relevance_map["BatchNorm2d"]["weight"]
+        # Verarbeite verschachtelte Dictionaries
+        for layer_name in global_concept_maps.keys():
+            print(f"[DEBUG] Überprüfe Layer '{layer_name}' in global_concept_maps...")
+            if isinstance(global_concept_maps[layer_name], dict):
+                if "relevance" in global_concept_maps[layer_name]:
+                    global_concept_maps[layer_name] = global_concept_maps[layer_name]["relevance"]
+                elif "Conv2d" in global_concept_maps[layer_name]:
+                    if isinstance(global_concept_maps[layer_name]["Conv2d"], dict):
+                        if "weight" in global_concept_maps[layer_name]["Conv2d"]:
+                            print(
+                                f"[DEBUG] Layer '{layer_name}' enthält verschachtelte Struktur. Verwende 'weight' von 'Conv2d'.")
+                            global_concept_maps[layer_name] = global_concept_maps[layer_name]["Conv2d"]["weight"]
+                        else:
+                            raise KeyError(
+                                f"[ERROR] Layer '{layer_name}' enthält 'Conv2d', aber kein 'weight'-Key. Verfügbare Keys: {list(global_concept_maps[layer_name]['Conv2d'].keys())}"
+                            )
+                    else:
+                        global_concept_maps[layer_name] = global_concept_maps[layer_name]["Conv2d"]
+                elif "BatchNorm2d" in global_concept_maps[layer_name]:
+                    print(f"[DEBUG] Layer '{layer_name}' enthält 'BatchNorm2d'-Key. Verwende als Relevanz.")
+                    global_concept_maps[layer_name] = global_concept_maps[layer_name]["BatchNorm2d"]
                 else:
-                    raise ValueError(f"Unsupported structure in relevance_map for layer {layer_name}: {relevance_map}")
+                    raise KeyError(
+                        f"[ERROR] Layer '{layer_name}' enthält keine unterstützten Keys. Verfügbare Keys: {list(global_concept_maps[layer_name].keys())}"
+                    )
 
-            # Ensure the relevance map is a tensor
-            if not isinstance(relevance_map, torch.Tensor):
-                raise TypeError(
-                    f"Relevance map for layer {layer_name} must be a tensor after extraction. Found type: {type(relevance_map)}"
+            # Sicherstellen, dass der Wert ein Tensor ist
+            if not isinstance(global_concept_maps[layer_name], torch.Tensor):
+                raise ValueError(
+                    f"[ERROR] Unerwartete Struktur in Layer '{layer_name}'. Erwartet Tensor, aber {type(global_concept_maps[layer_name])} gefunden."
                 )
 
-            # Compute the number of elements to prune
-            num_prune = int(pruning_percentage * relevance_map.numel())
+        print(f"[DEBUG] Überprüfung abgeschlossen. Alle relevanten Layer sind jetzt Tensoren.")
 
-            # Flatten the relevance map and compute the indices to prune
-            flat_relevance = relevance_map.view(-1)
-            _, prune_indices = flat_relevance.topk(num_prune, largest=not least_relevant_first)
+        # Initialisiere Intervalle für Pruning-Indizes
+        interval_indices = OrderedDict([])
+        old_start_index = 0
+        for layer_name, relevance_map in global_concept_maps.items():
+            if layer_name not in interval_indices.keys():
+                interval_indices[layer_name] = (
+                    old_start_index,
+                    old_start_index + relevance_map.shape[0] - 1,
+                )
+                old_start_index += relevance_map.shape[0]
 
-            # Generate local pruning mask
-            pruning_mask = self.generate_local_pruning_mask(
-                pruning_mask_shape=relevance_map.shape,
-                pruning_indices=prune_indices,
-                subsequent_layer_pruning="Both",  # or another mode based on your logic
+        print(f"[DEBUG] Intervallindizes initialisiert: {interval_indices}")
+
+        # Generiere Pruning-Indizes
+        global_pruning_indices = self.generate_global_pruning_indices(
+            global_concept_maps,
+            interval_indices,
+            pruning_percentage,
+            least_relevant_first,
+        )
+
+        print("[DEBUG] Generierte Pruning-Indizes überprüft:")
+        for layer_name, indices in global_pruning_indices.items():
+            print(f"  Layer: {layer_name} | Indizes: {indices.shape}")
+
+        # Validierung von subsequent_layer_pruning
+        valid_options = {"Conv2d", "BatchNorm2d", "Both"}
+        if isinstance(subsequent_layer_pruning, bool):
+            print(
+                f"[WARNING] 'subsequent_layer_pruning' war bool: {subsequent_layer_pruning}. Konvertiere zu 'Conv2d'.")
+            subsequent_layer_pruning = "Conv2d" if subsequent_layer_pruning else "None"
+        elif subsequent_layer_pruning not in valid_options:
+            raise ValueError(
+                f"[ERROR] Unsupported option for subsequent_layer_pruning: {subsequent_layer_pruning}. "
+                f"Valid options are: {valid_options}"
+            )
+
+        print(f"[DEBUG] Verwende 'subsequent_layer_pruning': {subsequent_layer_pruning}")
+
+        # Generiere Pruning-Masken
+        global_pruning_mask = OrderedDict([])
+        for layer_name, layer_pruning_indices in global_pruning_indices.items():
+            print(f"[DEBUG] Generiere Pruning-Maske für Layer '{layer_name}'...")
+            layer = ModelLayerUtils.get_module_from_name(model, layer_name)
+            mask_shape = layer.weight.shape
+            global_pruning_mask[layer_name] = self.generate_local_pruning_mask(
+                mask_shape,
+                layer_pruning_indices,
+                subsequent_layer_pruning=subsequent_layer_pruning,
                 device=device,
             )
-            global_pruning_masks[layer_name] = pruning_mask
 
-        return global_pruning_masks
+        # Debugging: Überprüfe die erstellten Masken
+        #for layer_name, mask in global_pruning_mask.items():
+        #    print(f"[DEBUG] Layer {layer_name} - Weight mask non-zero elements: {torch.sum(mask['weight'] > 0)}")
+
+        return global_pruning_mask
 
     def generate_global_pruning_indices(
         self,
@@ -342,26 +315,38 @@ class GlobalPruningOperations(LocalPruningOperations):
 
     def fit_pruning_mask(self, model, global_pruning_mask):
         """
-        Apply the global pruning mask to the model and fixing it
+        Apply the global pruning mask to the model and fix it.
 
         Args:
-            model (torch.nn.module): the model to prune
-            global_pruning_mask (dict): pruning mask for each layer
+            model (torch.nn.Module): The model to prune.
+            global_pruning_mask (dict): Pruning mask for each layer.
         """
-        # Apply the global pruning mask to the model per layer
-        if self.target_layer != torch.nn.Softmax:
-            [
-                super(GlobalPruningOperations, self).fit_pruning_mask(
-                    model, layer_name, layer_pruning_mask
+        print(f"[DEBUG] Applying pruning mask to {len(global_pruning_mask)} layers...")
+        for layer_name, layer_pruning_mask in global_pruning_mask.items():
+            # Validate layer existence
+            layer = ModelLayerUtils.get_module_from_name(model, layer_name)
+            if layer is None:
+                print(f"[ERROR] Layer '{layer_name}' does not exist in the model. Skipping...")
+                continue
+
+            # Validate pruning mask
+            if "weight" not in layer_pruning_mask:
+                print(f"[ERROR] Missing 'weight' in pruning mask for layer '{layer_name}'. Skipping...")
+                continue
+
+            try:
+                # Apply weight mask
+                self.bind_mask_to_module(
+                    model, layer_name, layer_pruning_mask["weight"], "weight"
                 )
-                for layer_name, layer_pruning_mask in global_pruning_mask.items()
-            ]
-        else:
-            for layer_name, layer_pruning_indices in global_pruning_mask.items():
-                hook_handles = self.mask_attention_head(
-                    model, layer_name, layer_pruning_indices
-                )
-            return hook_handles
+                # Apply bias mask if exists
+                if "bias" in layer_pruning_mask and layer.bias is not None:
+                    self.bind_mask_to_module(
+                        model, layer_name, layer_pruning_mask["bias"], "bias"
+                    )
+                print(f"[DEBUG] Pruning mask successfully applied to layer '{layer_name}'.")
+            except Exception as e:
+                print(f"[ERROR] Failed to apply pruning mask to layer '{layer_name}': {e}")
 
     @staticmethod
     def mask_attention_head(model, layer_names, head_indices):
@@ -380,13 +365,21 @@ class GlobalPruningOperations(LocalPruningOperations):
 
             return get_out_activations
 
-        # append hook to last activation of mlp layer
+        # Hook für jeden angegebenen Layer registrieren
         for name, layer in model.named_modules():
             if name == layer_names:
+                print(f"[DEBUG] Registriere Hook für Layer: {name}")
                 hook_handles.append(
                     layer.register_forward_hook(
                         generate_set_forward_hook_softmax(name, head_indices)
                     )
                 )
+            else:
+                print(f"[WARNING] Layer '{layer_names}' nicht im Modell gefunden.")
 
+        if not hook_handles:
+            print(f"[ERROR] Keine Hooks registriert für '{layer_names}'. Überprüfe Layer-Namen.")
         return hook_handles
+
+
+

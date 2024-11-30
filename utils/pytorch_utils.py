@@ -41,13 +41,42 @@ def init_results(num_cls):
 
 
 def update_results(scores, eval_result, num_cls):
+    """
+    Updates the scores dictionary with evaluation metrics.
+
+    Args:
+        scores (dict): The existing scores dictionary.
+        eval_result (dict): The evaluation result to update the dictionary with.
+        num_cls (int): Number of classes in the dataset.
+
+    Returns:
+        dict: Updated scores dictionary.
+    """
+    # Get primary and secondary keys
     primary_keys, secondary_keys = get_keys(num_cls)
+
     for prim_key, sec_key in list(itertools.product(*[primary_keys, secondary_keys])):
-        scores[prim_key][sec_key].append(eval_result[prim_key][sec_key])
-    # hard code other scores
-    scores["ap_mic"].append(eval_result["ap_mic"])
-    scores["ap_mac"].append(eval_result["ap_mac"])
+        try:
+            # Append result if keys exist
+            scores[prim_key][sec_key].append(eval_result[prim_key][sec_key])
+        except KeyError as e:
+            print(f"[ERROR] Missing key in eval_result: {e}")
+            print(f"[DEBUG] Current primary key: {prim_key}, secondary key: {sec_key}")
+            print(f"[DEBUG] Available keys in eval_result: {list(eval_result.keys())}")
+            print(f"[DEBUG] Available keys in eval_result[{prim_key}]: {list(eval_result.get(prim_key, {}).keys()) if prim_key in eval_result else 'N/A'}")
+            raise  # Re-raise error after debug information
+
+    try:
+        # Hard-coded scores
+        scores["ap_mic"].append(eval_result["ap_mic"])
+        scores["ap_mac"].append(eval_result["ap_mac"])
+    except KeyError as e:
+        print(f"[ERROR] Missing hard-coded score in eval_result: {e}")
+        print(f"[DEBUG] Available keys in eval_result: {list(eval_result.keys())}")
+        raise  # Re-raise error after debug information
+
     return scores
+
 
 
 def get_empty_report(y_labels):
