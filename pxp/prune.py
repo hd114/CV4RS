@@ -7,8 +7,15 @@ from pxp.utils import ModelLayerUtils
 
 
 class LocalPruningOperations:
-    def __init__(self):
-        pass
+    class LocalPruningOperations:
+        def __init__(self, device=None):
+            """
+            Konstruktor für LocalPruningOperations.
+            Args:
+                device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
+            """
+            self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
+            print(f"[INFO] Using device: {self.device}")
 
     def bind_mask_to_module(
         self,
@@ -85,85 +92,51 @@ class LocalPruningOperations:
                 )
 
     def generate_local_pruning_mask(
-            self,
-            pruning_mask_shape,
-            pruning_indices,
-            subsequent_layer_pruning="Conv2d",  # Standardwert wie im ursprünglichen Projekt
-            device="cuda",
+        self,
+        pruning_mask_shape,
+        pruning_indices,
+        subsequent_layer_pruning="Conv2d",
     ):
         """
         Generate a binary pruning mask for the specified layer types.
-
-        Args:
-            pruning_mask_shape (tuple): Shape of the parameter to prune.
-            pruning_indices (list): Indices of the parameters to prune.
-            subsequent_layer_pruning (str): Specifies which layers to prune.
-                Options: ["Conv2d", "Both", "BatchNorm2d", "Linear", "Softmax"].
-                Default is "Conv2d" (standard pruning).
-            device (str): Device to allocate the mask ("cuda" or "cpu").
-
-        Returns:
-            dict: Binary pruning mask for the specified layer types.
         """
-        # Initialize the final mask dictionary
         final_pruning_mask = {}
 
-        # Handle "Conv2d" pruning (default behavior)
-        if subsequent_layer_pruning in ["Conv2d", "Both"]:
-            conv_weight_mask = torch.ones(pruning_mask_shape).to(device)
-            conv_bias_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            # Apply pruning
-            conv_weight_mask[pruning_indices] = 0
-            conv_bias_mask[pruning_indices] = 0
-            final_pruning_mask["Conv2d"] = {
-                "weight": conv_weight_mask,
-                "bias": conv_bias_mask,
-            }
+        if "Conv2d" in subsequent_layer_pruning or subsequent_layer_pruning == "Both":
+            if len(pruning_mask_shape) != 0:  # Valid shape
+                conv_weight_mask = torch.ones(pruning_mask_shape).to(self.device)
+                conv_weight_mask[pruning_indices] = 0
+                final_pruning_mask["Conv2d"] = {
+                    "weight": conv_weight_mask,
+                    "bias": torch.ones(pruning_mask_shape[0]).to(self.device),  # Default bias mask
+                }
+            else:
+                print(f"[WARNING] Invalid mask shape for Conv2d: {pruning_mask_shape}. Skipping layer.")
 
-        # Handle "BatchNorm2d" pruning (if specified)
-        if subsequent_layer_pruning in ["BatchNorm2d", "Both"]:
-            bn_weight_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            bn_bias_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            # Apply pruning
+        if "BatchNorm2d" in subsequent_layer_pruning or subsequent_layer_pruning == "Both":
+            bn_weight_mask = torch.ones(pruning_mask_shape[0]).to(self.device)
             bn_weight_mask[pruning_indices] = 0
-            bn_bias_mask[pruning_indices] = 0
             final_pruning_mask["BatchNorm2d"] = {
                 "weight": bn_weight_mask,
-                "bias": bn_bias_mask,
+                "bias": bn_weight_mask.clone(),
             }
-
-        # Handle "Linear" pruning
-        if subsequent_layer_pruning == "Linear":
-            linear_weight_mask = torch.ones(pruning_mask_shape).to(device)
-            linear_bias_mask = torch.ones(pruning_mask_shape[0]).to(device)
-            # Apply pruning
-            linear_weight_mask[pruning_indices] = 0
-            linear_bias_mask[pruning_indices] = 0
-            final_pruning_mask["Linear"] = {
-                "weight": linear_weight_mask,
-                "bias": linear_bias_mask,
-            }
-
-        # Handle "Softmax" pruning
-        if subsequent_layer_pruning == "Softmax":
-            softmax_weight_mask = torch.ones(pruning_mask_shape).to(device)
-            # Apply pruning
-            softmax_weight_mask[pruning_indices] = 0
-            final_pruning_mask["Softmax"] = {"weight": softmax_weight_mask}
-
-        # Ensure at least one mask is generated
-        if not final_pruning_mask:
-            raise ValueError(
-                f"Unsupported option for subsequent_layer_pruning: {subsequent_layer_pruning}"
-            )
 
         return final_pruning_mask
 
 
 class GlobalPruningOperations(LocalPruningOperations):
-    def __init__(self, target_layer, layer_names):
+    def __init__(self, target_layer, layer_names, device=None):
+        """
+        Konstruktor für GlobalPruningOperations.
+        Args:
+            target_layer: Ziel-Layer, z. B. torch.nn.Conv2d.
+            layer_names (list): Namen der Layer, die geprunt werden sollen.
+            device (str, optional): Das zu verwendende Gerät ("cuda" oder "cpu").
+        """
+        super().__init__(device=device)  # Initialisiere die Basisklasse
         self.target_layer = target_layer
         self.layer_names = layer_names
+
 
     def generate_global_pruning_mask(
             self,
@@ -291,64 +264,6 @@ class GlobalPruningOperations(LocalPruningOperations):
 
         return global_pruning_mask
 
-    '''def generate_global_pruning_mask(
-            self,
-            model,
-            global_concept_maps,
-            pruning_percentage,
-            subsequent_layer_pruning="Conv2d",
-            least_relevant_first=True,
-            device="cuda",
-    ):
-        """
-        Generate a global pruning mask for the model based on LRP relevances.
-
-        Args:
-            model (torch.nn.Module): The model to prune.
-            global_concept_maps (dict): Relevance maps for each layer.
-            pruning_percentage (float): Percentage of parameters to prune.
-            subsequent_layer_pruning (str): Layer types to include in subsequent pruning. Options: ["Conv2d", "BatchNorm2d", "Both"].
-            least_relevant_first (bool): Prune the least relevant parameters first.
-            device (str): Device to perform computations (e.g., "cuda" or "cpu").
-
-        Returns:
-            dict: A dictionary containing pruning masks for each layer.
-        """
-        global_pruning_masks = {}
-        cumulative_mask = None
-
-        for layer_name, relevance_map in global_concept_maps.items():
-            relevance_map = relevance_map.to(device)
-            num_elements = relevance_map.numel()
-            num_prune = int(pruning_percentage * num_elements)
-
-            # Flatten the relevance map and get indices to prune
-            flat_relevance = relevance_map.view(-1)
-            _, prune_indices = torch.topk(flat_relevance, k=num_prune, largest=not least_relevant_first)
-
-            # Generate a local pruning mask
-            pruning_mask = self.generate_local_pruning_mask(
-                pruning_mask_shape=relevance_map.shape,
-                pruning_indices=prune_indices,
-                subsequent_layer_pruning=subsequent_layer_pruning,
-                device=device,
-            )
-
-            # Combine with cumulative mask if needed
-            if cumulative_mask is not None and subsequent_layer_pruning in ["Both", "BatchNorm2d"]:
-                pruning_mask = {
-                    key: pruning_mask[key] * cumulative_mask.get(key, 1)
-                    for key in pruning_mask.keys()
-                }
-
-            global_pruning_masks[layer_name] = pruning_mask
-
-            # Update the cumulative mask for subsequent layers
-            if subsequent_layer_pruning in ["Both", "BatchNorm2d"]:
-                cumulative_mask = pruning_mask
-
-        return global_pruning_masks'''
-
     def generate_global_pruning_indices(
         self,
         global_concept_maps,
@@ -400,38 +315,38 @@ class GlobalPruningOperations(LocalPruningOperations):
 
     def fit_pruning_mask(self, model, global_pruning_mask):
         """
-        Apply the global pruning mask to the model and fixing it
+        Apply the global pruning mask to the model and fix it.
 
         Args:
-            model (torch.nn.Module): the model to prune
-            global_pruning_mask (dict): pruning mask for each layer
+            model (torch.nn.Module): The model to prune.
+            global_pruning_mask (dict): Pruning mask for each layer.
         """
-        # Debug-Ausgabe
-        print(f"[DEBUG] Starte Anwendung der Pruning-Maske auf {len(global_pruning_mask)} Layer...")
-        if self.target_layer != torch.nn.Softmax:
-            for layer_name, layer_pruning_mask in global_pruning_mask.items():
-                #print(f"[DEBUG] Prüfe Layer '{layer_name}'...")
-                if ModelLayerUtils.get_module_from_name(model, layer_name) is None:
-                    print(f"[ERROR] Layer '{layer_name}' existiert nicht im Modell!")
-                    continue
-                try:
-                    super(GlobalPruningOperations, self).fit_pruning_mask(
-                        model, layer_name, layer_pruning_mask
+        print(f"[DEBUG] Applying pruning mask to {len(global_pruning_mask)} layers...")
+        for layer_name, layer_pruning_mask in global_pruning_mask.items():
+            # Validate layer existence
+            layer = ModelLayerUtils.get_module_from_name(model, layer_name)
+            if layer is None:
+                print(f"[ERROR] Layer '{layer_name}' does not exist in the model. Skipping...")
+                continue
+
+            # Validate pruning mask
+            if "weight" not in layer_pruning_mask:
+                print(f"[ERROR] Missing 'weight' in pruning mask for layer '{layer_name}'. Skipping...")
+                continue
+
+            try:
+                # Apply weight mask
+                self.bind_mask_to_module(
+                    model, layer_name, layer_pruning_mask["weight"], "weight"
+                )
+                # Apply bias mask if exists
+                if "bias" in layer_pruning_mask and layer.bias is not None:
+                    self.bind_mask_to_module(
+                        model, layer_name, layer_pruning_mask["bias"], "bias"
                     )
-                    print(f"[DEBUG] Pruning-Maske erfolgreich angewendet auf Layer '{layer_name}'.")
-                except Exception as e:
-                    print(f"[ERROR] Fehler beim Anwenden der Pruning-Maske auf Layer '{layer_name}': {e}")
-        else:
-            for layer_name, layer_pruning_indices in global_pruning_mask.items():
-                print(f"[DEBUG] Registriere Hook für Softmax-Layer '{layer_name}'...")
-                try:
-                    hook_handles = self.mask_attention_head(
-                        model, layer_name, layer_pruning_indices
-                    )
-                    print(f"[DEBUG] Hook erfolgreich registriert für Softmax-Layer '{layer_name}'.")
-                except Exception as e:
-                    print(f"[ERROR] Fehler bei Hook-Registrierung für Layer '{layer_name}': {e}")
-            return hook_handles
+                print(f"[DEBUG] Pruning mask successfully applied to layer '{layer_name}'.")
+            except Exception as e:
+                print(f"[ERROR] Failed to apply pruning mask to layer '{layer_name}': {e}")
 
     @staticmethod
     def mask_attention_head(model, layer_names, head_indices):

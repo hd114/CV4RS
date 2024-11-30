@@ -1,38 +1,40 @@
 
-  _     ._   __/__   _ _  _  _ _/_   Recorded: 12:01:49  Samples:  76671
- /_//_/// /_\ / //_// / //_'/ //     Duration: 125.447   CPU time: 136.280
+  _     ._   __/__   _ _  _  _ _/_   Recorded: 13:54:38  Samples:  66931
+ /_//_/// /_\ / //_// / //_'/ //     Duration: 108.950   CPU time: 118.012
 /   _/                      v5.0.0
 
-Profile at /home/paul/projects/CV4RS-main/utils/clients.py:654
+Profile at /home/paul/projects/CV4RS-main/utils/clients.py:639
 
-125.447 GlobalClient.train  utils/clients.py:613
-└─ 124.620 GlobalClient.compute_lrp_pruning_mask  utils/clients.py:453
-   ├─ 118.594 ComponentAttribution.attribute  pxp/attribute.py:568
-   │  └─ 116.596 ZennitLatentRelevanceAttributor.lrp_pass  pxp/attribute.py:23
-   │     ├─ 88.304 ZennitLatentRelevanceAttributor.compute_relevance  pxp/attribute.py:83
-   │     │  ├─ 34.661 grad  torch/autograd/__init__.py:358
-   │     │  │  └─ 34.648 _engine_run_backward  torch/autograd/graph.py:816
-   │     │  │     └─ 34.643 _EngineBase.run_backward  <built-in>
-   │     │  ├─ 34.248 ResNet50._wrapped_call_impl  torch/nn/modules/module.py:1732
-   │     │  │  └─ 34.245 tuple._call_impl  torch/nn/modules/module.py:1740
-   │     │  │     └─ 34.236 ResNet50.forward  utils/pytorch_models.py:73
-   │     │  │        └─ 34.221 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
+108.950 GlobalClient.train  utils/clients.py:598
+└─ 108.601 GlobalClient.compute_lrp_pruning_mask  utils/clients.py:438
+   ├─ 102.762 ComponentAttribution.attribute  pxp/attribute.py:568
+   │  └─ 101.289 ZennitLatentRelevanceAttributor.lrp_pass  pxp/attribute.py:23
+   │     ├─ 76.306 ZennitLatentRelevanceAttributor.compute_relevance  pxp/attribute.py:83
+   │     │  ├─ 32.205 grad  torch/autograd/__init__.py:358
+   │     │  │  └─ 32.165 _engine_run_backward  torch/autograd/graph.py:816
+   │     │  │     └─ 32.161 _EngineBase.run_backward  <built-in>
+   │     │  ├─ 26.469 ResNet50._wrapped_call_impl  torch/nn/modules/module.py:1732
+   │     │  │  └─ 26.468 tuple._call_impl  torch/nn/modules/module.py:1740
+   │     │  │     └─ 26.463 ResNet50.forward  utils/pytorch_models.py:73
+   │     │  │        └─ 26.444 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
    │     │  │              [27 frames hidden]  torch, zennit, <built-in>, functools
-   │     │  └─ 18.574 ZennitLatentRelevanceAttributor.register_hooks  pxp/attribute.py:231
-   │     │     ├─ 16.583 ResNet50.named_modules  torch/nn/modules/module.py:2778
+   │     │  └─ 17.016 ZennitLatentRelevanceAttributor.register_hooks  pxp/attribute.py:231
+   │     │     ├─ 15.239 ResNet50.named_modules  torch/nn/modules/module.py:2778
    │     │     │     [8 frames hidden]  torch
-   │     │     └─ 1.686 [self]  pxp/attribute.py
-   │     └─ 28.253 ZennitLatentRelevanceAttributor.parse_latent_relevances  pxp/attribute.py:176
-   │        ├─ 17.669 ResNet50.named_modules  torch/nn/modules/module.py:2778
+   │     │     └─ 1.562 [self]  pxp/attribute.py
+   │     └─ 24.969 ZennitLatentRelevanceAttributor.parse_latent_relevances  pxp/attribute.py:176
+   │        ├─ 14.883 ResNet50.named_modules  torch/nn/modules/module.py:2778
    │        │     [8 frames hidden]  torch
-   │        ├─ 4.654 Tensor.cpu  <built-in>
-   │        ├─ 3.177 Tensor.sum  <built-in>
-   │        └─ 2.260 [self]  pxp/attribute.py
-   └─ 5.427 GlobalClient.get_country_dataloader  utils/clients.py:420
-      ├─ 3.394 BENv2DataSet.__init__  utils/BENv2_dataset.py:88
-      │  └─ 2.108 BENv2LDMBReader.__init__  utils/BENv2_utils.py:559
-      │     └─ 1.297 read_parquet  pandas/io/parquet.py:498
-      │        └─ 1.297 PyArrowImpl.read  pandas/io/parquet.py:239
-      └─ 1.327 read_parquet  pandas/io/parquet.py:498
-         └─ 1.327 PyArrowImpl.read  pandas/io/parquet.py:239
+   │        ├─ 4.164 Tensor.cpu  <built-in>
+   │        ├─ 3.574 Tensor.sum  <built-in>
+   │        └─ 1.916 [self]  pxp/attribute.py
+   └─ 5.467 GlobalClient.get_country_dataloader  utils/clients.py:405
+      ├─ 3.729 BENv2DataSet.__init__  utils/BENv2_dataset.py:88
+      │  ├─ 2.050 BENv2LDMBReader.__init__  utils/BENv2_utils.py:559
+      │  │  └─ 1.287 read_parquet  pandas/io/parquet.py:498
+      │  │        [4 frames hidden]  pandas, pyarrow, <built-in>
+      │  └─ 1.174 read_parquet  pandas/io/parquet.py:498
+      │     └─ 1.174 PyArrowImpl.read  pandas/io/parquet.py:239
+      └─ 1.123 read_parquet  pandas/io/parquet.py:498
+         └─ 1.122 PyArrowImpl.read  pandas/io/parquet.py:239
 

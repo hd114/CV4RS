@@ -1,0 +1,257 @@
+Lines that potentially need to be canonized 309
+/home/paul/projects/CV4RS-main/pxp/prune.py
+Using device: cuda:0
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    7150 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    4263 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    7180 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    3248 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+[INFO] Initializing LRP Pruning...
+[INFO] LRP initialized successfully.
+=== Round 1/5 ===
+[INFO] Training and communication for Round 1...
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 1...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.1696746620684188, 'ap_mac': 0.13453528860318734}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1697
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1345
+
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+=== Round 2/5 ===
+[INFO] Training and communication for Round 2...
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 2...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.1696746620684188, 'ap_mac': 0.13453528860318734}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1697
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1345
+
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+=== Round 3/5 ===
+[INFO] Training and communication for Round 3...
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 3...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.1696607098722888, 'ap_mac': 0.13453528860318734}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1697
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1345
+
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+=== Round 4/5 ===
+[INFO] Training and communication for Round 4...
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 4...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.1696746620684188, 'ap_mac': 0.13453528860318734}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1697
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1345
+
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+=== Round 5/5 ===
+[INFO] Training and communication for Round 5...
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+Epoch 1/3
+----------
+Updated learning rate: [0.0002]
+Epoch 2/3
+----------
+Updated learning rate: [0.0002]
+Epoch 3/3
+----------
+Updated learning rate: [0.0002]
+[INFO] Starting validation after Round 5...
+Bug fix for empty classification report.
+[DEBUG] Validation report: {'0': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '1': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '2': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '3': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '4': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '5': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '6': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '7': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '8': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '9': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '10': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '11': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '12': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '13': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '14': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '15': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '16': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '17': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, '18': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'micro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'macro avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'weighted avg': {'precision': 0.0, 'recall': 0.0, 'f1-score': 0.0, 'support': 0.0}, 'ap_mic': 0.1696746620684188, 'ap_mac': 0.13453528860318734}
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1697
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 0 | mAP: 0.1345
+
+[WARNING] No pruning hooks to remove.
+[DEBUG] Pruning hooks removed successfully.
+[INFO] Training completed in 606.60 seconds.
+[DEBUG] Collected results from 3 clients.
+[INFO] Results and model state saved successfully.
+[{'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}]

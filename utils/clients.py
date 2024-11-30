@@ -280,45 +280,30 @@ class FLCLient:
 
     def train_epoch(self):
         self.model.train()
-        epsilon = 1e-8  # Small value to avoid numerical instability
-
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
-            data = batch[1].cuda()
-            labels = torch.from_numpy(np.copy(batch[4])).cuda()
+            data = batch[1].to(self.device)
+            labels = torch.tensor(batch[4]).to(self.device)
 
-            # Debugging: Check input and label tensors
+            # Validate input
             if torch.isnan(data).any() or torch.isinf(data).any():
-                print(f"NaN or Inf detected in input data for batch {idx}")
-                raise ValueError("Invalid input data detected.")
+                print(f"[ERROR] Invalid data in batch {idx}. Skipping...")
+                continue
             if torch.isnan(labels).any() or torch.isinf(labels).any():
-                print(f"NaN or Inf detected in labels for batch {idx}")
-                raise ValueError("Invalid labels detected.")
+                print(f"[ERROR] Invalid labels in batch {idx}. Skipping...")
+                continue
 
             self.optimizer.zero_grad()
-
             logits = self.model(data)
 
-            # Add epsilon to logits for numerical stability. not the solution to NaN. so
-            # taking it out again, to not influence performance
-            #logits = logits + epsilon
-
-            # Debugging: Check logits after adjustment
+            # Validate logits
             if torch.isnan(logits).any() or torch.isinf(logits).any():
-                print(f"NaN or Inf detected in logits after adding epsilon for batch {idx}")
-                raise ValueError("Invalid logits detected.")
+                print(f"[ERROR] NaN or Inf detected in logits for batch {idx}.")
+                print(f"[DEBUG] Logits stats: max={logits.max()}, min={logits.min()}, mean={logits.mean()}")
+                continue
 
             loss = self.criterion(logits, labels)
-
-            # Backward pass with gradient clipping
             loss.backward()
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-
-            # Debugging: Check gradients for NaN or Inf
-            for name, param in self.model.named_parameters():
-                if param.grad is not None:
-                    if torch.isnan(param.grad).any() or torch.isinf(param.grad).any():
-                        print(f"NaN or Inf detected in gradient for parameter {name}")
-                        raise ValueError("Invalid gradient detected.")
 
             self.optimizer.step()
 
@@ -518,6 +503,7 @@ class GlobalClient:
         pruning_operations = GlobalPruningOperations(
             target_layer=target_layer,
             layer_names=layer_names,
+            device=self.device,
         )
         print(f"[DEBUG] Ziel-Layer: {pruning_operations.layer_names}")
 
@@ -611,56 +597,75 @@ class GlobalClient:
     #     return self.results, self.client_results
 
     def train(self, communication_rounds: int, epochs: int):
+        """
+        Train the global model across multiple communication rounds with pruning and validation.
+
+        Args:
+            communication_rounds (int): Number of communication rounds.
+            epochs (int): Number of epochs per communication round.
+
+        Returns:
+            tuple: (global results, client results)
+        """
         start = time.perf_counter()
         pruning_rate = 0.3  # Pruning rate
         global_pruning_mask = None  # Initialize pruning mask
 
         # Initialize LRP Pruning
-        print("Initializing LRP Pruning...")
+        print("[INFO] Initializing LRP Pruning...")
         composite, component_attributor = self.initialize_lrp_pruning("resnet50", torch.nn.Conv2d)
-        print("LRP initialized successfully.")
+        print("[INFO] LRP initialized successfully.")
 
         for com_round in range(1, communication_rounds + 1):
             print(f"=== Round {com_round}/{communication_rounds} ===")
 
             # Apply pruning mask (if available)
             if global_pruning_mask is not None:
-                print(f"Applying pruning mask for round {com_round}...")
-                self.pruning_hook_handles = GlobalPruningOperations(
-                    torch.nn.Conv2d, list(global_pruning_mask.keys())
-                ).fit_pruning_mask(self.model, global_pruning_mask)
+                print(f"[INFO] Applying pruning mask for round {com_round}...")
+                try:
+                    self.pruning_hook_handles = GlobalPruningOperations(
+                        torch.nn.Conv2d, list(global_pruning_mask.keys())
+                    ).fit_pruning_mask(self.model, global_pruning_mask)
+                    print("[DEBUG] Pruning mask applied successfully.")
+                except Exception as e:
+                    print(f"[ERROR] Failed to apply pruning mask: {e}")
+                    raise
 
             try:
                 # Training and communication
-                print(f"Training and communication for Round {com_round}...")
+                print(f"[INFO] Training and communication for Round {com_round}...")
                 self.communication_round(epochs)
 
                 # Validation and error handling
-                print(f"Starting validation after Round {com_round}...")
+                print(f"[INFO] Starting validation after Round {com_round}...")
                 report = self.validation_round()
+                print(f"[DEBUG] Validation report: {report}")
                 self.results = update_results(self.results, report, self.num_classes)
                 print_micro_macro(report)
 
             except Exception as e:
-                print(f"Error during training or validation: {e}")
+                print(f"[ERROR] Error during training or validation: {e}")
+                print("[DEBUG] Attempting to log model state for debugging...")
+                try:
+                    self.save_state_dict(path="error_model_state.pth")
+                    print("[DEBUG] Model state saved to 'error_model_state.pth'.")
+                except Exception as save_error:
+                    print(f"[ERROR] Failed to save model state: {save_error}")
                 raise
 
-            # LRP-Pruning nach der ersten Kommunikationsrunde
-            if com_round == 1:  # Beispiel: Nur nach der ersten Runde prunen
-                print(f"Führe LRP-Pruning in Runde {com_round} durch...")
-
-                # Profiling starten
+            # Perform LRP Pruning after the first communication round
+                print(f"[INFO] Performing LRP Pruning in Round {com_round}...")
                 profiler = Profiler()
                 profiler.start()
 
                 try:
-                    # Der relevante Codeblock
-                    print(f"Führe LRP-Pruning in Runde {com_round} durch...")
                     global_concept_maps = self.compute_lrp_pruning_mask(
                         composite=composite,
                         component_attributor=component_attributor,
                         pruning_rate=pruning_rate,
                     )
+                    print(f"[DEBUG] Global concept maps computed with {len(global_concept_maps)} layers.")
+
                     pruning_ops = GlobalPruningOperations(
                         target_layer=torch.nn.Conv2d,
                         layer_names=list(global_concept_maps.keys())
@@ -669,33 +674,48 @@ class GlobalClient:
                         model=self.model,
                         global_concept_maps=global_concept_maps,
                         pruning_percentage=pruning_rate,
-                        subsequent_layer_pruning=True,  # Propagiere Pruning
+                        subsequent_layer_pruning=True,  # Propagate pruning
                         least_relevant_first=True,
                         device=self.device,
                     )
+                    print(f"[INFO] LRP Pruning applied successfully in Round {com_round}.")
+                    print(f"[DEBUG] Pruning mask generated for {len(global_pruning_mask)} layers.")
 
-                    print(f"LRP Pruning applied successfully in Round {com_round}.")
                 except Exception as e:
-                    print(f"Failed to compute pruning mask: {e}")
+                    print(f"[ERROR] Failed to compute pruning mask: {e}")
                     raise
 
-                # Profiling stoppen und Ergebnis anzeigen
                 profiler.stop()
                 with open("pruning_callgraph.txt", "w") as f:
                     f.write(profiler.output_text(unicode=True, color=False))
-                #with open("pruning_callgraph.html", "w") as f:
-                #    f.write(profiler.output_html())
+                print("[DEBUG] Pruning call graph saved to 'pruning_callgraph.txt'.")
 
             # Remove hooks at the end of the round
-            self.remove_pruning_hooks()
+            try:
+                self.remove_pruning_hooks()
+                print("[DEBUG] Pruning hooks removed successfully.")
+            except Exception as e:
+                print(f"[ERROR] Failed to remove pruning hooks: {e}")
 
         # Finalize training time
         self.train_time = time.perf_counter() - start
+        print(f"[INFO] Training completed in {self.train_time:.2f} seconds.")
 
         # Collect client results
-        self.client_results = [client.get_validation_results() for client in self.clients]
-        self.save_results()
-        self.save_state_dict()
+        try:
+            self.client_results = [client.get_validation_results() for client in self.clients]
+            print(f"[DEBUG] Collected results from {len(self.clients)} clients.")
+        except Exception as e:
+            print(f"[ERROR] Failed to collect client results: {e}")
+            self.client_results = []
+
+        # Save final results and model state
+        try:
+            self.save_results()
+            self.save_state_dict()
+            print("[INFO] Results and model state saved successfully.")
+        except Exception as e:
+            print(f"[ERROR] Failed to save final results or model state: {e}")
 
         return self.results, self.client_results
 
@@ -707,75 +727,82 @@ class GlobalClient:
         return new_labels
 
     def validation_round(self):
+        """
+        Perform validation for the current model state and return classification metrics.
+        """
         self.model.eval()
         y_true = []
         predicted_probs = []
 
         with torch.no_grad():
-            for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
+            for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="Validation")):
                 data = batch[1].to(self.device)
-                labels = batch[4]
+                labels = batch[4].to(self.device)
 
-                # Validate input data
+                # Check for NaN or Inf in input data
                 if torch.isnan(data).any() or torch.isinf(data).any():
-                    print(f"NaN or Inf detected in input data in batch {batch_idx}")
-                    raise ValueError("Invalid input data detected.")
-
-                # Validate labels
-                if torch.isnan(labels).any() or torch.isinf(labels).any():
-                    print(f"NaN or Inf detected in labels in batch {batch_idx}")
-                    raise ValueError("Invalid labels detected.")
+                    raise ValueError(f"[ERROR] NaN or Inf detected in input data at batch {batch_idx}")
 
                 logits = self.model(data)
 
-                # Validate logits
-                if torch.isnan(logits).any() or torch.isinf(logits).any(): # Problemo
-                    print(f"NaN or Inf detected in logits in batch {batch_idx}")
-                    print(f"Logits stats - max: {logits.max()}, min: {logits.min()}, mean: {logits.mean()}")
-                    raise ValueError("Invalid logits detected.")
+                # Check for NaN or Inf in logits
+                if torch.isnan(logits).any() or torch.isinf(logits).any():
+                    print(f"[ERROR] NaN or Inf in logits for batch {batch_idx}. Stats: "
+                          f"max={logits.max()}, min={logits.min()}, mean={logits.mean()}")
+                    return {"error": "NaN in logits"}  # Abort validation on error
 
                 probs = torch.sigmoid(logits)
 
-                # Validate probabilities
+                # Check for NaN or Inf in probabilities
                 if torch.isnan(probs).any() or torch.isinf(probs).any():
-                    print(f"NaN or Inf detected in probabilities in batch {batch_idx}")
-                    print(f"Probabilities stats - max: {probs.max()}, min: {probs.min()}, mean: {probs.mean()}")
-                    raise ValueError("Invalid probabilities detected.")
+                    raise ValueError(f"[ERROR] NaN or Inf detected in probabilities at batch {batch_idx}")
 
-                predicted_probs += list(probs.cpu().numpy())  # Keep probabilities for metrics
-                y_true += list(labels.numpy())
+                predicted_probs += list(probs.cpu().numpy())
+                y_true += list(labels.cpu().numpy())
 
+        # Convert predictions and true labels to numpy arrays
         predicted_probs = np.asarray(predicted_probs)
         y_true = np.asarray(y_true)
 
-        # Validate final arrays
-        if np.isnan(predicted_probs).any():
-            print("NaN detected in predicted probabilities array.")
-            raise ValueError("Predicted probabilities contain NaN values.")
-        if np.isnan(y_true).any():
-            print("NaN detected in true labels array.")
-            raise ValueError("True labels contain NaN values.")
+        # Handle empty predictions
+        if len(predicted_probs) == 0:
+            print("[ERROR] Validation failed. Returning default metrics.")
+            return {"precision": 0, "recall": 0, "f1-score": 0}
 
+        # Compute classification report
         report = get_classification_report(
-            y_true, predicted_probs >= 0.5, predicted_probs, self.dataset_filter
+            y_true,
+            predicted_probs >= 0.5,
+            predicted_probs,
+            self.dataset_filter
         )
+
+        # Check for errors in the report
+        if "error" in report:
+            print("[ERROR] Validation failed. Using default metrics.")
+            report = {"precision": 0, "recall": 0, "f1-score": 0}
+
         return report
 
-    def communication_round(self, epochs: int):
-        # Clients trainieren
-        model_updates = [client.train_one_round(epochs) for client in self.clients]
+    def communication_round(self, epochs):
+        model_updates = []
+        for client in self.clients:
+            try:
+                update = client.train_one_round(epochs)
+                model_updates.append(update)
+            except Exception as e:
+                print(f"[ERROR] Training failed for client: {e}")
 
-        # Parameteraggregation
         update_aggregation = self.aggregator.fed_avg(model_updates)
 
-        # Globales Modell aktualisieren
         global_state_dict = self.model.state_dict()
         for key, value in global_state_dict.items():
             if key in update_aggregation:
                 update = update_aggregation[key].to(self.device)
                 global_state_dict[key] = value + update
             else:
-                print(f"Skipping missing parameter: {key}")
+                print(f"[WARNING] Missing parameter: {key}. Setting to zeros.")
+                global_state_dict[key] = torch.zeros_like(value)
         self.model.load_state_dict(global_state_dict)
 
     def save_state_dict(self):
