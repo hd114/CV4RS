@@ -80,26 +80,33 @@ class LocalPruningOperations:
                 continue
 
             # Debugging output before mask adjustment
-            print(f"[DEBUG] Layer: {layer_name}, Mask type: {layer_type}, "
-                  f"Mask weight shape: {pruning_mask[layer_type]['weight'].shape if isinstance(pruning_mask[layer_type]['weight'], torch.Tensor) else 'Not a Tensor'}, "
-                  f"Layer weight shape: {layer.weight.shape if hasattr(layer, 'weight') else 'No weight attribute'}")
+            print(f"[DEBUG] Processing layer: {layer_name}, Type: {layer_type}")
+            print(f"[DEBUG] Original mask shape: {pruning_mask[layer_type]['weight'].shape}")
+            print(f"[DEBUG] Layer weight shape: {layer.weight.shape}")
 
-            # Adjust the mask to match the layer's weight shape
+            # Retrieve weight mask
             weight_mask = pruning_mask[layer_type]["weight"]
             if isinstance(weight_mask, torch.Tensor):
-                expected_shape = layer.weight.shape
-                if weight_mask.numel() == layer.weight.shape[0]:  # Filteranzahl stimmt überein
+                # Case 1: Mask matches filter count (1D)
+                if weight_mask.numel() == layer.weight.shape[0]:
+                    print(f"[INFO] Reshaping 1D mask to match 4D weight dimensions.")
                     weight_mask = weight_mask.view(-1, 1, 1, 1).expand_as(layer.weight)
-                    print(f"[INFO] Adjusted weight mask to shape {weight_mask.shape}")
-                elif weight_mask.numel() == layer.weight.numel():  # Exakte Elementeanzahl stimmt überein
+
+                # Case 2: Mask matches total element count (4D)
+                elif weight_mask.numel() == layer.weight.numel():
+                    print(f"[INFO] Reshaping flat mask to match exact weight dimensions.")
                     weight_mask = weight_mask.view_as(layer.weight)
-                    print(f"[INFO] Adjusted weight mask to exact layer shape {weight_mask.shape}")
+
+                # Error case: Mask dimensions are invalid
                 else:
-                    print(f"[ERROR] Cannot reshape mask: {weight_mask.shape} -> {layer.weight.shape}")
                     raise ValueError(
-                        f"Pruning mask shape {weight_mask.shape} does not match layer weight shape {layer.weight.shape}."
+                        f"[ERROR] Cannot reshape mask: {weight_mask.shape} -> {layer.weight.shape}. "
+                        f"Check the pruning mask generation logic."
                     )
+
+                # Update the pruning mask
                 pruning_mask[layer_type]["weight"] = weight_mask
+                print(f"[DEBUG] Final adjusted mask shape: {weight_mask.shape}")
 
             # Bind the adjusted mask
             self.bind_mask_to_module(
@@ -110,22 +117,20 @@ class LocalPruningOperations:
                 remove_re_parametrization=True,
             )
 
-            # Debugging output for bias processing
-            if layer.bias is not None:
+            # Process bias if it exists
+            if layer.bias is not None and "bias" in pruning_mask[layer_type]:
                 print(f"[DEBUG] Layer {layer_name} has bias with shape {layer.bias.shape}")
 
-            # Prune bias if it exists
-            if layer.bias is not None and "bias" in pruning_mask[layer_type]:
                 bias_mask = pruning_mask[layer_type]["bias"]
                 if isinstance(bias_mask, torch.Tensor):
                     if bias_mask.numel() == layer.bias.numel():
+                        print(f"[INFO] Adjusting bias mask to match bias dimensions.")
                         bias_mask = bias_mask.view_as(layer.bias)
-                        print(f"[INFO] Adjusted bias mask to shape {bias_mask.shape}")
+                        pruning_mask[layer_type]["bias"] = bias_mask
                     else:
                         raise ValueError(
-                            f"Pruning mask for bias shape {bias_mask.shape} does not match layer bias shape {layer.bias.shape}."
+                            f"[ERROR] Bias mask shape {bias_mask.shape} does not match layer bias shape {layer.bias.shape}."
                         )
-                    pruning_mask[layer_type]["bias"] = bias_mask
 
                 self.bind_mask_to_module(
                     model,
@@ -391,64 +396,57 @@ class GlobalPruningOperations(LocalPruningOperations):
 
         return global_pruning_indices
 
-    def fit_pruning_mask(self, model, layer_name, pruning_mask):
+    def bind_mask_to_module(
+            self,
+            model,
+            layer_name,
+            pruning_mask,
+            weight_or_bias,
+            remove_re_parametrization=True,
+    ):
         """
-        Apply the pruning mask to the model and fix it
+        Bind pruning mask to the module using PyTorch's pruning APIs.
 
         Args:
-            model (torch.nn.Module): the model to prune
-            layer_name (str): the layer which the pruning mask is applied to
-            pruning_mask (dict): dictionary of binary mask of the concepts to prune for each layer
+            model (torch.nn.Module): The model containing the layer.
+            layer_name (str): The name of the layer.
+            pruning_mask (torch.Tensor): The mask to apply.
+            weight_or_bias (str): Specify whether to prune "weight" or "bias".
+            remove_re_parametrization (bool): Whether to remove re-parametrization.
         """
-        mask_keys = list(pruning_mask.keys())
-        batch_norm_order_flag = False
-        if "BatchNorm2d" in mask_keys:
-            if ModelLayerUtils.is_batchnorm2d_after_conv2d(model):
-                batch_norm_order_flag = True
-                conv_bn_layers = ModelLayerUtils.get_layer_names(
-                    model, [torch.nn.Conv2d, torch.nn.BatchNorm2d]
+        module = ModelLayerUtils.get_module_from_name(model, layer_name)
+        if module is None:
+            raise ValueError(f"Layer {layer_name} not found in the model.")
+
+        # Debugging information
+        print(f"[DEBUG] Binding mask to module: {layer_name}, Target: {weight_or_bias}")
+        print(f"  Module weight shape: {module.weight.shape if hasattr(module, 'weight') else 'No weight'}")
+        print(f"  Module bias shape: {module.bias.shape if hasattr(module, 'bias') else 'No bias'}")
+        print(f"  Mask shape: {pruning_mask.shape}")
+
+        # Get the weight or bias shape
+        param_shape = getattr(module, weight_or_bias).shape
+        if pruning_mask.shape != param_shape:
+            print(f"[WARNING] Adjusting mask shape for {weight_or_bias} in layer: {layer_name}")
+            try:
+                pruning_mask = pruning_mask.view_as(getattr(module, weight_or_bias))
+            except Exception as e:
+                raise ValueError(
+                    f"Cannot reshape mask for {weight_or_bias} in layer {layer_name}: {e}"
                 )
-                bn_layer_name = conv_bn_layers[conv_bn_layers.index(layer_name) + 1]
 
-        for layer_type in mask_keys:
-            if layer_type == "BatchNorm2d" and batch_norm_order_flag:
-                layer_name_to_prune = bn_layer_name
-            else:
-                layer_name_to_prune = layer_name
+        print(f"[INFO] Mask reshaped to match {weight_or_bias} dimensions: {pruning_mask.shape}")
 
-            # Debugging: Validate layer and mask
-            print(f"[DEBUG] Applying mask to layer: {layer_name_to_prune}")
-            layer = ModelLayerUtils.get_module_from_name(model, layer_name_to_prune)
-            print(f"[DEBUG] Layer weight shape: {layer.weight.shape}")
-            print(f"[DEBUG] Mask shape: {pruning_mask[layer_type]['weight'].shape}")
+        # Apply the mask using PyTorch's pruning API
+        try:
+            prune.custom_from_mask(module, weight_or_bias, mask=pruning_mask)
+            print(f"[INFO] Successfully applied mask to {weight_or_bias} in layer: {layer_name}")
+        except Exception as e:
+            raise ValueError(f"Pruning application failed for {weight_or_bias} in layer {layer_name}: {e}")
 
-            # Adjust mask shape if needed
-            if pruning_mask[layer_type]["weight"].shape != layer.weight.shape:
-                print(f"[WARNING] Adjusting mask shape for layer: {layer_name_to_prune}")
-                pruning_mask[layer_type]["weight"] = pruning_mask[layer_type]["weight"].view_as(layer.weight)
-
-            # Prune the weights first
-            self.bind_mask_to_module(
-                model,
-                layer_name_to_prune,
-                pruning_mask[layer_type]["weight"],
-                weight_or_bias="weight",
-                remove_re_parametrization=True,
-            )
-
-            # For bias, prune if they exist
-            if layer.bias is not None:
-                if pruning_mask[layer_type]["bias"].shape != layer.bias.shape:
-                    print(f"[WARNING] Adjusting bias mask shape for layer: {layer_name_to_prune}")
-                    pruning_mask[layer_type]["bias"] = pruning_mask[layer_type]["bias"].view_as(layer.bias)
-
-                self.bind_mask_to_module(
-                    model,
-                    layer_name_to_prune,
-                    pruning_mask[layer_type]["bias"],
-                    weight_or_bias="bias",
-                    remove_re_parametrization=True,
-                )
+        if remove_re_parametrization:
+            prune.remove(module, weight_or_bias)
+            print(f"[INFO] Removed re-parametrization for {weight_or_bias} in layer: {layer_name}")
 
     @staticmethod
     def mask_attention_head(model, layer_names, head_indices):
