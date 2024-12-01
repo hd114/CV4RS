@@ -512,6 +512,15 @@ class GlobalClient:
             if global_pruning_mask is not None:
                 print(f"Applying pruning mask for Round {com_round}...")
                 for layer_name, layer_pruning_mask in global_pruning_mask.items():
+                    print(f"[DEBUG] Validating mask for layer: {layer_name}")
+                    for mask_type, mask in layer_pruning_mask.items():
+                        if isinstance(mask, torch.Tensor):  # Überprüfen, ob es sich um einen Tensor handelt
+                            print(
+                                f"  Mask type: {mask_type}, Mask shape: {mask.shape}, Non-zero elements: {torch.sum(mask != 0)}"
+                            )
+                        else:
+                            print(f"[WARNING] Mask for {mask_type} is not a Tensor: {type(mask)}")
+
                     print(f"[INFO] Applying pruning mask to layer: {layer_name}")
                     try:
                         pruning_ops.fit_pruning_mask(self.model, layer_name, layer_pruning_mask)
@@ -556,7 +565,8 @@ class GlobalClient:
                         least_relevant_first=True,
                         device=self.device,
                     )
-                    print(f"[INFO] Global pruning mask generated for {len(global_pruning_mask)} layers.")
+                    #print(f"[INFO] Global pruning mask generated for {len(global_pruning_mask)} layers.")
+                    print(f"[DEBUG] Global pruning mask: {global_pruning_mask}")
 
                 except Exception as e:
                     print(f"[ERROR] Failed to compute pruning mask: {e}")
