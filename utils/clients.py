@@ -496,7 +496,7 @@ class GlobalClient:
             tuple: (global results, client results)
         """
         start = time.perf_counter()
-        pruning_rate = 0.9  # Pruning rate
+        pruning_rate = 0.3  # Pruning rate
         global_pruning_mask = None  # Initialize pruning mask
         pruning_ops = None  # Ensure pruning_ops is initialized outside the loop
 
@@ -537,6 +537,16 @@ class GlobalClient:
             print(f"Training and communication for Round {com_round}...")
             self.communication_round(epochs)
 
+            # Perform validation after each communication round
+            print(f"[INFO] Starting validation for Round {com_round}...")
+            report = self.validation_round()
+            self.results = update_results(self.results, report, self.num_classes)
+            print_micro_macro(report)
+
+            # Update client models
+            for client in self.clients:
+                client.set_model(self.model)
+
             # Perform LRP pruning after the first communication round
             if com_round == 1:
                 print(f"[INFO] Performing LRP Pruning in Round {com_round}...")
@@ -565,7 +575,6 @@ class GlobalClient:
                         least_relevant_first=True,
                         device=self.device,
                     )
-                    #print(f"[INFO] Global pruning mask generated for {len(global_pruning_mask)} layers.")
                     print(f"[DEBUG] Global pruning mask: {global_pruning_mask}")
 
                 except Exception as e:
@@ -593,6 +602,7 @@ class GlobalClient:
 
         return self.results, self.client_results
 
+
     def change_sizes(self, labels):
         new_labels=np.zeros((len(labels[0]),19))
         for i in range(len(labels[0])): #128
@@ -601,6 +611,7 @@ class GlobalClient:
         return new_labels
 
     def validation_round(self):
+        #print("[DEBUG] validation_round called")
         self.model.eval()
         y_true = []
         predicted_probs = []
@@ -633,9 +644,9 @@ class GlobalClient:
         # print(f"Predicted labels shape: {y_predicted.shape}")
         # print(f"Predicted probabilities shape: {predicted_probs.shape}")
         #
-        # print(f"True labels sample: {y_true[:5]}")
-        # print(f"Predicted labels sample: {y_predicted[:5]}")
-        # print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+        print(f"True labels sample: {y_true[:5]}")
+        print(f"Predicted labels sample: {y_predicted[:5]}")
+        print(f"Predicted probabilities sample: {predicted_probs[:5]}")
 
         # Überprüfen auf NaN-Werte in Arrays
         if np.isnan(predicted_probs).any():

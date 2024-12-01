@@ -86,7 +86,7 @@ class LatentRelevanceAttributor:
         self.clear_latent_info()
         self.hook_handles = self.register_hooks(model)
 
-        print(f"Input shape before model forward: {inputs.shape}")
+        #print(f"Input shape before model forward: {inputs.shape}")
         if len(inputs.shape) < 4:
             #print(f"Unexpected input shape for LRP: {inputs.shape}. Adding dummy dimensions.")
             inputs = inputs.unsqueeze(0).unsqueeze(0)
@@ -103,26 +103,25 @@ class LatentRelevanceAttributor:
             #print(f"Adjusting input batch size from {inputs.shape[0]} to match targets batch size {targets.shape[0]}")
             inputs = inputs.repeat(targets.shape[0], 1, 1, 1)
 
-        print(f"Input shape before relevance computation: {inputs.shape}")
+        #print(f"Input shape before relevance computation: {inputs.shape}")
 
         try:
             output = model(inputs)
-            print(f"Model output shape: {output.shape}")
+            #print(f"Model output shape: {output.shape}")
         except Exception as e:
             print(f"Error during model forward pass: {e}")
             raise
 
         if targets.dtype != torch.long:
-            print(f"Converting targets from {targets.dtype} to torch.long")
+            #print(f"Converting targets from {targets.dtype} to torch.long")
             targets = targets.long()
 
         if targets.shape[0] != output.shape[0]:
-            print(
-                f"Mismatch between targets batch size ({targets.shape[0]}) and model output batch size ({output.shape[0]}).")
+            #print(f"Mismatch between targets batch size ({targets.shape[0]}) and model output batch size ({output.shape[0]}).")
             raise ValueError("Batch size mismatch between targets and model output.")
 
         if len(targets.shape) > 1 and targets.shape[1] == output.shape[-1]:
-            print(f"Reducing targets shape from {targets.shape} to {targets.shape[0]} for one-hot encoding.")
+            #print(f"Reducing targets shape from {targets.shape} to {targets.shape[0]} for one-hot encoding.")
             targets = torch.argmax(targets, dim=1)  # Konvertiere zu Klassenindizes
 
         try:

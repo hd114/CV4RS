@@ -80,9 +80,9 @@ class LocalPruningOperations:
                 continue
 
             # Debugging output before mask adjustment
-            print(f"[DEBUG] Processing layer: {layer_name}, Type: {layer_type}")
+            '''print(f"[DEBUG] Processing layer: {layer_name}, Type: {layer_type}")
             print(f"[DEBUG] Original mask shape: {pruning_mask[layer_type]['weight'].shape}")
-            print(f"[DEBUG] Layer weight shape: {layer.weight.shape}")
+            print(f"[DEBUG] Layer weight shape: {layer.weight.shape}")'''
 
             # Retrieve weight mask
             weight_mask = pruning_mask[layer_type]["weight"]
@@ -418,11 +418,11 @@ class GlobalPruningOperations(LocalPruningOperations):
         if module is None:
             raise ValueError(f"Layer {layer_name} not found in the model.")
 
-        # Debugging information
+        ''''# Debugging information
         print(f"[DEBUG] Binding mask to module: {layer_name}, Target: {weight_or_bias}")
         print(f"  Module weight shape: {module.weight.shape if hasattr(module, 'weight') else 'No weight'}")
         print(f"  Module bias shape: {module.bias.shape if hasattr(module, 'bias') else 'No bias'}")
-        print(f"  Mask shape: {pruning_mask.shape}")
+        print(f"  Mask shape: {pruning_mask.shape}")'''
 
         # Get the weight or bias shape
         param_shape = getattr(module, weight_or_bias).shape
@@ -435,7 +435,7 @@ class GlobalPruningOperations(LocalPruningOperations):
                     f"Cannot reshape mask for {weight_or_bias} in layer {layer_name}: {e}"
                 )
 
-        print(f"[INFO] Mask reshaped to match {weight_or_bias} dimensions: {pruning_mask.shape}")
+        #print(f"[INFO] Mask reshaped to match {weight_or_bias} dimensions: {pruning_mask.shape}")
 
         # Apply the mask using PyTorch's pruning API
         try:
@@ -446,7 +446,7 @@ class GlobalPruningOperations(LocalPruningOperations):
 
         if remove_re_parametrization:
             prune.remove(module, weight_or_bias)
-            print(f"[INFO] Removed re-parametrization for {weight_or_bias} in layer: {layer_name}")
+            #print(f"[INFO] Removed re-parametrization for {weight_or_bias} in layer: {layer_name}")
 
     @staticmethod
     def mask_attention_head(model, layer_names, head_indices):
