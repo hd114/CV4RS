@@ -34,6 +34,10 @@ from pxp import get_cnn_composite, ComponentAttribution
 from pxp import GlobalPruningOperations
 
 from pyinstrument import Profiler
+import sys
+import os
+from pyinstrument import Profiler
+
 import cProfile
 
 # data_dirs = {
@@ -530,12 +534,23 @@ class GlobalClient:
             # Validierung und Fehlerbehandlung
             print(f"Starting validation after Round {com_round}...")
             try:
-                report = self.validation_round()
-                self.results = update_results(self.results, report, self.num_classes)
-                print_micro_macro(report)
+                # HTML-Ausgabe speichern
+                '''html_file_name = "cv4rs_profiling.html"
+                with open(html_file_name, "w", encoding="utf-8") as html_file:
+                    html_output = profiler.output_html()
+                    html_file.write(html_output)
+                print(f"HTML profiling results saved to {os.path.abspath(html_file_name)}")'''
+
+                # Vollständige Text-Ausgabe speichern
+                text_file_name = "cv4rs_profiling_short.txt"
+                with open(text_file_name, "w", encoding="utf-8") as text_file:
+                    full_text_output = profiler.output_text(unicode=True, color=False,
+                                                            show_all=False)  # show_all=True für langes feedback
+                    text_file.write(full_text_output)
+                print(f"Full profiling results (including hidden frames) saved to {os.path.abspath(text_file_name)}")
+
             except Exception as e:
-                print(f"Validation failed due to: {e}")
-                raise
+                print(f"Error while writing profiling results: {e}")
 
             #profile_compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate, com_round)
 
@@ -577,8 +592,8 @@ class GlobalClient:
                 #print(profiler.output_text(unicode=True, color=True))
                 with open("pruning_callgraph.txt", "w") as f:
                     f.write(profiler.output_text(unicode=True, color=False))
-                with open("pruning_callgraph.html", "w") as f:
-                    f.write(profiler.output_html())
+                #with open("pruning_callgraph.html", "w") as f:
+                #    f.write(profiler.output_html())
 
         # Abschluss der Trainingszeit
         self.train_time = time.perf_counter() - start

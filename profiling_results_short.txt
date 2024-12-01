@@ -1,0 +1,37 @@
+
+  _     ._   __/__   _ _  _  _ _/_   Recorded: 15:16:25  Samples:  70002
+ /_//_/// /_\ / //_// / //_'/ //     Duration: 112.344   CPU time: 121.425
+/   _/                      v5.0.0
+
+Profile at /home/paul/projects/CV4RS-main/utils/clients.py:559
+
+112.343 GlobalClient.train  utils/clients.py:488
+├─ 110.714 GlobalClient.compute_lrp_pruning_mask  utils/clients.py:418
+│  ├─ 105.335 ComponentAttribution.attribute  pxp/attribute.py:568
+│  │  └─ 103.749 ZennitLatentRelevanceAttributor.lrp_pass  pxp/attribute.py:23
+│  │     ├─ 78.289 ZennitLatentRelevanceAttributor.compute_relevance  pxp/attribute.py:83
+│  │     │  ├─ 33.372 grad  torch/autograd/__init__.py:358
+│  │     │  │  └─ 33.350 _engine_run_backward  torch/autograd/graph.py:816
+│  │     │  │     └─ 33.346 _EngineBase.run_backward  <built-in>
+│  │     │  ├─ 26.929 ResNet50._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │     │  │  └─ 26.925 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │     │  │     └─ 26.914 ResNet50.forward  utils/pytorch_models.py:73
+│  │     │  │        └─ 26.893 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │     │  │              [25 frames hidden]  torch, zennit, <built-in>
+│  │     │  └─ 17.434 ZennitLatentRelevanceAttributor.register_hooks  pxp/attribute.py:231
+│  │     │     ├─ 15.625 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │     │     │     [8 frames hidden]  torch
+│  │     │     └─ 1.600 [self]  pxp/attribute.py
+│  │     └─ 25.443 ZennitLatentRelevanceAttributor.parse_latent_relevances  pxp/attribute.py:176
+│  │        ├─ 15.153 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │        │     [8 frames hidden]  torch
+│  │        ├─ 4.331 Tensor.cpu  <built-in>
+│  │        ├─ 3.516 Tensor.sum  <built-in>
+│  │        └─ 1.993 [self]  pxp/attribute.py
+│  └─ 4.688 GlobalClient.get_country_dataloader  utils/clients.py:385
+│     └─ 3.212 BENv2DataSet.__init__  utils/BENv2_dataset.py:88
+│        └─ 1.642 BENv2LDMBReader.__init__  utils/BENv2_utils.py:559
+└─ 1.418 GlobalPruningOperations.generate_global_pruning_mask  pxp/prune.py:236
+   └─ 1.406 Tensor.__repr__  torch/_tensor.py:517
+         [4 frames hidden]  torch
+
