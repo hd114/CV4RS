@@ -262,19 +262,13 @@ class FLCLient:
             data = batch[1]
             labels = batch[4]
 
-            # print(f"Batch {idx}:")
-            # print(f"  Data shape: {data.shape}")
-            # print(f"  Labels shape: {labels.shape}")
-            # print(f"  Sample label: {labels[0]}")
-            # break  # Stop after the first batch for inspection
-
             # Debugging: Ausgabe der Batch-Dimensionen
-            print(f"Batch {idx}:")
+            '''print(f"Batch {idx}:")
             print(f"  Data shape: {data.shape}")  # Eingabedatenform prüfen
             print(f"  Labels shape: {labels.shape}")  # Label-Form prüfen
 
             # Debugging: Conv1-Gewichte überprüfen
-            print(f"  Conv1 weight shape: {self.model.encoder[0].weight.shape}")
+            print(f"  Conv1 weight shape: {self.model.encoder[0].weight.shape}")'''
             
             data = data.cuda()
             label_new=np.copy(labels)
@@ -421,51 +415,52 @@ class GlobalClient:
 
     def compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate=0.3):
         """
-        Berechnet die LRP-Pruning-Maske basierend auf globalen Relevanzwerten.
+        Compute the LRP pruning mask based on global relevance maps.
 
         Args:
-            composite: Das Composite-Objekt für LRP.
-            component_attributor: Das Component Attribution-Objekt.
-            pruning_rate (float): Der Anteil der zu prunenden Parameter.
+            composite: The LRP composite object.
+            component_attributor: The component attribution object.
+            pruning_rate (float): Fraction of filters to prune.
 
         Returns:
-            dict: Die generierte globale Pruning-Maske.
+            dict: The global pruning mask.
         """
-        print(f"Berechne LRP-Pruning-Maske für Land: Finland")
+        print("[INFO] Computing LRP pruning mask...")
         dataloader = self.get_country_dataloader("Finland", batch_size=16, num_workers=4)
 
-        # Berechnung der Relevanzwerte
+        # Compute relevance maps
         global_concept_maps = component_attributor.attribute(
             model=self.model,
-            dataloader=(
-                (batch[0].float(), batch[-1])  # Passe die Struktur der Batch an
-                for batch in dataloader
-            ),
+            dataloader=((batch[0].float(), batch[-1]) for batch in dataloader),
             attribution_composite=composite,
             abs_flag=True,
             device=self.device,
         )
-        print(f"Relevanzkarten berechnet: {list(global_concept_maps.keys())}")
+        print(f"[INFO] Relevance maps computed for {len(global_concept_maps)} layers.")
 
-        # Prüfen, ob global_concept_maps bereits ein korrektes Format hat
-        assert isinstance(global_concept_maps, dict), "global_concept_maps must be a dictionary."
+        # Debugging: Check the generated mask
+        for layer_name, relevance_map in global_concept_maps.items():
+            print(f"[DEBUG] Layer: {layer_name}")
+            if isinstance(relevance_map, dict):
+                for mask_type, mask in relevance_map.items():
+                    print(
+                        f"  Mask type: {mask_type}, Mask shape: {mask.shape}, Non-zero elements: {torch.sum(mask != 0)}")
+            else:
+                print(f"  Mask shape: {relevance_map.shape}, Non-zero elements: {torch.sum(relevance_map != 0)}")
 
-        # Globale Pruning-Maske erstellen
-        pruning_operations = GlobalPruningOperations(
+        # Generate global pruning mask
+        pruning_ops = GlobalPruningOperations(
             target_layer=torch.nn.Conv2d,
-            layer_names=[name for name, _ in self.model.named_modules() if isinstance(_, torch.nn.Conv2d)],
+            layer_names=list(global_concept_maps.keys()),
         )
-        print(f"Calling generate_global_pruning_mask with pruning_rate: {pruning_rate}")
-
-        # Verwenden der berechneten Relevanzkarten für das Pruning
-        global_pruning_mask = pruning_operations.generate_global_pruning_mask(
+        global_pruning_mask = pruning_ops.generate_global_pruning_mask(
             model=self.model,
             global_concept_maps=global_concept_maps,
             pruning_percentage=pruning_rate,
             least_relevant_first=True,
-            device=self.device
+            device=self.device,
         )
-        print(f"Globale Pruning-Maske generiert: {len(global_pruning_mask)} Layer")
+
         return global_pruning_mask
 
     # def train(self, communication_rounds: int, epochs: int):
@@ -490,115 +485,98 @@ class GlobalClient:
     #     return self.results, self.client_results
 
     def train(self, communication_rounds: int, epochs: int):
-        start = time.perf_counter()
-        pruning_rate = 0.3  # Pruning-Rate
-        global_pruning_mask = None  # Pruning-Maske initialisieren
+        """
+        Train the global model across multiple communication rounds with pruning and validation.
 
-        # LRP-Pruning initialisieren
+        Args:
+            communication_rounds (int): Number of communication rounds.
+            epochs (int): Number of epochs per communication round.
+
+        Returns:
+            tuple: (global results, client results)
+        """
+        start = time.perf_counter()
+        pruning_rate = 0.9  # Pruning rate
+        global_pruning_mask = None  # Initialize pruning mask
+        pruning_ops = None  # Ensure pruning_ops is initialized outside the loop
+
+        # LRP-Pruning initialization
         print("Initializing LRP Pruning...")
         composite, component_attributor = self.initialize_lrp_pruning("resnet50", torch.nn.Conv2d)
         print("LRP initialized successfully.")
 
         for com_round in range(1, communication_rounds + 1):
-            print(f"=== Runde {com_round}/{communication_rounds} ===")
+            print(f"=== Round {com_round}/{communication_rounds} ===")
 
-            # Pruning-Maske anwenden (falls vorhanden)
+            # Apply pruning mask if available
             if global_pruning_mask is not None:
-                print(f"Pruning-Maske anwenden für Runde {com_round}...")
-                state_dict = self.model.state_dict()
-                for name, mask in global_pruning_mask.items():
-                    if name in state_dict:
-                        print(f"Anwenden der Maske auf Layer: {name}")
-                        try:
-                            pruned_param = state_dict[name] * mask["weight"]
-                            if torch.isnan(pruned_param).any() or torch.isinf(pruned_param).any():
-                                print(f"NaN or Inf detected in Layer: {name} after applying mask.")
-                                raise ValueError(f"Invalid values in Layer: {name}.")
-                            state_dict[name].copy_(pruned_param)
-                        except KeyError as e:
-                            print(f"KeyError: {e}. Ensure the mask has 'weight' and/or 'bias'.")
-                    else:
-                        print(f"Layer {name} not found in model state_dict. Skipping...")
-                self.model.load_state_dict(state_dict)
+                print(f"Applying pruning mask for Round {com_round}...")
+                for layer_name, layer_pruning_mask in global_pruning_mask.items():
+                    print(f"[INFO] Applying pruning mask to layer: {layer_name}")
+                    try:
+                        pruning_ops.fit_pruning_mask(self.model, layer_name, layer_pruning_mask)
+                    except Exception as e:
+                        print(f"[ERROR] Failed to apply pruning mask to layer {layer_name}: {e}")
+                        raise
 
-                # Reinitialisiere BatchNorm-Statistiken
-                for name, module in self.model.named_modules():
-                    if isinstance(module, torch.nn.BatchNorm2d):
-                        print(f"Reinitializing BatchNorm stats for Layer: {name}")
-                        module.reset_running_stats()
+                # Validate pruning
+                for name, param in self.model.named_parameters():
+                    if name in global_pruning_mask:
+                        print(f"[DEBUG] Layer {name}: Non-zero weights after pruning: {torch.sum(param != 0)}")
 
-            # Training und Kommunikation
+            # Training and communication
             print(f"Training and communication for Round {com_round}...")
             self.communication_round(epochs)
 
-            # Validierung und Fehlerbehandlung
-            print(f"Starting validation after Round {com_round}...")
-            try:
-                # HTML-Ausgabe speichern
-                '''html_file_name = "cv4rs_profiling.html"
-                with open(html_file_name, "w", encoding="utf-8") as html_file:
-                    html_output = profiler.output_html()
-                    html_file.write(html_output)
-                print(f"HTML profiling results saved to {os.path.abspath(html_file_name)}")'''
-
-                # Vollständige Text-Ausgabe speichern
-                text_file_name = "cv4rs_profiling_short.txt"
-                with open(text_file_name, "w", encoding="utf-8") as text_file:
-                    full_text_output = profiler.output_text(unicode=True, color=False,
-                                                            show_all=False)  # show_all=True für langes feedback
-                    text_file.write(full_text_output)
-                print(f"Full profiling results (including hidden frames) saved to {os.path.abspath(text_file_name)}")
-
-            except Exception as e:
-                print(f"Error while writing profiling results: {e}")
-
-            #profile_compute_lrp_pruning_mask(self, composite, component_attributor, pruning_rate, com_round)
-
-            # LRP-Pruning nach der ersten Kommunikationsrunde
-            if com_round == 1:  # Beispiel: Nur nach der ersten Runde prunen
-                print(f"Führe LRP-Pruning in Runde {com_round} durch...")
-
-                # Profiling starten
+            # Perform LRP pruning after the first communication round
+            if com_round == 1:
+                print(f"[INFO] Performing LRP Pruning in Round {com_round}...")
                 profiler = Profiler()
                 profiler.start()
 
                 try:
-                    # Der relevante Codeblock
-                    print(f"Führe LRP-Pruning in Runde {com_round} durch...")
                     global_concept_maps = self.compute_lrp_pruning_mask(
                         composite=composite,
                         component_attributor=component_attributor,
                         pruning_rate=pruning_rate,
                     )
+                    print(f"[DEBUG] Global concept maps computed with {len(global_concept_maps)} layers.")
+
+                    # Initialize pruning operations
                     pruning_ops = GlobalPruningOperations(
                         target_layer=torch.nn.Conv2d,
                         layer_names=list(global_concept_maps.keys())
                     )
+
+                    # Generate global pruning mask
                     global_pruning_mask = pruning_ops.generate_global_pruning_mask(
                         model=self.model,
                         global_concept_maps=global_concept_maps,
                         pruning_percentage=pruning_rate,
                         least_relevant_first=True,
-                        device=self.device
+                        device=self.device,
                     )
+                    print(f"[INFO] Global pruning mask generated for {len(global_pruning_mask)} layers.")
 
-                    print(f"LRP Pruning applied successfully in Round {com_round}.")
                 except Exception as e:
-                    print(f"Failed to compute pruning mask: {e}")
+                    print(f"[ERROR] Failed to compute pruning mask: {e}")
                     raise
 
-                # Profiling stoppen und Ergebnis anzeigen
                 profiler.stop()
-                #print(profiler.output_text(unicode=True, color=True))
-                with open("pruning_callgraph.txt", "w") as f:
-                    f.write(profiler.output_text(unicode=True, color=False))
-                #with open("pruning_callgraph.html", "w") as f:
-                #    f.write(profiler.output_html())
+                try:
+                    text_file_name = "pruning_callgraph.txt"
+                    with open(text_file_name, "w", encoding="utf-8") as text_file:
+                        full_text_output = profiler.output_text(unicode=True, color=False, show_all=True)
+                        text_file.write(full_text_output)
+                    print(f"Full profiling results saved to {os.path.abspath(text_file_name)}")
+                except Exception as e:
+                    print(f"Error while writing profiling results: {e}")
 
-        # Abschluss der Trainingszeit
+        # Finalize training time
         self.train_time = time.perf_counter() - start
+        print(f"Training completed in {self.train_time:.2f} seconds.")
 
-        # Ergebnisse der Clients sammeln
+        # Collect client results
         self.client_results = [client.get_validation_results() for client in self.clients]
         self.save_results()
         self.save_state_dict()

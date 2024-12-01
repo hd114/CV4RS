@@ -1,0 +1,880 @@
+
+  _     ._   __/__   _ _  _  _ _/_   Recorded: 15:58:20  Samples:  67984
+ /_//_/// /_\ / //_// / //_'/ //     Duration: 110.239   CPU time: 119.022
+/   _/                      v5.0.0
+
+Profile at /home/paul/projects/CV4RS-main/utils/clients.py:539
+
+110.239 GlobalClient.train  utils/clients.py:486
+├─ 109.662 GlobalClient.compute_lrp_pruning_mask  utils/clients.py:416
+│  ├─ 103.900 ComponentAttribution.attribute  pxp/attribute.py:568
+│  │  ├─ 102.267 ZennitLatentRelevanceAttributor.lrp_pass  pxp/attribute.py:23
+│  │  │  ├─ 76.995 ZennitLatentRelevanceAttributor.compute_relevance  pxp/attribute.py:83
+│  │  │  │  ├─ 32.853 grad  torch/autograd/__init__.py:358
+│  │  │  │  │  ├─ 32.822 _engine_run_backward  torch/autograd/graph.py:816
+│  │  │  │  │  │  ├─ 32.819 _EngineBase.run_backward  <built-in>
+│  │  │  │  │  │  └─ 0.003 [self]  torch/autograd/graph.py
+│  │  │  │  │  ├─ 0.015 _make_grads  torch/autograd/__init__.py:88
+│  │  │  │  │  │  ├─ 0.011 [self]  torch/autograd/__init__.py
+│  │  │  │  │  │  ├─ 0.003 sym_eq  torch/fx/experimental/symbolic_shapes.py:827
+│  │  │  │  │  │  └─ 0.001 expect_true  torch/fx/experimental/symbolic_shapes.py:1004
+│  │  │  │  │  ├─ 0.008 [self]  torch/autograd/__init__.py
+│  │  │  │  │  ├─ 0.004 inner  typing.py:306
+│  │  │  │  │  │  ├─ 0.002 [self]  typing.py
+│  │  │  │  │  │  └─ 0.002 _GenericAlias.__hash__  typing.py:1037
+│  │  │  │  │  ├─ 0.002 is_tensor_like  torch/overrides.py:1958
+│  │  │  │  │  └─ 0.002 _tensor_or_tensors_to_tuple  torch/autograd/__init__.py:232
+│  │  │  │  ├─ 26.354 ResNet50._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │  └─ 26.354 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     ├─ 26.348 ResNet50.forward  utils/pytorch_models.py:73
+│  │  │  │  │     │  ├─ 26.330 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │     │  │  ├─ 26.326 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     │  │  │  ├─ 26.268 Sequential.forward  torch/nn/modules/container.py:248
+│  │  │  │  │     │  │  │  │  ├─ 26.255 Sequential._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │     │  │  │  │  │  ├─ 26.243 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     │  │  │  │  │  │  ├─ 24.722 Sequential.forward  torch/nn/modules/container.py:248
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 24.697 Bottleneck._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 24.668 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 24.622 Bottleneck.forward  zennit/torchvision.py:60
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  ├─ 23.241 BatchNorm2d._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  ├─ 22.967 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  ├─ 21.163 inner  torch/nn/modules/module.py:1752
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 7.400 Pass.pre_forward  zennit/core.py:379
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 3.204 Identity.apply  torch/autograd/function.py:559
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.194 unwrap_dead_wrappers  torch/_functorch/utils.py:32
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.006 [self]  torch/_functorch/utils.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.188 <genexpr>  torch/_functorch/utils.py:34
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.110 PyCapsule.unwrap_if_dead  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.072 [self]  torch/_functorch/utils.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.006 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.133 Identity.apply  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.777 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.047 PyCapsule._are_functorch_transforms_active  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.038 _is_setup_context_defined  torch/autograd/function.py:592
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.015 forward  zennit/core.py:361
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 2.338 <genexpr>  zennit/core.py:402
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 2.275 Tensor.clone  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.063 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.908 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.440 update_wrapper  functools.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.255 [self]  functools.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.127 getattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.048 setattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.010 dict.update  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.352 _register_hook  torch/autograd/function.py:278
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.192 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.170 [self]  torch/utils/hooks.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.022 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.160 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.059 wraps  functools.py:65
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.053 IdentityBackward.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.019 len  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.015 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.013 RemovableHandleList.append  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 4.940 Pass.post_forward  zennit/core.py:408
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 2.298 _register_hook  torch/autograd/function.py:278
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.963 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.334 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.311 [self]  torch/utils/hooks.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.023 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.405 update_wrapper  functools.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.877 [self]  functools.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.456 getattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.056 setattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.016 dict.update  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.081 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.064 wraps  functools.py:65
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.023 ReluBackward0.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.022 CudnnBatchNormBackward0.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.016 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.014 RemovableHandleList.append  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.012 len  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.005 SumBackward1.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 3.451 Conv2d.forward  torch/nn/modules/conv.py:553
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 3.278 Conv2d._conv_forward  torch/nn/modules/conv.py:536
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 3.213 _VariableFunctionsClass.conv2d  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.065 [self]  torch/nn/modules/conv.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.111 [self]  torch/nn/modules/conv.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.062 Conv2d.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 2.692 BatchNorm2d.forward  torch/nn/modules/batchnorm.py:159
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 2.176 batch_norm  torch/nn/functional.py:2781
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.990 _VariableFunctionsClass.batch_norm  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.142 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.028 ContextProp.__get__  torch/backends/__init__.py:38
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.017 [self]  torch/backends/__init__.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.011 _get_cudnn_enabled  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.016 _has_torch_function_variadic  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.313 [self]  torch/nn/modules/batchnorm.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.157 BatchNorm2d.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.045 BatchNorm2d._check_input_dim  torch/nn/modules/batchnorm.py:450
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.025 [self]  torch/nn/modules/batchnorm.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.020 Tensor.dim  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 1.076 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.931 ReLU.forward  torch/nn/modules/activation.py:132
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.873 relu  torch/nn/functional.py:1693
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.812 _VariableFunctionsClass.relu_  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.049 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.012 _has_torch_function_unary  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.058 [self]  torch/nn/modules/activation.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.365 Sum.forward  zennit/layer.py:34
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.341 _VariableFunctionsClass.sum  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.024 [self]  zennit/layer.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.160 forward_hook_function  pxp/attribute.py:263
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.105 Tensor.retain_grad  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.055 [self]  pxp/attribute.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.071 OrderedDict.items  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.045 Norm.forward  zennit/core.py:521
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.017 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.016 Pass.forward  zennit/core.py:434
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.936 Sequential.forward  torch/nn/modules/container.py:248
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.924 BatchNorm2d._wrapped_call_impl  torch/nn/modules/module.py:1732
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.910 tuple._call_impl  torch/nn/modules/module.py:1740
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.873 inner  torch/nn/modules/module.py:1752
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.280 Conv2d.forward  torch/nn/modules/conv.py:553
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.264 Conv2d._conv_forward  torch/nn/modules/conv.py:536
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.258 _VariableFunctionsClass.conv2d  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.006 [self]  torch/nn/modules/conv.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.010 [self]  torch/nn/modules/conv.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.006 Conv2d.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.269 Pass.pre_forward  zennit/core.py:379
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.105 Identity.apply  torch/autograd/function.py:559
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.056 Identity.apply  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.030 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.015 unwrap_dead_wrappers  torch/_functorch/utils.py:32
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.010 [self]  torch/_functorch/utils.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.005 <genexpr>  torch/_functorch/utils.py:34
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.004 [self]  torch/_functorch/utils.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.001 PyCapsule.unwrap_if_dead  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.003 PyCapsule._are_functorch_transforms_active  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.001 forward  zennit/core.py:361
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.089 <genexpr>  zennit/core.py:402
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.089 Tensor.clone  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.042 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.013 update_wrapper  functools.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.006 [self]  functools.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.003 setattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.002 getattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.002 dict.update  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.012 _register_hook  torch/autograd/function.py:278
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.006 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.006 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.004 IdentityBackward.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.002 wraps  functools.py:65
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.002 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.212 BatchNorm2d.forward  torch/nn/modules/batchnorm.py:159
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.164 batch_norm  torch/nn/functional.py:2781
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.146 _VariableFunctionsClass.batch_norm  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.013 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.003 _has_torch_function_variadic  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.002 ContextProp.__get__  torch/backends/__init__.py:38
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.001 _get_cudnn_enabled  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.001 [self]  torch/backends/__init__.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.029 [self]  torch/nn/modules/batchnorm.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.014 BatchNorm2d.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.005 BatchNorm2d._check_input_dim  torch/nn/modules/batchnorm.py:450
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.004 Tensor.dim  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.001 [self]  torch/nn/modules/batchnorm.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.053 Pass.post_forward  zennit/core.py:408
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.026 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.016 update_wrapper  functools.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.009 [self]  functools.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.004 getattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.002 setattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.001 dict.update  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.010 _register_hook  torch/autograd/function.py:278
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.007 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.003 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.001 CudnnBatchNormBackward0.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.043 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.012 forward_hook_function  pxp/attribute.py:263
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.009 Tensor.retain_grad  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.003 [self]  pxp/attribute.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.002 Pass.forward  zennit/core.py:434
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.001 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.025 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.006 _handle_fromlist  <frozen importlib._bootstrap>:1053
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.005 [self]  <frozen importlib._bootstrap>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.001 hasattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.005 is_compiling  torch/compiler/__init__.py:292
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.001 PyCapsule._get_tracing_state  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.014 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.007 [self]  torch/nn/modules/container.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.005 Sequential.__iter__  torch/nn/modules/container.py:240
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.002 dict.values  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.002 [self]  torch/nn/modules/container.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.001 iter  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.515 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.134 _handle_fromlist  <frozen importlib._bootstrap>:1053
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.097 [self]  <frozen importlib._bootstrap>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.021 hasattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.016 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  ├─ 0.132 PyCapsule._get_tracing_state  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │  └─ 0.087 is_compiling  torch/compiler/__init__.py:292
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.077 [self]  torch/compiler/__init__.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  │     └─ 0.010 is_scripting  torch/_jit_internal.py:103
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  └─ 0.274 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  ├─ 0.731 _VariableFunctionsClass.stack  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  ├─ 0.456 [self]  zennit/torchvision.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  └─ 0.195 Bottleneck.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.032 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.014 PyCapsule._get_tracing_state  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.029 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.022 [self]  torch/nn/modules/container.py
+│  │  │  │  │     │  │  │  │  │  │  │  └─ 0.003 Sequential.__iter__  torch/nn/modules/container.py:240
+│  │  │  │  │     │  │  │  │  │  │  ├─ 1.441 inner  torch/nn/modules/module.py:1752
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.860 Norm.forward  zennit/core.py:521
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.271 Pass.pre_forward  zennit/core.py:379
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.094 <genexpr>  zennit/core.py:402
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.091 Tensor.clone  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.003 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.094 Identity.apply  torch/autograd/function.py:559
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.043 Identity.apply  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.024 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.017 unwrap_dead_wrappers  torch/_functorch/utils.py:32
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  ├─ 0.011 <genexpr>  torch/_functorch/utils.py:34
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  ├─ 0.005 PyCapsule.unwrap_if_dead  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  ├─ 0.004 [self]  torch/_functorch/utils.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  │  └─ 0.002 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  └─ 0.006 [self]  torch/_functorch/utils.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.005 PyCapsule._are_functorch_transforms_active  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.003 forward  zennit/core.py:361
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.002 _is_setup_context_defined  torch/autograd/function.py:592
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.037 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.021 _register_hook  torch/autograd/function.py:278
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.016 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  ├─ 0.015 [self]  torch/utils/hooks.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  └─ 0.001 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.005 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.018 update_wrapper  functools.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.009 [self]  functools.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.007 getattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.002 setattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.003 wraps  functools.py:65
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.002 IdentityBackward.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.001 len  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.001 RemovableHandleList.append  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.068 Pass.post_forward  zennit/core.py:408
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.027 [self]  zennit/core.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.021 update_wrapper  functools.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.009 [self]  functools.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.007 getattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.005 setattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.016 _register_hook  torch/autograd/function.py:278
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.012 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  ├─ 0.010 [self]  torch/utils/hooks.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  │  └─ 0.002 isinstance  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.004 [self]  torch/autograd/function.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.002 wraps  functools.py:65
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.001 ConvolutionBackward0.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.001 CudnnBatchNormBackward0.register_hook  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.067 Conv2d.forward  torch/nn/modules/conv.py:553
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.064 Conv2d._conv_forward  torch/nn/modules/conv.py:536
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.062 _VariableFunctionsClass.conv2d  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.002 [self]  torch/nn/modules/conv.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.003 [self]  torch/nn/modules/conv.py
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.058 BatchNorm2d.forward  torch/nn/modules/batchnorm.py:159
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.046 batch_norm  torch/nn/functional.py:2781
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.044 _VariableFunctionsClass.batch_norm  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.001 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.001 _has_torch_function_variadic  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.007 [self]  torch/nn/modules/batchnorm.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.004 BatchNorm2d.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.001 BatchNorm2d._check_input_dim  torch/nn/modules/batchnorm.py:450
+│  │  │  │  │     │  │  │  │  │  │  │  │     └─ 0.001 Tensor.dim  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.043 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.042 AdaptiveAvgPool2d.forward  torch/nn/modules/pooling.py:1454
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.041 adaptive_avg_pool2d  torch/nn/functional.py:1370
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.037 adaptive_avg_pool2d  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.002 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.001 _list_with_default  torch/nn/modules/utils.py:35
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.001 Tensor.size  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.001 [self]  torch/nn/modules/pooling.py
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.027 ReLU.forward  torch/nn/modules/activation.py:132
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.023 relu  torch/nn/functional.py:1693
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.022 _VariableFunctionsClass.relu_  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.001 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.004 [self]  torch/nn/modules/activation.py
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.003 OrderedDict.items  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  └─ 0.001 forward_hook_function  pxp/attribute.py:263
+│  │  │  │  │     │  │  │  │  │  │  │     └─ 0.001 Tensor.retain_grad  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  ├─ 0.033 MaxPool2d.forward  torch/nn/modules/pooling.py:212
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.031 fn  torch/_jit_internal.py:614
+│  │  │  │  │     │  │  │  │  │  │  │  │  ├─ 0.028 _max_pool2d  torch/nn/functional.py:807
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  ├─ 0.025 _VariableFunctionsClass.max_pool2d  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  │  │  │  └─ 0.003 [self]  torch/nn/functional.py
+│  │  │  │  │     │  │  │  │  │  │  │  │  └─ 0.003 [self]  torch/_jit_internal.py
+│  │  │  │  │     │  │  │  │  │  │  │  └─ 0.002 [self]  torch/nn/modules/pooling.py
+│  │  │  │  │     │  │  │  │  │  │  ├─ 0.032 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  │  │  ├─ 0.006 PyCapsule._get_tracing_state  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  ├─ 0.006 _handle_fromlist  <frozen importlib._bootstrap>:1053
+│  │  │  │  │     │  │  │  │  │  │  │  ├─ 0.005 [self]  <frozen importlib._bootstrap>
+│  │  │  │  │     │  │  │  │  │  │  │  └─ 0.001 hasattr  <built-in>
+│  │  │  │  │     │  │  │  │  │  │  └─ 0.002 is_compiling  torch/compiler/__init__.py:292
+│  │  │  │  │     │  │  │  │  │  └─ 0.012 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  │  ├─ 0.012 [self]  torch/nn/modules/container.py
+│  │  │  │  │     │  │  │  │  └─ 0.001 Sequential.__iter__  torch/nn/modules/container.py:240
+│  │  │  │  │     │  │  │  ├─ 0.053 Linear.forward  torch/nn/modules/linear.py:124
+│  │  │  │  │     │  │  │  │  ├─ 0.046 linear  <built-in>
+│  │  │  │  │     │  │  │  │  ├─ 0.005 [self]  torch/nn/modules/linear.py
+│  │  │  │  │     │  │  │  │  └─ 0.002 Linear.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  │  │  ├─ 0.004 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  │  │  └─ 0.001 PyCapsule._get_tracing_state  <built-in>
+│  │  │  │  │     │  │  └─ 0.004 [self]  torch/nn/modules/module.py
+│  │  │  │  │     │  ├─ 0.009 [self]  utils/pytorch_models.py
+│  │  │  │  │     │  ├─ 0.006 Tensor.view  <built-in>
+│  │  │  │  │     │  ├─ 0.002 ResNet50.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │     │  └─ 0.001 Tensor.size  <built-in>
+│  │  │  │  │     └─ 0.006 [self]  torch/nn/modules/module.py
+│  │  │  │  ├─ 17.242 ZennitLatentRelevanceAttributor.register_hooks  pxp/attribute.py:231
+│  │  │  │  │  ├─ 15.481 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  ├─ 13.986 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  ├─ 12.403 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  ├─ 10.427 Bottleneck.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  │  ├─ 5.630 BatchNorm2d.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  │  │  ├─ 4.197 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  │  │  ├─ 0.591 set.add  <built-in>
+│  │  │  │  │  │  │  │  │  │  ├─ 0.555 dict.items  <built-in>
+│  │  │  │  │  │  │  │  │  │  └─ 0.287 BatchNorm2d.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  │  │     ├─ 0.222 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  │  │     ├─ 0.034 set.add  <built-in>
+│  │  │  │  │  │  │  │  │  │     └─ 0.031 dict.items  <built-in>
+│  │  │  │  │  │  │  │  │  ├─ 4.661 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  │  ├─ 0.069 dict.items  <built-in>
+│  │  │  │  │  │  │  │  │  └─ 0.067 set.add  <built-in>
+│  │  │  │  │  │  │  │  ├─ 1.911 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  ├─ 0.038 set.add  <built-in>
+│  │  │  │  │  │  │  │  └─ 0.027 dict.items  <built-in>
+│  │  │  │  │  │  │  ├─ 1.556 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  ├─ 0.014 dict.items  <built-in>
+│  │  │  │  │  │  │  └─ 0.013 set.add  <built-in>
+│  │  │  │  │  │  ├─ 1.479 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  ├─ 0.010 dict.items  <built-in>
+│  │  │  │  │  │  └─ 0.006 set.add  <built-in>
+│  │  │  │  │  ├─ 1.542 [self]  pxp/attribute.py
+│  │  │  │  │  ├─ 0.203 Conv2d.register_forward_hook  torch/nn/modules/module.py:1643
+│  │  │  │  │  │  ├─ 0.135 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  │  │  │  ├─ 0.083 [self]  torch/utils/hooks.py
+│  │  │  │  │  │  │  ├─ 0.042 <genexpr>  torch/utils/hooks.py:33
+│  │  │  │  │  │  │  └─ 0.010 isinstance  <built-in>
+│  │  │  │  │  │  └─ 0.068 [self]  torch/nn/modules/module.py
+│  │  │  │  │  ├─ 0.011 get_hook_function  pxp/attribute.py:253
+│  │  │  │  │  └─ 0.005 list.append  <built-in>
+│  │  │  │  ├─ 0.169 ZennitLatentRelevanceAttributor.clear_latent_info  pxp/attribute.py:271
+│  │  │  │  ├─ 0.130 one_hot  pxp/utils.py:22
+│  │  │  │  │  ├─ 0.069 _VariableFunctionsClass.eye  <built-in>
+│  │  │  │  │  ├─ 0.037 [self]  pxp/utils.py
+│  │  │  │  │  ├─ 0.021 Tensor.to  <built-in>
+│  │  │  │  │  └─ 0.003 print  <built-in>
+│  │  │  │  ├─ 0.083 Tensor.repeat  <built-in>
+│  │  │  │  ├─ 0.071 [self]  pxp/attribute.py
+│  │  │  │  ├─ 0.027 _VariableFunctionsClass.argmax  <built-in>
+│  │  │  │  ├─ 0.024 print  <built-in>
+│  │  │  │  ├─ 0.016 Tensor.unsqueeze  <built-in>
+│  │  │  │  ├─ 0.015 Tensor.long  <built-in>
+│  │  │  │  ├─ 0.007 Sequential.__getitem__  torch/nn/modules/container.py:138
+│  │  │  │  │  ├─ 0.005 Sequential._get_item_by_idx  torch/nn/modules/container.py:129
+│  │  │  │  │  │  ├─ 0.004 [self]  torch/nn/modules/container.py
+│  │  │  │  │  │  └─ 0.001 len  <built-in>
+│  │  │  │  │  └─ 0.002 [self]  torch/nn/modules/container.py
+│  │  │  │  └─ 0.003 ResNet50.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  ├─ 25.259 ZennitLatentRelevanceAttributor.parse_latent_relevances  pxp/attribute.py:176
+│  │  │  │  ├─ 15.127 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  ├─ 13.666 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  ├─ 12.045 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  ├─ 10.136 Bottleneck.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  ├─ 5.488 Conv2d.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  │  ├─ 4.084 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  │  ├─ 0.577 set.add  <built-in>
+│  │  │  │  │  │  │  │  │  ├─ 0.530 dict.items  <built-in>
+│  │  │  │  │  │  │  │  │  └─ 0.297 Conv2d.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │  │  │  │  │  │     ├─ 0.234 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  │     ├─ 0.033 set.add  <built-in>
+│  │  │  │  │  │  │  │  │     └─ 0.030 dict.items  <built-in>
+│  │  │  │  │  │  │  │  ├─ 4.524 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  │  ├─ 0.066 dict.items  <built-in>
+│  │  │  │  │  │  │  │  └─ 0.057 set.add  <built-in>
+│  │  │  │  │  │  │  ├─ 1.839 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  │  ├─ 0.037 set.add  <built-in>
+│  │  │  │  │  │  │  └─ 0.033 dict.items  <built-in>
+│  │  │  │  │  │  ├─ 1.601 [self]  torch/nn/modules/module.py
+│  │  │  │  │  │  ├─ 0.015 set.add  <built-in>
+│  │  │  │  │  │  └─ 0.006 dict.items  <built-in>
+│  │  │  │  │  ├─ 1.453 [self]  torch/nn/modules/module.py
+│  │  │  │  │  ├─ 0.005 dict.items  <built-in>
+│  │  │  │  │  └─ 0.002 set.add  <built-in>
+│  │  │  │  ├─ 4.095 Tensor.cpu  <built-in>
+│  │  │  │  ├─ 3.638 Tensor.sum  <built-in>
+│  │  │  │  ├─ 1.952 [self]  pxp/attribute.py
+│  │  │  │  ├─ 0.433 Tensor.detach  <built-in>
+│  │  │  │  └─ 0.014 isinstance  <built-in>
+│  │  │  ├─ 0.005 [self]  pxp/attribute.py
+│  │  │  ├─ 0.005 enable_grad.__enter__  torch/autograd/grad_mode.py:135
+│  │  │  │  ├─ 0.003 [self]  torch/autograd/grad_mode.py
+│  │  │  │  └─ 0.002 _set_grad_enabled  <built-in>
+│  │  │  ├─ 0.002 enable_grad.__new__  torch/utils/_contextlib.py:154
+│  │  │  └─ 0.001 isinstance  <built-in>
+│  │  ├─ 0.658 <genexpr>  utils/clients.py:434
+│  │  │  ├─ 0.589 _MultiProcessingDataLoaderIter.__next__  torch/utils/data/dataloader.py:696
+│  │  │  │  ├─ 0.424 _MultiProcessingDataLoaderIter._next_data  torch/utils/data/dataloader.py:1416
+│  │  │  │  │  ├─ 0.337 _MultiProcessingDataLoaderIter._shutdown_workers  torch/utils/data/dataloader.py:1522
+│  │  │  │  │  │  ├─ 0.336 Process.join  multiprocessing/process.py:142
+│  │  │  │  │  │  │  └─ 0.336 Popen.wait  multiprocessing/popen_fork.py:36
+│  │  │  │  │  │  │     └─ 0.336 wait  multiprocessing/connection.py:917
+│  │  │  │  │  │  │        └─ 0.336 PollSelector.select  selectors.py:403
+│  │  │  │  │  │  │           ├─ 0.335 poll.poll  <built-in>
+│  │  │  │  │  │  │           └─ 0.001 [self]  selectors.py
+│  │  │  │  │  │  └─ 0.001 Queue.put  multiprocessing/queues.py:86
+│  │  │  │  │  │     └─ 0.001 Queue._start_thread  multiprocessing/queues.py:161
+│  │  │  │  │  │        └─ 0.001 Thread.start  threading.py:916
+│  │  │  │  │  │           └─ 0.001 Event.wait  threading.py:589
+│  │  │  │  │  │              └─ 0.001 Condition.wait  threading.py:288
+│  │  │  │  │  │                 └─ 0.001 lock.acquire  <built-in>
+│  │  │  │  │  ├─ 0.045 _MultiProcessingDataLoaderIter._get_data  torch/utils/data/dataloader.py:1381
+│  │  │  │  │  │  ├─ 0.028 _MultiProcessingDataLoaderIter._try_get_data  torch/utils/data/dataloader.py:1230
+│  │  │  │  │  │  │  ├─ 0.022 Queue.get  queue.py:154
+│  │  │  │  │  │  │  │  ├─ 0.013 [self]  queue.py
+│  │  │  │  │  │  │  │  ├─ 0.004 Condition.notify  threading.py:359
+│  │  │  │  │  │  │  │  │  ├─ 0.003 [self]  threading.py
+│  │  │  │  │  │  │  │  │  └─ 0.001 Condition._is_owned  threading.py:279
+│  │  │  │  │  │  │  │  ├─ 0.002 Condition.__exit__  threading.py:267
+│  │  │  │  │  │  │  │  ├─ 0.001 Condition.__enter__  threading.py:264
+│  │  │  │  │  │  │  │  │  └─ 0.001 lock.__enter__  <built-in>
+│  │  │  │  │  │  │  │  ├─ 0.001 Queue._qsize  queue.py:209
+│  │  │  │  │  │  │  │  │  └─ 0.001 len  <built-in>
+│  │  │  │  │  │  │  │  └─ 0.001 Queue._get  queue.py:217
+│  │  │  │  │  │  │  │     └─ 0.001 deque.popleft  <built-in>
+│  │  │  │  │  │  │  └─ 0.006 [self]  torch/utils/data/dataloader.py
+│  │  │  │  │  │  ├─ 0.009 Thread.is_alive  threading.py:1169
+│  │  │  │  │  │  │  ├─ 0.005 Thread._wait_for_tstate_lock  threading.py:1102
+│  │  │  │  │  │  │  │  ├─ 0.003 [self]  threading.py
+│  │  │  │  │  │  │  │  └─ 0.002 lock.acquire  <built-in>
+│  │  │  │  │  │  │  └─ 0.004 [self]  threading.py
+│  │  │  │  │  │  └─ 0.008 [self]  torch/utils/data/dataloader.py
+│  │  │  │  │  ├─ 0.031 _MultiProcessingDataLoaderIter._process_data  torch/utils/data/dataloader.py:1487
+│  │  │  │  │  │  ├─ 0.028 _MultiProcessingDataLoaderIter._try_put_index  torch/utils/data/dataloader.py:1467
+│  │  │  │  │  │  │  ├─ 0.014 Queue.put  multiprocessing/queues.py:86
+│  │  │  │  │  │  │  │  ├─ 0.008 Condition.notify  threading.py:359
+│  │  │  │  │  │  │  │  │  ├─ 0.006 lock.release  <built-in>
+│  │  │  │  │  │  │  │  │  └─ 0.002 [self]  threading.py
+│  │  │  │  │  │  │  │  ├─ 0.002 [self]  multiprocessing/queues.py
+│  │  │  │  │  │  │  │  ├─ 0.001 SemLock.acquire  <built-in>
+│  │  │  │  │  │  │  │  ├─ 0.001 deque.append  <built-in>
+│  │  │  │  │  │  │  │  ├─ 0.001 Condition.__enter__  threading.py:264
+│  │  │  │  │  │  │  │  └─ 0.001 Condition.__exit__  threading.py:267
+│  │  │  │  │  │  │  ├─ 0.008 [self]  torch/utils/data/dataloader.py
+│  │  │  │  │  │  │  └─ 0.006 _MultiProcessingDataLoaderIter._next_index  torch/utils/data/dataloader.py:690
+│  │  │  │  │  │  │     └─ 0.006 BatchSampler.__iter__  torch/utils/data/sampler.py:334
+│  │  │  │  │  │  │        ├─ 0.005 RandomSampler.__iter__  torch/utils/data/sampler.py:175
+│  │  │  │  │  │  │        │  ├─ 0.004 [self]  torch/utils/data/sampler.py
+│  │  │  │  │  │  │        │  └─ 0.001 _VariableFunctionsClass.randperm  <built-in>
+│  │  │  │  │  │  │        └─ 0.001 [self]  torch/utils/data/sampler.py
+│  │  │  │  │  │  └─ 0.003 [self]  torch/utils/data/dataloader.py
+│  │  │  │  │  └─ 0.011 [self]  torch/utils/data/dataloader.py
+│  │  │  │  ├─ 0.078 record_function.__exit__  torch/autograd/profiler.py:738
+│  │  │  │  │  ├─ 0.067 TorchBindOpOverload.__call__  torch/_ops.py:939
+│  │  │  │  │  │  ├─ 0.035 _must_dispatch_in_python  torch/_ops.py:993
+│  │  │  │  │  │  │  ├─ 0.031 tree_any  torch/utils/_pytree.py:1197
+│  │  │  │  │  │  │  │  ├─ 0.027 tree_iter  torch/utils/_pytree.py:890
+│  │  │  │  │  │  │  │  │  ├─ 0.012 tree_iter  torch/utils/_pytree.py:890
+│  │  │  │  │  │  │  │  │  │  ├─ 0.005 _dict_flatten  torch/utils/_pytree.py:439
+│  │  │  │  │  │  │  │  │  │  │  ├─ 0.003 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  │  │  ├─ 0.001 dict.values  <built-in>
+│  │  │  │  │  │  │  │  │  │  │  └─ 0.001 dict.keys  <built-in>
+│  │  │  │  │  │  │  │  │  │  ├─ 0.004 _is_leaf  torch/utils/_pytree.py:672
+│  │  │  │  │  │  │  │  │  │  │  ├─ 0.003 _get_node_type  torch/utils/_pytree.py:665
+│  │  │  │  │  │  │  │  │  │  │  │  └─ 0.003 _is_namedtuple_instance  torch/utils/_pytree.py:654
+│  │  │  │  │  │  │  │  │  │  │  │     ├─ 0.002 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  │  │  │     └─ 0.001 len  <built-in>
+│  │  │  │  │  │  │  │  │  │  │  └─ 0.001 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  │  ├─ 0.002 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  │  └─ 0.001 tree_iter  torch/utils/_pytree.py:890
+│  │  │  │  │  │  │  │  │  ├─ 0.010 _is_leaf  torch/utils/_pytree.py:672
+│  │  │  │  │  │  │  │  │  │  ├─ 0.009 _get_node_type  torch/utils/_pytree.py:665
+│  │  │  │  │  │  │  │  │  │  │  ├─ 0.005 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  │  │  └─ 0.004 _is_namedtuple_instance  torch/utils/_pytree.py:654
+│  │  │  │  │  │  │  │  │  │  └─ 0.001 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  ├─ 0.003 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  │  │  └─ 0.002 _tuple_flatten  torch/utils/_pytree.py:411
+│  │  │  │  │  │  │  │  ├─ 0.002 <lambda>  torch/_ops.py:995
+│  │  │  │  │  │  │  │  └─ 0.002 [self]  torch/utils/_pytree.py
+│  │  │  │  │  │  │  └─ 0.004 [self]  torch/_ops.py
+│  │  │  │  │  │  ├─ 0.031 PyCapsule.  <built-in>
+│  │  │  │  │  │  └─ 0.001 [self]  torch/_ops.py
+│  │  │  │  │  ├─ 0.010 [self]  torch/autograd/profiler.py
+│  │  │  │  │  └─ 0.001 DisableTorchFunctionSubclass.__exit__  <built-in>
+│  │  │  │  ├─ 0.066 record_function.__enter__  torch/autograd/profiler.py:732
+│  │  │  │  │  ├─ 0.057 OpOverloadPacket.__call__  torch/_ops.py:1105
+│  │  │  │  │  │  ├─ 0.053 PyCapsule._record_function_enter_new  <built-in>
+│  │  │  │  │  │  └─ 0.004 [self]  torch/_ops.py
+│  │  │  │  │  └─ 0.009 [self]  torch/autograd/profiler.py
+│  │  │  │  ├─ 0.013 [self]  torch/utils/data/dataloader.py
+│  │  │  │  └─ 0.007 record_function.__init__  torch/autograd/profiler.py:721
+│  │  │  │     ├─ 0.004 [self]  torch/autograd/profiler.py
+│  │  │  │     └─ 0.003 inner  typing.py:306
+│  │  │  ├─ 0.043 Tensor.float  <built-in>
+│  │  │  └─ 0.026 [self]  utils/clients.py
+│  │  ├─ 0.274 [self]  pxp/attribute.py
+│  │  ├─ 0.253 _VariableFunctionsClass.abs  <built-in>
+│  │  ├─ 0.197 Tensor.sum  <built-in>
+│  │  ├─ 0.112 NameLayerMapComposite.register  zennit/core.py:644
+│  │  │  ├─ 0.107 ResNetCanonizer.apply  zennit/canonizers.py:314
+│  │  │  │  ├─ 0.106 SequentialMergeBatchNorm.apply  zennit/canonizers.py:165
+│  │  │  │  │  ├─ 0.104 SequentialMergeBatchNorm.register  zennit/canonizers.py:77
+│  │  │  │  │  │  ├─ 0.102 merge_batch_norm  zennit/canonizers.py:113
+│  │  │  │  │  │  │  ├─ 0.058 [self]  zennit/canonizers.py
+│  │  │  │  │  │  │  ├─ 0.032 Conv2d.__setattr__  torch/nn/modules/module.py:1935
+│  │  │  │  │  │  │  ├─ 0.009 _VariableFunctionsClass.ones_like  <built-in>
+│  │  │  │  │  │  │  ├─ 0.002 _VariableFunctionsClass.zeros_like  <built-in>
+│  │  │  │  │  │  │  ├─ 0.001 BatchNorm2d.__getattr__  torch/nn/modules/module.py:1918
+│  │  │  │  │  │  │  └─ 0.001 ConvolutionTranspose.__instancecheck__  zennit/types.py:24
+│  │  │  │  │  │  │     └─ 0.001 ConvolutionTranspose.__subclasscheck__  zennit/types.py:28
+│  │  │  │  │  │  └─ 0.002 [self]  zennit/canonizers.py
+│  │  │  │  │  ├─ 0.001 collect_leaves  zennit/core.py:335
+│  │  │  │  │  │  └─ 0.001 collect_leaves  zennit/core.py:335
+│  │  │  │  │  │     └─ 0.001 collect_leaves  zennit/core.py:335
+│  │  │  │  │  │        └─ 0.001 collect_leaves  zennit/core.py:335
+│  │  │  │  │  └─ 0.001 Linear.__instancecheck__  zennit/types.py:24
+│  │  │  │  │     └─ 0.001 Linear.__subclasscheck__  zennit/types.py:28
+│  │  │  │  └─ 0.001 ResNetBottleneckCanonizer.apply  zennit/canonizers.py:247
+│  │  │  │     └─ 0.001 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │        └─ 0.001 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │           └─ 0.001 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │              └─ 0.001 Bottleneck.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │                 └─ 0.001 BatchNorm2d.named_modules  torch/nn/modules/module.py:2778
+│  │  │  │                    └─ 0.001 dict.items  <built-in>
+│  │  │  ├─ 0.003 Pass.register  zennit/core.py:451
+│  │  │  │  ├─ 0.002 ReLU.register_forward_pre_hook  torch/nn/modules/module.py:1577
+│  │  │  │  │  ├─ 0.001 [self]  torch/nn/modules/module.py
+│  │  │  │  │  └─ 0.001 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  │  └─ 0.001 BatchNorm2d.register_forward_hook  torch/nn/modules/module.py:1643
+│  │  │  │     └─ 0.001 RemovableHandle.__init__  torch/utils/hooks.py:24
+│  │  │  └─ 0.002 NameLayerMapComposite.mapping  zennit/composites.py:167
+│  │  │     └─ 0.002 <listcomp>  zennit/composites.py:190
+│  │  │        └─ 0.002 NameMapComposite.mapping  zennit/composites.py:124
+│  │  │           └─ 0.002 <genexpr>  zennit/composites.py:142
+│  │  ├─ 0.067 Tensor.detach  <built-in>
+│  │  ├─ 0.045 Tensor.to  <built-in>
+│  │  ├─ 0.018 Tensor.cpu  <built-in>
+│  │  ├─ 0.004 OrderedDict.keys  <built-in>
+│  │  ├─ 0.003 ResNet50.eval  torch/nn/modules/module.py:2849
+│  │  │  └─ 0.003 ResNet50.train  torch/nn/modules/module.py:2827
+│  │  │     ├─ 0.002 Sequential.train  torch/nn/modules/module.py:2827
+│  │  │     │  ├─ 0.001 Sequential.children  torch/nn/modules/module.py:2722
+│  │  │     │  │  └─ 0.001 Sequential.named_children  torch/nn/modules/module.py:2731
+│  │  │     │  └─ 0.001 Sequential.train  torch/nn/modules/module.py:2827
+│  │  │     │     └─ 0.001 Sequential.__setattr__  torch/nn/modules/module.py:1935
+│  │  │     │        └─ 0.001 dict.get  <built-in>
+│  │  │     └─ 0.001 ResNet50.children  torch/nn/modules/module.py:2722
+│  │  ├─ 0.001 Finalize.__call__  multiprocessing/util.py:205
+│  │  │  └─ 0.001 close_fds  multiprocessing/util.py:461
+│  │  │     └─ 0.001 close  <built-in>
+│  │  └─ 0.001 get_layer_names  pxp/attribute.py:556
+│  │     └─ 0.001 get_layer_names  pxp/utils.py:62
+│  │        └─ 0.001 ResNet50.named_modules  torch/nn/modules/module.py:2778
+│  │           └─ 0.001 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │              └─ 0.001 Sequential.named_modules  torch/nn/modules/module.py:2778
+│  │                 └─ 0.001 Bottleneck.named_modules  torch/nn/modules/module.py:2778
+│  ├─ 5.143 GlobalClient.get_country_dataloader  utils/clients.py:383
+│  │  ├─ 3.378 BENv2DataSet.__init__  utils/BENv2_dataset.py:88
+│  │  │  ├─ 1.805 BENv2LDMBReader.__init__  utils/BENv2_utils.py:559
+│  │  │  │  ├─ 1.128 read_parquet  pandas/io/parquet.py:498
+│  │  │  │  │  └─ 1.128 PyArrowImpl.read  pandas/io/parquet.py:239
+│  │  │  │  │     ├─ 1.001 table_to_dataframe  pyarrow/pandas_compat.py:769
+│  │  │  │  │     ├─ 0.126 read_table  pyarrow/parquet/core.py:1776
+│  │  │  │  │     │  ├─ 0.125 ParquetDataset.read  pyarrow/parquet/core.py:1420
+│  │  │  │  │     │  └─ 0.001 ParquetDataset.__init__  pyarrow/parquet/core.py:1276
+│  │  │  │  │     └─ 0.001 _get_path_or_handle  pandas/io/parquet.py:85
+│  │  │  │  │        └─ 0.001 stringify_path  pandas/io/common.py:248
+│  │  │  │  ├─ 0.320 <dictcomp>  utils/BENv2_utils.py:585
+│  │  │  │  ├─ 0.205 <dictcomp>  utils/BENv2_utils.py:592
+│  │  │  │  ├─ 0.085 [self]  utils/BENv2_utils.py
+│  │  │  │  └─ 0.066 concat  pandas/core/reshape/concat.py:157
+│  │  │  │     └─ 0.066 _Concatenator.get_result  pandas/core/reshape/concat.py:622
+│  │  │  │        ├─ 0.062 concatenate_managers  pandas/core/internals/concat.py:94
+│  │  │  │        └─ 0.003 _Concatenator.new_axes  pandas/core/reshape/concat.py:699
+│  │  │  │           └─ 0.003 <listcomp>  pandas/core/reshape/concat.py:702
+│  │  │  │              ├─ 0.002 _Concatenator._get_concat_axis  pandas/core/reshape/concat.py:717
+│  │  │  │              │  └─ 0.002 _concat_indexes  pandas/core/reshape/concat.py:777
+│  │  │  │              │     └─ 0.002 RangeIndex.append  pandas/core/indexes/base.py:5455
+│  │  │  │              │        └─ 0.002 RangeIndex._concat  pandas/core/indexes/range.py:938
+│  │  │  │              └─ 0.001 _Concatenator._get_comb_axis  pandas/core/reshape/concat.py:707
+│  │  │  │                 └─ 0.001 get_objs_combined_axis  pandas/core/indexes/api.py:72
+│  │  │  │                    └─ 0.001 _get_combined_index  pandas/core/indexes/api.py:120
+│  │  │  │                       └─ 0.001 Index.copy  pandas/core/indexes/base.py:1250
+│  │  │  │                          └─ 0.001 Index._validate_names  pandas/core/indexes/base.py:1697
+│  │  │  ├─ 1.067 read_parquet  pandas/io/parquet.py:498
+│  │  │  │  └─ 1.067 PyArrowImpl.read  pandas/io/parquet.py:239
+│  │  │  │     ├─ 0.979 table_to_dataframe  pyarrow/pandas_compat.py:769
+│  │  │  │     └─ 0.087 read_table  pyarrow/parquet/core.py:1776
+│  │  │  │        └─ 0.087 ParquetDataset.read  pyarrow/parquet/core.py:1420
+│  │  │  ├─ 0.292 PreFilter.__call__  utils/clients.py:112
+│  │  │  ├─ 0.100 [self]  utils/BENv2_dataset.py
+│  │  │  ├─ 0.084 DataFrame.__getitem__  pandas/core/frame.py:4062
+│  │  │  │  └─ 0.084 DataFrame._getitem_bool_array  pandas/core/frame.py:4130
+│  │  │  │     ├─ 0.066 DataFrame.copy  pandas/core/generic.py:6662
+│  │  │  │     │  └─ 0.066 BlockManager.copy  pandas/core/internals/managers.py:557
+│  │  │  │     │     └─ 0.066 BlockManager.apply  pandas/core/internals/managers.py:317
+│  │  │  │     │        └─ 0.066 NumpyBlock.copy  pandas/core/internals/blocks.py:790
+│  │  │  │     │           └─ 0.066 ndarray.copy  <built-in>
+│  │  │  │     └─ 0.019 DataFrame._take_with_is_copy  pandas/core/generic.py:4142
+│  │  │  │        └─ 0.019 DataFrame.take  pandas/core/generic.py:4027
+│  │  │  │           └─ 0.019 BlockManager.take  pandas/core/internals/managers.py:869
+│  │  │  │              ├─ 0.018 BlockManager.reindex_indexer  pandas/core/internals/managers.py:623
+│  │  │  │              │  └─ 0.018 <listcomp>  pandas/core/internals/managers.py:687
+│  │  │  │              │     └─ 0.018 NumpyBlock.take_nd  pandas/core/internals/blocks.py:1287
+│  │  │  │              │        └─ 0.018 take_nd  pandas/core/array_algos/take.py:59
+│  │  │  │              │           └─ 0.018 _take_nd_ndarray  pandas/core/array_algos/take.py:120
+│  │  │  │              │              ├─ 0.013 [self]  pandas/core/array_algos/take.py
+│  │  │  │              │              └─ 0.005 empty  <built-in>
+│  │  │  │              └─ 0.001 maybe_convert_indices  pandas/core/indexers/utils.py:239
+│  │  │  │                 └─ 0.001 _any  numpy/_core/_methods.py:59
+│  │  │  │                    └─ 0.001 ufunc.reduce  <built-in>
+│  │  │  ├─ 0.026 Series.new_method  pandas/core/ops/common.py:62
+│  │  │  │  └─ 0.026 Series.__eq__  pandas/core/arraylike.py:38
+│  │  │  │     └─ 0.026 Series._cmp_method  pandas/core/series.py:6110
+│  │  │  │        └─ 0.026 comparison_op  pandas/core/ops/array_ops.py:288
+│  │  │  │           └─ 0.026 comp_method_OBJECT_ARRAY  pandas/core/ops/array_ops.py:113
+│  │  │  ├─ 0.004 Series.tolist  pandas/core/base.py:798
+│  │  │  │  └─ 0.004 ndarray.tolist  <built-in>
+│  │  │  └─ 0.001 Series.__invert__  pandas/core/generic.py:1565
+│  │  │     └─ 0.001 Series.__finalize__  pandas/core/generic.py:6236
+│  │  ├─ 1.113 read_parquet  pandas/io/parquet.py:498
+│  │  │  └─ 1.113 PyArrowImpl.read  pandas/io/parquet.py:239
+│  │  │     ├─ 1.020 table_to_dataframe  pyarrow/pandas_compat.py:769
+│  │  │     │  ├─ 1.019 [self]  pyarrow/pandas_compat.py
+│  │  │     │  └─ 0.001 _deserialize_column_index  pyarrow/pandas_compat.py:900
+│  │  │     │     └─ 0.001 Index.__new__  pandas/core/indexes/base.py:475
+│  │  │     │        └─ 0.001 sanitize_array  pandas/core/construction.py:517
+│  │  │     │           └─ 0.001 maybe_infer_to_datetimelike  pandas/core/dtypes/cast.py:1156
+│  │  │     │              └─ 0.001 full  numpy/_core/numeric.py:303
+│  │  │     └─ 0.093 read_table  pyarrow/parquet/core.py:1776
+│  │  │        └─ 0.093 ParquetDataset.read  pyarrow/parquet/core.py:1420
+│  │  ├─ 0.617 PreFilter.__init__  utils/clients.py:65
+│  │  │  ├─ 0.222 <listcomp>  utils/clients.py:106
+│  │  │  │  ├─ 0.122 filter_fn  utils/clients.py:90
+│  │  │  │  └─ 0.100 [self]  utils/clients.py
+│  │  │  ├─ 0.182 StringMethods.__getitem__  pandas/core/strings/accessor.py:248
+│  │  │  │  └─ 0.182 NumpyExtensionArray._str_getitem  pandas/core/strings/base.py:37
+│  │  │  │     └─ 0.182 NumpyExtensionArray._str_slice  pandas/core/strings/object_array.py:304
+│  │  │  │        └─ 0.182 NumpyExtensionArray._str_map  pandas/core/strings/object_array.py:46
+│  │  │  │           ├─ 0.078 <lambda>  pandas/core/strings/object_array.py:306
+│  │  │  │           ├─ 0.076 [self]  pandas/core/strings/object_array.py
+│  │  │  │           └─ 0.027 isna  pandas/core/dtypes/missing.py:101
+│  │  │  │              └─ 0.027 _isna  pandas/core/dtypes/missing.py:184
+│  │  │  │                 └─ 0.027 _isna_array  pandas/core/dtypes/missing.py:261
+│  │  │  │                    └─ 0.027 _isna_string_dtype  pandas/core/dtypes/missing.py:305
+│  │  │  ├─ 0.128 DataFrame.values  pandas/core/frame.py:12590
+│  │  │  │  └─ 0.128 BlockManager.as_array  pandas/core/internals/managers.py:1633
+│  │  │  │     └─ 0.128 BlockManager._interleave  pandas/core/internals/managers.py:1707
+│  │  │  │        ├─ 0.069 NumpyBlock.get_values  pandas/core/internals/blocks.py:2586
+│  │  │  │        │  └─ 0.069 ndarray.astype  <built-in>
+│  │  │  │        ├─ 0.044 [self]  pandas/core/internals/managers.py
+│  │  │  │        ├─ 0.013 empty  <built-in>
+│  │  │  │        └─ 0.003 ExtensionBlock.get_values  pandas/core/internals/blocks.py:2244
+│  │  │  │           └─ 0.003 Categorical.astype  pandas/core/arrays/categorical.py:551
+│  │  │  │              └─ 0.003 take_nd  pandas/core/array_algos/take.py:59
+│  │  │  │                 └─ 0.003 _take_nd_ndarray  pandas/core/array_algos/take.py:120
+│  │  │  │                    ├─ 0.001 [self]  pandas/core/array_algos/take.py
+│  │  │  │                    └─ 0.001 empty  <built-in>
+│  │  │  ├─ 0.033 Series.astype  pandas/core/generic.py:6463
+│  │  │  │  └─ 0.033 SingleBlockManager.astype  pandas/core/internals/managers.py:421
+│  │  │  │     └─ 0.033 SingleBlockManager.apply  pandas/core/internals/managers.py:317
+│  │  │  │        └─ 0.033 NumpyBlock.astype  pandas/core/internals/blocks.py:723
+│  │  │  │           └─ 0.033 astype_array_safe  pandas/core/dtypes/astype.py:191
+│  │  │  │              └─ 0.033 astype_array  pandas/core/dtypes/astype.py:157
+│  │  │  │                 └─ 0.033 _astype_nansafe  pandas/core/dtypes/astype.py:56
+│  │  │  │                    └─ 0.033 ndarray.astype  <built-in>
+│  │  │  ├─ 0.029 [self]  utils/clients.py
+│  │  │  ├─ 0.013 CachedAccessor.__get__  pandas/core/accessor.py:220
+│  │  │  │  └─ 0.013 StringMethods.__init__  pandas/core/strings/accessor.py:188
+│  │  │  │     ├─ 0.012 _validate  pandas/core/strings/accessor.py:207
+│  │  │  │     └─ 0.001 [self]  pandas/core/strings/accessor.py
+│  │  │  ├─ 0.006 cut  pandas/core/reshape/tile.py:52
+│  │  │  │  └─ 0.006 _bins_to_cuts  pandas/core/reshape/tile.py:413
+│  │  │  │     ├─ 0.004 Index.searchsorted  pandas/core/base.py:1333
+│  │  │  │     │  └─ 0.004 searchsorted  pandas/core/algorithms.py:1248
+│  │  │  │     │     ├─ 0.002 ndarray.searchsorted  <built-in>
+│  │  │  │     │     ├─ 0.001 [self]  pandas/core/algorithms.py
+│  │  │  │     │     └─ 0.001 array  pandas/core/construction.py:74
+│  │  │  │     │        └─ 0.001 NumpyExtensionArray._from_sequence  pandas/core/arrays/numpy_.py:115
+│  │  │  │     │           └─ 0.001 ndarray.copy  <built-in>
+│  │  │  │     ├─ 0.001 [self]  pandas/core/reshape/tile.py
+│  │  │  │     └─ 0.001 Categorical.__init__  pandas/core/arrays/categorical.py:371
+│  │  │  │        └─ 0.001 CategoricalDtype._from_values_or_dtype  pandas/core/dtypes/dtypes.py:243
+│  │  │  │           └─ 0.001 CategoricalDtype.__init__  pandas/core/dtypes/dtypes.py:220
+│  │  │  │              └─ 0.001 CategoricalDtype._finalize  pandas/core/dtypes/dtypes.py:373
+│  │  │  │                 └─ 0.001 validate_categories  pandas/core/dtypes/dtypes.py:550
+│  │  │  │                    └─ 0.001 Index.is_unique  pandas/core/indexes/base.py:2313
+│  │  │  ├─ 0.002 DataFrame.__setitem__  pandas/core/frame.py:4271
+│  │  │  │  └─ 0.002 DataFrame._set_item  pandas/core/frame.py:4514
+│  │  │  │     ├─ 0.001 DataFrame._set_item_mgr  pandas/core/frame.py:4481
+│  │  │  │     │  └─ 0.001 BlockManager.insert  pandas/core/internals/managers.py:1347
+│  │  │  │     │     └─ 0.001 Index.insert  pandas/core/indexes/base.py:6956
+│  │  │  │     │        └─ 0.001 Index._with_infer  pandas/core/indexes/base.py:674
+│  │  │  │     │           └─ 0.001 Index.__new__  pandas/core/indexes/base.py:475
+│  │  │  │     │              └─ 0.001 sanitize_array  pandas/core/construction.py:517
+│  │  │  │     │                 └─ 0.001 maybe_infer_to_datetimelike  pandas/core/dtypes/cast.py:1156
+│  │  │  │     │                    └─ 0.001 full  numpy/_core/numeric.py:303
+│  │  │  │     │                       └─ 0.001 empty  <built-in>
+│  │  │  │     └─ 0.001 DataFrame._sanitize_column  pandas/core/frame.py:5242
+│  │  │  └─ 0.001 _LocIndexer.__setitem__  pandas/core/indexing.py:882
+│  │  │     └─ 0.001 _iLocIndexer._setitem_with_indexer  pandas/core/indexing.py:1785
+│  │  │        └─ 0.001 _iLocIndexer._maybe_mask_setitem_value  pandas/core/indexing.py:782
+│  │  └─ 0.035 [self]  utils/clients.py
+│  ├─ 0.480 DataLoader.__iter__  torch/utils/data/dataloader.py:471
+│  │  └─ 0.480 DataLoader._get_iterator  torch/utils/data/dataloader.py:410
+│  │     └─ 0.480 _MultiProcessingDataLoaderIter.__init__  torch/utils/data/dataloader.py:1073
+│  │        ├─ 0.468 Process.start  multiprocessing/process.py:110
+│  │        │  ├─ 0.467 _Popen  multiprocessing/context.py:222
+│  │        │  │  └─ 0.467 _Popen  multiprocessing/context.py:278
+│  │        │  │     └─ 0.467 Popen.__init__  multiprocessing/popen_fork.py:15
+│  │        │  │        └─ 0.467 Popen._launch  multiprocessing/popen_fork.py:62
+│  │        │  └─ 0.001 getpid  <built-in>
+│  │        ├─ 0.004 _MultiProcessingDataLoaderIter._reset  torch/utils/data/dataloader.py:1193
+│  │        │  └─ 0.004 _MultiProcessingDataLoaderIter._try_put_index  torch/utils/data/dataloader.py:1467
+│  │        │     ├─ 0.002 Queue.put  multiprocessing/queues.py:86
+│  │        │     │  └─ 0.002 Queue._start_thread  multiprocessing/queues.py:161
+│  │        │     │     └─ 0.002 Thread.start  threading.py:916
+│  │        │     │        └─ 0.002 Event.wait  threading.py:589
+│  │        │     │           └─ 0.002 Condition.wait  threading.py:288
+│  │        │     │              └─ 0.002 lock.acquire  <built-in>
+│  │        │     └─ 0.002 _MultiProcessingDataLoaderIter._next_index  torch/utils/data/dataloader.py:690
+│  │        │        └─ 0.002 BatchSampler.__iter__  torch/utils/data/sampler.py:334
+│  │        │           └─ 0.002 RandomSampler.__iter__  torch/utils/data/sampler.py:175
+│  │        │              └─ 0.002 Tensor.tolist  <built-in>
+│  │        ├─ 0.003 DefaultContext.Queue  multiprocessing/context.py:100
+│  │        │  └─ 0.003 Queue.__init__  multiprocessing/queues.py:37
+│  │        │     ├─ 0.002 [self]  multiprocessing/queues.py
+│  │        │     └─ 0.001 ForkContext.Lock  multiprocessing/context.py:65
+│  │        │        └─ 0.001 Lock.__init__  multiprocessing/synchronize.py:161
+│  │        │           └─ 0.001 Lock.__init__  multiprocessing/synchronize.py:50
+│  │        ├─ 0.002 Thread.start  threading.py:916
+│  │        │  └─ 0.002 Event.wait  threading.py:589
+│  │        │     └─ 0.002 Condition.wait  threading.py:288
+│  │        │        └─ 0.002 lock.acquire  <built-in>
+│  │        ├─ 0.001 Process.__init__  multiprocessing/process.py:80
+│  │        ├─ 0.001 Event.__init__  threading.py:545
+│  │        │  └─ 0.001 Condition.__init__  threading.py:236
+│  │        └─ 0.001 [self]  torch/utils/data/dataloader.py
+│  ├─ 0.137 GlobalPruningOperations.generate_global_pruning_mask  pxp/prune.py:236
+│  │  ├─ 0.121 Tensor.__format__  torch/_tensor.py:1048
+│  │  │  └─ 0.121 Tensor.__repr__  torch/_tensor.py:517
+│  │  │     └─ 0.121 Tensor._str  torch/_tensor_str.py:705
+│  │  │        ├─ 0.117 _str_intern  torch/_tensor_str.py:398
+│  │  │        │  └─ 0.117 Tensor._tensor_str  torch/_tensor_str.py:310
+│  │  │        │     ├─ 0.091 _Formatter.__init__  torch/_tensor_str.py:130
+│  │  │        │     │  ├─ 0.029 [self]  torch/_tensor_str.py
+│  │  │        │     │  ├─ 0.028 Tensor.__iter__  torch/_tensor.py:1099
+│  │  │        │     │  │  └─ 0.028 Tensor.unbind  <built-in>
+│  │  │        │     │  ├─ 0.021 Tensor.__format__  torch/_tensor.py:1048
+│  │  │        │     │  │  ├─ 0.009 [self]  torch/_tensor.py
+│  │  │        │     │  │  ├─ 0.005 Tensor.item  <built-in>
+│  │  │        │     │  │  ├─ 0.004 float.__format__  <built-in>
+│  │  │        │     │  │  ├─ 0.002 _has_torch_function_unary  <built-in>
+│  │  │        │     │  │  └─ 0.001 Tensor.dim  <built-in>
+│  │  │        │     │  ├─ 0.007 _VariableFunctionsClass.ceil  <built-in>
+│  │  │        │     │  ├─ 0.001 _VariableFunctionsClass.isfinite  <built-in>
+│  │  │        │     │  ├─ 0.001 _VariableFunctionsClass.masked_select  <built-in>
+│  │  │        │     │  ├─ 0.001 tensor_totype  torch/_tensor_str.py:117
+│  │  │        │     │  ├─ 0.001 str.format  <built-in>
+│  │  │        │     │  ├─ 0.001 no_grad.__init__  torch/autograd/grad_mode.py:75
+│  │  │        │     │  └─ 0.001 max  <built-in>
+│  │  │        │     ├─ 0.025 _Formatter._tensor_str_with_formatter  torch/_tensor_str.py:273
+│  │  │        │     │  ├─ 0.024 Tensor._vector_str  torch/_tensor_str.py:228
+│  │  │        │     │  │  └─ 0.024 <listcomp>  torch/_tensor_str.py:261
+│  │  │        │     │  │     ├─ 0.023 _val_formatter  torch/_tensor_str.py:239
+│  │  │        │     │  │     │  ├─ 0.019 _Formatter.format  torch/_tensor_str.py:200
+│  │  │        │     │  │     │  │  ├─ 0.012 [self]  torch/_tensor_str.py
+│  │  │        │     │  │     │  │  ├─ 0.005 str.format  <built-in>
+│  │  │        │     │  │     │  │  └─ 0.002 len  <built-in>
+│  │  │        │     │  │     │  └─ 0.004 [self]  torch/_tensor_str.py
+│  │  │        │     │  │     └─ 0.001 [self]  torch/_tensor_str.py
+│  │  │        │     │  └─ 0.001 [self]  torch/_tensor_str.py
+│  │  │        │     └─ 0.001 [self]  torch/_tensor_str.py
+│  │  │        ├─ 0.002 _GeneratorContextManager.__enter__  contextlib.py:130
+│  │  │        │  ├─ 0.001 _disable_current_modes  torch/utils/_python_dispatch.py:227
+│  │  │        │  │  └─ 0.001 _find_and_load  <frozen importlib._bootstrap>:1022
+│  │  │        │  │     └─ 0.001 _find_and_load_unlocked  <frozen importlib._bootstrap>:987
+│  │  │        │  │        └─ 0.001 _load_unlocked  <frozen importlib._bootstrap>:664
+│  │  │        │  │           └─ 0.001 SourceFileLoader.exec_module  <frozen importlib._bootstrap_external>:877
+│  │  │        │  │              └─ 0.001 _call_with_frames_removed  <frozen importlib._bootstrap>:233
+│  │  │        │  │                 └─ 0.001 <module>  torch/_subclasses/schema_check_mode.py:1
+│  │  │        │  │                    └─ 0.001 namedtuple  collections/__init__.py:328
+│  │  │        │  └─ 0.001 [self]  contextlib.py
+│  │  │        ├─ 0.001 [self]  torch/_tensor_str.py
+│  │  │        └─ 0.001 no_grad.__exit__  torch/autograd/grad_mode.py:84
+│  │  ├─ 0.012 GlobalPruningOperations.generate_local_pruning_mask  pxp/prune.py:87
+│  │  │  ├─ 0.007 Tensor.to  <built-in>
+│  │  │  ├─ 0.004 [self]  pxp/prune.py
+│  │  │  └─ 0.001 _VariableFunctionsClass.ones  <built-in>
+│  │  ├─ 0.002 Tensor.topk  <built-in>
+│  │  ├─ 0.001 print  <built-in>
+│  │  └─ 0.001 [self]  pxp/prune.py
+│  └─ 0.001 [self]  utils/clients.py
+├─ 0.353 GlobalPruningOperations.generate_global_pruning_mask  pxp/prune.py:236
+│  ├─ 0.335 Tensor.__repr__  torch/_tensor.py:517
+│  │  ├─ 0.333 Tensor._str  torch/_tensor_str.py:705
+│  │  │  ├─ 0.324 _str_intern  torch/_tensor_str.py:398
+│  │  │  │  ├─ 0.318 Tensor._tensor_str  torch/_tensor_str.py:310
+│  │  │  │  │  ├─ 0.238 _Formatter.__init__  torch/_tensor_str.py:130
+│  │  │  │  │  │  ├─ 0.111 [self]  torch/_tensor_str.py
+│  │  │  │  │  │  ├─ 0.049 Tensor.__format__  torch/_tensor.py:1048
+│  │  │  │  │  │  │  ├─ 0.048 Tensor.item  <built-in>
+│  │  │  │  │  │  │  └─ 0.001 [self]  torch/_tensor.py
+│  │  │  │  │  │  ├─ 0.026 _VariableFunctionsClass.ceil  <built-in>
+│  │  │  │  │  │  ├─ 0.012 _VariableFunctionsClass.masked_select  <built-in>
+│  │  │  │  │  │  ├─ 0.008 _VariableFunctionsClass.isfinite  <built-in>
+│  │  │  │  │  │  ├─ 0.008 Tensor.__iter__  torch/_tensor.py:1099
+│  │  │  │  │  │  │  ├─ 0.007 Tensor.unbind  <built-in>
+│  │  │  │  │  │  │  └─ 0.001 PyCapsule._get_tracing_state  <built-in>
+│  │  │  │  │  │  ├─ 0.006 Tensor.min  <built-in>
+│  │  │  │  │  │  ├─ 0.004 tensor_totype  torch/_tensor_str.py:117
+│  │  │  │  │  │  │  └─ 0.004 Tensor.to  <built-in>
+│  │  │  │  │  │  ├─ 0.004 Tensor.ne  <built-in>
+│  │  │  │  │  │  ├─ 0.002 Tensor.reshape  <built-in>
+│  │  │  │  │  │  ├─ 0.002 Tensor.abs  <built-in>
+│  │  │  │  │  │  ├─ 0.002 Tensor.max  <built-in>
+│  │  │  │  │  │  ├─ 0.001 no_grad.__exit__  torch/autograd/grad_mode.py:84
+│  │  │  │  │  │  │  └─ 0.001 set_grad_enabled.__init__  torch/autograd/grad_mode.py:184
+│  │  │  │  │  │  └─ 0.001 len  <built-in>
+│  │  │  │  │  ├─ 0.075 _Formatter._tensor_str_with_formatter  torch/_tensor_str.py:273
+│  │  │  │  │  │  └─ 0.075 Tensor._vector_str  torch/_tensor_str.py:228
+│  │  │  │  │  │     ├─ 0.063 <listcomp>  torch/_tensor_str.py:261
+│  │  │  │  │  │     │  ├─ 0.059 _val_formatter  torch/_tensor_str.py:239
+│  │  │  │  │  │     │  │  ├─ 0.050 _Formatter.format  torch/_tensor_str.py:200
+│  │  │  │  │  │     │  │  │  ├─ 0.037 [self]  torch/_tensor_str.py
+│  │  │  │  │  │     │  │  │  ├─ 0.006 len  <built-in>
+│  │  │  │  │  │     │  │  │  ├─ 0.004 isinf  <built-in>
+│  │  │  │  │  │     │  │  │  └─ 0.003 isnan  <built-in>
+│  │  │  │  │  │     │  │  └─ 0.009 [self]  torch/_tensor_str.py
+│  │  │  │  │  │     │  └─ 0.004 [self]  torch/_tensor_str.py
+│  │  │  │  │  │     ├─ 0.010 Tensor.tolist  <built-in>
+│  │  │  │  │  │     └─ 0.002 <listcomp>  torch/_tensor_str.py:266
+│  │  │  │  │  │        ├─ 0.001 str.join  <built-in>
+│  │  │  │  │  │        └─ 0.001 [self]  torch/_tensor_str.py
+│  │  │  │  │  ├─ 0.004 [self]  torch/_tensor_str.py
+│  │  │  │  │  └─ 0.001 Tensor.get_summarized_data  torch/_tensor_str.py:377
+│  │  │  │  ├─ 0.003 [self]  torch/_tensor_str.py
+│  │  │  │  ├─ 0.001 _ParameterMeta.__instancecheck__  torch/nn/parameter.py:10
+│  │  │  │  │  └─ 0.001 isinstance  <built-in>
+│  │  │  │  ├─ 0.001 PyCapsule.is_functorch_wrapped_tensor  <built-in>
+│  │  │  │  └─ 0.001 unpack_dual  torch/autograd/forward_ad.py:143
+│  │  │  │     └─ 0.001 <lambda>  <string>:1
+│  │  │  │        └─ 0.001 tuple.__new__  <built-in>
+│  │  │  ├─ 0.005 _GeneratorContextManager.__enter__  contextlib.py:130
+│  │  │  │  └─ 0.005 _disable_current_modes  torch/utils/_python_dispatch.py:227
+│  │  │  ├─ 0.002 [self]  torch/_tensor_str.py
+│  │  │  ├─ 0.001 no_grad.__new__  torch/utils/_contextlib.py:154
+│  │  │  └─ 0.001 no_grad.__exit__  torch/autograd/grad_mode.py:84
+│  │  │     └─ 0.001 set_grad_enabled.__init__  torch/autograd/grad_mode.py:184
+│  │  └─ 0.002 [self]  torch/_tensor.py
+│  ├─ 0.014 GlobalPruningOperations.generate_local_pruning_mask  pxp/prune.py:87
+│  │  ├─ 0.008 [self]  pxp/prune.py
+│  │  ├─ 0.004 Tensor.to  <built-in>
+│  │  └─ 0.002 _VariableFunctionsClass.ones  <built-in>
+│  ├─ 0.002 Tensor.topk  <built-in>
+│  └─ 0.002 [self]  pxp/prune.py
+├─ 0.223 [self]  utils/clients.py
+└─ 0.001 Profiler.stop  pyinstrument/profiler.py:168
+   └─ 0.001 StackSampler.unsubscribe  pyinstrument/stack_sampler.py:96
+

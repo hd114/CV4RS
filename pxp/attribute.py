@@ -88,19 +88,19 @@ class LatentRelevanceAttributor:
 
         print(f"Input shape before model forward: {inputs.shape}")
         if len(inputs.shape) < 4:
-            print(f"Unexpected input shape for LRP: {inputs.shape}. Adding dummy dimensions.")
+            #print(f"Unexpected input shape for LRP: {inputs.shape}. Adding dummy dimensions.")
             inputs = inputs.unsqueeze(0).unsqueeze(0)
-            print(f"Modified input shape for LRP: {inputs.shape}")
+            #print(f"Modified input shape for LRP: {inputs.shape}")
 
         # Adjust input channels if necessary
         first_layer_channels = model.encoder[0].weight.shape[1]
         if inputs.shape[1] != first_layer_channels:
-            print(f"Adjusting input channels from {inputs.shape[1]} to {first_layer_channels}")
+            #print(f"Adjusting input channels from {inputs.shape[1]} to {first_layer_channels}")
             inputs = inputs.repeat(1, first_layer_channels, 1, 1)
 
         # Adjust batch size to match targets
         if inputs.shape[0] != targets.shape[0]:
-            print(f"Adjusting input batch size from {inputs.shape[0]} to match targets batch size {targets.shape[0]}")
+            #print(f"Adjusting input batch size from {inputs.shape[0]} to match targets batch size {targets.shape[0]}")
             inputs = inputs.repeat(targets.shape[0], 1, 1, 1)
 
         print(f"Input shape before relevance computation: {inputs.shape}")
@@ -129,7 +129,7 @@ class LatentRelevanceAttributor:
             grad_outputs = initial_relevance_function(output, targets).to(device)
 
             # Debugging: Grad-Output-Formen überprüfen
-            print(f"Grad output shape: {grad_outputs.shape}")
+            #print(f"Grad output shape: {grad_outputs.shape}")
             if grad_outputs.shape != output.shape:
                 raise ValueError(
                     f"Mismatch in shape: grad_outputs {grad_outputs.shape} and model output {output.shape}")

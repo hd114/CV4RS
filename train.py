@@ -12,7 +12,7 @@ from utils.pytorch_utils import start_cuda
 def train():
     csv_paths = ["Finland"]  # Liste der Länder für die Clients
     epochs = 1
-    communication_rounds = 5
+    communication_rounds = 3
     channels = 10
     num_classes = 19
 
