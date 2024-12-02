@@ -145,7 +145,7 @@ class LocalPruningOperations:
             pruning_mask_shape,
             pruning_indices,
             subsequent_layer_pruning,
-            device="cuda",
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu"),
     ):
         """
         Generate a binary pruning mask for the specified layer types.
@@ -211,9 +211,11 @@ class LocalPruningOperations:
 
 
 class GlobalPruningOperations(LocalPruningOperations):
-    def __init__(self, target_layer, layer_names):
+    def __init__(self, target_layer, layer_names, device=None):
         self.target_layer = target_layer
         self.layer_names = layer_names
+        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        print(f"[INFO] Using device: {self.device}")
 
     # def generate_global_pruning_mask(
     #     self,
@@ -290,7 +292,12 @@ class GlobalPruningOperations(LocalPruningOperations):
     #         return global_pruning_indices
 
     def generate_global_pruning_mask(
-            self, model, global_concept_maps, pruning_percentage, least_relevant_first=True, device="cuda"
+            self,
+            model,
+            global_concept_maps,
+            pruning_percentage,
+            least_relevant_first=True,
+            device=None
     ):
         """
         Generate a global pruning mask based on relevance maps.

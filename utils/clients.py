@@ -256,6 +256,8 @@ class FLCLient:
     
     def train_epoch(self):
         self.model.train()
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
             
         #    data, labels, index = batch["data"], batch["label"], batch["index"]
@@ -270,10 +272,10 @@ class FLCLient:
             # Debugging: Conv1-Gewichte überprüfen
             print(f"  Conv1 weight shape: {self.model.encoder[0].weight.shape}")'''
             
-            data = data.cuda()
+            data = data.to(device)
             label_new=np.copy(labels)
            # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).cuda()
+            label_new = torch.from_numpy(label_new).to(device)
             self.optimizer.zero_grad()
 
             logits = self.model(data)
