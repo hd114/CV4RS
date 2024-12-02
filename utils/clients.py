@@ -217,32 +217,41 @@ class FLCLient:
                     state_dict[name] = state_dict[name] * mask  # Apply mask
             self.model.load_state_dict(state_dict)
 
-    def train_one_round(self, epochs: int, validate: bool = False):
-        state_before = copy.deepcopy(self.model.state_dict())
+    def calculate_local_mean_and_std(self):
+        """
+        Calculate mean and standard deviation of the local training dataset using the shared compute function.
+        Returns:
+            tuple: (mean, std)
+        """
+        return compute_mean_and_std(self.train_loader)
 
-        # optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001, weight_decay=0)
-        # criterion = torch.nn.BCEWithLogitsLoss(reduction="mean")
+    def train_one_round(self, epochs: int, validate: bool = False):
+        """
+        Train the model for one round of communication, including local standardization.
+        """
+        # Mittelwert und Standardabweichung berechnen (nur beim ersten Aufruf)
+        if not hasattr(self, "data_mean") or not hasattr(self, "data_std"):
+            self.data_mean, self.data_std = self.calculate_local_mean_and_std()
+
+        state_before = copy.deepcopy(self.model.state_dict())
         self.optimizer = self.optimizer_constructor(self.model.parameters(), **self.optimizer_kwargs)
         self.criterion = self.criterion_constructor(**self.criterion_kwargs)
 
         for epoch in range(1, epochs + 1):
             print("Epoch {}/{}".format(epoch, epochs))
             print("-" * 10)
-
             self.train_epoch()
-        
+
         if validate:
             report = self.validation_round()
             self.results = update_results(self.results, report, self.num_classes)
 
         state_after = self.model.state_dict()
-
         model_update = {}
+
         for key, value_before in state_before.items():
             value_after = state_after[key]
-            diff = value_after.type(torch.DoubleTensor) - value_before.type(
-                torch.DoubleTensor
-            )
+            diff = value_after.type(torch.DoubleTensor) - value_before.type(torch.DoubleTensor)
             model_update[key] = diff
 
         return model_update
@@ -253,39 +262,67 @@ class FLCLient:
             for j in range(len(labels)): #19
                 new_labels[i,j] =  int(labels[j][i])
         return new_labels
-    
+
     def train_epoch(self):
+        """
+        Train the model for one epoch using the standardized data.
+        """
         self.model.train()
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
-            
-        #    data, labels, index = batch["data"], batch["label"], batch["index"]
+            # Daten vorbereiten
             data = batch[1]
             labels = batch[4]
 
             # Debugging: Ausgabe der Batch-Dimensionen
-            '''print(f"Batch {idx}:")
-            print(f"  Data shape: {data.shape}")  # Eingabedatenform prüfen
-            print(f"  Labels shape: {labels.shape}")  # Label-Form prüfen
+            print(f"[DEBUG] Batch {idx}: Data shape: {data.shape}, Labels shape: {labels.shape}")
 
-            # Debugging: Conv1-Gewichte überprüfen
-            print(f"  Conv1 weight shape: {self.model.encoder[0].weight.shape}")'''
-            
+            # Standardisierung der Daten
+            if not hasattr(self, "data_mean") or not hasattr(self, "data_std"):
+                raise AttributeError("[ERROR] Data mean and std are not defined.")
+            data = standardize_data(data, self.data_mean, self.data_std)
+
+            # Daten auf das richtige Gerät verschieben
             data = data.to(device)
-            label_new=np.copy(labels)
-           # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).to(device)
+            label_new = torch.from_numpy(np.copy(labels)).to(device)
+
+            # Optimierer zurücksetzen
             self.optimizer.zero_grad()
 
+            # Vorwärtsdurchlauf und Debugging der Logits
             logits = self.model(data)
-            # print(f"Logits sample: {logits[0]}")
+            if torch.isnan(logits).any() or torch.isinf(logits).any():
+                print("[ERROR] NaN or Inf detected in logits.")
+                print(f"Logits: {logits}")
+                raise ValueError("Invalid values in logits.")
+
+            # Verlust berechnen
             loss = self.criterion(logits, label_new)
+            print(f"[DEBUG] Loss for batch {idx}: {loss.item()}")
+
+            # Rückwärtsdurchlauf und Debugging der Gradienten
             loss.backward()
+            for name, param in self.model.named_parameters():
+                if param.grad is not None:
+                    if torch.isnan(param.grad).any() or torch.isinf(param.grad).any():
+                        print(f"[ERROR] NaN or Inf detected in gradient of {name}")
+                        raise ValueError("Invalid gradients.")
+
+            # Optional: Gradient Clipping
+            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+
+            # Optimierungsschritt
             self.optimizer.step()
-    
-    
-    
+
+            # Debugging der Modellparameter nach dem Optimierungsschritt
+            for name, param in self.model.named_parameters():
+                if torch.isnan(param).any() or torch.isinf(param).any():
+                    print(f"[ERROR] NaN or Inf detected in model parameters: {name}")
+                    raise ValueError("Invalid model parameters.")
+
+        print("[INFO] Training epoch completed successfully.")
+
     def get_validation_results(self):
         return self.results
 
@@ -502,6 +539,25 @@ class GlobalClient:
         global_pruning_mask = None  # Initialize pruning mask
         pruning_ops = None  # Ensure pruning_ops is initialized outside the loop
 
+        # Berechnung von globalem Mittelwert und Standardabweichung
+        print("[INFO] Collecting local mean and std from clients...")
+        local_means = []
+        local_stds = []
+        local_sizes = []
+
+        for client in self.clients:
+            mean, std = client.calculate_local_mean_and_std()
+            local_means.append(mean)
+            local_stds.append(std)
+            local_sizes.append(len(client.train_loader.dataset))  # Anzahl der Datenpunkte
+
+        # Gewichtete Berechnung des globalen Mittelwerts und der Standardabweichung
+        total_size = sum(local_sizes)
+        self.data_mean = sum(m * s for m, s in zip(local_means, local_sizes)) / total_size
+        self.data_std = (sum(s ** 2 * (n - 1) for s, n in zip(local_stds, local_sizes)) / (total_size - 1)).sqrt()
+
+        print(f"[INFO] Global data mean: {self.data_mean}, Global data std: {self.data_std}")
+
         # LRP-Pruning initialization
         print("Initializing LRP Pruning...")
         composite, component_attributor = self.initialize_lrp_pruning("resnet50", torch.nn.Conv2d)
@@ -516,7 +572,7 @@ class GlobalClient:
                 for layer_name, layer_pruning_mask in global_pruning_mask.items():
                     print(f"[DEBUG] Validating mask for layer: {layer_name}")
                     for mask_type, mask in layer_pruning_mask.items():
-                        if isinstance(mask, torch.Tensor):  # Überprüfen, ob es sich um einen Tensor handelt
+                        if isinstance(mask, torch.Tensor):  # Check if it is a Tensor
                             print(
                                 f"  Mask type: {mask_type}, Mask shape: {mask.shape}, Non-zero elements: {torch.sum(mask != 0)}"
                             )
@@ -604,7 +660,6 @@ class GlobalClient:
 
         return self.results, self.client_results
 
-
     def change_sizes(self, labels):
         new_labels=np.zeros((len(labels[0]),19))
         for i in range(len(labels[0])): #128
@@ -613,53 +668,84 @@ class GlobalClient:
         return new_labels
 
     def validation_round(self):
-        #print("[DEBUG] validation_round called")
+        """
+        Perform a validation round and check for NaN/Inf issues in logits, inputs, and predictions.
+        """
+        # Überprüfen, ob data_mean und data_std definiert sind
+        if not hasattr(self, 'data_mean') or not hasattr(self, 'data_std'):
+            raise AttributeError(
+                "[ERROR] Data mean and std are not defined. Ensure `aggregate_mean_and_std` was executed in the GlobalClient."
+            )
+
         self.model.eval()
         y_true = []
         predicted_probs = []
 
         with torch.no_grad():
-            for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
-                data = batch[1].to(self.device)
+            for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="validation")):
+                # Daten vorbereiten
+                data = batch[1]
                 labels = batch[4]
 
+                # Debugging: Ausgabe der Dimensionen
+                print(f"[DEBUG] Batch {batch_idx}: Data shape: {data.shape}, Labels shape: {labels.shape}")
+
+                # Standardisierung der Daten
+                data = standardize_data(data, self.data_mean, self.data_std)
+
+                # NaN/Inf-Check für standardisierte Eingabedaten
+                if torch.isnan(data).any() or torch.isinf(data).any():
+                    print(f"[ERROR] NaN or Inf detected in input data at batch {batch_idx}")
+                    raise ValueError("Invalid values in input data.")
+
+                if torch.isnan(labels).any() or torch.isinf(labels).any():
+                    print(f"[ERROR] NaN or Inf detected in labels at batch {batch_idx}")
+                    raise ValueError("Invalid values in labels.")
+
+                # Daten auf das richtige Gerät verschieben
+                data = data.to(self.device)
                 label_new = np.copy(labels)
+
+                # Berechnung der Logits
                 logits = self.model(data)
-                probs = torch.sigmoid(logits).cpu()  # Wahrscheinlichkeiten berechnen
 
-                # Variante 1: Threshold-basiert
+                # NaN/Inf-Check für Logits
+                if torch.isnan(logits).any() or torch.isinf(logits).any():
+                    print("[ERROR] NaN or Inf detected in logits.")
+                    print(f"Logits: {logits}")
+                    raise ValueError("Invalid values in logits.")
+
+                # Wahrscheinlichkeiten berechnen
+                probs = torch.sigmoid(logits).cpu()
+
+                # Schwellenwert-basierte Vorhersage (binär)
                 threshold = 0.5
-                y_predicted = (probs >= threshold).float()  # Binäre Schwellenwert-basierte Vorhersage
+                y_predicted = (probs >= threshold).float()
 
-                # Variante 2: Argmax-basiert
-                # y_predicted = torch.zeros_like(probs)
-                # y_predicted[torch.arange(probs.size(0)), probs.argmax(dim=1)] = 1  # Argmax-Vorhersage für eine Klasse
-
-                predicted_probs += list(probs.numpy())  # Wahrscheinlichkeiten bleiben für andere Metriken erhalten
+                # Wahrscheinlichkeiten und True Labels speichern
+                predicted_probs += list(probs.numpy())
                 y_true += list(label_new)
 
+        # Konvertierung der Ergebnisse in NumPy-Arrays
         predicted_probs = np.asarray(predicted_probs)
         y_true = np.asarray(y_true)
 
-        # Ausgabe für Debugging
-        # print(f"True labels shape: {y_true.shape}")
-        # print(f"Predicted labels shape: {y_predicted.shape}")
-        # print(f"Predicted probabilities shape: {predicted_probs.shape}")
-        #
-        print(f"True labels sample: {y_true[:5]}")
-        print(f"Predicted labels sample: {y_predicted[:5]}")
-        print(f"Predicted probabilities sample: {predicted_probs[:5]}")
+        # Debugging der Ergebnisse
+        print(f"[DEBUG] True labels sample: {y_true[:5]}")
+        print(f"[DEBUG] Predicted probabilities sample: {predicted_probs[:5]}")
 
-        # Überprüfen auf NaN-Werte in Arrays
+        # NaN-Check in den Arrays
         if np.isnan(predicted_probs).any():
-            print("NaN detected in predicted probabilities array.")
+            print("[ERROR] NaN detected in predicted probabilities array.")
             print(predicted_probs)
             raise ValueError("Predicted probabilities contain NaN values.")
+
         if np.isnan(y_true).any():
-            print("NaN detected in true labels array.")
+            print("[ERROR] NaN detected in true labels array.")
             print(y_true)
             raise ValueError("True labels contain NaN values.")
 
+        # Berechnung des Klassifizierungsberichts
         report = get_classification_report(
             y_true, y_predicted.numpy(), predicted_probs, self.dataset_filter
         )
@@ -782,3 +868,46 @@ def profile_compute_lrp_pruning_mask(client, composite, component_attributor, pr
         print("Erstelle Callgraph aus cProfile-Daten...")
         import os
         os.system("gprof2dot -f pstats output.prof | dot -Tpng -o callgraph.png")
+
+def compute_mean_and_std(data_loader):
+    """
+    Compute the mean and standard deviation of data from a DataLoader.
+
+    Args:
+        data_loader (DataLoader): DataLoader containing the dataset.
+
+    Returns:
+        tuple: (mean, std) of the data.
+    """
+    print("[INFO] Calculating data mean and standard deviation...")
+    data_sum = 0.0
+    data_squared_sum = 0.0
+    num_samples = 0
+
+    for batch in tqdm(data_loader, desc="Calculating mean/std"):
+        data = batch[1]  # Assuming the data is at index 1 in the batch
+        data_sum += data.sum()
+        data_squared_sum += (data ** 2).sum()
+        num_samples += data.numel()
+
+    mean = data_sum / num_samples
+    std = (data_squared_sum / num_samples - mean ** 2).sqrt()
+
+    print(f"[INFO] Data mean: {mean.item()}, Data std: {std.item()}")
+    return mean, std
+
+def standardize_data(data, mean, std):
+    """
+    Standardize the data using the provided mean and standard deviation.
+
+    Args:
+        data (Tensor): Input data to be standardized.
+        mean (Tensor): Mean of the data.
+        std (Tensor): Standard deviation of the data.
+
+    Returns:
+        Tensor: Standardized data.
+    """
+    if mean is None or std is None:
+        raise ValueError("[ERROR] Mean and standard deviation must not be None.")
+    return (data - mean) / (std + 1e-8)  # Hinzufügen eines kleinen Offsets, um Division durch Null zu vermeiden

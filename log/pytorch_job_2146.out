@@ -1,0 +1,551 @@
+Lines that potentially need to be canonized 309
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    7150 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    4263 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    7180 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    3248 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Initializing LRP Pruning...
+LRP initialized successfully.
+=== Round 1/3 ===
+Training and communication for Round 1...
+[INFO] Mittelwert: 1053.065290779903, Standardabweichung: 1082.4255665746227
+Epoch 1/2
+----------
+[DEBUG] Batch 0: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 0: 0.9451961230897767
+[DEBUG] Batch 1: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 1: 0.5468484559992244
+[DEBUG] Batch 2: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 2: 0.34680534204188235
+[DEBUG] Batch 3: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 3: 0.2461882729280283
+[DEBUG] Batch 4: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 4: 0.22280354072354833
+[DEBUG] Batch 5: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 5: 0.23172776197156209
+[DEBUG] Batch 6: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 6: 0.2399138709698892
+[DEBUG] Batch 7: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 7: 0.27740426732522744
+[DEBUG] Batch 8: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 8: 0.19283499271804533
+[DEBUG] Batch 9: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 9: 0.21512489831489262
+[DEBUG] Batch 10: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 10: 0.2081697639595992
+[DEBUG] Batch 11: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 11: 0.20107995386518707
+[DEBUG] Batch 12: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 12: 0.211795868041268
+[DEBUG] Batch 13: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 13: 0.19873861644895152
+[DEBUG] Batch 14: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 14: 0.16963351317683287
+[DEBUG] Batch 15: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 15: 0.18028393337111703
+[DEBUG] Batch 16: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 16: 0.18299066444940668
+[DEBUG] Batch 17: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 17: 0.17960395065706267
+[DEBUG] Batch 18: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 18: 0.2006671633010729
+[DEBUG] Batch 19: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 19: 0.17818415107465072
+[DEBUG] Batch 20: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 20: 0.1758481151452344
+[DEBUG] Batch 21: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 21: 0.1745798393283867
+[DEBUG] Batch 22: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 22: 0.15836273454872177
+[DEBUG] Batch 23: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 23: 0.1705578535084645
+[DEBUG] Batch 24: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 24: 0.18285012971251177
+[DEBUG] Batch 25: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 25: 0.1745157567374678
+[DEBUG] Batch 26: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 26: 0.17254191708973035
+[DEBUG] Batch 27: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 27: 0.17946851617634924
+[DEBUG] Batch 28: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 28: 0.16475940368393172
+[DEBUG] Batch 29: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 29: 0.1604452149154221
+[DEBUG] Batch 30: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 30: 0.16397212694861704
+[DEBUG] Batch 31: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 31: 0.16195856000882689
+[DEBUG] Batch 32: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 32: 0.16634275185845
+[DEBUG] Batch 33: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 33: 0.13790527417359408
+[DEBUG] Batch 34: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 34: 0.1592233722937299
+[DEBUG] Batch 35: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 35: 0.17326494246535049
+[DEBUG] Batch 36: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 36: 0.14520611822766377
+[DEBUG] Batch 37: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 37: 0.14589902423165463
+[DEBUG] Batch 38: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 38: 0.1606264936073978
+[DEBUG] Batch 39: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 39: 0.13891239968369462
+[DEBUG] Batch 40: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 40: 0.1644171046306889
+[DEBUG] Batch 41: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 41: 0.1482633172367522
+[DEBUG] Batch 42: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 42: 0.13284579514368902
+[DEBUG] Batch 43: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 43: 0.15094302762891268
+[DEBUG] Batch 44: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 44: 0.14201468260992825
+[DEBUG] Batch 45: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 45: 0.15228956943077102
+[DEBUG] Batch 46: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 46: 0.15506327129514044
+[DEBUG] Batch 47: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 47: 0.1810912952139625
+[DEBUG] Batch 48: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 48: 0.17241716451991707
+[DEBUG] Batch 49: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 49: 0.1490300020181388
+[DEBUG] Batch 50: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 50: 0.15536546287280903
+[DEBUG] Batch 51: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 51: 0.15079001970412856
+[DEBUG] Batch 52: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 52: 0.1442738812323078
+[DEBUG] Batch 53: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 53: 0.15499602659715012
+[DEBUG] Batch 54: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 54: 0.14243048218344556
+[DEBUG] Batch 55: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 55: 0.1469458105152416
+[DEBUG] Batch 56: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 56: 0.14644748832252205
+[DEBUG] Batch 57: Data shape: torch.Size([213, 10, 120, 120]), Labels shape: torch.Size([213, 19])
+[DEBUG] Loss for batch 57: 0.12125373261650488
+[INFO] Training epoch completed successfully.
+Epoch 2/2
+----------
+[DEBUG] Batch 0: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 0: 0.1488017902550313
+[DEBUG] Batch 1: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 1: 0.1574253350676326
+[DEBUG] Batch 2: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 2: 0.1388608301826057
+[DEBUG] Batch 3: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 3: 0.1356205183511234
+[DEBUG] Batch 4: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 4: 0.15493737175784664
+[DEBUG] Batch 5: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 5: 0.14873169887409457
+[DEBUG] Batch 6: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 6: 0.15173749594071456
+[DEBUG] Batch 7: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 7: 0.12594153525068844
+[DEBUG] Batch 8: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 8: 0.13056186468739384
+[DEBUG] Batch 9: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 9: 0.1418628811759383
+[DEBUG] Batch 10: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 10: 0.1228266389633521
+[DEBUG] Batch 11: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 11: 0.14510675639926593
+[DEBUG] Batch 12: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 12: 0.13433641463480975
+[DEBUG] Batch 13: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 13: 0.1529937180853264
+[DEBUG] Batch 14: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 14: 0.13203921105560038
+[DEBUG] Batch 15: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 15: 0.13837524541453322
+[DEBUG] Batch 16: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 16: 0.14823902295017904
+[DEBUG] Batch 17: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 17: 0.1423630980777159
+[DEBUG] Batch 18: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 18: 0.11495159384980212
+[DEBUG] Batch 19: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 19: 0.12794504049337785
+[DEBUG] Batch 20: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 20: 0.1202652552266247
+[DEBUG] Batch 21: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 21: 0.1424626874449643
+[DEBUG] Batch 22: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 22: 0.13484055902864872
+[DEBUG] Batch 23: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 23: 0.12447618546077988
+[DEBUG] Batch 24: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 24: 0.13123885636046811
+[DEBUG] Batch 25: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 25: 0.12534014334236543
+[DEBUG] Batch 26: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 26: 0.12013595373290911
+[DEBUG] Batch 27: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 27: 0.12224122367362442
+[DEBUG] Batch 28: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 28: 0.12816645938393845
+[DEBUG] Batch 29: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 29: 0.14844392894874425
+[DEBUG] Batch 30: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 30: 0.1350824359905653
+[DEBUG] Batch 31: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 31: 0.13283959744024382
+[DEBUG] Batch 32: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 32: 0.14097435908943326
+[DEBUG] Batch 33: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 33: 0.1310182578256294
+[DEBUG] Batch 34: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 34: 0.13146655173105354
+[DEBUG] Batch 35: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 35: 0.12726064866620523
+[DEBUG] Batch 36: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 36: 0.1257088457015927
+[DEBUG] Batch 37: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 37: 0.1271867245152684
+[DEBUG] Batch 38: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 38: 0.11774073578924765
+[DEBUG] Batch 39: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 39: 0.12404610948514821
+[DEBUG] Batch 40: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 40: 0.13836680483971733
+[DEBUG] Batch 41: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 41: 0.1246184519374888
+[DEBUG] Batch 42: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 42: 0.12926627364553414
+[DEBUG] Batch 43: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 43: 0.12599700786830262
+[DEBUG] Batch 44: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 44: 0.12345810427573897
+[DEBUG] Batch 45: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 45: 0.13546595363975694
+[DEBUG] Batch 46: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 46: 0.1273446689893545
+[DEBUG] Batch 47: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 47: 0.12338434756573494
+[DEBUG] Batch 48: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 48: 0.12301999620515394
+[DEBUG] Batch 49: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 49: 0.1167481745216861
+[DEBUG] Batch 50: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 50: 0.12379061151568378
+[DEBUG] Batch 51: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 51: 0.111613120143445
+[DEBUG] Batch 52: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 52: 0.11775238777530268
+[DEBUG] Batch 53: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 53: 0.12648468138719085
+[DEBUG] Batch 54: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 54: 0.14433668294498625
+[DEBUG] Batch 55: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 55: 0.12631541979171226
+[DEBUG] Batch 56: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 56: 0.1318981821897755
+[DEBUG] Batch 57: Data shape: torch.Size([213, 10, 120, 120]), Labels shape: torch.Size([213, 19])
+[DEBUG] Loss for batch 57: 0.12801782973170908
+[INFO] Training epoch completed successfully.
+[INFO] Mittelwert: 1429.3262503487724, Standardabweichung: 1641.8885934012276
+Epoch 1/2
+----------
+[DEBUG] Batch 0: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 0: 0.8410632513721085
+[DEBUG] Batch 1: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 1: 0.4178057358966065
+[DEBUG] Batch 2: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 2: 0.2730390286018801
+[DEBUG] Batch 3: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 3: 0.25617426102936336
+[DEBUG] Batch 4: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 4: 0.18100413916104835
+[DEBUG] Batch 5: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 5: 0.21724282812076232
+[DEBUG] Batch 6: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 6: 0.21175023311263202
+[DEBUG] Batch 7: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 7: 0.19868690040932627
+[DEBUG] Batch 8: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 8: 0.18028350638177415
+[DEBUG] Batch 9: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 9: 0.21070135829911857
+[DEBUG] Batch 10: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 10: 0.20325344169086706
+[DEBUG] Batch 11: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 11: 0.1713000201365138
+[DEBUG] Batch 12: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 12: 0.1664793274050776
+[DEBUG] Batch 13: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 13: 0.18184439422293508
+[DEBUG] Batch 14: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 14: 0.1772671792786545
+[DEBUG] Batch 15: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 15: 0.17234498700596357
+[DEBUG] Batch 16: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 16: 0.14758408437279624
+[DEBUG] Batch 17: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 17: 0.14951142123365152
+[DEBUG] Batch 18: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 18: 0.20688455079653445
+[DEBUG] Batch 19: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 19: 0.16522992039910955
+[DEBUG] Batch 20: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 20: 0.1576466511992183
+[DEBUG] Batch 21: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 21: 0.17788583345715414
+[DEBUG] Batch 22: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 22: 0.16290377930801278
+[DEBUG] Batch 23: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 23: 0.1817907877722083
+[DEBUG] Batch 24: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 24: 0.17926668224688283
+[DEBUG] Batch 25: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 25: 0.15391953422212715
+[DEBUG] Batch 26: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 26: 0.18588756547279392
+[DEBUG] Batch 27: Data shape: torch.Size([238, 10, 120, 120]), Labels shape: torch.Size([238, 19])
+[DEBUG] Loss for batch 27: 0.1678890085864153
+[INFO] Training epoch completed successfully.
+Epoch 2/2
+----------
+[DEBUG] Batch 0: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 0: 0.14461629291904024
+[DEBUG] Batch 1: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 1: 0.13190143774753912
+[DEBUG] Batch 2: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 2: 0.143634844655556
+[DEBUG] Batch 3: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 3: 0.16005005827202295
+[DEBUG] Batch 4: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 4: 0.15243802562783365
+[DEBUG] Batch 5: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 5: 0.1557488341325165
+[DEBUG] Batch 6: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 6: 0.13165696658971615
+[DEBUG] Batch 7: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 7: 0.13968367670350734
+[DEBUG] Batch 8: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 8: 0.12882451041628634
+[DEBUG] Batch 9: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 9: 0.12042534401579162
+[DEBUG] Batch 10: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 10: 0.1581662868336548
+[DEBUG] Batch 11: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 11: 0.1407670227707255
+[DEBUG] Batch 12: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 12: 0.135224306575121
+[DEBUG] Batch 13: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 13: 0.16695149438543808
+[DEBUG] Batch 14: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 14: 0.13671351612840932
+[DEBUG] Batch 15: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 15: 0.1278151374980561
+[DEBUG] Batch 16: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 16: 0.17692071464084858
+[DEBUG] Batch 17: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 17: 0.13159545028950548
+[DEBUG] Batch 18: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 18: 0.13362620797123437
+[DEBUG] Batch 19: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 19: 0.11970998580318037
+[DEBUG] Batch 20: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 20: 0.1404313797096991
+[DEBUG] Batch 21: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 21: 0.1297723691856791
+[DEBUG] Batch 22: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 22: 0.14915586026545288
+[DEBUG] Batch 23: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 23: 0.15450952028448894
+[DEBUG] Batch 24: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 24: 0.11937763815770171
+[DEBUG] Batch 25: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 25: 0.12582406964723328
+[DEBUG] Batch 26: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 26: 0.16220449100278617
+[DEBUG] Batch 27: Data shape: torch.Size([238, 10, 120, 120]), Labels shape: torch.Size([238, 19])
+[DEBUG] Loss for batch 27: 0.12922216572151501
+[INFO] Training epoch completed successfully.
+[INFO] Mittelwert: 1799.1862498316273, Standardabweichung: 1148.5064318426723
+Epoch 1/2
+----------
+[DEBUG] Batch 0: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 0: 1.0016669060487537
+[DEBUG] Batch 1: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 1: 0.6424572850301415
+[DEBUG] Batch 2: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 2: 0.3763083409093782
+[DEBUG] Batch 3: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 3: 0.34048719928500226
+[DEBUG] Batch 4: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 4: 0.3018587842438287
+[DEBUG] Batch 5: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 5: 0.26163966228114377
+[DEBUG] Batch 6: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 6: 0.30454914609257916
+[DEBUG] Batch 7: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 7: 0.24823960006304296
+[DEBUG] Batch 8: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 8: 0.2367163505656989
+[DEBUG] Batch 9: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 9: 0.22190269180016403
+[DEBUG] Batch 10: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 10: 0.21153824358467568
+[DEBUG] Batch 11: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 11: 0.21708619048220695
+[DEBUG] Batch 12: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 12: 0.21040877150824233
+[DEBUG] Batch 13: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 13: 0.2375073081778882
+[DEBUG] Batch 14: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 14: 0.21027616608771313
+[DEBUG] Batch 15: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 15: 0.22160518484907268
+[DEBUG] Batch 16: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 16: 0.21293370265926856
+[DEBUG] Batch 17: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 17: 0.23148420212294837
+[DEBUG] Batch 18: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 18: 0.20583115080659664
+[DEBUG] Batch 19: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 19: 0.19127692477253638
+[DEBUG] Batch 20: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 20: 0.19542039678067788
+[DEBUG] Batch 21: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 21: 0.21360784189395882
+[DEBUG] Batch 22: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 22: 0.1998932678796231
+[DEBUG] Batch 23: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 23: 0.17063622896523598
+[DEBUG] Batch 24: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 24: 0.1829543052088486
+[DEBUG] Batch 25: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 25: 0.1828423597453448
+[DEBUG] Batch 26: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 26: 0.19604718431864518
+[DEBUG] Batch 27: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 27: 0.18197176969035284
+[DEBUG] Batch 28: Data shape: torch.Size([12, 10, 120, 120]), Labels shape: torch.Size([12, 19])
+[DEBUG] Loss for batch 28: 0.14427892691188
+[INFO] Training epoch completed successfully.
+Epoch 2/2
+----------
+[DEBUG] Batch 0: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 0: 0.19376430028191208
+[DEBUG] Batch 1: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 1: 0.17096795294315226
+[DEBUG] Batch 2: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 2: 0.17742560369536425
+[DEBUG] Batch 3: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 3: 0.17636929126909995
+[DEBUG] Batch 4: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 4: 0.17050607056010078
+[DEBUG] Batch 5: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 5: 0.18519934412194455
+[DEBUG] Batch 6: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 6: 0.1842779743733294
+[DEBUG] Batch 7: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 7: 0.19650389464287885
+[DEBUG] Batch 8: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 8: 0.1784803603223007
+[DEBUG] Batch 9: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 9: 0.17586947006013903
+[DEBUG] Batch 10: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 10: 0.1688941017331325
+[DEBUG] Batch 11: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 11: 0.19365038888076289
+[DEBUG] Batch 12: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 12: 0.16987989675890786
+[DEBUG] Batch 13: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 13: 0.16744235170251823
+[DEBUG] Batch 14: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 14: 0.16695032396081974
+[DEBUG] Batch 15: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 15: 0.1718434420708545
+[DEBUG] Batch 16: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 16: 0.16452930001664726
+[DEBUG] Batch 17: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 17: 0.16869169767303738
+[DEBUG] Batch 18: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 18: 0.1697142281400525
+[DEBUG] Batch 19: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 19: 0.17935957078739445
+[DEBUG] Batch 20: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 20: 0.15974080526013743
+[DEBUG] Batch 21: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 21: 0.16233866582038692
+[DEBUG] Batch 22: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 22: 0.17483284555747075
+[DEBUG] Batch 23: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 23: 0.176774545157258
+[DEBUG] Batch 24: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 24: 0.16590631867112576
+[DEBUG] Batch 25: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 25: 0.16988542712001997
+[DEBUG] Batch 26: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 26: 0.16031957814220282
+[DEBUG] Batch 27: Data shape: torch.Size([256, 10, 120, 120]), Labels shape: torch.Size([256, 19])
+[DEBUG] Loss for batch 27: 0.16461730484535875
+[DEBUG] Batch 28: Data shape: torch.Size([12, 10, 120, 120]), Labels shape: torch.Size([12, 19])
+[DEBUG] Loss for batch 28: 0.2663272750766224
+[INFO] Training epoch completed successfully.
+[INFO] Starting validation for Round 1...
