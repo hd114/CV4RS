@@ -12,7 +12,7 @@ from utils.pytorch_utils import start_cuda
 def train():
     csv_paths = ["Finland", "Ireland", "Serbia"]  # add Austria, Belgium, Lithuania, Portugal, Switzerland
     epochs = 2
-    communication_rounds = 3
+    communication_rounds = 4
     channels = 10
     num_classes = 19
 

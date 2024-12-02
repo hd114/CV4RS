@@ -41,9 +41,9 @@ def one_hot(output, targets):
     eye_matrix = torch.eye(output.shape[-1]).to(output.device)
 
     # Debugging-Ausgaben
-    print(f"Targets shape: {targets.shape}")
-    print(f"Eye matrix shape: {eye_matrix.shape}")
-    print(f"Output shape: {output.shape}")
+    #print(f"Targets shape: {targets.shape}")
+    #print(f"Eye matrix shape: {eye_matrix.shape}")
+    #print(f"Output shape: {output.shape}")
 
     # Indizieren, um die One-Hot-Matrix zu erstellen
     one_hot_matrix = eye_matrix[targets]

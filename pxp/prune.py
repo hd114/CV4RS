@@ -26,11 +26,10 @@ class LocalPruningOperations:
             raise ValueError(f"Layer {layer_name} not found in the model.")
 
         # Debugging information about the layer and mask
-        print(f"[DEBUG] Validating mask before application for layer: {layer_name}")
-        print(f"  Layer weight shape: {module.weight.shape if hasattr(module, 'weight') else 'No weight attribute'}")
-        print(f"  Layer bias shape: {module.bias.shape if hasattr(module, 'bias') else 'No bias attribute'}")
-        print(
-            f"  Mask weight shape: {pruning_mask.shape if isinstance(pruning_mask, torch.Tensor) else 'Mask is not a Tensor'}")
+        #print(f"[DEBUG] Validating mask before application for layer: {layer_name}")
+        #print(f"  Layer weight shape: {module.weight.shape if hasattr(module, 'weight') else 'No weight attribute'}")
+        #print(f"  Layer bias shape: {module.bias.shape if hasattr(module, 'bias') else 'No bias attribute'}")
+        #print(f"  Mask weight shape: {pruning_mask.shape if isinstance(pruning_mask, torch.Tensor) else 'Mask is not a Tensor'}")
 
         # Ensure the mask is reshaped to match the weight if needed
         if isinstance(pruning_mask, torch.Tensor) and hasattr(module, 'weight'):
@@ -89,12 +88,12 @@ class LocalPruningOperations:
             if isinstance(weight_mask, torch.Tensor):
                 # Case 1: Mask matches filter count (1D)
                 if weight_mask.numel() == layer.weight.shape[0]:
-                    print(f"[INFO] Reshaping 1D mask to match 4D weight dimensions.")
+                    #print(f"[INFO] Reshaping 1D mask to match 4D weight dimensions.")
                     weight_mask = weight_mask.view(-1, 1, 1, 1).expand_as(layer.weight)
 
                 # Case 2: Mask matches total element count (4D)
                 elif weight_mask.numel() == layer.weight.numel():
-                    print(f"[INFO] Reshaping flat mask to match exact weight dimensions.")
+                    #print(f"[INFO] Reshaping flat mask to match exact weight dimensions.")
                     weight_mask = weight_mask.view_as(layer.weight)
 
                 # Error case: Mask dimensions are invalid
@@ -119,12 +118,12 @@ class LocalPruningOperations:
 
             # Process bias if it exists
             if layer.bias is not None and "bias" in pruning_mask[layer_type]:
-                print(f"[DEBUG] Layer {layer_name} has bias with shape {layer.bias.shape}")
+                #print(f"[DEBUG] Layer {layer_name} has bias with shape {layer.bias.shape}")
 
                 bias_mask = pruning_mask[layer_type]["bias"]
                 if isinstance(bias_mask, torch.Tensor):
                     if bias_mask.numel() == layer.bias.numel():
-                        print(f"[INFO] Adjusting bias mask to match bias dimensions.")
+                        #print(f"[INFO] Adjusting bias mask to match bias dimensions.")
                         bias_mask = bias_mask.view_as(layer.bias)
                         pruning_mask[layer_type]["bias"] = bias_mask
                     else:

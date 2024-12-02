@@ -718,9 +718,22 @@ class GlobalClient:
                 # Wahrscheinlichkeiten berechnen
                 probs = torch.sigmoid(logits).cpu()
 
-                # Schwellenwert-basierte Vorhersage (binär)
-                threshold = 0.5
-                y_predicted = (probs >= threshold).float()
+                # Schwellenwert-basierte Vorhersage (binär) - auskommentiert
+                # threshold = 0.5
+                # y_predicted = (probs >= threshold).float()
+
+                # Top-n basierte Vorhersage (neuer Ansatz)
+                n = 3  # Anzahl der Klassen mit den höchsten Wahrscheinlichkeiten
+                topk_values, topk_indices = torch.topk(probs, n, dim=1)  # Top-n-Wahrscheinlichkeiten und ihre Indizes
+
+                y_predicted = torch.zeros_like(probs)
+                y_predicted[
+                    torch.arange(probs.size(0)), topk_indices[:, 0]] = 1  # Höchstwahrscheinliche Klasse aus Top-n
+
+                # Debugging: Zeige die Top-n-Wahrscheinlichkeiten und -Indizes
+                print(f"[DEBUG] Top-{n} class probabilities:\n{topk_values}")
+                print(f"[DEBUG] Top-{n} class indices:\n{topk_indices}")
+                print(f"[DEBUG] Argmax prediction (from top-{n} classes):\n{y_predicted}")
 
                 # Wahrscheinlichkeiten und True Labels speichern
                 predicted_probs += list(probs.numpy())
@@ -884,17 +897,29 @@ def compute_mean_and_std(data_loader):
     data_squared_sum = 0.0
     num_samples = 0
 
-    for batch in tqdm(data_loader, desc="Calculating mean/std"):
+    for batch_idx, batch in enumerate(tqdm(data_loader, desc="Calculating mean/std")):
         data = batch[1]  # Assuming the data is at index 1 in the batch
-        data_sum += data.sum()
-        data_squared_sum += (data ** 2).sum()
+
+        # Debugging: Ausgabe der Datenstatistik pro Batch
+        #print(f"[DEBUG] Batch {batch_idx}: Data Min: {data.min()}, Max: {data.max()}, Mean: {data.mean()}, Std: {data.std()}")
+
+        # Optional: Vor-Normalisierung der Daten, falls notwendig
+        if data.min() < 0 or data.max() > 1:
+            print("[WARNING] Data out of normal range. Applying pre-normalization.")
+            data = (data - data.min()) / (data.max() - data.min())
+
+        # Akkumulieren der Werte für die Berechnung des globalen Mittelwerts und der Varianz
+        data_sum += data.sum().item()
+        data_squared_sum += (data ** 2).sum().item()
         num_samples += data.numel()
 
+    # Berechnung von Mittelwert und Standardabweichung
     mean = data_sum / num_samples
-    std = (data_squared_sum / num_samples - mean ** 2).sqrt()
+    std = ((data_squared_sum / num_samples) - mean ** 2) ** 0.5
 
-    print(f"[INFO] Data mean: {mean.item()}, Data std: {std.item()}")
-    return mean, std
+    print(f"[INFO] Final Data Mean: {mean}, Final Data Std: {std}")
+    return torch.tensor(mean), torch.tensor(std)
+
 
 def standardize_data(data, mean, std):
     """
@@ -910,4 +935,16 @@ def standardize_data(data, mean, std):
     """
     if mean is None or std is None:
         raise ValueError("[ERROR] Mean and standard deviation must not be None.")
-    return (data - mean) / (std + 1e-8)  # Hinzufügen eines kleinen Offsets, um Division durch Null zu vermeiden
+
+    # Debugging: Überprüfen der Eingabedaten
+    #print(f"[DEBUG] Data before standardization: Min: {data.min()}, Max: {data.max()}, Mean: {data.mean()}, Std: {data.std()}")
+    #print(f"[DEBUG] Mean used for standardization: {mean}, Std used for standardization: {std}")
+
+    # Standardisierung der Daten
+    standardized_data = (data - mean) / (
+                std + 1e-8)  # Hinzufügen eines kleinen Offsets, um Division durch Null zu vermeiden
+
+    # Debugging: Überprüfen der standardisierten Daten
+    #print(f"[DEBUG] Data after standardization: Min: {standardized_data.min()}, Max: {standardized_data.max()}, Mean: {standardized_data.mean()}, Std: {standardized_data.std()}")
+
+    return standardized_data
