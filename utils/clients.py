@@ -30,6 +30,15 @@ from utils.pytorch_utils import (
     start_cuda
 )
 
+from collections import defaultdict
+import random
+import yaml
+from pxp import GlobalPruningOperations
+from pxp import ComponentAttribution
+from pxp.composites import *
+from data.imagenet import ImageNetSubset, ImageNetSubset, get_sample_indices_for_class
+
+
 '''data_dirs = {
         "images_lmdb": "/data/kaiclasen/BENv2.lmdb",
          "metadata_parquet": "/data/kaiclasen/metadata.parquet",
@@ -41,6 +50,8 @@ data_dirs = {
          "metadata_parquet": "/faststorage/BigEarthNet-V2/metadata.parquet",
          "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
     }
+
+config_path = "CV4RS-orig/configs/test-config-resnet-p.yaml"
 
 class PreFilter:
     def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None, seasons: Optional[Container] | str = None):
@@ -217,10 +228,10 @@ class FLCLient:
             data = batch[1]
             labels = batch[4]
             
-            data = data.cuda()
+            data = data.to(self.device)
             label_new=np.copy(labels)
            # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).cuda()
+            label_new = torch.from_numpy(label_new).to(self.device)
             self.optimizer.zero_grad()
 
             logits = self.model(data)
@@ -247,6 +258,9 @@ class GlobalClient:
         state_dict_path: str = None,
         results_path: str = None
     ) -> None:
+        global config_path
+        with open(config_path, "r") as stream:
+            self.configs = yaml.safe_load(stream)
         self.model = model
         self.device = torch.device(0) if torch.cuda.is_available() else torch.device('cpu')
         print(f'Using device: {self.device}')
@@ -259,21 +273,22 @@ class GlobalClient:
             FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
             for csv_path in csv_paths
         ]
+        self.dataset = BENv2DataSet(
+            data_dirs=data_dirs,
+            split="train",  # Für Trainingsdaten
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
+        )
         self.validation_set = BENv2DataSet(
-        data_dirs=data_dirs,
-        split="test",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
-        )
-        self.val_loader = DataLoader(
-            self.validation_set,
-            batch_size=batch_size,
-            num_workers=num_workers,
-            shuffle=False,
-            pin_memory=True,
-        )
+            data_dirs=data_dirs,
+            split="test",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+            )
         
         dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         if state_dict_path is None:
@@ -295,12 +310,177 @@ class GlobalClient:
                 self.results_path = f'results/poolformer_results_{dt}.pkl'
             elif isinstance(model, ResNet50):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
+                
+    def create_pruning_loader(self, pruning_patches: list[str]) -> DataLoader:
+        """
+        Create a DataLoader for the given pruning patches.
+
+        Args:
+            pruning_patches (list[str]): List of patch IDs to include in the pruning dataset.
+
+        Returns:
+            DataLoader: DataLoader for the pruning patches.
+        """
+        # Standardwerte für fehlende Konfigurationskeys
+        batch_size = self.configs.get("pruning_dataloader_batchsize", 32)  # Standardwert: 32
+        num_workers = self.configs.get("num_workers", 0)  # Standardwert: 0
+
+        # Erstelle ein Dataset, das nur die Pruning-Patches enthält
+        pruning_dataset = BENv2DataSet(
+            data_dirs=data_dirs,
+            split="train",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=lambda patch_id: patch_id in pruning_patches,  # Filter für spezifische Patches
+        )
+
+        # Erstelle den DataLoader
+        prune_loader = DataLoader(
+            pruning_dataset,
+            batch_size=batch_size,
+            num_workers=num_workers,
+            shuffle=True,
+            pin_memory=True,
+        )
+        return prune_loader
+
+    
 
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
         for com_round in range(1, communication_rounds + 1):
             print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
+        
+
+            # Pruning mask generation
+            if com_round == 1:
+                # Trainings- und Validierungsdatensatz setzen
+                train_set = self.dataset
+                val_set = self.validation_set
+                
+                
+                
+                # Liste aller verfügbaren Klassen
+                all_classes = [
+                    'Transitional woodland, shrub', 'Coastal wetlands', 'Urban fabric', 'Arable land',
+                    'Moors, heathland and sclerophyllous vegetation', 'Inland wetlands', 'Permanent crops',
+                    'Industrial or commercial units', 'Mixed forest', 'Broad-leaved forest',
+                    'Natural grassland and sparsely vegetated areas',
+                    'Land principally occupied by agriculture, with significant areas of natural vegetation',
+                    'Marine waters', 'Beaches, dunes, sands', 'Coniferous forest', 'Pastures',
+                    'Inland waters', 'Agro-forestry areas', 'Complex cultivation patterns'
+                ]
+
+                from collections import defaultdict
+
+                # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
+                class_counts = defaultdict(int)
+                collected_classes = set()
+                pruning_patches = []
+
+                # Iteriere über die Patches und sammle Klassen, bis die gewünschte Anzahl erreicht ist
+                for patch in train_set.patches:
+                    patch_labels = train_set.BENv2Loader.lbls[patch]
+
+                    # Prüfe, ob der Patch neue Klassen enthält
+                    new_labels = [label for label in patch_labels if label not in collected_classes]
+
+                    # Füge den Patch hinzu, wenn er neue Klassen enthält
+                    if new_labels:
+                        pruning_patches.append(patch)
+
+                        # Aktualisiere die gesammelten Klassen und deren Häufigkeiten
+                        for label in patch_labels:
+                            collected_classes.add(label)
+                            class_counts[label] += 1
+
+                    # Prüfe, ob die gewünschte Anzahl eindeutiger Klassen erreicht wurde
+                    if len(collected_classes) >= self.configs["domain_restriction_classes"]:
+                        break  # Abbruch, wenn die gewünschte Anzahl an Klassen gesammelt wurde
+
+                # Zähle die Häufigkeit jeder Klasse in den gesammelten Patches
+                total_class_counts = defaultdict(int)
+                for patch in pruning_patches:
+                    patch_labels = train_set.BENv2Loader.lbls[patch]
+                    for label in patch_labels:
+                        total_class_counts[label] += 1
+
+                # Ausgabe der Ergebnisse
+                print(f"Finale Anzahl der Pruning-Patches: {len(pruning_patches)}")
+                print(f"Anzahl eindeutiger Klassen: {len(collected_classes)}")
+                print(f"Klassenverteilung in den Pruning-Patches (Häufigkeiten): {dict(total_class_counts)}")
+
+
+
+                self.prune_loader = self.create_pruning_loader(pruning_patches)
+                
+                suggested_composite = {
+                    "low_level_hidden_layer_rule": self.configs["low_level_hidden_layer_rule"],
+                    "mid_level_hidden_layer_rule": self.configs["mid_level_hidden_layer_rule"],
+                    "high_level_hidden_layer_rule": self.configs["high_level_hidden_layer_rule"],
+                    "fully_connected_layers_rule": self.configs["fully_connected_layers_rule"],
+                    "softmax_rule": self.configs["softmax_rule"],
+                }
+                
+                if self.configs["model_architecture"] == "vit_b_16":
+                    composite = get_vit_composite(
+                        self.configs["model_architecture"], suggested_composite
+                    )
+                else:
+                    composite = get_cnn_composite(
+                        self.configs["model_architecture"], suggested_composite
+                    )
+                    
+                    
+                layer_types = {
+                    "Softmax": torch.nn.Softmax,
+                    "Linear": torch.nn.Linear,
+                    "Conv2d": torch.nn.Conv2d,
+                }
+                            
+                print("Starting relevance computation and pruning mask generation.")
+                # Laden der relevanten Konfigurationen
+                pruning_rates = self.configs["pruning_rates"]
+
+                # Initialisierung des Relevance-Attributors
+                component_attributor = ComponentAttribution(
+                    "Relevance",
+                    "CNN",  # Annahme: ResNet wird verwendet
+                    layer_types[self.configs["pruning_layer_type"]],
+                )
+                
+                # Berechnung der Relevanzen
+                components_relevances = component_attributor.attribute(
+                    self.model,
+                    self.prune_loader,  # Beispielhaft Validation-Dataloader verwendet
+                    composite,  # Composite muss definiert werden
+                    abs_flag=True,
+                    device=self.device,
+                )
+                print(f"Components Relevances: {components_relevances}")
+                break
+
+                # Erstellen der Pruning-Maske
+                '''layer_names = component_attributor.layer_names
+                pruner = GlobalPruningOperations(
+                    layer_types[self.configs["pruning_layer_type"]],
+                    layer_names,
+                )
+                pruning_mask = pruner.generate_global_pruning_mask(
+                    self.model,
+                    components_relevances,
+                    pruning_rate=pruning_rates[0],  # Erste Pruning-Rate für dieses Beispiel
+                    subsequent_layer_pruning=configs["subsequent_layer_pruning"],
+                    least_relevant_first=configs["least_relevant_first"],
+                    device=self.device,
+                )
+                print(f"Generated Pruning Mask: {pruning_mask}")
+
+                # Senden der Maske an die Clients
+                for client in self.clients:
+                    client.apply_pruning_mask(pruning_mask)'''
 
             self.communication_round(epochs)
             report = self.validation_round()
@@ -316,6 +496,7 @@ class GlobalClient:
         self.save_results()
         self.save_state_dict()
         return self.results, self.client_results
+
 
     def change_sizes(self, labels):
         new_labels=np.zeros((len(labels[0]),19))

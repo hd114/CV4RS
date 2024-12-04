@@ -515,9 +515,46 @@ class ComponentAttribution:
         attributor = self.attributor(self.layer_names)
 
         sum_latent_relevances = OrderedDict([])
-        for images, labels in dataloader:
+        #for images, labels in dataloader:
             # Use composite=None because the composite
             # has been already registered to the model
+            
+        sample = dataloader.dataset[0]  # Beispielhaft den ersten Datensatz holen
+        #print(f"Sample returned by __getitem__: {sample}")
+        #print(f"Type of sample: {type(sample)}")
+        for batch_indices in dataloader.batch_sampler:  # Holt Batch-Indizes vom Dataloader
+            # Initialisiere Listen für Bilder und Labels
+            images = []
+            labels = []
+
+            for idx in batch_indices:
+                sample = dataloader.dataset[idx]  # Ruft __getitem__ auf
+                # Extrahiere Bild und Label
+                image, label = sample[1], sample[3]  # Bild ist an Index 1, Label an Index 3
+                images.append(image)
+                labels.append(label)
+
+            # Konvertiere zu Tensoren
+            images = torch.stack(images)  # Bilder stapeln
+            labels = torch.stack(labels)  # Labels stapeln
+
+            # Falls Labels im One-Hot-Encoding sind, ggf. konvertieren
+            if labels.ndim > 1:
+                labels = torch.argmax(labels, dim=1)
+
+
+            # Nutze die Daten im gewünschten Format
+            attributor.lrp_pass(
+                model,
+                images.to(device),  # Bilder an das Gerät senden
+                labels.to(device),  # Labels an das Gerät senden
+                composite=None,
+                # attribution_composite,  # Composite ist bereits registriert
+                initial_relevance=1,
+                device=device,
+            )
+
+            
             attributor.lrp_pass(
                 model,
                 images.to(device),

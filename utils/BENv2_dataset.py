@@ -90,7 +90,7 @@ class BENv2DataSet(Dataset):
             data_dirs: Mapping[str, Union[str, Path]] = None,
             split: Optional[str] = None,
             transform: Optional[Callable] = None,
-            max_len: Optional[int] = 100, #None,
+            max_len: Optional[int] = 3000, #None,
             img_size: tuple = (3, 120, 120),
             patch_prefilter: Optional[Callable[[str], bool]] = None,
             include_cloudy: bool = False,

@@ -33,7 +33,7 @@ model_architecture: resnet50
 # Checkpoint path of model
 checkpoint_path: None
 # Restricting output of the model (simpling the task) according to paper
-domain_restriction_classes: 3
+domain_restriction_classes: 19
 
 
 validation_dataloader_batchsize: 8
