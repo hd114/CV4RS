@@ -466,15 +466,26 @@ class GlobalClient:
                 )
                 
                 # Berechnung der Relevanzen
-                components_relevances = component_attributor.attribute(
-                    self.model,
-                    self.prune_loader,  # Beispielhaft Validation-Dataloader verwendet
-                    composite,  # Composite muss definiert werden
-                    abs_flag=True,
-                    device=self.device,
-                )
-                print(f"Components Relevances: {components_relevances}")
-                break
+                print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
+                print(f"model: {self.model}, device: {self.device}")
+                try:
+                    components_relevances = component_attributor.attribute(
+                        self.model,
+                        self.prune_loader,
+                        composite,
+                        abs_flag=True,
+                        device=self.device,
+                    )
+                except Exception as e:
+                    print(f"Exception occurred in attribute: {e}")
+                # Debugging: Überprüfen des Rückgabetyps und des Inhalts
+                print(f"Type of components_relevances: {type(components_relevances)}")
+                # Iteriere über das OrderedDict und gib die Relevanzen aus
+                for layer_name, relevance in components_relevances.items():
+                    print(f"Layer: {layer_name}")
+                    print(f"Relevance shape: {relevance.shape}")
+                    print(f"Relevance values: {relevance}")
+                    print("-" * 50)
 
                 # Erstellen der Pruning-Maske
                 '''layer_names = component_attributor.layer_names

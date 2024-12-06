@@ -540,7 +540,7 @@ class ComponentAttribution:
             labels = torch.stack(labels)  # Labels stapeln
 
             # Weiterverarbeitung oder Rückgabe
-            yield images, labels  # Falls als Generator genutzt
+            #yield images, labels  # Falls als Generator genutzt
 
 
             # Falls Labels im One-Hot-Encoding sind, ggf. konvertieren
@@ -551,21 +551,10 @@ class ComponentAttribution:
             # Nutze die Daten im gewünschten Format
             attributor.lrp_pass(
                 model,
-                images.to(device),  # Bilder an das Gerät senden
-                labels.to(device),  # Labels an das Gerät senden
-                composite=None,
-                # attribution_composite,  # Composite ist bereits registriert
-                initial_relevance=1,
-                device=device,
-            )
-
-            
-            attributor.lrp_pass(
-                model,
                 images.to(device),
                 labels.to(device),
                 composite=None,
-                # attribution_composite,
+                # attribution_composite,  # Composite ist bereits registriert
                 initial_relevance=1,
                 device=device,
             )
