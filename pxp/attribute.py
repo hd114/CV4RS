@@ -529,14 +529,19 @@ class ComponentAttribution:
 
             for idx in batch_indices:
                 sample = dataloader.dataset[idx]  # Ruft __getitem__ auf
-                # Extrahiere Bild und Label
-                image, label = sample[1], sample[3]  # Bild ist an Index 1, Label an Index 3
-                images.append(image)
+                # Extrahiere Bild und Label aus der verschachtelten Struktur
+                img = sample[1]  # Bild ist an Index 1
+                label = sample[4]  # Label ist an Index 4
+                images.append(img)
                 labels.append(label)
 
             # Konvertiere zu Tensoren
             images = torch.stack(images)  # Bilder stapeln
             labels = torch.stack(labels)  # Labels stapeln
+
+            # Weiterverarbeitung oder Rückgabe
+            yield images, labels  # Falls als Generator genutzt
+
 
             # Falls Labels im One-Hot-Encoding sind, ggf. konvertieren
             if labels.ndim > 1:

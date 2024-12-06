@@ -273,6 +273,7 @@ class GlobalClient:
             FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
             for csv_path in csv_paths
         ]
+        self.pruning_patches = []
         self.dataset = BENv2DataSet(
             data_dirs=data_dirs,
             split="train",  # Für Trainingsdaten
@@ -289,6 +290,14 @@ class GlobalClient:
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
             )
+        self.pruning_dataset = PruneDataSet(
+            pruning_patches=self.pruning_patches,  # Die gesammelten Patches
+            data_dirs=data_dirs,
+            split="train",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+        )
         
         dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         if state_dict_path is None:
@@ -378,7 +387,6 @@ class GlobalClient:
                 # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
                 class_counts = defaultdict(int)
                 collected_classes = set()
-                pruning_patches = []
 
                 # Iteriere über die Patches und sammle Klassen, bis die gewünschte Anzahl erreicht ist
                 for patch in train_set.patches:
@@ -389,7 +397,7 @@ class GlobalClient:
 
                     # Füge den Patch hinzu, wenn er neue Klassen enthält
                     if new_labels:
-                        pruning_patches.append(patch)
+                        self.pruning_patches.append(patch)
 
                         # Aktualisiere die gesammelten Klassen und deren Häufigkeiten
                         for label in patch_labels:
@@ -402,20 +410,23 @@ class GlobalClient:
 
                 # Zähle die Häufigkeit jeder Klasse in den gesammelten Patches
                 total_class_counts = defaultdict(int)
-                for patch in pruning_patches:
+                for patch in self.pruning_patches:
                     patch_labels = train_set.BENv2Loader.lbls[patch]
                     for label in patch_labels:
                         total_class_counts[label] += 1
 
                 # Ausgabe der Ergebnisse
-                print(f"Finale Anzahl der Pruning-Patches: {len(pruning_patches)}")
+                print(f"Finale Anzahl der Pruning-Patches: {len(self.pruning_patches)}")
                 print(f"Anzahl eindeutiger Klassen: {len(collected_classes)}")
                 print(f"Klassenverteilung in den Pruning-Patches (Häufigkeiten): {dict(total_class_counts)}")
 
 
 
-                self.prune_loader = self.create_pruning_loader(pruning_patches)
+                #self.prune_loader = self.create_pruning_loader(pruning_patches)
+                
                 train_loader = self.clients[0].train_loader
+                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
+
                 #validate_prune_loader(train_loader, self.prune_loader, self.pruning_dataset)
 
                 
@@ -625,3 +636,45 @@ def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
     for idx, img, _, key, labels in prune_loader:
         print(f"[DEBUG] Index: {idx}, Image Shape: {img.shape}, Key: {key}, Labels: {labels}")
         break  # Nur eine Batch prüfen'''
+
+
+from torch.utils.data import DataLoader, Subset
+
+def create_prune_loader(train_loader, pruning_patches):
+    """
+    Erstellt einen Prune-Loader basierend auf dem train_loader, indem nur die Patches
+    in `pruning_patches` beibehalten werden.
+
+    Args:
+        train_loader (DataLoader): Der ursprüngliche Trainings-Loader.
+        pruning_patches (list): Liste der Patches, die im Prune-Loader enthalten sein sollen.
+
+    Returns:
+        DataLoader: Der Prune-Loader mit derselben Struktur wie der train_loader.
+    """
+    print("[INFO] Erstelle Prune Loader...")
+
+    # Kopiere das Dataset aus dem train_loader
+    train_dataset = train_loader.dataset  # Das originale BENv2DataSet
+    prune_dataset = copy.deepcopy(train_dataset)
+
+    # Filtere die Patches, die nicht in pruning_patches sind
+    prune_dataset.patches = [patch for patch in prune_dataset.patches if patch in pruning_patches]
+    print(f"[INFO] {len(prune_dataset.patches)} Patches nach Filterung übrig.")
+
+    # Aktualisiere abhängige Attribute
+    prune_dataset.BENv2Loader.lbls = {patch: lbl for patch, lbl in prune_dataset.BENv2Loader.lbls.items() if patch in pruning_patches}
+    prune_dataset.BENv2Loader.lbl_key_set = set(prune_dataset.patches)
+
+    # Erstelle einen neuen DataLoader basierend auf dem gefilterten Dataset
+    prune_loader = torch.utils.data.DataLoader(
+        dataset=prune_dataset,
+        batch_size=train_loader.batch_size,
+        shuffle=False,  # Da Reihenfolge wichtig sein könnte
+        num_workers=train_loader.num_workers,
+        pin_memory=train_loader.pin_memory,
+        drop_last=train_loader.drop_last,
+    )
+
+    print("[SUCCESS] Prune Loader erfolgreich erstellt.")
+    return prune_loader
