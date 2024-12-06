@@ -238,7 +238,7 @@ class FLCLient:
             loss = self.criterion(logits, label_new)
             loss.backward()
             self.optimizer.step()
-    
+
     
     
     def get_validation_results(self):
@@ -325,27 +325,27 @@ class GlobalClient:
         batch_size = self.configs.get("pruning_dataloader_batchsize", 32)  # Standardwert: 32
         num_workers = self.configs.get("num_workers", 0)  # Standardwert: 0
 
-        # Erstelle ein Dataset, das nur die Pruning-Patches enthält
-        pruning_dataset = BENv2DataSet(
+        # Erstelle das Pruning-Dataset und speichere es als Attribut
+        self.pruning_dataset = PruneDataSet(
+            pruning_patches=pruning_patches,  # Die gesammelten Patches
             data_dirs=data_dirs,
             split="train",
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=lambda patch_id: patch_id in pruning_patches,  # Filter für spezifische Patches
         )
 
-        # Erstelle den DataLoader
+        # Erstelle den Pruning-Loader
         prune_loader = DataLoader(
-            pruning_dataset,
-            batch_size=batch_size,
+            self.pruning_dataset,
+            batch_size=min(256, len(self.pruning_dataset)),  # Dynamische Anpassung der Batch-Größe
             num_workers=num_workers,
             shuffle=True,
             pin_memory=True,
         )
+
         return prune_loader
 
-    
 
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
@@ -415,6 +415,9 @@ class GlobalClient:
 
 
                 self.prune_loader = self.create_pruning_loader(pruning_patches)
+                train_loader = self.clients[0].train_loader
+                #validate_prune_loader(train_loader, self.prune_loader, self.pruning_dataset)
+
                 
                 suggested_composite = {
                     "low_level_hidden_layer_rule": self.configs["low_level_hidden_layer_rule"],
@@ -559,3 +562,66 @@ class GlobalClient:
             Path(self.results_path).parent.mkdir(parents=True)  
         res = {'global':self.results, 'clients':self.client_results, 'train_time': self.train_time}
         torch.save(res, self.results_path)
+        
+        
+from utils.BENv2_dataset import BENv2DataSet
+
+class PruneDataSet(BENv2DataSet):
+    def __init__(self, pruning_patches, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Setze die Patches auf die Pruning-Patches
+        self.patches = pruning_patches
+        # Sortiere für Konsistenz
+        self.patches.sort()
+
+def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
+    print("[INFO] Validierung des Prune Loaders...")
+
+    for batch_idx, (train_batch, prune_batch) in enumerate(zip(train_loader, prune_loader)):
+        for i, (train_item, prune_item) in enumerate(zip(train_batch, prune_batch)):
+            # Prüfe nur die Shape-Dimensionen, nicht die exakte Anzahl
+            assert train_item.shape[1:] == prune_item.shape[1:], \
+                f"Shape mismatch in batch {batch_idx}, element {i}: {train_item.shape} != {prune_item.shape}"
+
+    print("[SUCCESS] Prune Loader Struktur validiert!")
+
+
+'''def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
+    """
+    Validiert die Struktur des prune_loader im Vergleich zum train_loader
+    und prüft, ob die Daten korrekt geladen werden.
+
+    Args:
+        train_loader (DataLoader): Originaler Trainings-Loader.
+        prune_loader (DataLoader): Pruning-Loader.
+        pruning_dataset (PruneDataSet): Pruning-Dataset.
+    """
+    print("[INFO] Validierung des Prune Loaders...")
+
+    # Prüfen, ob beide Loader gleichartige Datenstrukturen zurückgeben
+    for batch_idx, (train_batch, prune_batch) in enumerate(zip(train_loader, prune_loader)):
+        # Anzahl der Elemente im Batch prüfen
+        assert len(train_batch) == len(prune_batch), f"Batch structure mismatch: train_batch has {len(train_batch)} elements, prune_batch has {len(prune_batch)} elements."
+
+        # Iteriere über die Elemente in einem Batch
+        for i, (train_item, prune_item) in enumerate(zip(train_batch, prune_batch)):
+            # Typen vergleichen
+            assert type(train_item) == type(prune_item), f"Type mismatch in batch {batch_idx}, element {i}: {type(train_item)} != {type(prune_item)}"
+            
+            # Shapes vergleichen (nur für Tensoren relevant)
+            if isinstance(train_item, torch.Tensor):
+                assert train_item.shape == prune_item.shape, f"Shape mismatch in batch {batch_idx}, element {i}: {train_item.shape} != {prune_item.shape}"
+
+    print("[SUCCESS] Prune Loader Struktur validiert!")
+
+    # Debugging innerhalb des Pruning Datasets
+    print("[INFO] Debugging des Prune Datasets...")
+    for patch in pruning_dataset.patches:
+        assert patch in pruning_dataset.BENv2Loader.lbls, f"Patch {patch} nicht in BENv2Loader vorhanden"
+    print("[SUCCESS] Alle Pruning-Patches haben gültige Labels!")
+
+    # Debugging der geladenen Daten
+    print("[INFO] Debugging der geladenen Daten...")
+    for idx, img, _, key, labels in prune_loader:
+        print(f"[DEBUG] Index: {idx}, Image Shape: {img.shape}, Key: {key}, Labels: {labels}")
+        break  # Nur eine Batch prüfen'''
