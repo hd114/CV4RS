@@ -30,13 +30,14 @@ from utils.pytorch_utils import (
     start_cuda
 )
 
-from collections import defaultdict
+from collections import OrderedDict, defaultdict
 import random
 import yaml
 from pxp import GlobalPruningOperations
 from pxp import ComponentAttribution
 from pxp.composites import *
 from data.imagenet import ImageNetSubset, ImageNetSubset, get_sample_indices_for_class
+from metrics.accuracy import compute_accuracy
 
 
 '''data_dirs = {
@@ -425,7 +426,7 @@ class GlobalClient:
                 #self.prune_loader = self.create_pruning_loader(pruning_patches)
                 
                 train_loader = self.clients[0].train_loader
-                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
+                self.prune_loader = create_prune_loader(train_loader, self.pruning_patches)
 
                 #validate_prune_loader(train_loader, self.prune_loader, self.pruning_dataset)
 
@@ -485,27 +486,101 @@ class GlobalClient:
                     print(f"Layer: {layer_name}")
                     print(f"Relevance shape: {relevance.shape}")
                     print(f"Relevance values: {relevance}")
+                    total_relevance = relevance.sum().item()
+                    print(f"Total layer relevance: {total_relevance}")
+                    
                     print("-" * 50)
-
-                # Erstellen der Pruning-Maske
-                '''layer_names = component_attributor.layer_names
+                    
+                # neu
+                '''acc_top1 = compute_accuracy(
+                    self.model,
+                    custom_validation_dataloader,
+                    self.device,
+                )
+                
+                print(f"Initial accuracy: top1={acc_top1}")'''
+                """
+                Experiment's main loop
+                """
+                layer_names = component_attributor.layer_names
                 pruner = GlobalPruningOperations(
                     layer_types[self.configs["pruning_layer_type"]],
                     layer_names,
                 )
-                pruning_mask = pruner.generate_global_pruning_mask(
-                    self.model,
-                    components_relevances,
-                    pruning_rate=pruning_rates[0],  # Erste Pruning-Rate für dieses Beispiel
-                    subsequent_layer_pruning=configs["subsequent_layer_pruning"],
-                    least_relevant_first=configs["least_relevant_first"],
-                    device=self.device,
-                )
-                print(f"Generated Pruning Mask: {pruning_mask}")
+                #top1_acc_list = []
+                #progress_bar = tqdm.tqdm(total=len(pruning_rates))
+                
+                global_pruning_mask = OrderedDict([])
+                for pruning_rate in pruning_rates:
+                    #progress_bar.set_description(f"Processing {int((pruning_rate)*100)}% Pruning")
+                    # skip pruning if compression rate is 0.00 as we
+                    # have computed few lines above, otherwise prune
+                    if pruning_rate != 0.0:
+                        # prune the model based on the
+                        # pre-computed attibution flow
+                        # (relevance values)
+                        global_pruning_mask = pruner.generate_global_pruning_mask(
+                            self.model,
+                            components_relevances,
+                            pruning_rate,
+                            subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
+                            least_relevant_first=self.configs["least_relevant_first"],
+                            device=self.device,
+                        )
+                        print(f"Global Pruning Mask: {global_pruning_mask}")
+                        # Our pruning gets applied by masking the
+                        # activation of layers via forward hooks.
+                        # Therefore hooks are returned for later
+                        # removal
+                        hook_handles = pruner.fit_pruning_mask(
+                            self.model,
+                            global_pruning_mask,
+                        )
+
+                    '''progress_bar.set_description(
+                        f"Computing accuracy for model pruned with {int((pruning_rate)*100)}%"
+                    )
+                    acc_top1 = compute_accuracy(
+                        self.model,
+                        self.custom_validation_dataloader,
+                        self.device,
+                    )'''
+                    # Remove/Deactivate hooks (except
+                    # when the pruning rate is 0.00)
+                    if pruning_rate != 0.0:
+                        if layer_types[self.configs["pruning_layer_type"]] == torch.nn.Softmax:
+                            for hook in hook_handles:
+                                hook.remove()
+                    #top1_acc_list.append(acc_top1)
+                    #print(f"Accuracy-Flow list: {top1_acc_list}")
+
+                    """
+                    Logging the results on WandB
+                    """
+                    '''if self.configs["wandb"]:
+                        wandb.log({"acc_top1": acc_top1, "pruning_rate": pruning_rate})
+                        print(f"Logged the results of {pruning_rate}% Pruning Rate to wandb!")
+                    progress_bar.update(1)'''
+
+                # empty up the GPU memory and CUDA cache, model and dataset
+                #progress_bar.close()
+                del pruner
+                torch.cuda.empty_cache()
+
+                '''top1_auc = compute_auc(top1_acc_list, pruning_rates)
+                if self.configs["wandb"]:
+                    wandb.log({"top1_auc": top1_auc})
+                    print(f"Logged the AUC of the Top1 Accuracy to wandb!")
+
+                print(f"Top1 AUC: {top1_auc}")'''
+                
+                # Profiling stoppen und Ergebnisse speichern
+                #profiler.stop()
+                print(f"Generated Pruning Mask: {global_pruning_mask}")
 
                 # Senden der Maske an die Clients
                 for client in self.clients:
-                    client.apply_pruning_mask(pruning_mask)'''
+                    client.apply_pruning_mask(self.pruning_mask)
 
             self.communication_round(epochs)
             report = self.validation_round()
