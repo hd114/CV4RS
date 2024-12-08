@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import time
 from datetime import datetime
-from pathlib import Path 
+from pathlib import Path
 
 from functools import partial
 from pathlib import Path
@@ -37,13 +37,15 @@ from utils.pytorch_utils import (
     }'''
 
 data_dirs = {
-        "images_lmdb": "/faststorage/BigEarthNet-V2/BigEarthNet-V2-LMDB",
-         "metadata_parquet": "/faststorage/BigEarthNet-V2/metadata.parquet",
-         "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
-    }
+    "images_lmdb": "/faststorage/BigEarthNet-V2/BigEarthNet-V2-LMDB",
+    "metadata_parquet": "/faststorage/BigEarthNet-V2/metadata.parquet",
+    "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
+}
+
 
 class PreFilter:
-    def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None, seasons: Optional[Container] | str = None):
+    def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None,
+                 seasons: Optional[Container] | str = None):
         """
         Creates a function that filters patches based on country and season.
 
@@ -100,32 +102,32 @@ class Aggregator:
 
     def fed_avg(self, model_updates: list[dict]):
         assert len(model_updates) > 0, "Trying to aggregate empty update list"
-        
+
         update_aggregation = {}
         for key in model_updates[0].keys():
             params = torch.stack([update[key] for update in model_updates], dim=0)
             avg = torch.mean(params, dim=0)
             update_aggregation[key] = avg
-        
+
         return update_aggregation
 
 
 class FLCLient:
     def __init__(
-        self,
-        model: torch.nn.Module,
-        lmdb_path: str,
-        val_path: str,
-        csv_path: list[str],
-        batch_size: int = 256,
-        num_workers: int = 2,
-        optimizer_constructor: callable = torch.optim.Adam,
-        optimizer_kwargs: dict = {"lr": 0.001, "weight_decay": 0},
-        criterion_constructor: callable = torch.nn.BCEWithLogitsLoss,
-        criterion_kwargs: dict = {"reduction": "mean"},
-        num_classes: int = 19,
-        device: torch.device = torch.device('cpu'),
-        dataset_filter: str = "serbia",
+            self,
+            model: torch.nn.Module,
+            lmdb_path: str,
+            val_path: str,
+            csv_path: list[str],
+            batch_size: int = 256,
+            num_workers: int = 2,
+            optimizer_constructor: callable = torch.optim.Adam,
+            optimizer_kwargs: dict = {"lr": 0.001, "weight_decay": 0},
+            criterion_constructor: callable = torch.nn.BCEWithLogitsLoss,
+            criterion_kwargs: dict = {"reduction": "mean"},
+            num_classes: int = 19,
+            device: torch.device = torch.device('cpu'),
+            dataset_filter: str = "serbia",
     ) -> None:
         self.model = model
         self.optimizer_constructor = optimizer_constructor
@@ -136,13 +138,14 @@ class FLCLient:
         self.dataset_filter = dataset_filter
         self.results = init_results(self.num_classes)
         self.dataset = BENv2DataSet(
-        data_dirs=data_dirs,
-        # For Mars use these paths
-        split="train",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons=["Summer"]),
+            data_dirs=data_dirs,
+            # For Mars use these paths
+            split="train",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path],
+                                      seasons=["Summer"]),
         )
         self.train_loader = DataLoader(
             self.dataset,
@@ -154,12 +157,13 @@ class FLCLient:
         self.device = device
 
         self.validation_set = BENv2DataSet(
-        data_dirs=data_dirs,
-        split="test",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons="Summer"),
+            data_dirs=data_dirs,
+            split="test",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path],
+                                      seasons="Summer"),
         )
         self.val_loader = DataLoader(
             self.validation_set,
@@ -185,7 +189,7 @@ class FLCLient:
             print("-" * 10)
 
             self.train_epoch()
-        
+
         if validate:
             report = self.validation_round()
             self.results = update_results(self.results, report, self.num_classes)
@@ -203,23 +207,22 @@ class FLCLient:
         return model_update
 
     def change_sizes(self, labels):
-        new_labels=np.zeros((len(labels[0]),19))
-        for i in range(len(labels[0])): #128
-            for j in range(len(labels)): #19
-                new_labels[i,j] =  int(labels[j][i])
+        new_labels = np.zeros((len(labels[0]), 19))
+        for i in range(len(labels[0])):  # 128
+            for j in range(len(labels)):  # 19
+                new_labels[i, j] = int(labels[j][i])
         return new_labels
-    
+
     def train_epoch(self):
         self.model.train()
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
-            
-        #    data, labels, index = batch["data"], batch["label"], batch["index"]
+            #    data, labels, index = batch["data"], batch["label"], batch["index"]
             data = batch[1]
             labels = batch[4]
-            
+
             data = data.cuda()
-            label_new=np.copy(labels)
-           # label_new=self.change_sizes(label_new)
+            label_new = np.copy(labels)
+            # label_new=self.change_sizes(label_new)
             label_new = torch.from_numpy(label_new).cuda()
             self.optimizer.zero_grad()
 
@@ -227,25 +230,24 @@ class FLCLient:
             loss = self.criterion(logits, label_new)
             loss.backward()
             self.optimizer.step()
-    
-    
-    
+
     def get_validation_results(self):
         return self.results
 
+
 class GlobalClient:
     def __init__(
-        self,
-        model: torch.nn.Module,
-        lmdb_path: str,
-        val_path: str,
-        csv_paths: list[str],
-        batch_size: int = 128,
-        num_workers: int = 0,
-        num_classes: int = 19,
-        dataset_filter: str = "serbia",
-        state_dict_path: str = None,
-        results_path: str = None
+            self,
+            model: torch.nn.Module,
+            lmdb_path: str,
+            val_path: str,
+            csv_paths: list[str],
+            batch_size: int = 128,
+            num_workers: int = 0,
+            num_classes: int = 19,
+            dataset_filter: str = "serbia",
+            state_dict_path: str = None,
+            results_path: str = None
     ) -> None:
         self.model = model
         self.device = torch.device(0) if torch.cuda.is_available() else torch.device('cpu')
@@ -256,16 +258,18 @@ class GlobalClient:
         self.aggregator = Aggregator()
         self.results = init_results(self.num_classes)
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
+            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes,
+                     dataset_filter=dataset_filter, device=self.device)
             for csv_path in csv_paths
         ]
         self.validation_set = BENv2DataSet(
-        data_dirs=data_dirs,
-        split="test",
-        img_size=(10, 120, 120),
-        include_snowy=False,
-        include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+            data_dirs=data_dirs,
+            split="test",
+            img_size=(10, 120, 120),
+            include_snowy=False,
+            include_cloudy=False,
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]),
+                                      countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
         )
         self.val_loader = DataLoader(
             self.validation_set,
@@ -274,7 +278,7 @@ class GlobalClient:
             shuffle=False,
             pin_memory=True,
         )
-        
+
         dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         if state_dict_path is None:
             if isinstance(model, ConvMixer):
@@ -318,12 +322,11 @@ class GlobalClient:
         return self.results, self.client_results
 
     def change_sizes(self, labels):
-        new_labels=np.zeros((len(labels[0]),19))
-        for i in range(len(labels[0])): #128
-            for j in range(len(labels)): #19
-                new_labels[i,j] =  int(labels[j][i])
+        new_labels = np.zeros((len(labels[0]), 19))
+        for i in range(len(labels[0])):  # 128
+            for j in range(len(labels)):  # 19
+                new_labels[i, j] = int(labels[j][i])
         return new_labels
-    
 
     def validation_round(self):
         self.model.eval()
@@ -334,8 +337,8 @@ class GlobalClient:
             for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
                 data = batch[1].to(self.device)
                 labels = batch[4]
-                label_new=np.copy(labels)
-               # label_new=self.change_sizes(label_new)
+                label_new = np.copy(labels)
+                # label_new=self.change_sizes(label_new)
 
                 logits = self.model(data)
                 probs = torch.sigmoid(logits).cpu().numpy()
@@ -375,6 +378,6 @@ class GlobalClient:
 
     def save_results(self):
         if not Path(self.results_path).parent.is_dir():
-            Path(self.results_path).parent.mkdir(parents=True)  
-        res = {'global':self.results, 'clients':self.client_results, 'train_time': self.train_time}
+            Path(self.results_path).parent.mkdir(parents=True)
+        res = {'global': self.results, 'clients': self.client_results, 'train_time': self.train_time}
         torch.save(res, self.results_path)
