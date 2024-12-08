@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from pathlib import Path
-from utils.pytorch_models import ResNet50
+from utils.pytorch_models import ResNet18, ResNet50
 from models.poolformer import create_poolformer_s12
 from models.ConvMixer import create_convmixer
 from models.MLPMixer import create_mlp_mixer
@@ -21,6 +21,7 @@ def train():
 	#model = create_convmixer(channels=channels, num_classes=num_classes, pretrained=False)
     #model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)
 	model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+	#model = ResNet18("ResNet18", channels=channels, num_cls=num_classes, pretrained=False)
 	global_client = GlobalClient(
 		model=model,
 		lmdb_path="",

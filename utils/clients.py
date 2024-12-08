@@ -19,7 +19,7 @@ from typing import Container
 from timm.models.convmixer import ConvMixer
 from timm.models.mlp_mixer import MlpMixer
 from models.poolformer import PoolFormer
-from utils.pytorch_models import ResNet50
+from utils.pytorch_models import ResNet18, ResNet50
 import pandas as pd
 from utils.BENv2_dataset import BENv2DataSet
 from utils.pytorch_utils import (
@@ -288,6 +288,8 @@ class GlobalClient:
             elif isinstance(model, PoolFormer):
                 self.state_dict_path = f'checkpoints/global_poolformer_{dt}.pkl'
             elif isinstance(model, ResNet50):
+                self.state_dict_path = f'checkpoints/global_resnet50_{dt}.pkl'
+            elif isinstance(model, ResNet18):
                 self.state_dict_path = f'checkpoints/global_resnet18_{dt}.pkl'
 
         if results_path is None:
@@ -298,6 +300,8 @@ class GlobalClient:
             elif isinstance(model, PoolFormer):
                 self.results_path = f'results/poolformer_results_{dt}.pkl'
             elif isinstance(model, ResNet50):
+                self.results_path = f'results/resnet50_results_{dt}.pkl'
+            elif isinstance(model, ResNet18):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
 
     def train(self, communication_rounds: int, epochs: int):
