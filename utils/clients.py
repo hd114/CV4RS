@@ -482,11 +482,17 @@ class GlobalClient:
                 # Debugging: Überprüfen des Rückgabetyps und des Inhalts
                 print(f"Type of components_relevances: {type(components_relevances)}")
                 # Iteriere über das OrderedDict und gib die Relevanzen aus
-                for layer_name, relevance in components_relevances.items():
+                '''for layer_name, relevance in components_relevances.items():
                     print(f"Layer: {layer_name}")
                     print(f"Relevance shape: {relevance.shape}")
-                    print(f"Relevance values: {relevance}")
+                    print(f"Relevance values: {relevance}")     
                     total_relevance = relevance.sum().item()
+                    print(f"Total layer relevance: {total_relevance}")               
+                    print("-" * 50)'''
+                    
+                for layer_name, relevance in components_relevances.items():
+                    total_relevance = relevance.sum().item()
+                    print(f"Layer: {layer_name}")
                     print(f"Total layer relevance: {total_relevance}")
                     
                     print("-" * 50)
