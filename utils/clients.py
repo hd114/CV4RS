@@ -52,7 +52,7 @@ data_dirs = {
          "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
     }
 
-config_path = "../CV4RS-orig/configs/test-config-resnet-p.yaml"
+config_path = "CV4RS-orig/configs/test-config-resnet-p.yaml"
 
 class PreFilter:
     def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None, seasons: Optional[Container] | str = None):
@@ -524,7 +524,7 @@ class GlobalClient:
                     'Inland waters', 'Agro-forestry areas', 'Complex cultivation patterns'
                 ]
 
-                '''from collections import defaultdict
+                from collections import defaultdict
 
                 # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
                 class_counts = defaultdict(int)
@@ -567,10 +567,10 @@ class GlobalClient:
                 #self.prune_loader = self.create_pruning_loader(pruning_patches)
                 
                 self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
-                '''
+                
                 
                 # 30 patch big subset of trainloader
-                original_dataset = self.clients[0].train_loader.dataset
+                '''original_dataset = self.clients[0].train_loader.dataset
                 assert len(original_dataset) >= 30, "Das Dataset enthält weniger als 30 Patches!"
                 selected_indices = list(range(30))  # Nimm die ersten 30 Patches
                 subset_dataset = torch.utils.data.Subset(original_dataset, selected_indices)
@@ -583,7 +583,7 @@ class GlobalClient:
                     num_workers=self.clients[0].train_loader.num_workers,
                     pin_memory=self.clients[0].train_loader.pin_memory
                 )
-                print(f"Created train_loader1 with {len(subset_dataset)} patches.")
+                print(f"Created train_loader1 with {len(subset_dataset)} patches.")'''
 
                 
                 suggested_composite = {
@@ -628,7 +628,7 @@ class GlobalClient:
                 try:
                     components_relevances = component_attributor.attribute(
                         self.model,
-                        train_loader1, # self.prune_loader,
+                        self.prune_loader, # train_loader1, 
                         composite,
                         abs_flag=True,
                         device=self.device,
@@ -677,17 +677,17 @@ class GlobalClient:
                 # prune the model based on the
                 # pre-computed attibution flow
                 # (relevance values)
-                try:
-                    global_pruning_mask = pruner.generate_global_pruning_mask(
-                        self.model,
-                        components_relevances,
-                        pruning_percentage=0.1,
-                        subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
-                        least_relevant_first=self.configs["least_relevant_first"],
-                        device=self.device,
-                    )
-                except Exception as e:
-                    print(f"Error during pruning mask generation: {e}")
+                #try:
+                global_pruning_mask = pruner.generate_global_pruning_mask(
+                    self.model,
+                    components_relevances,
+                    pruning_percentage=0.5,
+                    subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
+                    least_relevant_first=self.configs["least_relevant_first"],
+                    device=self.device,
+                )
+                #except Exception as e:
+                #    print(f"Error during pruning mask generation: {e}")
             
                 print(f"Global Pruning Mask: {global_pruning_mask}")
                 

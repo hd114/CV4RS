@@ -34,8 +34,8 @@ def ensure_model_keys(model: torch.nn.Module, required_keys: list[str]) -> torch
 
 
 def train():
-	csv_paths = ["Finland","Ireland","Serbia"] #  ,"Ireland","Serbia"  this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
-	epochs = 3
+	csv_paths = ["Finland"] #  ,"Ireland","Serbia"  this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
+	epochs = 2
 	communication_rounds = 8
 	channels = 10
 	num_classes = 19

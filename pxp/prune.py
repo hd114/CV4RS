@@ -223,10 +223,6 @@ class GlobalPruningOperations(LocalPruningOperations):
         if self.target_layer != torch.nn.Softmax:
             global_pruning_mask = OrderedDict([])
             for layer_name, layer_pruning_indices in global_pruning_indices.items():
-                # Verhindere neue Keys
-                if layer_name not in model.state_dict():
-                    print(f"Pruner is attempting to add a new key: {layer_name}. This is not allowed!")
-                    continue  # Überspringe neue Keys
 
                 global_pruning_mask[layer_name] = self.generate_local_pruning_mask(
                     global_pruning_masks_shapes[layer_name],
@@ -236,7 +232,6 @@ class GlobalPruningOperations(LocalPruningOperations):
                 )
 
             return global_pruning_mask
-
 
         else:
             return global_pruning_indices
