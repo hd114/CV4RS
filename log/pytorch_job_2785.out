@@ -1,0 +1,493 @@
+Initializing missing key: conv1.bias
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    29135 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Loading BEN data for train...
+    237871 patches indexed
+    237871 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+==================================================
+ROUND 1/8
+==================================================
+[INFO] Saving initial model state...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+[INFO] Saving initial model state...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+[INFO] Saving initial model state...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+micro     precision: 0.1653 | recall: 0.9901 | f1-score: 0.2833 | support: 101 | mAP: 0.1650
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0532
+
+==================================================
+ROUND 2/8
+==================================================
+Created train_loader1 with 30 patches.
+Starting relevance computation and pruning mask generation.
+Type of components_relevances: <class 'collections.OrderedDict'>
+Layer: conv1
+Total layer relevance: 3.300400340248288e+37
+--------------------------------------------------
+Layer: encoder.4.0.conv1
+Total layer relevance: 2.133698842039114e+37
+--------------------------------------------------
+Layer: encoder.4.0.conv2
+Total layer relevance: 1.438542831175117e+37
+--------------------------------------------------
+Layer: encoder.4.0.conv3
+Total layer relevance: 4.201126558644076e+36
+--------------------------------------------------
+Layer: encoder.4.0.downsample.0
+Total layer relevance: 4.269803431387341e+36
+--------------------------------------------------
+Layer: encoder.4.1.conv1
+Total layer relevance: 2.1092775056888195e+35
+--------------------------------------------------
+Layer: encoder.4.1.conv2
+Total layer relevance: 1.3650848002770528e+35
+--------------------------------------------------
+Layer: encoder.4.1.conv3
+Total layer relevance: 1.5085765099698873e+34
+--------------------------------------------------
+Layer: encoder.4.2.conv1
+Total layer relevance: 4.5093250293760735e+32
+--------------------------------------------------
+Layer: encoder.4.2.conv2
+Total layer relevance: 2.6400682594093117e+32
+--------------------------------------------------
+Layer: encoder.4.2.conv3
+Total layer relevance: 8.79974782959915e+31
+--------------------------------------------------
+Layer: encoder.5.0.conv1
+Total layer relevance: 1.3772617282262125e+31
+--------------------------------------------------
+Layer: encoder.5.0.conv2
+Total layer relevance: 1.088244195208689e+31
+--------------------------------------------------
+Layer: encoder.5.0.conv3
+Total layer relevance: 1.8783523228433927e+30
+--------------------------------------------------
+Layer: encoder.5.0.downsample.0
+Total layer relevance: 1.8588201617230615e+30
+--------------------------------------------------
+Layer: encoder.5.1.conv1
+Total layer relevance: 6.0193417700306755e+28
+--------------------------------------------------
+Layer: encoder.5.1.conv2
+Total layer relevance: 4.141538072835797e+28
+--------------------------------------------------
+Layer: encoder.5.1.conv3
+Total layer relevance: 3.797410136673606e+27
+--------------------------------------------------
+Layer: encoder.5.2.conv1
+Total layer relevance: 4.021106128209947e+25
+--------------------------------------------------
+Layer: encoder.5.2.conv2
+Total layer relevance: 2.7682062683195064e+25
+--------------------------------------------------
+Layer: encoder.5.2.conv3
+Total layer relevance: 6.166157977413001e+24
+--------------------------------------------------
+Layer: encoder.5.3.conv1
+Total layer relevance: 5.1268099055338464e+23
+--------------------------------------------------
+Layer: encoder.5.3.conv2
+Total layer relevance: 3.361027034419376e+23
+--------------------------------------------------
+Layer: encoder.5.3.conv3
+Total layer relevance: 9.82634548016453e+22
+--------------------------------------------------
+Layer: encoder.6.0.conv1
+Total layer relevance: 9.978191097000767e+21
+--------------------------------------------------
+Layer: encoder.6.0.conv2
+Total layer relevance: 7.314214527069176e+21
+--------------------------------------------------
+Layer: encoder.6.0.conv3
+Total layer relevance: 6.97074116830079e+20
+--------------------------------------------------
+Layer: encoder.6.0.downsample.0
+Total layer relevance: 6.967100289477037e+20
+--------------------------------------------------
+Layer: encoder.6.1.conv1
+Total layer relevance: 1.1648922175519326e+19
+--------------------------------------------------
+Layer: encoder.6.1.conv2
+Total layer relevance: 8.446529688435687e+18
+--------------------------------------------------
+Layer: encoder.6.1.conv3
+Total layer relevance: 2.3815391621058396e+18
+--------------------------------------------------
+Layer: encoder.6.2.conv1
+Total layer relevance: 3.099378280604631e+17
+--------------------------------------------------
+Layer: encoder.6.2.conv2
+Total layer relevance: 2.4850801033740288e+17
+--------------------------------------------------
+Layer: encoder.6.2.conv3
+Total layer relevance: 3.017925557275853e+16
+--------------------------------------------------
+Layer: encoder.6.3.conv1
+Total layer relevance: 1912279025057792.0
+--------------------------------------------------
+Layer: encoder.6.3.conv2
+Total layer relevance: 1510241363558400.0
+--------------------------------------------------
+Layer: encoder.6.3.conv3
+Total layer relevance: 233143726505984.0
+--------------------------------------------------
+Layer: encoder.6.4.conv1
+Total layer relevance: 25626585071616.0
+--------------------------------------------------
+Layer: encoder.6.4.conv2
+Total layer relevance: 18193779261440.0
+--------------------------------------------------
+Layer: encoder.6.4.conv3
+Total layer relevance: 1267028066304.0
+--------------------------------------------------
+Layer: encoder.6.5.conv1
+Total layer relevance: 25684488192.0
+--------------------------------------------------
+Layer: encoder.6.5.conv2
+Total layer relevance: 18761777152.0
+--------------------------------------------------
+Layer: encoder.6.5.conv3
+Total layer relevance: 2821871616.0
+--------------------------------------------------
+Layer: encoder.7.0.conv1
+Total layer relevance: 316632000.0
+--------------------------------------------------
+Layer: encoder.7.0.conv2
+Total layer relevance: 252407712.0
+--------------------------------------------------
+Layer: encoder.7.0.conv3
+Total layer relevance: 40467212.0
+--------------------------------------------------
+Layer: encoder.7.0.downsample.0
+Total layer relevance: 38583964.0
+--------------------------------------------------
+Layer: encoder.7.1.conv1
+Total layer relevance: 2647874.0
+--------------------------------------------------
+Layer: encoder.7.1.conv2
+Total layer relevance: 2252763.0
+--------------------------------------------------
+Layer: encoder.7.1.conv3
+Total layer relevance: 165568.359375
+--------------------------------------------------
+Layer: encoder.7.2.conv1
+Total layer relevance: 13082.0654296875
+--------------------------------------------------
+Layer: encoder.7.2.conv2
+Total layer relevance: 14027.35546875
+--------------------------------------------------
+Layer: encoder.7.2.conv3
+Total layer relevance: 1741.416259765625
+--------------------------------------------------
+Pruner is attempting to add a new key: conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.0.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.0.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.0.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.0.downsample.0. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.1.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.1.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.1.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.2.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.2.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.4.2.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.0.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.0.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.0.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.0.downsample.0. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.1.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.1.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.1.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.2.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.2.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.2.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.3.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.3.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.5.3.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.0.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.0.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.0.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.0.downsample.0. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.1.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.1.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.1.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.2.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.2.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.2.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.3.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.3.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.3.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.4.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.4.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.4.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.5.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.5.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.6.5.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.0.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.0.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.0.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.0.downsample.0. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.1.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.1.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.1.conv3. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.2.conv1. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.2.conv2. This is not allowed!
+Pruner is attempting to add a new key: encoder.7.2.conv3. This is not allowed!
+Global Pruning Mask: OrderedDict()
+Keys missing after pruning: {'encoder.5.2.conv2.bias', 'encoder.7.1.bn1.num_batches_tracked', 'encoder.7.2.bn2.bias', 'encoder.5.3.bn3.num_batches_tracked', 'encoder.6.3.bn3.num_batches_tracked', 'encoder.5.1.bn1.running_mean', 'encoder.5.3.bn2.bias', 'encoder.6.1.bn1.running_mean', 'encoder.7.1.conv1.bias', 'encoder.7.0.bn3.bias', 'encoder.5.0.bn2.running_mean', 'encoder.5.2.conv1.bias', 'encoder.5.0.downsample.1.weight', 'encoder.4.1.conv3.weight', 'encoder.6.5.bn2.num_batches_tracked', 'encoder.6.3.bn2.weight', 'encoder.6.4.bn3.num_batches_tracked', 'encoder.6.2.conv3.weight', 'encoder.7.0.conv1.bias', 'encoder.4.0.conv1.weight', 'encoder.7.2.bn3.running_var', 'encoder.5.0.downsample.1.bias', 'encoder.7.2.bn2.num_batches_tracked', 'encoder.6.2.bn2.weight', 'encoder.6.1.bn1.weight', 'encoder.6.4.bn1.num_batches_tracked', 'encoder.6.4.conv2.weight', 'encoder.4.1.conv1.weight', 'encoder.4.1.bn2.running_mean', 'encoder.6.0.conv1.bias', 'encoder.7.0.bn1.running_var', 'encoder.7.2.bn1.num_batches_tracked', 'encoder.6.3.conv1.weight', 'encoder.4.2.bn2.bias', 'encoder.6.5.bn3.bias', 'encoder.6.5.bn3.weight', 'encoder.7.1.bn2.running_var', 'encoder.7.2.bn2.running_var', 'encoder.7.0.downsample.1.running_var', 'encoder.6.1.bn1.bias', 'encoder.6.0.downsample.1.weight', 'encoder.4.0.downsample.1.running_mean', 'encoder.5.1.bn3.bias', 'conv1.bias', 'encoder.5.2.bn1.running_var', 'encoder.5.2.conv3.bias', 'encoder.7.0.downsample.1.weight', 'encoder.4.1.bn2.bias', 'encoder.5.0.bn3.weight', 'encoder.6.4.bn2.weight', 'encoder.7.0.bn1.bias', 'encoder.6.3.bn2.running_var', 'encoder.5.2.bn2.weight', 'encoder.6.0.conv2.weight', 'encoder.5.1.bn2.bias', 'encoder.6.3.bn1.bias', 'encoder.6.0.bn1.num_batches_tracked', 'encoder.5.3.conv2.weight', 'encoder.5.1.bn3.running_mean', 'encoder.5.2.bn2.bias', 'encoder.6.1.bn3.bias', 'encoder.4.0.conv2.bias', 'encoder.4.2.bn1.running_mean', 'encoder.6.0.downsample.0.bias', 'encoder.4.2.conv1.bias', 'encoder.7.0.bn3.running_mean', 'encoder.7.0.conv3.weight', 'encoder.7.0.downsample.1.num_batches_tracked', 'encoder.4.2.conv3.weight', 'encoder.4.1.conv3.bias', 'encoder.6.1.bn2.bias', 'encoder.7.2.bn2.weight', 'encoder.6.1.conv1.weight', 'encoder.5.2.conv3.weight', 'encoder.6.2.conv1.weight', 'encoder.5.2.bn1.bias', 'encoder.6.2.bn1.bias', 'encoder.6.0.bn1.bias', 'encoder.6.1.conv1.bias', 'encoder.7.1.bn1.bias', 'encoder.4.1.bn1.running_mean', 'encoder.6.0.bn3.weight', 'encoder.7.1.bn2.num_batches_tracked', 'encoder.5.1.bn1.running_var', 'encoder.4.1.conv1.bias', 'encoder.5.0.downsample.0.weight', 'encoder.5.1.bn3.num_batches_tracked', 'encoder.6.1.bn2.weight', 'encoder.4.0.bn2.running_mean', 'encoder.5.1.bn2.running_mean', 'encoder.5.0.conv1.bias', 'encoder.4.0.bn1.running_mean', 'encoder.6.0.downsample.1.running_mean', 'encoder.6.2.bn2.running_var', 'encoder.6.4.bn1.bias', 'encoder.7.0.bn2.num_batches_tracked', 'encoder.4.1.bn3.weight', 'encoder.6.0.bn1.running_var', 'encoder.6.5.conv3.bias', 'encoder.6.5.bn3.num_batches_tracked', 'encoder.4.0.bn3.weight', 'encoder.6.5.bn2.weight', 'encoder.6.4.bn3.weight', 'encoder.5.2.bn3.weight', 'encoder.5.3.conv1.bias', 'encoder.5.3.bn1.running_var', 'encoder.4.0.bn2.num_batches_tracked', 'encoder.4.1.bn1.weight', 'encoder.4.2.bn3.num_batches_tracked', 'encoder.5.3.conv3.weight', 'encoder.4.1.bn3.num_batches_tracked', 'encoder.4.1.conv2.weight', 'encoder.5.0.bn1.running_mean', 'encoder.6.3.bn3.weight', 'encoder.7.0.bn2.weight', 'encoder.7.1.conv1.weight', 'encoder.4.2.bn3.weight', 'encoder.5.0.bn1.weight', 'encoder.5.0.bn2.weight', 'encoder.6.1.bn1.running_var', 'encoder.6.3.bn2.num_batches_tracked', 'encoder.5.3.bn3.weight', 'encoder.6.2.bn3.running_mean', 'encoder.4.1.bn1.num_batches_tracked', 'encoder.6.5.conv1.weight', 'encoder.6.2.bn2.bias', 'encoder.5.1.bn3.weight', 'encoder.4.1.bn2.running_var', 'encoder.4.2.bn3.running_var', 'encoder.6.0.bn1.weight', 'encoder.6.5.bn2.running_mean', 'encoder.5.2.conv2.weight', 'encoder.6.3.conv2.weight', 'encoder.6.2.bn1.num_batches_tracked', 'encoder.6.4.bn2.running_mean', 'encoder.5.2.bn1.weight', 'encoder.6.5.bn2.bias', 'encoder.6.2.bn1.running_mean', 'encoder.6.0.downsample.1.bias', 'encoder.7.0.bn3.weight', 'encoder.6.0.bn3.num_batches_tracked', 'encoder.7.2.bn3.bias', 'encoder.5.0.bn1.num_batches_tracked', 'encoder.6.1.conv3.weight', 'encoder.6.5.bn1.num_batches_tracked', 'encoder.4.0.bn3.running_var', 'encoder.1.weight', 'encoder.6.2.conv2.bias', 'encoder.7.2.conv3.weight', 'encoder.1.bias', 'encoder.7.1.conv3.bias', 'encoder.5.3.bn1.num_batches_tracked', 'encoder.4.1.bn3.running_var', 'encoder.5.2.bn1.running_mean', 'encoder.7.2.bn2.running_mean', 'encoder.6.5.conv3.weight', 'encoder.0.bias', 'encoder.7.1.bn3.running_mean', 'encoder.4.2.bn2.running_var', 'encoder.5.3.conv3.bias', 'encoder.6.2.bn3.num_batches_tracked', 'encoder.7.1.conv2.weight', 'encoder.4.2.bn3.bias', 'encoder.4.0.bn1.bias', 'encoder.6.1.conv3.bias', 'encoder.4.2.bn2.running_mean', 'encoder.5.1.conv3.weight', 'encoder.6.3.conv3.weight', 'encoder.6.3.bn1.running_var', 'encoder.5.1.conv3.bias', 'encoder.5.1.conv2.weight', 'encoder.7.1.bn2.weight', 'encoder.7.2.bn3.num_batches_tracked', 'encoder.5.2.conv1.weight', 'encoder.5.3.conv1.weight', 'encoder.7.0.bn2.running_mean', 'encoder.6.1.bn3.running_mean', 'encoder.6.4.bn3.running_var', 'encoder.7.1.bn2.bias', 'encoder.7.0.bn2.running_var', 'encoder.6.0.conv3.weight', 'encoder.7.1.bn1.running_var', 'encoder.5.1.conv1.bias', 'encoder.5.0.downsample.0.bias', 'encoder.7.2.conv3.bias', 'encoder.7.0.bn3.num_batches_tracked', 'encoder.6.5.bn1.weight', 'encoder.4.1.bn3.bias', 'encoder.4.0.downsample.1.bias', 'encoder.5.3.bn3.running_var', 'encoder.6.2.conv3.bias', 'encoder.7.0.conv3.bias', 'encoder.6.2.bn1.weight', 'encoder.5.0.conv2.bias', 'encoder.6.1.bn2.running_var', 'encoder.7.2.conv1.weight', 'encoder.4.2.bn1.running_var', 'encoder.4.0.downsample.1.running_var', 'encoder.4.2.conv2.weight', 'encoder.6.4.bn2.bias', 'encoder.4.1.bn1.running_var', 'encoder.6.2.conv2.weight', 'encoder.6.5.bn1.running_var', 'encoder.7.2.bn3.weight', 'encoder.5.0.bn2.bias', 'encoder.4.0.bn3.bias', 'encoder.5.3.bn1.weight', 'encoder.6.0.bn2.num_batches_tracked', 'encoder.6.5.bn1.running_mean', 'encoder.5.1.conv2.bias', 'encoder.6.0.bn2.running_var', 'encoder.6.0.downsample.0.weight', 'encoder.6.5.conv2.weight', 'encoder.4.0.bn2.running_var', 'encoder.6.0.bn3.running_mean', 'encoder.7.0.bn1.num_batches_tracked', 'encoder.5.1.bn1.weight', 'encoder.7.0.bn1.running_mean', 'encoder.5.3.bn2.running_var', 'encoder.6.1.bn3.running_var', 'encoder.6.4.bn1.running_var', 'encoder.0.weight', 'encoder.7.2.bn1.bias', 'conv1.weight', 'encoder.6.2.bn3.running_var', 'encoder.5.0.bn1.bias', 'encoder.6.1.bn2.num_batches_tracked', 'encoder.5.0.bn2.num_batches_tracked', 'encoder.5.0.bn3.bias', 'encoder.5.2.bn3.num_batches_tracked', 'encoder.7.1.bn3.bias', 'encoder.4.2.conv1.weight', 'encoder.6.2.bn1.running_var', 'encoder.6.0.bn3.running_var', 'encoder.5.0.conv3.bias', 'encoder.6.4.bn1.running_mean', 'encoder.4.2.bn3.running_mean', 'encoder.6.4.bn3.bias', 'encoder.5.0.bn3.num_batches_tracked', 'encoder.4.0.bn3.num_batches_tracked', 'encoder.6.4.conv3.weight', 'encoder.6.4.conv3.bias', 'encoder.5.3.bn3.running_mean', 'encoder.4.2.bn1.weight', 'encoder.6.5.conv1.bias', 'encoder.5.2.bn1.num_batches_tracked', 'encoder.6.3.bn1.running_mean', 'encoder.7.2.bn1.running_mean', 'encoder.6.3.conv2.bias', 'encoder.7.0.conv1.weight', 'encoder.6.3.bn3.running_mean', 'encoder.5.0.conv1.weight', 'encoder.4.0.conv2.weight', 'encoder.6.4.bn2.num_batches_tracked', 'encoder.7.1.bn2.running_mean', 'encoder.6.0.bn3.bias', 'encoder.4.2.conv2.bias', 'encoder.7.0.downsample.0.weight', 'encoder.5.3.conv2.bias', 'encoder.6.5.bn2.running_var', 'encoder.6.0.bn2.running_mean', 'encoder.7.2.conv1.bias', 'encoder.7.0.downsample.1.bias', 'encoder.7.2.conv2.weight', 'encoder.6.5.bn1.bias', 'encoder.5.0.conv2.weight', 'encoder.6.3.bn1.num_batches_tracked', 'encoder.4.0.bn2.bias', 'encoder.4.0.downsample.1.num_batches_tracked', 'encoder.5.0.downsample.1.num_batches_tracked', 'encoder.6.3.bn2.running_mean', 'encoder.6.2.bn2.num_batches_tracked', 'encoder.4.1.bn1.bias', 'encoder.5.2.bn3.running_var', 'encoder.4.0.conv3.bias', 'encoder.4.0.conv3.weight', 'encoder.7.1.bn3.weight', 'encoder.6.3.bn3.running_var', 'encoder.1.running_var', 'encoder.6.4.conv2.bias', 'encoder.4.0.bn1.running_var', 'encoder.7.2.bn1.weight', 'encoder.6.5.bn3.running_var', 'encoder.7.2.bn3.running_mean', 'encoder.5.0.bn3.running_mean', 'encoder.4.0.conv1.bias', 'encoder.1.num_batches_tracked', 'encoder.5.3.bn2.num_batches_tracked', 'encoder.4.1.bn2.num_batches_tracked', 'encoder.4.0.downsample.0.weight', 'encoder.5.3.bn1.bias', 'encoder.4.1.conv2.bias', 'encoder.5.0.bn3.running_var', 'encoder.7.0.downsample.0.bias', 'encoder.4.0.downsample.1.weight', 'encoder.7.2.bn1.running_var', 'encoder.5.0.bn1.running_var', 'encoder.6.4.conv1.bias', 'encoder.5.1.bn2.num_batches_tracked', 'encoder.7.0.downsample.1.running_mean', 'encoder.6.0.conv2.bias', 'encoder.5.1.bn2.running_var', 'encoder.6.4.bn2.running_var', 'encoder.5.2.bn3.bias', 'encoder.4.2.bn1.num_batches_tracked', 'encoder.6.0.conv1.weight', 'FC.bias', 'encoder.5.3.bn3.bias', 'encoder.5.0.downsample.1.running_mean', 'encoder.1.running_mean', 'encoder.5.1.bn1.bias', 'encoder.6.2.bn3.weight', 'encoder.4.0.bn2.weight', 'encoder.6.1.bn3.num_batches_tracked', 'encoder.6.2.bn3.bias', 'encoder.5.0.conv3.weight', 'encoder.6.1.conv2.weight', 'encoder.7.1.conv3.weight', 'encoder.5.2.bn2.running_mean', 'encoder.5.3.bn2.running_mean', 'encoder.4.2.bn2.weight', 'encoder.6.3.conv1.bias', 'encoder.6.2.bn2.running_mean', 'encoder.6.1.bn1.num_batches_tracked', 'encoder.7.1.bn3.running_var', 'encoder.7.1.bn1.weight', 'encoder.6.0.downsample.1.running_var', 'encoder.7.2.conv2.bias', 'encoder.6.2.conv1.bias', 'encoder.6.3.bn3.bias', 'encoder.6.0.conv3.bias', 'encoder.6.1.bn3.weight', 'encoder.6.1.bn2.running_mean', 'encoder.4.2.bn2.num_batches_tracked', 'encoder.4.2.conv3.bias', 'encoder.7.1.bn1.running_mean', 'encoder.4.2.bn1.bias', 'encoder.7.0.conv2.weight', 'encoder.5.2.bn3.running_mean', 'encoder.5.3.bn2.weight', 'encoder.6.3.bn2.bias', 'encoder.5.1.bn1.num_batches_tracked', 'encoder.7.0.bn3.running_var', 'encoder.6.3.bn1.weight', 'encoder.6.0.bn1.running_mean', 'encoder.4.0.bn1.num_batches_tracked', 'encoder.4.0.downsample.0.bias', 'encoder.5.1.bn3.running_var', 'encoder.6.0.bn2.weight', 'encoder.6.4.bn3.running_mean', 'encoder.6.5.bn3.running_mean', 'encoder.5.1.conv1.weight', 'encoder.6.3.conv3.bias', 'encoder.4.1.bn3.running_mean', 'encoder.4.0.bn3.running_mean', 'encoder.6.0.bn2.bias', 'encoder.6.4.conv1.weight', 'FC.weight', 'encoder.5.2.bn2.num_batches_tracked', 'encoder.6.5.conv2.bias', 'encoder.7.1.bn3.num_batches_tracked', 'encoder.4.0.bn1.weight', 'encoder.5.0.bn2.running_var', 'encoder.6.0.downsample.1.num_batches_tracked', 'encoder.7.1.conv2.bias', 'encoder.5.1.bn2.weight', 'encoder.7.0.bn2.bias', 'encoder.7.0.conv2.bias', 'encoder.5.3.bn1.running_mean', 'encoder.7.0.bn1.weight', 'encoder.4.1.bn2.weight', 'encoder.6.1.conv2.bias', 'encoder.6.4.bn1.weight', 'encoder.5.0.downsample.1.running_var', 'encoder.5.2.bn2.running_var'}
+Additional keys after pruning: set()
+Distributing pruning mask to clients...
+[WARNING] Client state_dict does not match global model: {'encoder.5.2.conv2.bias', 'encoder.7.1.conv1.bias', 'encoder.5.2.conv1.bias', 'encoder.7.0.conv1.bias', 'encoder.6.0.conv1.bias', 'conv1.bias', 'encoder.5.2.conv3.bias', 'encoder.4.0.conv2.bias', 'encoder.6.0.downsample.0.bias', 'encoder.4.2.conv1.bias', 'encoder.4.1.conv3.bias', 'encoder.6.1.conv1.bias', 'encoder.4.1.conv1.bias', 'encoder.5.0.conv1.bias', 'encoder.6.5.conv3.bias', 'encoder.5.3.conv1.bias', 'encoder.6.2.conv2.bias', 'encoder.7.1.conv3.bias', 'encoder.0.bias', 'encoder.5.3.conv3.bias', 'encoder.6.1.conv3.bias', 'encoder.5.1.conv3.bias', 'encoder.5.1.conv1.bias', 'encoder.5.0.downsample.0.bias', 'encoder.7.2.conv3.bias', 'encoder.6.2.conv3.bias', 'encoder.7.0.conv3.bias', 'encoder.5.0.conv2.bias', 'encoder.5.1.conv2.bias', 'encoder.5.0.conv3.bias', 'encoder.6.4.conv3.bias', 'encoder.6.5.conv1.bias', 'encoder.6.3.conv2.bias', 'encoder.4.2.conv2.bias', 'encoder.5.3.conv2.bias', 'encoder.7.2.conv1.bias', 'encoder.4.0.conv3.bias', 'encoder.6.4.conv2.bias', 'encoder.4.0.conv1.bias', 'encoder.4.1.conv2.bias', 'encoder.7.0.downsample.0.bias', 'encoder.6.4.conv1.bias', 'encoder.6.0.conv2.bias', 'encoder.6.3.conv1.bias', 'encoder.7.2.conv2.bias', 'encoder.6.2.conv1.bias', 'encoder.6.0.conv3.bias', 'encoder.4.2.conv3.bias', 'encoder.4.0.downsample.0.bias', 'encoder.6.3.conv3.bias', 'encoder.6.5.conv2.bias', 'encoder.7.1.conv2.bias', 'encoder.7.0.conv2.bias', 'encoder.6.1.conv2.bias'}
+[WARNING] Client state_dict does not match global model: {'encoder.5.2.conv2.bias', 'encoder.7.1.conv1.bias', 'encoder.5.2.conv1.bias', 'encoder.7.0.conv1.bias', 'encoder.6.0.conv1.bias', 'conv1.bias', 'encoder.5.2.conv3.bias', 'encoder.4.0.conv2.bias', 'encoder.6.0.downsample.0.bias', 'encoder.4.2.conv1.bias', 'encoder.4.1.conv3.bias', 'encoder.6.1.conv1.bias', 'encoder.4.1.conv1.bias', 'encoder.5.0.conv1.bias', 'encoder.6.5.conv3.bias', 'encoder.5.3.conv1.bias', 'encoder.6.2.conv2.bias', 'encoder.7.1.conv3.bias', 'encoder.0.bias', 'encoder.5.3.conv3.bias', 'encoder.6.1.conv3.bias', 'encoder.5.1.conv3.bias', 'encoder.5.1.conv1.bias', 'encoder.5.0.downsample.0.bias', 'encoder.7.2.conv3.bias', 'encoder.6.2.conv3.bias', 'encoder.7.0.conv3.bias', 'encoder.5.0.conv2.bias', 'encoder.5.1.conv2.bias', 'encoder.5.0.conv3.bias', 'encoder.6.4.conv3.bias', 'encoder.6.5.conv1.bias', 'encoder.6.3.conv2.bias', 'encoder.4.2.conv2.bias', 'encoder.5.3.conv2.bias', 'encoder.7.2.conv1.bias', 'encoder.4.0.conv3.bias', 'encoder.6.4.conv2.bias', 'encoder.4.0.conv1.bias', 'encoder.4.1.conv2.bias', 'encoder.7.0.downsample.0.bias', 'encoder.6.4.conv1.bias', 'encoder.6.0.conv2.bias', 'encoder.6.3.conv1.bias', 'encoder.7.2.conv2.bias', 'encoder.6.2.conv1.bias', 'encoder.6.0.conv3.bias', 'encoder.4.2.conv3.bias', 'encoder.4.0.downsample.0.bias', 'encoder.6.3.conv3.bias', 'encoder.6.5.conv2.bias', 'encoder.7.1.conv2.bias', 'encoder.7.0.conv2.bias', 'encoder.6.1.conv2.bias'}
+[WARNING] Client state_dict does not match global model: {'encoder.5.2.conv2.bias', 'encoder.7.1.conv1.bias', 'encoder.5.2.conv1.bias', 'encoder.7.0.conv1.bias', 'encoder.6.0.conv1.bias', 'conv1.bias', 'encoder.5.2.conv3.bias', 'encoder.4.0.conv2.bias', 'encoder.6.0.downsample.0.bias', 'encoder.4.2.conv1.bias', 'encoder.4.1.conv3.bias', 'encoder.6.1.conv1.bias', 'encoder.4.1.conv1.bias', 'encoder.5.0.conv1.bias', 'encoder.6.5.conv3.bias', 'encoder.5.3.conv1.bias', 'encoder.6.2.conv2.bias', 'encoder.7.1.conv3.bias', 'encoder.0.bias', 'encoder.5.3.conv3.bias', 'encoder.6.1.conv3.bias', 'encoder.5.1.conv3.bias', 'encoder.5.1.conv1.bias', 'encoder.5.0.downsample.0.bias', 'encoder.7.2.conv3.bias', 'encoder.6.2.conv3.bias', 'encoder.7.0.conv3.bias', 'encoder.5.0.conv2.bias', 'encoder.5.1.conv2.bias', 'encoder.5.0.conv3.bias', 'encoder.6.4.conv3.bias', 'encoder.6.5.conv1.bias', 'encoder.6.3.conv2.bias', 'encoder.4.2.conv2.bias', 'encoder.5.3.conv2.bias', 'encoder.7.2.conv1.bias', 'encoder.4.0.conv3.bias', 'encoder.6.4.conv2.bias', 'encoder.4.0.conv1.bias', 'encoder.4.1.conv2.bias', 'encoder.7.0.downsample.0.bias', 'encoder.6.4.conv1.bias', 'encoder.6.0.conv2.bias', 'encoder.6.3.conv1.bias', 'encoder.7.2.conv2.bias', 'encoder.6.2.conv1.bias', 'encoder.6.0.conv3.bias', 'encoder.4.2.conv3.bias', 'encoder.4.0.downsample.0.bias', 'encoder.6.3.conv3.bias', 'encoder.6.5.conv2.bias', 'encoder.7.1.conv2.bias', 'encoder.7.0.conv2.bias', 'encoder.6.1.conv2.bias'}
+[INFO] Saving initial model state...
+[INFO] Pruning mask detected.
+[INFO] Pruning the model...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+[INFO] Saving initial model state...
+[INFO] Pruning mask detected.
+[INFO] Pruning the model...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+[INFO] Saving initial model state...
+[INFO] Pruning mask detected.
+[INFO] Pruning the model...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+Skipping key: conv1.bias, not found in update aggregation
+Skipping key: encoder.0.bias, not found in update aggregation
+Skipping key: encoder.4.0.conv1.bias, not found in update aggregation
+Skipping key: encoder.4.0.conv2.bias, not found in update aggregation
+Skipping key: encoder.4.0.conv3.bias, not found in update aggregation
+Skipping key: encoder.4.0.downsample.0.bias, not found in update aggregation
+Skipping key: encoder.4.1.conv1.bias, not found in update aggregation
+Skipping key: encoder.4.1.conv2.bias, not found in update aggregation
+Skipping key: encoder.4.1.conv3.bias, not found in update aggregation
+Skipping key: encoder.4.2.conv1.bias, not found in update aggregation
+Skipping key: encoder.4.2.conv2.bias, not found in update aggregation
+Skipping key: encoder.4.2.conv3.bias, not found in update aggregation
+Skipping key: encoder.5.0.conv1.bias, not found in update aggregation
+Skipping key: encoder.5.0.conv2.bias, not found in update aggregation
+Skipping key: encoder.5.0.conv3.bias, not found in update aggregation
+Skipping key: encoder.5.0.downsample.0.bias, not found in update aggregation
+Skipping key: encoder.5.1.conv1.bias, not found in update aggregation
+Skipping key: encoder.5.1.conv2.bias, not found in update aggregation
+Skipping key: encoder.5.1.conv3.bias, not found in update aggregation
+Skipping key: encoder.5.2.conv1.bias, not found in update aggregation
+Skipping key: encoder.5.2.conv2.bias, not found in update aggregation
+Skipping key: encoder.5.2.conv3.bias, not found in update aggregation
+Skipping key: encoder.5.3.conv1.bias, not found in update aggregation
+Skipping key: encoder.5.3.conv2.bias, not found in update aggregation
+Skipping key: encoder.5.3.conv3.bias, not found in update aggregation
+Skipping key: encoder.6.0.conv1.bias, not found in update aggregation
+Skipping key: encoder.6.0.conv2.bias, not found in update aggregation
+Skipping key: encoder.6.0.conv3.bias, not found in update aggregation
+Skipping key: encoder.6.0.downsample.0.bias, not found in update aggregation
+Skipping key: encoder.6.1.conv1.bias, not found in update aggregation
+Skipping key: encoder.6.1.conv2.bias, not found in update aggregation
+Skipping key: encoder.6.1.conv3.bias, not found in update aggregation
+Skipping key: encoder.6.2.conv1.bias, not found in update aggregation
+Skipping key: encoder.6.2.conv2.bias, not found in update aggregation
+Skipping key: encoder.6.2.conv3.bias, not found in update aggregation
+Skipping key: encoder.6.3.conv1.bias, not found in update aggregation
+Skipping key: encoder.6.3.conv2.bias, not found in update aggregation
+Skipping key: encoder.6.3.conv3.bias, not found in update aggregation
+Skipping key: encoder.6.4.conv1.bias, not found in update aggregation
+Skipping key: encoder.6.4.conv2.bias, not found in update aggregation
+Skipping key: encoder.6.4.conv3.bias, not found in update aggregation
+Skipping key: encoder.6.5.conv1.bias, not found in update aggregation
+Skipping key: encoder.6.5.conv2.bias, not found in update aggregation
+Skipping key: encoder.6.5.conv3.bias, not found in update aggregation
+Skipping key: encoder.7.0.conv1.bias, not found in update aggregation
+Skipping key: encoder.7.0.conv2.bias, not found in update aggregation
+Skipping key: encoder.7.0.conv3.bias, not found in update aggregation
+Skipping key: encoder.7.0.downsample.0.bias, not found in update aggregation
+Skipping key: encoder.7.1.conv1.bias, not found in update aggregation
+Skipping key: encoder.7.1.conv2.bias, not found in update aggregation
+Skipping key: encoder.7.1.conv3.bias, not found in update aggregation
+Skipping key: encoder.7.2.conv1.bias, not found in update aggregation
+Skipping key: encoder.7.2.conv2.bias, not found in update aggregation
+Skipping key: encoder.7.2.conv3.bias, not found in update aggregation
+micro     precision: 0.3333 | recall: 0.9901 | f1-score: 0.4988 | support: 101 | mAP: 0.2500
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0532
+
+==================================================
+ROUND 3/8
+==================================================
+[INFO] Saving initial model state...
+[INFO] Pruning mask detected.
+[INFO] Pruning the model...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+[INFO] Saving initial model state...
+[INFO] Pruning mask detected.
+[INFO] Pruning the model...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()
+[INFO] Saving initial model state...
+[INFO] Pruning mask detected.
+[INFO] Pruning the model...
+[DEBUG] Keys missing after pruning: set()
+[DEBUG] Additional keys after pruning: set()
+[INFO] Epoch 1/3
+----------
+[INFO] Epoch 2/3
+----------
+[INFO] Epoch 3/3
+----------
+[DEBUG] Saving final model state...
+[DEBUG] Keys missing after training: set()
+[DEBUG] Additional keys after training: set()

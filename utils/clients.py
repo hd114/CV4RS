@@ -52,7 +52,7 @@ data_dirs = {
          "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
     }
 
-config_path = "CV4RS-orig/configs/test-config-resnet-p.yaml"
+config_path = "../CV4RS-orig/configs/test-config-resnet-p.yaml"
 
 class PreFilter:
     def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None, seasons: Optional[Container] | str = None):
@@ -268,18 +268,19 @@ class FLCLient:
         Returns:
             dict: Modell-Updates nach dem Training.
         """
-        # [DEBUG] Speichere den aktuellen Zustand des Modells
-        print("[DEBUG] Saving initial model state...")
+        # Speichere den aktuellen Zustand des Modells
+        print("[INFO] Saving initial model state...")
         state_before = copy.deepcopy(self.model.state_dict())
         keys_before = set(state_before.keys())
-        print(f"[DEBUG] Keys in state_before: {keys_before}")
+        #print(f"[DEBUG] Keys in state_before: {keys_before}")
 
         # Initialisiere Hook-Handles
         hook_handles = []
         
         # Prüfe, ob eine Pruning-Maske gesetzt ist
         if self.pruner is not None and self.pruning_mask is not None:
-            print("[DEBUG] Pruning mask detected. Attempting to apply...")
+            print("[INFO] Pruning mask detected.")
+            print("[INFO] Pruning the model...")
             try:
                 hook_handles = self.pruner.fit_pruning_mask(
                     self.model,
@@ -320,7 +321,7 @@ class FLCLient:
         print("[DEBUG] Saving final model state...")
         state_after = self.model.state_dict()
         keys_after = set(state_after.keys())
-        print(f"[DEBUG] Keys in state_after: {keys_after}")
+        #print(f"[DEBUG] Keys in state_after: {keys_after}")
 
         # [DEBUG] Prüfen der Änderungen an den Keys
         missing_keys_final = keys_before - keys_after
@@ -337,6 +338,7 @@ class FLCLient:
                 model_update[key] = diff
             else:
                 print(f"[WARNING] Key {key} is missing in state_after. Skipping...")
+                model_update[key] = torch.zeros_like(value_before)  # Fallback für fehlende Keys
 
         # Rückgabe der Modell-Updates
         return model_update
@@ -710,19 +712,6 @@ class GlobalClient:
                 # Therefore hooks are returned for later
                 # removal
 
-                # empty up the GPU memory and CUDA cache, model and dataset
-                #progress_bar.close()
-                #del pruner
-                #torch.cuda.empty_cache()
-
-                '''top1_auc = compute_auc(top1_acc_list, pruning_rates)
-                if self.configs["wandb"]:
-                    wandb.log({"top1_auc": top1_auc})
-                    print(f"Logged the AUC of the Top1 Accuracy to wandb!")
-
-                print(f"Top1 AUC: {top1_auc}")'''
-                
-
             self.communication_round(epochs)
             report = self.validation_round()
 
@@ -730,6 +719,8 @@ class GlobalClient:
             print_micro_macro(report)
 
             for client in self.clients:
+                #class_counts = torch.bincount(client.dataset.labels)
+                #print(f"[DEBUG] Client class distribution: {class_counts}")
                 client.set_model(self.model)
                 
         self.train_time = time.perf_counter() - start
@@ -779,8 +770,16 @@ class GlobalClient:
     def communication_round(self, epochs: int):
         # here the clients train
         # TODO: could be parallelized
-        model_updates = [client.train_one_round(epochs) for client in self.clients]
+        
+        # Prüfen der Konsistenz der state_dicts
+        global_keys = set(self.model.state_dict().keys())
+        for client in self.clients:
+            client_keys = set(client.model.state_dict().keys())
+            if client_keys != global_keys:
+                print(f"[WARNING] Client state_dict does not match global model: {client_keys.symmetric_difference(global_keys)}")
 
+        model_updates = [client.train_one_round(epochs) for client in self.clients]
+    
         # parameter aggregation
         update_aggregation = self.aggregator.fed_avg(model_updates)
 
