@@ -138,6 +138,7 @@ class FLCLient:
         self.dataset_filter = dataset_filter
         self.results = init_results(self.num_classes)
         self.dataset = BENv2DataSet(
+            #max_len= batch_size,
             data_dirs=data_dirs,
             # For Mars use these paths
             split="train",
@@ -157,6 +158,7 @@ class FLCLient:
         self.device = device
 
         self.validation_set = BENv2DataSet(
+            #max_len= batch_size,
             data_dirs=data_dirs,
             split="test",
             img_size=(10, 120, 120),
@@ -220,10 +222,10 @@ class FLCLient:
             data = batch[1]
             labels = batch[4]
 
-            data = data.cuda()
+            data = data.to(self.device)
             label_new = np.copy(labels)
             # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).cuda()
+            label_new = torch.from_numpy(label_new).to(self.device)
             self.optimizer.zero_grad()
 
             logits = self.model(data)
