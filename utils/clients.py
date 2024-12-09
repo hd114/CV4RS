@@ -562,8 +562,8 @@ class GlobalClient:
                 
                 # Berechnung der Relevanzen
                 #print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
-                print(f"Calling attribute with prune_loader: {train_loader1}, composite: {composite}")
-                print(f"model: {self.model}, device: {self.device}")
+                #print(f"Calling attribute with prune_loader: {train_loader1}, composite: {composite}")
+                #print(f"model: {self.model}, device: {self.device}")
                 try:
                     components_relevances = component_attributor.attribute(
                         self.model,
@@ -620,7 +620,7 @@ class GlobalClient:
                     global_pruning_mask = pruner.generate_global_pruning_mask(
                         self.model,
                         components_relevances,
-                        pruning_percentage=0.5,
+                        pruning_percentage=0.1,
                         subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
                         least_relevant_first=self.configs["least_relevant_first"],
                         device=self.device,
@@ -725,7 +725,7 @@ class GlobalClient:
         # parameter aggregation
         update_aggregation = self.aggregator.fed_avg(model_updates)
 
-        # update the global model
+        # update the global model. original code
         '''global_state_dict = self.model.state_dict()
         for key, value in global_state_dict.items():
             update = update_aggregation[key].to(self.device)
