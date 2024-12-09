@@ -12,11 +12,11 @@ from utils.pytorch_utils import start_cuda
 
 def ensure_model_keys(model: torch.nn.Module, required_keys: list[str]) -> torch.nn.Module:
     """
-    Fügt fehlende Keys zum State Dict eines Modells hinzu.
+    Sicherstellen, dass alle Keys im Modell vorhanden sind.
 
     Args:
-        model (torch.nn.Module): Das zu überprüfende Modell.
-        required_keys (list[str]): Liste der Keys, die sichergestellt werden sollen.
+        model (torch.nn.Module): Das Modell.
+        required_keys (list[str]): Liste der benötigten Keys.
 
     Returns:
         torch.nn.Module: Modell mit vollständigem State Dict.
@@ -25,10 +25,10 @@ def ensure_model_keys(model: torch.nn.Module, required_keys: list[str]) -> torch
     for key in required_keys:
         if key not in state_dict:
             print(f"Initializing missing key: {key}")
-            # Neuen Key initialisieren (z. B. als Null- oder Einheits-Tensor)
+            # Neuen Key als Null-Tensor initialisieren
             state_dict[key] = torch.zeros_like(next(iter(state_dict.values())))
 
-    # Das State Dict wieder ins Modell laden
+    # Überarbeitetes State Dict laden
     model.load_state_dict(state_dict, strict=False)
     return model
 

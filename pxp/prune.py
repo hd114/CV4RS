@@ -223,6 +223,10 @@ class GlobalPruningOperations(LocalPruningOperations):
         if self.target_layer != torch.nn.Softmax:
             global_pruning_mask = OrderedDict([])
             for layer_name, layer_pruning_indices in global_pruning_indices.items():
+                # Verhindere neue Keys
+                if layer_name not in model.state_dict():
+                    print(f"Pruner is attempting to add a new key: {layer_name}. This is not allowed!")
+                    continue  # Überspringe neue Keys
 
                 global_pruning_mask[layer_name] = self.generate_local_pruning_mask(
                     global_pruning_masks_shapes[layer_name],
@@ -232,6 +236,7 @@ class GlobalPruningOperations(LocalPruningOperations):
                 )
 
             return global_pruning_mask
+
 
         else:
             return global_pruning_indices
@@ -287,13 +292,19 @@ class GlobalPruningOperations(LocalPruningOperations):
 
     def fit_pruning_mask(self, model, global_pruning_mask):
         """
-        Apply the global pruning mask to the model and fixing it
+        Apply the global pruning mask to the model and fix it.
 
         Args:
             model (torch.nn.module): the model to prune
             global_pruning_mask (dict): pruning mask for each layer
         """
-        # Apply the global pruning mask to the model per layer
+        # Check for missing bias keys
+        for layer_name in global_pruning_mask.keys():
+            if layer_name not in model.state_dict():
+                print(f"Key {layer_name} missing in model state dict. Skipping...")
+                continue  # Überspringe Layer mit fehlenden Keys
+
+        # Apply the pruning mask
         if self.target_layer != torch.nn.Softmax:
             [
                 super(GlobalPruningOperations, self).fit_pruning_mask(
@@ -307,6 +318,7 @@ class GlobalPruningOperations(LocalPruningOperations):
                     model, layer_name, layer_pruning_indices
                 )
             return hook_handles
+
 
     @staticmethod
     def mask_attention_head(model, layer_names, head_indices):

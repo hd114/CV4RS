@@ -135,6 +135,36 @@ class Aggregator:
                 print(f"Skipping key {key} as it is missing in some updates.")
         
         return update_aggregation
+    
+    '''def fed_avg(self, model_updates: list[dict]):
+        """
+        Perform Federated Averaging of model updates.
+
+        Args:
+            model_updates (list[dict]): A list of state_dict updates from clients.
+
+        Returns:
+            dict: Aggregated model state_dict.
+        """
+        assert len(model_updates) > 0, "Trying to aggregate empty update list"
+        
+        update_aggregation = {}
+        all_keys = set().union(*[update.keys() for update in model_updates])  # Alle Keys sammeln
+        
+        for key in all_keys:
+            # Check if the key exists in at least one update
+            available_updates = [update[key] for update in model_updates if key in update]
+            
+            if len(available_updates) > 0:
+                # Average only for available updates
+                params = torch.stack(available_updates, dim=0)
+                avg = torch.mean(params, dim=0)
+                update_aggregation[key] = avg
+            else:
+                print(f"[WARNING] Key {key} is missing in all updates. Skipping...")
+
+        return update_aggregation'''
+
 
 
 class FLCLient:
@@ -238,34 +268,47 @@ class FLCLient:
         Returns:
             dict: Modell-Updates nach dem Training.
         """
-        # Speichere den aktuellen Zustand des Modells
+        # [DEBUG] Speichere den aktuellen Zustand des Modells
+        print("[DEBUG] Saving initial model state...")
         state_before = copy.deepcopy(self.model.state_dict())
-        
+        keys_before = set(state_before.keys())
+        print(f"[DEBUG] Keys in state_before: {keys_before}")
+
         # Initialisiere Hook-Handles
         hook_handles = []
         
         # Prüfe, ob eine Pruning-Maske gesetzt ist
         if self.pruner is not None and self.pruning_mask is not None:
+            print("[DEBUG] Pruning mask detected. Attempting to apply...")
             try:
                 hook_handles = self.pruner.fit_pruning_mask(
                     self.model,
                     self.pruning_mask,
                 ) or []  # Fallback auf eine leere Liste
             except Exception as e:
-                print(f"Error applying pruning mask: {e}")
+                print(f"[ERROR] Error applying pruning mask: {e}")
         
+        # [DEBUG] Prüfen der Keys nach Pruning
+        state_after_pruning = self.model.state_dict()
+        keys_after_pruning = set(state_after_pruning.keys())
+        missing_keys = keys_before - keys_after_pruning
+        additional_keys = keys_after_pruning - keys_before
+        print(f"[DEBUG] Keys missing after pruning: {missing_keys}")
+        print(f"[DEBUG] Additional keys after pruning: {additional_keys}")
+
         # Initialisiere den Optimizer und die Loss-Funktion
         self.optimizer = self.optimizer_constructor(self.model.parameters(), **self.optimizer_kwargs)
         self.criterion = self.criterion_constructor(**self.criterion_kwargs)
         
         # Training über die angegebenen Epochen
         for epoch in range(1, epochs + 1):
-            print("Epoch {}/{}".format(epoch, epochs))
+            print(f"[INFO] Epoch {epoch}/{epochs}")
             print("-" * 10)
             self.train_epoch()
         
         # Validierung nach dem Training (optional)
         if validate:
+            print("[INFO] Running validation...")
             report = self.validation_round()
             self.results = update_results(self.results, report, self.num_classes)
         
@@ -273,16 +316,31 @@ class FLCLient:
         for hook in hook_handles:
             hook.remove()
         
-        # Berechne die Differenz zwischen dem vorherigen und dem aktuellen Modellzustand
+        # [DEBUG] Speichere den Zustand des Modells nach dem Training
+        print("[DEBUG] Saving final model state...")
         state_after = self.model.state_dict()
+        keys_after = set(state_after.keys())
+        print(f"[DEBUG] Keys in state_after: {keys_after}")
+
+        # [DEBUG] Prüfen der Änderungen an den Keys
+        missing_keys_final = keys_before - keys_after
+        additional_keys_final = keys_after - keys_before
+        print(f"[DEBUG] Keys missing after training: {missing_keys_final}")
+        print(f"[DEBUG] Additional keys after training: {additional_keys_final}")
+
+        # Berechne die Differenz zwischen dem vorherigen und dem aktuellen Modellzustand
         model_update = {}
         for key, value_before in state_before.items():
-            value_after = state_after[key]
-            diff = value_after.type(torch.DoubleTensor) - value_before.type(torch.DoubleTensor)
-            model_update[key] = diff
-        
+            if key in state_after:  # Prüfen, ob der Key nach dem Training existiert
+                value_after = state_after[key]
+                diff = value_after.type(torch.DoubleTensor) - value_before.type(torch.DoubleTensor)
+                model_update[key] = diff
+            else:
+                print(f"[WARNING] Key {key} is missing in state_after. Skipping...")
+
         # Rückgabe der Modell-Updates
         return model_update
+
 
 
     def change_sizes(self, labels):
@@ -440,8 +498,9 @@ class GlobalClient:
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
         for com_round in range(1, communication_rounds + 1):
-            print("Round {}/{}".format(com_round, communication_rounds))
-            print("-" * 10)
+            print("=" * 50)
+            print("ROUND {}/{}".format(com_round, communication_rounds))
+            print("=" * 50)
         
 
             # Pruning mask generation
