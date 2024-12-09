@@ -110,7 +110,7 @@ class Aggregator:
     def __init__(self) -> None:
         pass
 
-    def fed_avg(self, model_updates: list[dict]):
+    '''def fed_avg(self, model_updates: list[dict]):
         assert len(model_updates) > 0, "Trying to aggregate empty update list"
         
         update_aggregation = {}
@@ -118,6 +118,21 @@ class Aggregator:
             params = torch.stack([update[key] for update in model_updates], dim=0)
             avg = torch.mean(params, dim=0)
             update_aggregation[key] = avg
+        
+        return update_aggregation'''
+    
+    def fed_avg(self, model_updates: list[dict]):
+        assert len(model_updates) > 0, "Trying to aggregate empty update list"
+        
+        update_aggregation = {}
+        for key in model_updates[0].keys():
+            # Check if the key exists in all updates
+            if all(key in update for update in model_updates):
+                params = torch.stack([update[key] for update in model_updates], dim=0)
+                avg = torch.mean(params, dim=0)
+                update_aggregation[key] = avg
+            else:
+                print(f"Skipping key {key} as it is missing in some updates.")
         
         return update_aggregation
 
@@ -138,7 +153,13 @@ class FLCLient:
         num_classes: int = 19,
         device: torch.device = torch.device('cpu'),
         dataset_filter: str = "serbia",
+        pruner=None,
     ) -> None:
+        global config_path
+        with open(config_path, "r") as stream:
+            self.configs = yaml.safe_load(stream)
+        self.pruner = pruner
+        self.pruning_mask = None
         self.model = model
         self.optimizer_constructor = optimizer_constructor
         self.optimizer_kwargs = optimizer_kwargs
@@ -156,6 +177,7 @@ class FLCLient:
         include_cloudy=False,
         patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons=["Summer"]),
         )
+        
         self.train_loader = DataLoader(
             self.dataset,
             batch_size=batch_size,
@@ -183,36 +205,85 @@ class FLCLient:
 
     def set_model(self, model: torch.nn.Module):
         self.model = copy.deepcopy(model)
+       
+    # from here mask seeting and application
+    def set_pruner(self, pruner):
+        """
+        Setzt den Pruner für den Client.
+
+        Args:
+            pruner (GlobalPruningOperations): Der Pruner.
+        """
+        self.pruner = pruner
+ 
+    def set_pruning_mask(self, pruning_mask: OrderedDict):
+        """
+        Speichert die Pruning-Maske lokal im Client.
+
+        Args:
+            pruning_mask (OrderedDict): Die generierte Pruning-Maske.
+        """
+        self.pruning_mask = pruning_mask
+        
+        
 
     def train_one_round(self, epochs: int, validate: bool = False):
-        state_before = copy.deepcopy(self.model.state_dict())
+        """
+        Trainiert das Modell für eine Runde mit oder ohne Pruning-Maske.
 
-        # optimizer = torch.optim.Adam(self.model.parameters(), lr=0.001, weight_decay=0)
-        # criterion = torch.nn.BCEWithLogitsLoss(reduction="mean")
+        Args:
+            epochs (int): Anzahl der Trainings-Epochen.
+            validate (bool): Führt eine Validierung nach dem Training durch, falls True.
+
+        Returns:
+            dict: Modell-Updates nach dem Training.
+        """
+        # Speichere den aktuellen Zustand des Modells
+        state_before = copy.deepcopy(self.model.state_dict())
+        
+        # Initialisiere Hook-Handles
+        hook_handles = []
+        
+        # Prüfe, ob eine Pruning-Maske gesetzt ist
+        if self.pruner is not None and self.pruning_mask is not None:
+            try:
+                hook_handles = self.pruner.fit_pruning_mask(
+                    self.model,
+                    self.pruning_mask,
+                ) or []  # Fallback auf eine leere Liste
+            except Exception as e:
+                print(f"Error applying pruning mask: {e}")
+        
+        # Initialisiere den Optimizer und die Loss-Funktion
         self.optimizer = self.optimizer_constructor(self.model.parameters(), **self.optimizer_kwargs)
         self.criterion = self.criterion_constructor(**self.criterion_kwargs)
-
+        
+        # Training über die angegebenen Epochen
         for epoch in range(1, epochs + 1):
             print("Epoch {}/{}".format(epoch, epochs))
             print("-" * 10)
-
             self.train_epoch()
         
+        # Validierung nach dem Training (optional)
         if validate:
             report = self.validation_round()
             self.results = update_results(self.results, report, self.num_classes)
-
+        
+        # Entferne die Hooks, falls sie gesetzt wurden
+        for hook in hook_handles:
+            hook.remove()
+        
+        # Berechne die Differenz zwischen dem vorherigen und dem aktuellen Modellzustand
         state_after = self.model.state_dict()
-
         model_update = {}
         for key, value_before in state_before.items():
             value_after = state_after[key]
-            diff = value_after.type(torch.DoubleTensor) - value_before.type(
-                torch.DoubleTensor
-            )
+            diff = value_after.type(torch.DoubleTensor) - value_before.type(torch.DoubleTensor)
             model_update[key] = diff
-
+        
+        # Rückgabe der Modell-Updates
         return model_update
+
 
     def change_sizes(self, labels):
         new_labels=np.zeros((len(labels[0]),19))
@@ -274,6 +345,23 @@ class GlobalClient:
             FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
             for csv_path in csv_paths
         ]
+        self.validation_set = BENv2DataSet(
+        data_dirs=data_dirs,
+        split="test",
+        img_size=(10, 120, 120),
+        include_snowy=False,
+        include_cloudy=False,
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+        )
+        self.val_loader = DataLoader(
+            self.validation_set,
+            batch_size=batch_size,
+            num_workers=num_workers,
+            shuffle=False,
+            pin_memory=True,
+        )
+        
+        
         self.pruning_patches = []
         self.dataset = BENv2DataSet(
             data_dirs=data_dirs,
@@ -283,14 +371,6 @@ class GlobalClient:
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
         )
-        self.validation_set = BENv2DataSet(
-            data_dirs=data_dirs,
-            split="test",
-            img_size=(10, 120, 120),
-            include_snowy=False,
-            include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
-            )
         self.pruning_dataset = PruneDataSet(
             pruning_patches=self.pruning_patches,  # Die gesammelten Patches
             data_dirs=data_dirs,
@@ -365,10 +445,10 @@ class GlobalClient:
         
 
             # Pruning mask generation
-            if com_round == 1:
+            if com_round == 2:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
-                val_set = self.validation_set
+                #val_set = self.validation_set
                 
                 
                 
@@ -383,7 +463,7 @@ class GlobalClient:
                     'Inland waters', 'Agro-forestry areas', 'Complex cultivation patterns'
                 ]
 
-                from collections import defaultdict
+                '''from collections import defaultdict
 
                 # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
                 class_counts = defaultdict(int)
@@ -426,6 +506,7 @@ class GlobalClient:
                 #self.prune_loader = self.create_pruning_loader(pruning_patches)
                 
                 self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
+                '''
                 
                 # 30 patch big subset of trainloader
                 original_dataset = self.clients[0].train_loader.dataset
@@ -480,7 +561,8 @@ class GlobalClient:
                 )
                 
                 # Berechnung der Relevanzen
-                print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
+                #print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
+                print(f"Calling attribute with prune_loader: {train_loader1}, composite: {composite}")
                 print(f"model: {self.model}, device: {self.device}")
                 try:
                     components_relevances = component_attributor.attribute(
@@ -530,61 +612,49 @@ class GlobalClient:
                 #progress_bar = tqdm.tqdm(total=len(pruning_rates))
                 
                 global_pruning_mask = OrderedDict([])
-                for pruning_rate in pruning_rates:
-                    #progress_bar.set_description(f"Processing {int((pruning_rate)*100)}% Pruning")
-                    # skip pruning if compression rate is 0.00 as we
-                    # have computed few lines above, otherwise prune
-                    if pruning_rate != 0.0:
-                        # prune the model based on the
-                        # pre-computed attibution flow
-                        # (relevance values)
-                        global_pruning_mask = pruner.generate_global_pruning_mask(
-                            self.model,
-                            components_relevances,
-                            pruning_rate,
-                            subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
-                            least_relevant_first=self.configs["least_relevant_first"],
-                            device=self.device,
-                        )
-                        print(f"Global Pruning Mask: {global_pruning_mask}")
-                        # Our pruning gets applied by masking the
-                        # activation of layers via forward hooks.
-                        # Therefore hooks are returned for later
-                        # removal
-                        hook_handles = pruner.fit_pruning_mask(
-                            self.model,
-                            global_pruning_mask,
-                        )
-
-                    '''progress_bar.set_description(
-                        f"Computing accuracy for model pruned with {int((pruning_rate)*100)}%"
-                    )
-                    acc_top1 = compute_accuracy(
+                
+                # prune the model based on the
+                # pre-computed attibution flow
+                # (relevance values)
+                try:
+                    global_pruning_mask = pruner.generate_global_pruning_mask(
                         self.model,
-                        self.custom_validation_dataloader,
-                        self.device,
-                    )'''
-                    # Remove/Deactivate hooks (except
-                    # when the pruning rate is 0.00)
-                    if pruning_rate != 0.0:
-                        if layer_types[self.configs["pruning_layer_type"]] == torch.nn.Softmax:
-                            for hook in hook_handles:
-                                hook.remove()
-                    #top1_acc_list.append(acc_top1)
-                    #print(f"Accuracy-Flow list: {top1_acc_list}")
+                        components_relevances,
+                        pruning_percentage=0.5,
+                        subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
+                        least_relevant_first=self.configs["least_relevant_first"],
+                        device=self.device,
+                    )
+                except Exception as e:
+                    print(f"Error during pruning mask generation: {e}")
+            
+                print(f"Global Pruning Mask: {global_pruning_mask}")
+                
+                # Debugging-Code einfügen, um Schlüssel zu vergleichen
+                keys_before = set(self.model.state_dict().keys())
+                keys_after = set(global_pruning_mask.keys()) if global_pruning_mask else set()
 
-                    """
-                    Logging the results on WandB
-                    """
-                    '''if self.configs["wandb"]:
-                        wandb.log({"acc_top1": acc_top1, "pruning_rate": pruning_rate})
-                        print(f"Logged the results of {pruning_rate}% Pruning Rate to wandb!")
-                    progress_bar.update(1)'''
+                # Unterschied prüfen
+                missing_keys = keys_before - keys_after
+                additional_keys = keys_after - keys_before
+
+                print(f"Keys missing after pruning: {missing_keys}")
+                print(f"Additional keys after pruning: {additional_keys}")
+
+                print("Distributing pruning mask to clients...")
+                for client in self.clients:
+                    client.set_pruner(pruner)
+                    client.set_pruning_mask(global_pruning_mask)
+        
+                # Our pruning gets applied by masking the
+                # activation of layers via forward hooks.
+                # Therefore hooks are returned for later
+                # removal
 
                 # empty up the GPU memory and CUDA cache, model and dataset
                 #progress_bar.close()
-                del pruner
-                torch.cuda.empty_cache()
+                #del pruner
+                #torch.cuda.empty_cache()
 
                 '''top1_auc = compute_auc(top1_acc_list, pruning_rates)
                 if self.configs["wandb"]:
@@ -593,13 +663,6 @@ class GlobalClient:
 
                 print(f"Top1 AUC: {top1_auc}")'''
                 
-                # Profiling stoppen und Ergebnisse speichern
-                #profiler.stop()
-                print(f"Generated Pruning Mask: {global_pruning_mask}")
-
-                # Senden der Maske an die Clients
-                for client in self.clients:
-                    client.apply_pruning_mask(self.pruning_mask)
 
             self.communication_round(epochs)
             report = self.validation_round()
@@ -609,6 +672,7 @@ class GlobalClient:
 
             for client in self.clients:
                 client.set_model(self.model)
+                
         self.train_time = time.perf_counter() - start
 
         self.client_results = [client.get_validation_results() for client in self.clients]
@@ -662,11 +726,25 @@ class GlobalClient:
         update_aggregation = self.aggregator.fed_avg(model_updates)
 
         # update the global model
-        global_state_dict = self.model.state_dict()
+        '''global_state_dict = self.model.state_dict()
         for key, value in global_state_dict.items():
             update = update_aggregation[key].to(self.device)
             global_state_dict[key] = value + update
+        self.model.load_state_dict(global_state_dict)'''
+        
+        # Update the global model
+        global_state_dict = self.model.state_dict()
+
+        for key, value in global_state_dict.items():
+            # Skip missing keys (e.g., 'conv1.bias' and 'encoder.1.bias') for now
+            if key not in update_aggregation:
+                print(f"Skipping key: {key}, not found in update aggregation")
+                continue
+            update = update_aggregation[key].to(self.device)
+            global_state_dict[key] = value + update
+
         self.model.load_state_dict(global_state_dict)
+
 
     def save_state_dict(self):
         if not Path(self.state_dict_path).parent.is_dir():

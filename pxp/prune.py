@@ -166,7 +166,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         self,
         model,
         global_concept_maps,
-        pruning_precentage,
+        pruning_percentage,
         subsequent_layer_pruning="Conv2d",
         least_relevant_first=True,
         device="cuda",
@@ -177,7 +177,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         Args:
             mode (str): whether to use "Relevance", "Activation", or "Random" for concept attribution
             model (torch.module): the model
-            pruning_precentage (float): the precentage of the concepts to prune
+            pruning_percentage (float): the precentage of the concepts to prune
             dataset (torchvision.datasets): the dataset which holds tbe images used for pruning
             sample_indices (list): indices of the samples to use for pruning from the dataset
             device (str, optional): device to run on. Defaults to "cuda".
@@ -215,7 +215,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         global_pruning_indices = self.generate_global_pruning_indices(
             global_concept_maps,
             interval_indices,
-            pruning_precentage,
+            pruning_percentage,
             least_relevant_first,
         )
 

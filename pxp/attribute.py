@@ -512,9 +512,6 @@ class ComponentAttribution:
             model, self.target_layer_type
         )
 
-        attributor = self.attributor(self.layer_names)
-
-        sum_latent_relevances = OrderedDict([])
         #for images, labels in dataloader:
             # Use composite=None because the composite
             # has been already registered to the model
@@ -547,9 +544,10 @@ class ComponentAttribution:
             if labels.ndim > 1:
                 labels = torch.argmax(labels, dim=1)
 
-
-            # Nutze die Daten im gewünschten Format
-            attributor.lrp_pass(
+            attributor = self.attributor(self.layer_names)
+            
+            sum_latent_relevances = OrderedDict([])    
+            '''attributor.lrp_pass(
                 model,
                 images.to(device),
                 labels.to(device),
@@ -557,36 +555,45 @@ class ComponentAttribution:
                 # attribution_composite,  # Composite ist bereits registriert
                 initial_relevance=1,
                 device=device,
-            )
-
-            for layer_name in self.layer_names:
-                # Get latent relevances for each layer
-                latent_relevance = (
-                    attributor.latent_relevances[layer_name].detach().cpu()
+            )'''
+            for img, label in zip(images, labels):
+                attributor.lrp_pass(
+                    model,
+                    img.unsqueeze(0).to(device),  # Bild in Batch-Dimension bringen
+                    label.unsqueeze(0).to(device),  # Label ebenfalls in Batch-Dimension bringen
+                    composite=None,
+                    initial_relevance=1,
+                    device=device,
                 )
 
-                if abs_flag:
-                    latent_relevance = torch.abs(latent_relevance)
-
-                if self.model_type == "CNN":
-                    latent_relevance = latent_relevance.sum(dim=0)
-                elif self.model_type == "ViT":
-                    # Summing over the extra
-                    # dimension of tokens
-                    latent_relevance = latent_relevance.sum(dim=(0, 1))
-
-                # Add the local latent relevance to the
-                # corresponding dictionary
-                if layer_name not in sum_latent_relevances.keys():
-                    sum_latent_relevances[layer_name] = latent_relevance
-                else:
-                    sum_latent_relevances[layer_name] += latent_relevance
-
-                # Taking care of Random Pruning
-                if self.attribution_type == "Random":
-                    sum_latent_relevances[layer_name] = torch.rand_like(
-                        latent_relevance
+                for layer_name in self.layer_names:
+                    # Get latent relevances for each layer
+                    latent_relevance = (
+                        attributor.latent_relevances[layer_name].detach().cpu()
                     )
-                    break
+
+                    if abs_flag:
+                        latent_relevance = torch.abs(latent_relevance)
+
+                    if self.model_type == "CNN":
+                        latent_relevance = latent_relevance.sum(dim=0)
+                    elif self.model_type == "ViT":
+                        # Summing over the extra
+                        # dimension of tokens
+                        latent_relevance = latent_relevance.sum(dim=(0, 1))
+
+                    # Add the local latent relevance to the
+                    # corresponding dictionary
+                    if layer_name not in sum_latent_relevances.keys():
+                        sum_latent_relevances[layer_name] = latent_relevance
+                    else:
+                        sum_latent_relevances[layer_name] += latent_relevance
+
+                    # Taking care of Random Pruning
+                    if self.attribution_type == "Random":
+                        sum_latent_relevances[layer_name] = torch.rand_like(
+                            latent_relevance
+                        )
+                        break
 
         return sum_latent_relevances
