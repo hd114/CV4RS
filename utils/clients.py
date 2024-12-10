@@ -46,7 +46,7 @@ data_dirs = {
 class PreFilter:
     def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None,
                  seasons: Optional[Container] | str = None):
-        """
+        """Filters patch_id's by countries and seasons; the BenV2DataSet class in utils/BENv2_dataset.py doesn't offer this functionality
         Creates a function that filters patches based on country and season.
 
         Args:
@@ -85,8 +85,8 @@ class PreFilter:
             return True
 
         self.filter_fn = filter_fn
-        from tqdm import tqdm
-        self.filtered_patches = set([x[0] for x in [x for x in metadata.values if filter_fn(x)]])
+        #BUG from tqdm import tqdm                                                  wrong place for import probably bug
+        self.filtered_patches = set([x[0] for x in [x for x in metadata.values if filter_fn(x)]]) # set of patch_id of patches that matched filter, not shared with other clients because they use other countries for filter
         print(f"Pre-filtered {len(self.filtered_patches)} patches based on country and season (split ignored)")
 
     def filter(self, patch_id: str) -> bool:
@@ -137,6 +137,8 @@ class FLCLient:
         self.num_classes = num_classes
         self.dataset_filter = dataset_filter
         self.results = init_results(self.num_classes)
+
+        print("\ninit FLClient TRAIN dataset and dataloader")
         self.dataset = BENv2DataSet(
             #max_len= batch_size,
             data_dirs=data_dirs,
@@ -157,6 +159,8 @@ class FLCLient:
         )
         self.device = device
 
+
+        print("\ninit FLClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
             #max_len= batch_size,
             data_dirs=data_dirs,
@@ -264,6 +268,7 @@ class GlobalClient:
                      dataset_filter=dataset_filter, device=self.device)
             for csv_path in csv_paths
         ]
+        print("\ninit GLOBALClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
             data_dirs=data_dirs,
             split="test",
