@@ -528,7 +528,7 @@ class ComponentAttribution:
         # Reinitialize model outside the function
         channels = 10
         num_classes = 19
-        model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+        p_model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
        
         for batch_indices in dataloader.batch_sampler:  # Holt Batch-Indizes vom Dataloader
             # Initialisiere Listen für Bilder und Labels
@@ -558,7 +558,7 @@ class ComponentAttribution:
 
             # Nutze die Daten im gewünschten Format
             attributor.lrp_pass(
-                model,
+                p_model,
                 images.to(device),
                 labels.to(device),
                 composite=None,

@@ -274,6 +274,23 @@ class GlobalClient:
             FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
             for csv_path in csv_paths
         ]
+        
+        self.validation_set = BENv2DataSet(
+        data_dirs=data_dirs,
+        split="test",
+        img_size=(10, 120, 120),
+        include_snowy=False,
+        include_cloudy=False,
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+        )
+        self.val_loader = DataLoader(
+            self.validation_set,
+            batch_size=batch_size,
+            num_workers=num_workers,
+            shuffle=False,
+            pin_memory=True,
+        )
+        
         self.pruning_patches = []
         self.dataset = BENv2DataSet(
             data_dirs=data_dirs,
@@ -283,14 +300,6 @@ class GlobalClient:
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
         )
-        self.validation_set = BENv2DataSet(
-            data_dirs=data_dirs,
-            split="test",
-            img_size=(10, 120, 120),
-            include_snowy=False,
-            include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
-            )
         self.pruning_dataset = PruneDataSet(
             pruning_patches=self.pruning_patches,  # Die gesammelten Patches
             data_dirs=data_dirs,
@@ -365,7 +374,7 @@ class GlobalClient:
         
 
             # Pruning mask generation
-            if com_round == 1:
+            if com_round == 3:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
                 val_set = self.validation_set
