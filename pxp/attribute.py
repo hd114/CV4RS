@@ -1,5 +1,7 @@
 from collections import OrderedDict
 import torch
+from utils.pytorch_models import ResNet50
+#from utils.clients import GlobalClient
 from pxp.utils import one_hot_max, one_hot, ModelLayerUtils
 from pxp.canonizers import get_vit_canonizer
 from pxp.LiT.rules import (
@@ -522,6 +524,12 @@ class ComponentAttribution:
         sample = dataloader.dataset[0]  # Beispielhaft den ersten Datensatz holen
         #print(f"Sample returned by __getitem__: {sample}")
         #print(f"Type of sample: {type(sample)}")
+        
+        # Reinitialize model outside the function
+        channels = 10
+        num_classes = 19
+        model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+       
         for batch_indices in dataloader.batch_sampler:  # Holt Batch-Indizes vom Dataloader
             # Initialisiere Listen für Bilder und Labels
             images = []
@@ -536,7 +544,7 @@ class ComponentAttribution:
                 labels.append(label)
 
             # Konvertiere zu Tensoren
-            images = torch.stack(images)  # Bilder stapeln
+            images = torch.stack(images)  # Bilder stapeln  torch.Size([10, 120, 120]) alle bänder drin
             labels = torch.stack(labels)  # Labels stapeln
 
             # Weiterverarbeitung oder Rückgabe
