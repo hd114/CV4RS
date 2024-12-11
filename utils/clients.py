@@ -524,7 +524,7 @@ class GlobalClient:
                     'Inland waters', 'Agro-forestry areas', 'Complex cultivation patterns'
                 ]
 
-                from collections import defaultdict
+                '''from collections import defaultdict
 
                 # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
                 class_counts = defaultdict(int)
@@ -566,11 +566,11 @@ class GlobalClient:
 
                 #self.prune_loader = self.create_pruning_loader(pruning_patches)
                 
-                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
+                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)'''
                 
                 
                 # 30 patch big subset of trainloader
-                '''original_dataset = self.clients[0].train_loader.dataset
+                original_dataset = self.clients[0].train_loader.dataset
                 assert len(original_dataset) >= 30, "Das Dataset enthält weniger als 30 Patches!"
                 selected_indices = list(range(30))  # Nimm die ersten 30 Patches
                 subset_dataset = torch.utils.data.Subset(original_dataset, selected_indices)
@@ -583,7 +583,7 @@ class GlobalClient:
                     num_workers=self.clients[0].train_loader.num_workers,
                     pin_memory=self.clients[0].train_loader.pin_memory
                 )
-                print(f"Created train_loader1 with {len(subset_dataset)} patches.")'''
+                print(f"Created train_loader1 with {len(subset_dataset)} patches.")
 
                 
                 suggested_composite = {
@@ -628,7 +628,7 @@ class GlobalClient:
                 try:
                     components_relevances = component_attributor.attribute(
                         self.model,
-                        self.prune_loader, # train_loader1, 
+                        train_loader1, # self.prune_loader, #
                         composite,
                         abs_flag=True,
                         device=self.device,
@@ -681,7 +681,7 @@ class GlobalClient:
                 global_pruning_mask = pruner.generate_global_pruning_mask(
                     self.model,
                     components_relevances,
-                    pruning_percentage=0.5,
+                    pruning_percentage=0.9,
                     subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
                     least_relevant_first=self.configs["least_relevant_first"],
                     device=self.device,

@@ -285,34 +285,49 @@ class GlobalPruningOperations(LocalPruningOperations):
 
         return global_pruning_indices
 
-    def fit_pruning_mask(self, model, global_pruning_mask):
+    def fit_pruning_mask(self, model, layer_name, pruning_mask):
         """
-        Apply the global pruning mask to the model and fix it.
+        Apply the pruning mask to the model and fix it
 
         Args:
             model (torch.nn.module): the model to prune
-            global_pruning_mask (dict): pruning mask for each layer
+            layer_name (str): the layer which the pruning mask is applied to
+            pruning_mask (dict): dictionary of binary mask of the concepts to prune for each layer
         """
-        # Check for missing bias keys
-        for layer_name in global_pruning_mask.keys():
-            if layer_name not in model.state_dict():
-                print(f"Key {layer_name} missing in model state dict. Skipping...")
-                continue  # Überspringe Layer mit fehlenden Keys
+        mask_keys = list(pruning_mask.keys())
+        batch_norm_order_flag = False
+        if "BatchNorm2d" in mask_keys:
+            if ModelLayerUtils.is_batchnorm2d_after_conv2d(model):
+                batch_norm_order_flag = True
+                conv_bn_layers = ModelLayerUtils.get_layer_names(
+                    model, [torch.nn.Conv2d, torch.nn.BatchNorm2d]
+                )
+                bn_layer_name = conv_bn_layers[conv_bn_layers.index(layer_name) + 1]
 
-        # Apply the pruning mask
-        if self.target_layer != torch.nn.Softmax:
-            [
-                super(GlobalPruningOperations, self).fit_pruning_mask(
-                    model, layer_name, layer_pruning_mask
+        for layer_type in mask_keys:
+            if layer_type == "BatchNorm2d" and batch_norm_order_flag == True:
+                layer_name_to_prune = bn_layer_name
+            else:
+                layer_name_to_prune = layer_name
+
+            # Prune the weights first
+            self.bind_mask_to_module(
+                model,
+                layer_name_to_prune,
+                pruning_mask[layer_type]["weight"],
+                weight_or_bias="weight",
+                remove_re_parametrization=True,
+            )
+
+            # For bias, prune if they exist
+            if ModelLayerUtils.get_module_from_name(model, layer_name).bias is not None:
+                self.bind_mask_to_module(
+                    model,
+                    layer_name_to_prune,
+                    pruning_mask[layer_type]["bias"],
+                    weight_or_bias="bias",
+                    remove_re_parametrization=True,
                 )
-                for layer_name, layer_pruning_mask in global_pruning_mask.items()
-            ]
-        else:
-            for layer_name, layer_pruning_indices in global_pruning_mask.items():
-                hook_handles = self.mask_attention_head(
-                    model, layer_name, layer_pruning_indices
-                )
-            return hook_handles
 
 
     @staticmethod

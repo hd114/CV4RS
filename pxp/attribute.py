@@ -7,6 +7,8 @@ from pxp.LiT.rules import (
     IxGSoftmaxBriefModule,
     BlockModule,
 )
+from utils.pytorch_models import ResNet50
+
 
 
 class LatentRelevanceAttributor:
@@ -512,6 +514,9 @@ class ComponentAttribution:
             model, self.target_layer_type
         )
 
+        attributor = self.attributor(self.layer_names)
+
+        sum_latent_relevances = OrderedDict([])
         #for images, labels in dataloader:
             # Use composite=None because the composite
             # has been already registered to the model
@@ -519,6 +524,12 @@ class ComponentAttribution:
         sample = dataloader.dataset[0]  # Beispielhaft den ersten Datensatz holen
         #print(f"Sample returned by __getitem__: {sample}")
         #print(f"Type of sample: {type(sample)}")
+        
+        # Reinitialize model outside the function
+        channels = 10
+        num_classes = 19
+        p_model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+       
         for batch_indices in dataloader.batch_sampler:  # Holt Batch-Indizes vom Dataloader
             # Initialisiere Listen für Bilder und Labels
             images = []
@@ -533,7 +544,7 @@ class ComponentAttribution:
                 labels.append(label)
 
             # Konvertiere zu Tensoren
-            images = torch.stack(images)  # Bilder stapeln
+            images = torch.stack(images)  # Bilder stapeln  torch.Size([10, 120, 120]) alle bänder drin
             labels = torch.stack(labels)  # Labels stapeln
 
             # Weiterverarbeitung oder Rückgabe
@@ -544,56 +555,45 @@ class ComponentAttribution:
             if labels.ndim > 1:
                 labels = torch.argmax(labels, dim=1)
 
-            attributor = self.attributor(self.layer_names)
-            
-            sum_latent_relevances = OrderedDict([])    
-            '''attributor.lrp_pass(
-                model,
+            # Nutze die Daten im gewünschten Format
+            attributor.lrp_pass(
+                p_model,
                 images.to(device),
                 labels.to(device),
                 composite=None,
                 # attribution_composite,  # Composite ist bereits registriert
                 initial_relevance=1,
                 device=device,
-            )'''
-            for img, label in zip(images, labels):
-                attributor.lrp_pass(
-                    model,
-                    img.unsqueeze(0).to(device),  # Bild in Batch-Dimension bringen
-                    label.unsqueeze(0).to(device),  # Label ebenfalls in Batch-Dimension bringen
-                    composite=None,
-                    initial_relevance=1,
-                    device=device,
+            )
+
+            for layer_name in self.layer_names:
+                # Get latent relevances for each layer
+                latent_relevance = (
+                    attributor.latent_relevances[layer_name].detach().cpu()
                 )
 
-                for layer_name in self.layer_names:
-                    # Get latent relevances for each layer
-                    latent_relevance = (
-                        attributor.latent_relevances[layer_name].detach().cpu()
+                if abs_flag:
+                    latent_relevance = torch.abs(latent_relevance)
+
+                if self.model_type == "CNN":
+                    latent_relevance = latent_relevance.sum(dim=0)
+                elif self.model_type == "ViT":
+                    # Summing over the extra
+                    # dimension of tokens
+                    latent_relevance = latent_relevance.sum(dim=(0, 1))
+
+                # Add the local latent relevance to the
+                # corresponding dictionary
+                if layer_name not in sum_latent_relevances.keys():
+                    sum_latent_relevances[layer_name] = latent_relevance
+                else:
+                    sum_latent_relevances[layer_name] += latent_relevance
+
+                # Taking care of Random Pruning
+                if self.attribution_type == "Random":
+                    sum_latent_relevances[layer_name] = torch.rand_like(
+                        latent_relevance
                     )
-
-                    if abs_flag:
-                        latent_relevance = torch.abs(latent_relevance)
-
-                    if self.model_type == "CNN":
-                        latent_relevance = latent_relevance.sum(dim=0)
-                    elif self.model_type == "ViT":
-                        # Summing over the extra
-                        # dimension of tokens
-                        latent_relevance = latent_relevance.sum(dim=(0, 1))
-
-                    # Add the local latent relevance to the
-                    # corresponding dictionary
-                    if layer_name not in sum_latent_relevances.keys():
-                        sum_latent_relevances[layer_name] = latent_relevance
-                    else:
-                        sum_latent_relevances[layer_name] += latent_relevance
-
-                    # Taking care of Random Pruning
-                    if self.attribution_type == "Random":
-                        sum_latent_relevances[layer_name] = torch.rand_like(
-                            latent_relevance
-                        )
-                        break
+                    break
 
         return sum_latent_relevances
