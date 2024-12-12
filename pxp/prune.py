@@ -81,7 +81,7 @@ class LocalPruningOperations:
         pruning_mask_shape,
         pruning_indices,
         subsequent_layer_pruning,
-        device="cuda",
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
     ):
         """
         Given the shape of the cumulative pruning mask, generate a binary mask of the concepts to prune further
@@ -169,7 +169,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         pruning_precentage,
         subsequent_layer_pruning="Conv2d",
         least_relevant_first=True,
-        device="cuda",
+        device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
     ):
         """
         Generate a global pruning mask for the model based on the LRP relevances

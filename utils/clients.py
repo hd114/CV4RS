@@ -52,7 +52,7 @@ data_dirs = {
          "metadata_snow_cloud_parquet": "/faststorage/BigEarthNet-V2/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
     }
 
-config_path = "CV4RS-orig/configs/test-config-resnet-p.yaml"
+config_path = "../CV4RS-orig/configs/test-config-resnet-p.yaml"
 
 class PreFilter:
     def __init__(self, metadata: pd.DataFrame, countries: Optional[Container] | str = None, seasons: Optional[Container] | str = None):
@@ -136,7 +136,7 @@ class FLCLient:
         criterion_constructor: callable = torch.nn.BCEWithLogitsLoss,
         criterion_kwargs: dict = {"reduction": "mean"},
         num_classes: int = 19,
-        device: torch.device = torch.device('cpu'),
+        device: torch.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu"),
         dataset_filter: str = "serbia",
     ) -> None:
         self.model = model
@@ -226,15 +226,17 @@ class FLCLient:
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
             
         #    data, labels, index = batch["data"], batch["label"], batch["index"]
-            data = batch[1]
-            labels = batch[4]
+            data = batch[1].to(self.device)
+            labels = batch[4].to(self.device)
             
-            data = data.to(self.device)
-            label_new=np.copy(labels)
+            '''data = data.to(self.device)
+            label_new = np.copy(labels.cpu()).to(self.device)
            # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).to(self.device)
-            self.optimizer.zero_grad()
+            label_new = torch.from_numpy(label_new).to(self.device)'''
+            
+            label_new = labels.clone().to(self.device)
 
+            self.optimizer.zero_grad()
             logits = self.model(data)
             loss = self.criterion(logits, label_new)
             loss.backward()
@@ -263,7 +265,7 @@ class GlobalClient:
         with open(config_path, "r") as stream:
             self.configs = yaml.safe_load(stream)
         self.model = model
-        self.device = torch.device(0) if torch.cuda.is_available() else torch.device('cpu')
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         print(f'Using device: {self.device}')
         self.model.to(self.device)
         self.num_classes = num_classes
@@ -661,16 +663,16 @@ class GlobalClient:
         with torch.no_grad():
             for batch_idx, batch in enumerate(tqdm(self.val_loader, desc="test")):
                 data = batch[1].to(self.device)
-                labels = batch[4]
-                label_new=np.copy(labels)
+                labels = batch[4].to(self.device)
+                label_new = labels.clone()
+                #label_new=np.copy(labels)
                # label_new=self.change_sizes(label_new)
 
                 logits = self.model(data)
                 probs = torch.sigmoid(logits).cpu().numpy()
-
                 predicted_probs += list(probs)
 
-                y_true += list(label_new)
+                y_true += list(label_new.cpu().numpy())
 
         predicted_probs = np.asarray(predicted_probs)
         y_predicted = (predicted_probs >= 0.5).astype(np.float32)
@@ -709,6 +711,7 @@ class GlobalClient:
                 continue
             global_state_dict[key] = value + update
         self.model.load_state_dict(global_state_dict)
+        self.model.to(self.device)
 
 
     def save_state_dict(self):

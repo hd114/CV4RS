@@ -497,7 +497,7 @@ class ComponentAttribution:
         return layer_names
 
     def attribute(
-        self, model, dataloader, attribution_composite, abs_flag=True, device="cpu"
+        self, model, dataloader, attribution_composite, abs_flag=True, device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     ):
         model.eval()
         # registering the composites + canonizers
@@ -528,7 +528,7 @@ class ComponentAttribution:
         # Reinitialize model outside the function
         channels = 10
         num_classes = 19
-        p_model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+        p_model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False).to(device)
        
         for batch_indices in dataloader.batch_sampler:  # Holt Batch-Indizes vom Dataloader
             # Initialisiere Listen für Bilder und Labels
@@ -544,8 +544,8 @@ class ComponentAttribution:
                 labels.append(label)
 
             # Konvertiere zu Tensoren
-            images = torch.stack(images)  # Bilder stapeln  torch.Size([10, 120, 120]) alle bänder drin
-            labels = torch.stack(labels)  # Labels stapeln
+            images = torch.stack(images).to(device)
+            labels = torch.stack(labels).to(device) 
 
             # Weiterverarbeitung oder Rückgabe
             #yield images, labels  # Falls als Generator genutzt
@@ -570,7 +570,7 @@ class ComponentAttribution:
             for layer_name in self.layer_names:
                 # Get latent relevances for each layer
                 latent_relevance = (
-                    attributor.latent_relevances[layer_name].detach().cpu()
+                    attributor.latent_relevances[layer_name].to(device).detach()
                 )
 
                 if abs_flag:
