@@ -691,10 +691,25 @@ class GlobalClient:
 
         # update the global model
         global_state_dict = self.model.state_dict()
-        for key, value in global_state_dict.items():
+        '''for key, value in global_state_dict.items():
             update = update_aggregation[key].to(self.device)
             global_state_dict[key] = value + update
+        self.model.load_state_dict(global_state_dict)'''
+        
+        
+        for key, value in global_state_dict.items():
+            if key in update_aggregation:
+                update = update_aggregation[key].to(self.device)
+            elif f"{key}.weight" in update_aggregation:
+                update = update_aggregation[f"{key}.weight"].to(self.device)
+            elif f"{key}.bias" in update_aggregation:
+                update = update_aggregation[f"{key}.bias"].to(self.device)
+            else:
+                print(f"[ERROR] Key {key} not found in update aggregation!")
+                continue
+            global_state_dict[key] = value + update
         self.model.load_state_dict(global_state_dict)
+
 
     def save_state_dict(self):
         if not Path(self.state_dict_path).parent.is_dir():
