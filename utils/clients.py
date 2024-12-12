@@ -676,8 +676,20 @@ class GlobalClient:
 
         predicted_probs = np.asarray(predicted_probs)
         y_predicted = (predicted_probs >= 0.5).astype(np.float32)
-
         y_true = np.asarray(y_true)
+        
+        # Debugging für NaN-Werte
+        if np.any(np.isnan(predicted_probs)):
+            print("NaN detected in predicted_probs!")
+            print(predicted_probs)
+        if np.any(np.isnan(y_true)):
+            print("NaN detected in y_true!")
+            print(y_true)
+
+        # NaN-Werte behandeln
+        predicted_probs = np.nan_to_num(predicted_probs, nan=0.0)
+        y_true = np.nan_to_num(y_true, nan=0.0)
+    
         report = get_classification_report(
             y_true, y_predicted, predicted_probs, self.dataset_filter
         )
