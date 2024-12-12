@@ -605,10 +605,29 @@ class GlobalClient:
                 # Profiling stoppen und Ergebnisse speichern
                 #profiler.stop()
                 print(f"Generated Pruning Mask: {global_pruning_mask}")
-
                 # Senden der Maske an die Clients
-                for client in self.clients:
-                    client.apply_pruning_mask(self.pruning_mask)
+                
+                # Entfernt alle Hooks aus einem Modell
+                def remove_all_hooks(model):
+                    for name, module in model.named_modules():
+                        # Entferne Forward-Hooks
+                        if hasattr(module, '_forward_hooks'):
+                            module._forward_hooks.clear()
+                        # Entferne Pre-Forward-Hooks
+                        if hasattr(module, '_forward_pre_hooks'):
+                            module._forward_pre_hooks.clear()
+                        # Entferne Backward-Hooks
+                        if hasattr(module, '_backward_hooks'):
+                            module._backward_hooks.clear()
+
+                    print("All hooks removed from the model.")
+
+                # Beispiel: Entferne alle Hooks aus deinem Modell
+                remove_all_hooks(self.model)
+
+
+                #for client in self.clients:
+                #    client.apply_pruning_mask(self.pruning_mask)
 
             self.communication_round(epochs)
             report = self.validation_round()
