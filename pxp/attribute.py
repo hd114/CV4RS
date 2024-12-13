@@ -522,14 +522,14 @@ class ComponentAttribution:
             # Use composite=None because the composite
             # has been already registered to the model
             
-        sample = dataloader.dataset[0]  # Beispielhaft den ersten Datensatz holen
+        #sample = dataloader.dataset[0]  # Beispielhaft den ersten Datensatz holen
         #print(f"Sample returned by __getitem__: {sample}")
         #print(f"Type of sample: {type(sample)}")
         
         # Reinitialize model outside the function
-        channels = 10
+        '''channels = 10
         num_classes = 19
-        p_model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False).to(device)
+        p_model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False).to(device)'''
        
         for batch_indices in dataloader.batch_sampler:  # Holt Batch-Indizes vom Dataloader
             # Initialisiere Listen für Bilder und Labels

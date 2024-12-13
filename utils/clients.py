@@ -251,13 +251,13 @@ class FLCLient:
             
             self.optimizer.zero_grad()
             
-            with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
-                logits = self.model(data)
-                loss = self.criterion(logits, label_new)
-                loss.backward()
+            #with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
+            logits = self.model(data)
+            loss = self.criterion(logits, label_new)
+            loss.backward()
             #torch.cuda.synchronize() 
-            print("Profiler for cuda_memory_usage:")
-            print(prof.key_averages().table(sort_by="cuda_memory_usage", row_limit=10))
+            #print("Profiler for cuda_memory_usage:")
+            #print(prof.key_averages().table(sort_by="cuda_memory_usage", row_limit=10))
             
             del logits, data, labels
             torch.cuda.empty_cache()
@@ -268,9 +268,9 @@ class FLCLient:
             # removal
             # Anwenden der Pruning-Maske
             if self.pruning_mask is not None:
-                print("-" * 50)
-                print("Applying pruning mask...")
-                print("-" * 50)
+                #print("-" * 30)
+                #print("Applying pruning mask...")
+                #print("-" * 30)
                 hook_handles = self.pruner.fit_pruning_mask(
                     self.model,
                     self.pruning_mask,
@@ -282,7 +282,7 @@ class FLCLient:
                         
                 # empty up the GPU memory and CUDA cache, model and dataset
                 # Entferne alle Hooks aus dem Modell
-                remove_all_hooks(self.model)
+                #remove_all_hooks(self.model)
                 #del self.pruner
                 #torch.cuda.empty_cache()
 
@@ -426,7 +426,7 @@ class GlobalClient:
         
 
             # Pruning mask generation
-            if com_round == 2:
+            if com_round == 8:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
                 val_set = self.validation_set
@@ -446,7 +446,7 @@ class GlobalClient:
 
                 from collections import defaultdict
 
-                '''# Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
+                # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
                 class_counts = defaultdict(int)
                 collected_classes = set()
 
@@ -484,9 +484,9 @@ class GlobalClient:
 
                 #self.prune_loader = self.create_pruning_loader(pruning_patches)
                 
-                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)'''
+                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
                 
-                # 30 patch big subset of trainloader
+                '''# 30 patch big subset of trainloader
                 original_dataset = self.clients[0].train_loader.dataset
                 assert len(original_dataset) >= 30, "Das Dataset enthält weniger als 30 Patches!"
                 selected_indices = list(range(30))  # Nimm die ersten 30 Patches
@@ -500,7 +500,7 @@ class GlobalClient:
                     num_workers=self.clients[0].train_loader.num_workers,
                     pin_memory=self.clients[0].train_loader.pin_memory
                 )
-                print(f"Created train_loader1 with {len(subset_dataset)} patches.")
+                print(f"Created train_loader1 with {len(subset_dataset)} patches.")'''
 
                 
                 suggested_composite = {
@@ -529,7 +529,7 @@ class GlobalClient:
                             
                 print("Starting relevance computation and pruning mask generation.")
                 # Laden der relevanten Konfigurationen
-                pruning_rates = self.configs["pruning_rates"]
+                #pruning_rates = self.configs["pruning_rates"]
 
                 # Initialisierung des Relevance-Attributors
                 component_attributor = ComponentAttribution(
@@ -545,7 +545,7 @@ class GlobalClient:
                 
                 components_relevances = component_attributor.attribute(
                     model_copy,
-                    train_loader1, # self.prune_loader,
+                    self.prune_loader, # train_loader1, # 
                     composite,
                     abs_flag=True,
                     device=self.device,
@@ -575,21 +575,50 @@ class GlobalClient:
                     layer_names,
                 )
                 
-                global_pruning_mask = OrderedDict([])
+                #global_pruning_mask = OrderedDict([])
                 
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                
+                pruning_rate = 0.0
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
                     self.model,
                     components_relevances,
-                    pruning_precentage=0.5,
+                    pruning_precentage=pruning_rate,
                     subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
                     least_relevant_first=self.configs["least_relevant_first"],
                     device=self.device,
                 )
-                print(f"Global Pruning Mask: {global_pruning_mask}")
-                
+                #print(f"Global Pruning Mask: {global_pruning_mask}")
+                # print pruning mask statistics:
+                print("-" * 50)
+                print("Global Pruning Mask")
+                print(f"Pruning-rate: {pruning_rate}")
+            
+                total_global_elements = 0
+                total_global_ones = 0
+
+                for layer, masks in global_pruning_mask.items():
+                    total_elements = 0
+                    total_ones = 0
+
+                    for mask_type, mask_values in masks.items():
+                        if "weight" in mask_values:
+                            tensor = mask_values["weight"]
+                            total_elements += tensor.numel()
+                            total_ones += torch.sum(tensor == 0).item()
+
+                    percentage_ones = (total_ones / total_elements) * 100 if total_elements > 0 else 0
+                    print(f"Layer: {layer}\t\t% of pruned neurons: {percentage_ones:.2f}%")
+
+                    total_global_elements += total_elements
+                    total_global_ones += total_ones
+
+                # Berechnung des prozentualen Anteils aller Einsen
+                global_percentage_ones = (total_global_ones / total_global_elements) * 100 if total_global_elements > 0 else 0
+                #print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_ones:.2f}%")
+
+                # distribute mask among clients
+                print("Sendeing pruning mask to clients...")
                 for client in self.clients:
                     client.set_pruner_and_mask(pruner, global_pruning_mask)
                 
@@ -649,8 +678,8 @@ class GlobalClient:
             print(y_true)
 
         # NaN-Werte behandeln
-        predicted_probs = np.nan_to_num(predicted_probs, nan=0.0)
-        y_true = np.nan_to_num(y_true, nan=0.0)
+        #predicted_probs = np.nan_to_num(predicted_probs, nan=0.0)
+        #y_true = np.nan_to_num(y_true, nan=0.0)
     
         report = get_classification_report(
             y_true, y_predicted, predicted_probs, self.dataset_filter
@@ -665,15 +694,15 @@ class GlobalClient:
         # parameter aggregation
         update_aggregation = self.aggregator.fed_avg(model_updates)
 
-        # update the global model
+        # original: update the global model
         global_state_dict = self.model.state_dict()
-        '''for key, value in global_state_dict.items():
+        for key, value in global_state_dict.items():
             update = update_aggregation[key].to(self.device)
             global_state_dict[key] = value + update
-        self.model.load_state_dict(global_state_dict)'''
+        self.model.load_state_dict(global_state_dict)
         
-        
-        for key, value in global_state_dict.items():
+        # me: update the global model
+        '''for key, value in global_state_dict.items():
             if key in update_aggregation:
                 update = update_aggregation[key].to(self.device)
             elif f"{key}.weight" in update_aggregation:
@@ -685,7 +714,7 @@ class GlobalClient:
                 continue
             global_state_dict[key] = value + update
         self.model.load_state_dict(global_state_dict)
-        self.model.to(self.device)
+        self.model.to(self.device)'''
 
 
     def save_state_dict(self):
@@ -773,4 +802,4 @@ def remove_all_hooks(model):
         if hasattr(module, '_backward_hooks'):
             module._backward_hooks.clear()
 
-    print("All hooks removed from the model.")
+    #print("All hooks removed from the model.")
