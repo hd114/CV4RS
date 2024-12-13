@@ -3,6 +3,7 @@ import copy
 import numpy as np
 import torch
 from torch.utils.data import DataLoader
+from torchvision import transforms
 from tqdm import tqdm
 import time
 from datetime import datetime
@@ -151,6 +152,7 @@ class FLCLient:
         self.results = init_results(self.num_classes)
         self.pruner = None
         self.pruning_mask = None
+        
         self.dataset = BENv2DataSet(
         data_dirs=data_dirs,
         # For Mars use these paths
@@ -159,6 +161,7 @@ class FLCLient:
         include_snowy=False,
         include_cloudy=False,
         patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons=["Summer"]),
+        normalize=True  # standardisation
         )
         self.train_loader = DataLoader(
             self.dataset,
@@ -176,6 +179,7 @@ class FLCLient:
         include_snowy=False,
         include_cloudy=False,
         patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons="Summer"),
+        normalize=True  # standardisation
         )
         self.val_loader = DataLoader(
             self.validation_set,
@@ -251,7 +255,7 @@ class FLCLient:
                 logits = self.model(data)
                 loss = self.criterion(logits, label_new)
                 loss.backward()
-            torch.cuda.synchronize() 
+            #torch.cuda.synchronize() 
             print("Profiler for cuda_memory_usage:")
             print(prof.key_averages().table(sort_by="cuda_memory_usage", row_limit=10))
             
@@ -275,13 +279,12 @@ class FLCLient:
                 '''if layer_types[self.configs["pruning_layer_type"]] == torch.nn.Softmax:
                     for hook in hook_handles:
                         hook.remove()'''
-
+                        
                 # empty up the GPU memory and CUDA cache, model and dataset
-                # Beispiel: Entferne alle Hooks aus deinem Modell
+                # Entferne alle Hooks aus dem Modell
                 remove_all_hooks(self.model)
-                #progress_bar.close()
                 #del self.pruner
-                torch.cuda.empty_cache()
+                #torch.cuda.empty_cache()
 
             self.optimizer.step()
     
@@ -325,7 +328,9 @@ class GlobalClient:
         include_snowy=False,
         include_cloudy=False,
         patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+        normalize=True # standardisation
         )
+        
         self.val_loader = DataLoader(
             self.validation_set,
             batch_size=batch_size,
@@ -337,12 +342,14 @@ class GlobalClient:
         self.pruning_patches = []
         self.dataset = BENv2DataSet(
             data_dirs=data_dirs,
-            split="train",  # Für Trainingsdaten
+            split="train",
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
+            normalize=True # standardisation
         )
+        
         self.pruning_dataset = PruneDataSet(
             pruning_patches=self.pruning_patches,  # Die gesammelten Patches
             data_dirs=data_dirs,
@@ -350,6 +357,7 @@ class GlobalClient:
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
+            normalize=True  # standardisation
         )
         
         dt = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
@@ -533,16 +541,16 @@ class GlobalClient:
                 # Berechnung der Relevanzen
                 #print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
                 #print(f"model: {self.model}, device: {self.device}")
-                try:
-                    components_relevances = component_attributor.attribute(
-                        self.model,
-                        train_loader1, # self.prune_loader,
-                        composite,
-                        abs_flag=True,
-                        device=self.device,
-                    )
-                except Exception as e:
-                    print(f"Exception occurred in attribute: {e}")
+                model_copy = copy.deepcopy(self.model)
+                
+                components_relevances = component_attributor.attribute(
+                    model_copy,
+                    train_loader1, # self.prune_loader,
+                    composite,
+                    abs_flag=True,
+                    device=self.device,
+                )
+                
                 # Debugging: Überprüfen des Rückgabetyps und des Inhalts
                 print(f"Type of components_relevances: {type(components_relevances)}")
                 # Iteriere über das OrderedDict und gib die Relevanzen aus
@@ -566,14 +574,12 @@ class GlobalClient:
                     layer_types[self.configs["pruning_layer_type"]],
                     layer_names,
                 )
-                #top1_acc_list = []
-                #progress_bar = tqdm.tqdm(total=len(pruning_rates))
                 
                 global_pruning_mask = OrderedDict([])
                 
-                # prune the model based on the
-                # pre-computed attibution flow
-                # (relevance values)
+                # prune the model based on the pre-computed attibution flow (relevance values)
+                
+                
                 global_pruning_mask = pruner.generate_global_pruning_mask(
                     self.model,
                     components_relevances,
@@ -694,8 +700,6 @@ class GlobalClient:
         torch.save(res, self.results_path)
         
         
-from utils.BENv2_dataset import BENv2DataSet
-
 class PruneDataSet(BENv2DataSet):
     def __init__(self, pruning_patches, *args, **kwargs):
         super().__init__(*args, **kwargs)

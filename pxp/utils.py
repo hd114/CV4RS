@@ -34,6 +34,41 @@ def one_hot(output, targets):
     eye_matrix = torch.eye(output.shape[-1]).to(output.device)
     return eye_matrix[targets]
 
+def one_hot_targets_mlc(output, targets):
+    """
+    Get a tensor where each target is multiplied by the corresponding model output
+    for each label in the multilabel classification setting, ensuring gradients
+    can be backpropagated.
+
+    Args:
+    output (torch.tensor): the output of the model (size: batch_size x num_labels)
+    targets (torch.tensor): the targets of the model (size: batch_size x num_labels)
+
+    Returns:
+    torch.tensor: a tensor where each target is multiplied by the corresponding output logit,
+    preserving gradients for backpropagation
+    """
+
+    # Ensure output and targets are on the same device
+    output = output.to(targets.device)
+
+    # Check if targets are provided in one-hot or index format
+    if targets.dim() == 1:
+        # Convert to one-hot format if targets are indices
+        eye_matrix = torch.eye(output.shape[-1]).to(output.device)
+        targets = eye_matrix[targets]
+
+    # Ensure the dimensions match between output and targets
+    if output.size() != targets.size():
+        raise ValueError(
+            f"Mismatch in dimensions: output size {output.size()} and targets size {targets.size()} must match."
+        )
+
+    # Element-wise multiplication
+    selected_values = targets * output
+
+    return selected_values
+
 
 class ModelLayerUtils:
 

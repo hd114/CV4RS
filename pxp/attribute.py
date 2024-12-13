@@ -2,14 +2,13 @@ from collections import OrderedDict
 import torch
 from utils.pytorch_models import ResNet50
 #from utils.clients import GlobalClient
-from pxp.utils import one_hot_max, one_hot, ModelLayerUtils
+from pxp.utils import one_hot_max, one_hot, one_hot_targets_mlc, ModelLayerUtils
 from pxp.canonizers import get_vit_canonizer
 from pxp.LiT.rules import (
     InputRefXGSoftmaxZPlusModuleVMAP,
     IxGSoftmaxBriefModule,
     BlockModule,
 )
-
 
 class LatentRelevanceAttributor:
     def __init__(self, layers_list_to_track) -> None:
@@ -36,11 +35,13 @@ class LatentRelevanceAttributor:
         Returns:
             (torch.tensor): the computed heatmap using LRP
         """
-
+        
         if initial_relevance == 1:
-            initial_relevance_function = one_hot
+            initial_relevance_function = one_hot_targets_mlc
+            #initial_relevance_function = one_hot
         elif initial_relevance == "logit":
             initial_relevance_function = one_hot_max
+            
 
         with torch.enable_grad():
             inputs.requires_grad = True
@@ -558,7 +559,7 @@ class ComponentAttribution:
 
             # Nutze die Daten im gewünschten Format
             attributor.lrp_pass(
-                p_model,
+                model,
                 images.to(device),
                 labels.to(device),
                 composite=None,

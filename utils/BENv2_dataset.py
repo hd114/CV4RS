@@ -17,11 +17,14 @@ from typing import Container
 
 import pandas as pd
 from torch.utils.data import Dataset
+from torchvision import transforms
 
 from utils.BENv2_utils import BENv2LDMBReader
 from utils.BENv2_utils import STANDARD_BANDS
 from utils.BENv2_utils import ben_19_labels_to_multi_hot
 from utils.BENv2_utils import stack_and_interpolate
+from utils.BENv2_utils import band_combi_to_mean_std
+
 
 
 
@@ -90,11 +93,13 @@ class BENv2DataSet(Dataset):
             data_dirs: Mapping[str, Union[str, Path]] = None,
             split: Optional[str] = None,
             transform: Optional[Callable] = None,
-            max_len: Optional[int] = 100, #  None,   #
-            img_size: tuple = (3, 120, 120),
+            max_len: Optional[int] = 1000, #  None,   #
+            img_size: tuple = (3, 120, 120),    #(14, 120, 120),  # Default to all available bands
             patch_prefilter: Optional[Callable[[str], bool]] = None,
             include_cloudy: bool = False,
             include_snowy: bool = False,
+            normalize: bool = False,
+            interpolation: str = "120_nearest",
     ):
         """
         Dataset for BigEarthNet v2 dataset. Files can be requested by contacting
@@ -157,6 +162,8 @@ class BENv2DataSet(Dataset):
         self.image_size = img_size
         self.split = "validation" if split == "val" else split
         assert len(img_size) == 3, "Image size must be a tuple of length 3"
+        
+        # set channel order
         c, h, w = img_size
         assert h == w, "Image size must be square"
         if c not in self.avail_chan_configs.keys():
@@ -205,6 +212,16 @@ class BENv2DataSet(Dataset):
             ),
             process_labels_fn=ben_19_labels_to_multi_hot,
         )
+        
+        # Set transform with optional normalization
+        if normalize:
+            mean, std = band_combi_to_mean_std(self.channel_order, interpolation)
+            self.transform = transforms.Compose([
+                transforms.Normalize(mean=mean.tolist(), std=std.tolist())  # Nur Normalisierung
+            ])
+        else:
+            self.transform = None  # Keine Transformation, wenn nicht benötigt
+
 
     def get_patchname_from_index(self, idx: int) -> Optional[str]:
         """
@@ -246,8 +263,13 @@ class BENv2DataSet(Dataset):
         if img is None:
             print(f"Cannot load {key} from database")
             raise ValueError
+        
+        #print(f"Before transform - Mean: {img.mean()}, Std: {img.std()}")  # Vor Transformation
         if self.transform:
             img = self.transform(img)
+        #print(f"After transform - Mean: {img.mean()}, Std: {img.std()}")  # Nach Transformation
+
+
 
         return idx, img, "", key, labels
 

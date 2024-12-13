@@ -562,10 +562,9 @@ class BENv2LDMBReader:
             metadata_file: Union[str, Path],
             metadata_snow_cloud_file: Optional[Union[str, Path]] = None,
             bands: Optional[Union[Iterable, str, int]] = None,
-            process_bands_fn: Optional[
-                Callable[[Dict[str, np.ndarray], List[str]], Any]
-            ] = None,
+            process_bands_fn: Optional[Callable[[Dict[str, np.ndarray], List[str]], Any]] = None,
             process_labels_fn: Optional[Callable[[List[str]], Any]] = None,
+            interpolation: str = "120_nearest",  # Default interpolation type
     ):
         self.image_lmdb_file = image_lmdb_file
         self.env = None
@@ -582,9 +581,7 @@ class BENv2LDMBReader:
             print("Merged metadata with snow/cloud metadata")
 
         # self.lbls = {row["patch_id"]: row["labels"] for idx, row in self.metadata.iterrows()}
-        self.lbls = {
-            p: l for p, l in zip(self.metadata["patch_id"], self.metadata["labels"])
-        }
+        self.lbls = {p: l for p, l in zip(self.metadata["patch_id"], self.metadata["labels"])}
         print(f"Loaded {len(self.lbls)} labels")
         self.lbl_key_set = set(self.lbls.keys())
         print(f"Loaded {len(self.lbl_key_set)} keys")
@@ -593,18 +590,14 @@ class BENv2LDMBReader:
             p: s for p, s in zip(self.metadata["patch_id"], self.metadata["s1_name"])
         }
         print("Loaded mapping created")
-
+        
         # set mean and std based on bands selected
         self.mean = None
         self.std = None
 
-        self.process_bands_fn = (
-            process_bands_fn if process_bands_fn is not None else lambda x, y: x
-        )
-        self.process_labels_fn = (
-            process_labels_fn if process_labels_fn is not None else lambda x: x
-        )
-
+        self.process_bands_fn = (process_bands_fn if process_bands_fn is not None else lambda x, y: x)
+        self.process_labels_fn = (process_labels_fn if process_labels_fn is not None else lambda x: x)
+        
         self._keys: Optional[set] = None
         self._S2_keys: Optional[set] = None
         self._S1_keys: Optional[set] = None
@@ -670,8 +663,8 @@ class BENv2LDMBReader:
 
         assert isinstance(self.bands, list), "Bands should be a list"
         img_data_dict = {k: v for k, v in img_data_dict.items() if k in self.bands}
-
         img_data = self.process_bands_fn(img_data_dict, self.bands)
+        
         labels = self.lbls[key] if key in self.lbl_key_set else []
         labels = self.process_labels_fn(labels)
 
