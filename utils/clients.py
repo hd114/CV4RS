@@ -38,6 +38,8 @@ from pxp import ComponentAttribution
 from pxp.composites import *
 from data.imagenet import ImageNetSubset, ImageNetSubset, get_sample_indices_for_class
 from metrics.accuracy import compute_accuracy
+from torch.profiler import profile, record_function, ProfilerActivity
+
 
 
 '''data_dirs = {
@@ -147,6 +149,8 @@ class FLCLient:
         self.num_classes = num_classes
         self.dataset_filter = dataset_filter
         self.results = init_results(self.num_classes)
+        self.pruner = None
+        self.pruning_mask = None
         self.dataset = BENv2DataSet(
         data_dirs=data_dirs,
         # For Mars use these paths
@@ -183,6 +187,17 @@ class FLCLient:
 
     def set_model(self, model: torch.nn.Module):
         self.model = copy.deepcopy(model)
+        
+    def set_pruner_and_mask(self, pruner: GlobalPruningOperations, pruning_mask: OrderedDict):
+        """
+        Speichert den Pruner und die Pruning-Maske für diesen Client.
+        Args:
+            pruner (GlobalPruningOperations): Der vom GlobalClient generierte Pruner.
+            pruning_mask (OrderedDict): Die vom GlobalClient generierte Pruning-Maske.
+        """
+        self.pruner = pruner
+        self.pruning_mask = pruning_mask
+        print("[INFO] Pruner and pruning mask received and stored.")
 
     def train_one_round(self, epochs: int, validate: bool = False):
         state_before = copy.deepcopy(self.model.state_dict())
@@ -225,24 +240,50 @@ class FLCLient:
         self.model.train()
         for idx, batch in enumerate(tqdm(self.train_loader, desc="training")):
             
-        #    data, labels, index = batch["data"], batch["label"], batch["index"]
+            #data, labels, index = batch["data"], batch["label"], batch["index"]
             data = batch[1].to(self.device)
             labels = batch[4].to(self.device)
-            
-            '''data = data.to(self.device)
-            label_new = np.copy(labels.cpu()).to(self.device)
-           # label_new=self.change_sizes(label_new)
-            label_new = torch.from_numpy(label_new).to(self.device)'''
-            
             label_new = labels.clone().to(self.device)
-
+            
             self.optimizer.zero_grad()
-            logits = self.model(data)
-            loss = self.criterion(logits, label_new)
-            loss.backward()
-            self.optimizer.step()
+            
+            with profile(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as prof:
+                logits = self.model(data)
+                loss = self.criterion(logits, label_new)
+                loss.backward()
+            torch.cuda.synchronize() 
+            print("Profiler for cuda_memory_usage:")
+            print(prof.key_averages().table(sort_by="cuda_memory_usage", row_limit=10))
+            
+            del logits, data, labels
+            torch.cuda.empty_cache()
+            
+            # Our pruning gets applied by masking the
+            # activation of layers via forward hooks.
+            # Therefore hooks are returned for later
+            # removal
+            # Anwenden der Pruning-Maske
+            if self.pruning_mask is not None:
+                print("-" * 50)
+                print("Applying pruning mask...")
+                print("-" * 50)
+                hook_handles = self.pruner.fit_pruning_mask(
+                    self.model,
+                    self.pruning_mask,
+                )
+                
+                '''if layer_types[self.configs["pruning_layer_type"]] == torch.nn.Softmax:
+                    for hook in hook_handles:
+                        hook.remove()'''
 
-    
+                # empty up the GPU memory and CUDA cache, model and dataset
+                # Beispiel: Entferne alle Hooks aus deinem Modell
+                remove_all_hooks(self.model)
+                #progress_bar.close()
+                #del self.pruner
+                torch.cuda.empty_cache()
+
+            self.optimizer.step()
     
     def get_validation_results(self):
         return self.results
@@ -371,12 +412,13 @@ class GlobalClient:
     def train(self, communication_rounds: int, epochs: int):
         start = time.perf_counter()
         for com_round in range(1, communication_rounds + 1):
-            print("Round {}/{}".format(com_round, communication_rounds))
-            print("-" * 10)
+            print("=" * 50)
+            print("ROUND {}/{}".format(com_round, communication_rounds))
+            print("=" * 50)
         
 
             # Pruning mask generation
-            if com_round == 3:
+            if com_round == 2:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
                 val_set = self.validation_set
@@ -396,7 +438,7 @@ class GlobalClient:
 
                 from collections import defaultdict
 
-                # Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
+                '''# Initialisiere ein Dictionary, um die Klassenhäufigkeiten in den Patches zu überwachen
                 class_counts = defaultdict(int)
                 collected_classes = set()
 
@@ -432,11 +474,9 @@ class GlobalClient:
                 print(f"Anzahl eindeutiger Klassen: {len(collected_classes)}")
                 print(f"Klassenverteilung in den Pruning-Patches (Häufigkeiten): {dict(total_class_counts)}")
 
-
-
                 #self.prune_loader = self.create_pruning_loader(pruning_patches)
                 
-                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
+                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)'''
                 
                 # 30 patch big subset of trainloader
                 original_dataset = self.clients[0].train_loader.dataset
@@ -491,8 +531,8 @@ class GlobalClient:
                 )
                 
                 # Berechnung der Relevanzen
-                print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
-                print(f"model: {self.model}, device: {self.device}")
+                #print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
+                #print(f"model: {self.model}, device: {self.device}")
                 try:
                     components_relevances = component_attributor.attribute(
                         self.model,
@@ -521,17 +561,6 @@ class GlobalClient:
                     
                     print("-" * 50)
                     
-                # neu
-                '''acc_top1 = compute_accuracy(
-                    self.model,
-                    custom_validation_dataloader,
-                    self.device,
-                )
-                
-                print(f"Initial accuracy: top1={acc_top1}")'''
-                """
-                Experiment's main loop
-                """
                 layer_names = component_attributor.layer_names
                 pruner = GlobalPruningOperations(
                     layer_types[self.configs["pruning_layer_type"]],
@@ -541,96 +570,23 @@ class GlobalClient:
                 #progress_bar = tqdm.tqdm(total=len(pruning_rates))
                 
                 global_pruning_mask = OrderedDict([])
-                for pruning_rate in pruning_rates:
-                    #progress_bar.set_description(f"Processing {int((pruning_rate)*100)}% Pruning")
-                    # skip pruning if compression rate is 0.00 as we
-                    # have computed few lines above, otherwise prune
-                    if pruning_rate != 0.0:
-                        # prune the model based on the
-                        # pre-computed attibution flow
-                        # (relevance values)
-                        global_pruning_mask = pruner.generate_global_pruning_mask(
-                            self.model,
-                            components_relevances,
-                            pruning_rate,
-                            subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
-                            least_relevant_first=self.configs["least_relevant_first"],
-                            device=self.device,
-                        )
-                        print(f"Global Pruning Mask: {global_pruning_mask}")
-                        # Our pruning gets applied by masking the
-                        # activation of layers via forward hooks.
-                        # Therefore hooks are returned for later
-                        # removal
-                        hook_handles = pruner.fit_pruning_mask(
-                            self.model,
-                            global_pruning_mask,
-                        )
-
-                    '''progress_bar.set_description(
-                        f"Computing accuracy for model pruned with {int((pruning_rate)*100)}%"
-                    )
-                    acc_top1 = compute_accuracy(
-                        self.model,
-                        self.custom_validation_dataloader,
-                        self.device,
-                    )'''
-                    # Remove/Deactivate hooks (except
-                    # when the pruning rate is 0.00)
-                    if pruning_rate != 0.0:
-                        if layer_types[self.configs["pruning_layer_type"]] == torch.nn.Softmax:
-                            for hook in hook_handles:
-                                hook.remove()
-                    #top1_acc_list.append(acc_top1)
-                    #print(f"Accuracy-Flow list: {top1_acc_list}")
-
-                    """
-                    Logging the results on WandB
-                    """
-                    '''if self.configs["wandb"]:
-                        wandb.log({"acc_top1": acc_top1, "pruning_rate": pruning_rate})
-                        print(f"Logged the results of {pruning_rate}% Pruning Rate to wandb!")
-                    progress_bar.update(1)'''
-
-                # empty up the GPU memory and CUDA cache, model and dataset
-                #progress_bar.close()
-                del pruner
-                torch.cuda.empty_cache()
-
-                '''top1_auc = compute_auc(top1_acc_list, pruning_rates)
-                if self.configs["wandb"]:
-                    wandb.log({"top1_auc": top1_auc})
-                    print(f"Logged the AUC of the Top1 Accuracy to wandb!")
-
-                print(f"Top1 AUC: {top1_auc}")'''
                 
-                # Profiling stoppen und Ergebnisse speichern
-                #profiler.stop()
-                print(f"Generated Pruning Mask: {global_pruning_mask}")
-                # Senden der Maske an die Clients
+                # prune the model based on the
+                # pre-computed attibution flow
+                # (relevance values)
+                global_pruning_mask = pruner.generate_global_pruning_mask(
+                    self.model,
+                    components_relevances,
+                    pruning_precentage=0.5,
+                    subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
+                    least_relevant_first=self.configs["least_relevant_first"],
+                    device=self.device,
+                )
+                print(f"Global Pruning Mask: {global_pruning_mask}")
                 
-                # Entfernt alle Hooks aus einem Modell
-                def remove_all_hooks(model):
-                    for name, module in model.named_modules():
-                        # Entferne Forward-Hooks
-                        if hasattr(module, '_forward_hooks'):
-                            module._forward_hooks.clear()
-                        # Entferne Pre-Forward-Hooks
-                        if hasattr(module, '_forward_pre_hooks'):
-                            module._forward_pre_hooks.clear()
-                        # Entferne Backward-Hooks
-                        if hasattr(module, '_backward_hooks'):
-                            module._backward_hooks.clear()
-
-                    print("All hooks removed from the model.")
-
-                # Beispiel: Entferne alle Hooks aus deinem Modell
-                remove_all_hooks(self.model)
-
-
-                #for client in self.clients:
-                #    client.apply_pruning_mask(self.pruning_mask)
-
+                for client in self.clients:
+                    client.set_pruner_and_mask(pruner, global_pruning_mask)
+                
             self.communication_round(epochs)
             report = self.validation_round()
 
@@ -759,48 +715,6 @@ def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
 
     print("[SUCCESS] Prune Loader Struktur validiert!")
 
-
-'''def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
-    """
-    Validiert die Struktur des prune_loader im Vergleich zum train_loader
-    und prüft, ob die Daten korrekt geladen werden.
-
-    Args:
-        train_loader (DataLoader): Originaler Trainings-Loader.
-        prune_loader (DataLoader): Pruning-Loader.
-        pruning_dataset (PruneDataSet): Pruning-Dataset.
-    """
-    print("[INFO] Validierung des Prune Loaders...")
-
-    # Prüfen, ob beide Loader gleichartige Datenstrukturen zurückgeben
-    for batch_idx, (train_batch, prune_batch) in enumerate(zip(train_loader, prune_loader)):
-        # Anzahl der Elemente im Batch prüfen
-        assert len(train_batch) == len(prune_batch), f"Batch structure mismatch: train_batch has {len(train_batch)} elements, prune_batch has {len(prune_batch)} elements."
-
-        # Iteriere über die Elemente in einem Batch
-        for i, (train_item, prune_item) in enumerate(zip(train_batch, prune_batch)):
-            # Typen vergleichen
-            assert type(train_item) == type(prune_item), f"Type mismatch in batch {batch_idx}, element {i}: {type(train_item)} != {type(prune_item)}"
-            
-            # Shapes vergleichen (nur für Tensoren relevant)
-            if isinstance(train_item, torch.Tensor):
-                assert train_item.shape == prune_item.shape, f"Shape mismatch in batch {batch_idx}, element {i}: {train_item.shape} != {prune_item.shape}"
-
-    print("[SUCCESS] Prune Loader Struktur validiert!")
-
-    # Debugging innerhalb des Pruning Datasets
-    print("[INFO] Debugging des Prune Datasets...")
-    for patch in pruning_dataset.patches:
-        assert patch in pruning_dataset.BENv2Loader.lbls, f"Patch {patch} nicht in BENv2Loader vorhanden"
-    print("[SUCCESS] Alle Pruning-Patches haben gültige Labels!")
-
-    # Debugging der geladenen Daten
-    print("[INFO] Debugging der geladenen Daten...")
-    for idx, img, _, key, labels in prune_loader:
-        print(f"[DEBUG] Index: {idx}, Image Shape: {img.shape}, Key: {key}, Labels: {labels}")
-        break  # Nur eine Batch prüfen'''
-
-
 from torch.utils.data import DataLoader, Subset
 
 def create_prune_loader(train_loader, pruning_patches):
@@ -841,3 +755,18 @@ def create_prune_loader(train_loader, pruning_patches):
 
     print("[SUCCESS] Prune Loader erfolgreich erstellt.")
     return prune_loader
+
+# Entfernt alle Hooks aus einem Modell
+def remove_all_hooks(model):
+    for name, module in model.named_modules():
+        # Entferne Forward-Hooks
+        if hasattr(module, '_forward_hooks'):
+            module._forward_hooks.clear()
+        # Entferne Pre-Forward-Hooks
+        if hasattr(module, '_forward_pre_hooks'):
+            module._forward_pre_hooks.clear()
+        # Entferne Backward-Hooks
+        if hasattr(module, '_backward_hooks'):
+            module._backward_hooks.clear()
+
+    print("All hooks removed from the model.")
