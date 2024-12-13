@@ -618,4 +618,255 @@
 training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.16s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.48it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.94it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.32it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.67it/s]
 training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.21s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.26it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.67it/s]
 training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.16s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.49it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.95it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.32it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.68it/s]
-training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.27s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.39it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.86it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.24it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.60it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.19s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.46it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.29it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.69it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.18s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.47it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.93it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.31it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.70it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.19s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.44it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.90it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.28it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+test:   0%|          | 0/8 [00:00<?, ?it/s]test:  12%|█▎        | 1/8 [00:00<00:01,  4.69it/s]test:  25%|██▌       | 2/8 [00:00<00:01,  5.15it/s]test:  38%|███▊      | 3/8 [00:00<00:00,  5.36it/s]test:  50%|█████     | 4/8 [00:00<00:00,  5.45it/s]test:  62%|██████▎   | 5/8 [00:00<00:00,  5.49it/s]test:  75%|███████▌  | 6/8 [00:01<00:00,  5.50it/s]test:  88%|████████▊ | 7/8 [00:01<00:00,  5.39it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.61it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.45it/s]
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.22s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.44it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.90it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.67it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.25s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.41it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.87it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.26it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.60it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.21s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.45it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.90it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.29it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.17s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.48it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.94it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.32it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.68it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.18s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.47it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.93it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.31it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.22s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.89it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.67it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.89it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.20s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.45it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.90it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.28it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.68it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.20s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.46it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.90it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.29it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.64it/s]
+test:   0%|          | 0/8 [00:00<?, ?it/s]test:  12%|█▎        | 1/8 [00:00<00:01,  4.54it/s]test:  25%|██▌       | 2/8 [00:00<00:01,  5.11it/s]test:  38%|███▊      | 3/8 [00:00<00:00,  5.32it/s]test:  50%|█████     | 4/8 [00:00<00:00,  5.40it/s]test:  62%|██████▎   | 5/8 [00:00<00:00,  5.47it/s]test:  75%|███████▌  | 6/8 [00:01<00:00,  5.50it/s]test:  88%|████████▊ | 7/8 [00:01<00:00,  5.54it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.71it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.48it/s]
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in samples with no predicted labels. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.21s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.89it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.28it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.62it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.17s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.47it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.30it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.70it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.24s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.40it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.85it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.24it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.61it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.64it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.17s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.48it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.90it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.29it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.64it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.18s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.48it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.30it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.67it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.24s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.41it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.87it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.26it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.61it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.18s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.47it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.92it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.30it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.70it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.22s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.64it/s]
+test:   0%|          | 0/8 [00:00<?, ?it/s]test:  12%|█▎        | 1/8 [00:00<00:01,  4.23it/s]test:  25%|██▌       | 2/8 [00:00<00:01,  4.81it/s]test:  38%|███▊      | 3/8 [00:00<00:00,  5.11it/s]test:  50%|█████     | 4/8 [00:00<00:00,  5.25it/s]test:  62%|██████▎   | 5/8 [00:00<00:00,  5.34it/s]test:  75%|███████▌  | 6/8 [00:01<00:00,  5.40it/s]test:  88%|████████▊ | 7/8 [00:01<00:00,  5.42it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.77it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.39it/s]
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.22s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.87it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.25it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.62it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.27s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.38it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.82it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.20it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.52it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.29s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.36it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.18it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.57it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:04,  1.34s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.32it/s]training:  75%|███████▌  | 3/4 [00:02<00:00,  1.77it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.16it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.55it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.33s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.34it/s]training:  75%|███████▌  | 3/4 [00:02<00:00,  1.79it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.18it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.56it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.30s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.38it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.83it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.22it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.56it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.30s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.36it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.82it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.20it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.59it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.31s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.35it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.20it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.54it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.28s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.37it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.83it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.22it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.61it/s]
+test:   0%|          | 0/8 [00:00<?, ?it/s]test:  12%|█▎        | 1/8 [00:00<00:01,  4.13it/s]test:  25%|██▌       | 2/8 [00:00<00:01,  4.46it/s]test:  38%|███▊      | 3/8 [00:00<00:01,  4.78it/s]test:  50%|█████     | 4/8 [00:00<00:00,  4.95it/s]test:  62%|██████▎   | 5/8 [00:01<00:00,  5.04it/s]test:  75%|███████▌  | 6/8 [00:01<00:00,  5.11it/s]test:  88%|████████▊ | 7/8 [00:01<00:00,  5.10it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.24it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.01it/s]
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.31s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.37it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.81it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.20it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.57it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.33s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.35it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.80it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.19it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.56it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.33s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.34it/s]training:  75%|███████▌  | 3/4 [00:02<00:00,  1.78it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.16it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.55it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:04,  1.34s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.32it/s]training:  75%|███████▌  | 3/4 [00:02<00:00,  1.77it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.14it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.55it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.33s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.35it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.80it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.18it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.56it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.24s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.87it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.25it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.62it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.30s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.33it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.79it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.18it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.55it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.29s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.38it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.83it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.22it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.57it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.25s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.87it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.26it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.64it/s]
+test:   0%|          | 0/8 [00:00<?, ?it/s]test:  12%|█▎        | 1/8 [00:00<00:01,  4.55it/s]test:  25%|██▌       | 2/8 [00:00<00:01,  4.93it/s]test:  38%|███▊      | 3/8 [00:00<00:00,  5.08it/s]test:  50%|█████     | 4/8 [00:00<00:00,  5.16it/s]test:  62%|██████▎   | 5/8 [00:00<00:00,  5.19it/s]test:  75%|███████▌  | 6/8 [00:01<00:00,  5.22it/s]test:  88%|████████▊ | 7/8 [00:01<00:00,  5.25it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.40it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.22it/s]
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.31s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.36it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.83it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.22it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.58it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.27s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.39it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.84it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.23it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.59it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.27s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.40it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.84it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.23it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.63it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.25s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.26it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.65it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.89it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.63it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.25s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.42it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.88it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.26it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.62it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.25s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.41it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.86it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.25it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.64it/s]
+training:   0%|          | 0/4 [00:00<?, ?it/s]training:  25%|██▌       | 1/4 [00:01<00:03,  1.23s/it]training:  50%|█████     | 2/4 [00:01<00:01,  1.43it/s]training:  75%|███████▌  | 3/4 [00:01<00:00,  1.89it/s]training: 100%|██████████| 4/4 [00:02<00:00,  2.27it/s]training: 100%|██████████| 4/4 [00:02<00:00,  1.63it/s]
+test:   0%|          | 0/8 [00:00<?, ?it/s]test:  12%|█▎        | 1/8 [00:00<00:01,  4.67it/s]test:  25%|██▌       | 2/8 [00:00<00:01,  5.23it/s]test:  38%|███▊      | 3/8 [00:00<00:00,  5.41it/s]test:  50%|█████     | 4/8 [00:00<00:00,  5.55it/s]test:  62%|██████▎   | 5/8 [00:00<00:00,  5.61it/s]test:  75%|███████▌  | 6/8 [00:01<00:00,  5.65it/s]test:  88%|████████▊ | 7/8 [00:01<00:00,  5.68it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.99it/s]test: 100%|██████████| 8/8 [00:01<00:00,  5.67it/s]
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
+  warnings.warn(
