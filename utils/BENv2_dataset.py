@@ -93,7 +93,7 @@ class BENv2DataSet(Dataset):
             data_dirs: Mapping[str, Union[str, Path]] = None,
             split: Optional[str] = None,
             transform: Optional[Callable] = None,
-            max_len: Optional[int] = 1000, #  None,   #
+            max_len: Optional[int] = None, #  1000, #  None,   #
             img_size: tuple = (3, 120, 120),    #(14, 120, 120),  # Default to all available bands
             patch_prefilter: Optional[Callable[[str], bool]] = None,
             include_cloudy: bool = False,

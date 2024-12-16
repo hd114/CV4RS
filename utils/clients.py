@@ -220,7 +220,17 @@ class FLCLient:
         if validate:
             report = self.validation_round()
             self.results = update_results(self.results, report, self.num_classes)
-
+            
+        # prune again here: if mask is not none, then prune
+        if self.pruning_mask is not None:
+                #print("-" * 30)
+                print("Prune before sending to global...")
+                #print("-" * 30)
+                self.pruner.fit_pruning_mask(
+                    self.model,
+                    self.pruning_mask,
+                )
+                
         state_after = self.model.state_dict()
 
         model_update = {}
@@ -426,7 +436,7 @@ class GlobalClient:
         
 
             # Pruning mask generation
-            if com_round == 8:
+            if com_round == 4:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
                 val_set = self.validation_set
@@ -577,8 +587,10 @@ class GlobalClient:
                 
                 #global_pruning_mask = OrderedDict([])
                 
+                ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.0
+                pruning_rate = 0.6
+                ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
                     self.model,

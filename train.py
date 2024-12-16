@@ -11,7 +11,7 @@ from utils.pytorch_utils import start_cuda
 
 
 def train():
-	csv_paths = ["Finland", "Ireland","Serbia"]     # ,"Ireland","Serbia"  this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
+	csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"] #this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
 	epochs = 3
 	communication_rounds = 20
 	channels = 10
