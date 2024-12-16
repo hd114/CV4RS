@@ -1,0 +1,789 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    29135 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Loading BEN data for train...
+    237871 patches indexed
+    237871 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+==================================================
+ROUND 1/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0017 | recall: 0.0039 | f1-score: 0.0024 | support: 1282 | mAP: 0.0672
+macro     precision: 0.0003 | recall: 0.0263 | f1-score: 0.0006 | support: 1282 | mAP: 0.1379
+
+==================================================
+ROUND 2/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0048 | recall: 0.0031 | f1-score: 0.0038 | support: 1282 | mAP: 0.0564
+macro     precision: 0.0091 | recall: 0.0273 | f1-score: 0.0129 | support: 1282 | mAP: 0.1035
+
+==================================================
+ROUND 3/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0615
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1349
+
+==================================================
+ROUND 4/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0011 | recall: 0.0008 | f1-score: 0.0009 | support: 1282 | mAP: 0.0560
+macro     precision: 0.0132 | recall: 0.0263 | f1-score: 0.0175 | support: 1282 | mAP: 0.1558
+
+==================================================
+ROUND 5/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0071 | recall: 0.0078 | f1-score: 0.0074 | support: 1282 | mAP: 0.0664
+macro     precision: 0.0526 | recall: 0.0033 | f1-score: 0.0062 | support: 1282 | mAP: 0.1373
+
+==================================================
+ROUND 6/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0042 | recall: 0.0094 | f1-score: 0.0058 | support: 1282 | mAP: 0.0552
+macro     precision: 0.0211 | recall: 0.0218 | f1-score: 0.0214 | support: 1282 | mAP: 0.1443
+
+==================================================
+ROUND 7/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0019 | recall: 0.0016 | f1-score: 0.0017 | support: 1282 | mAP: 0.0527
+macro     precision: 0.0010 | recall: 0.0526 | f1-score: 0.0020 | support: 1282 | mAP: 0.1420
+
+==================================================
+ROUND 8/20
+==================================================
+Finale Anzahl der Pruning-Patches: 10
+Anzahl eindeutiger Klassen: 11
+Klassenverteilung in den Pruning-Patches (Häufigkeiten): {'Marine waters': 7, 'Transitional woodland, shrub': 6, 'Mixed forest': 5, 'Coniferous forest': 4, 'Land principally occupied by agriculture, with significant areas of natural vegetation': 2, 'Inland waters': 1, 'Broad-leaved forest': 1, 'Arable land': 1, 'Urban fabric': 1, 'Industrial or commercial units': 1, 'Coastal wetlands': 1}
+[INFO] Erstelle Prune Loader...
+[INFO] 10 Patches nach Filterung übrig.
+[SUCCESS] Prune Loader erfolgreich erstellt.
+Starting relevance computation and pruning mask generation.
+Type of components_relevances: <class 'collections.OrderedDict'>
+Layer: conv1
+Total layer relevance: 1.2829834096450287e+26
+--------------------------------------------------
+Layer: encoder.4.0.conv1
+Total layer relevance: 9.150264823079054e+25
+--------------------------------------------------
+Layer: encoder.4.0.conv2
+Total layer relevance: 5.589554378135157e+25
+--------------------------------------------------
+Layer: encoder.4.0.conv3
+Total layer relevance: 1.3916364385630048e+25
+--------------------------------------------------
+Layer: encoder.4.0.downsample.0
+Total layer relevance: 1.385219738636965e+25
+--------------------------------------------------
+Layer: encoder.4.1.conv1
+Total layer relevance: 5.1883067385895756e+23
+--------------------------------------------------
+Layer: encoder.4.1.conv2
+Total layer relevance: 3.2731005567344456e+23
+--------------------------------------------------
+Layer: encoder.4.1.conv3
+Total layer relevance: 6.142975644287916e+22
+--------------------------------------------------
+Layer: encoder.4.2.conv1
+Total layer relevance: 7.864429426644192e+21
+--------------------------------------------------
+Layer: encoder.4.2.conv2
+Total layer relevance: 4.252430498452323e+21
+--------------------------------------------------
+Layer: encoder.4.2.conv3
+Total layer relevance: 5.934713406772111e+20
+--------------------------------------------------
+Layer: encoder.5.0.conv1
+Total layer relevance: 3.548103791819201e+19
+--------------------------------------------------
+Layer: encoder.5.0.conv2
+Total layer relevance: 2.752229336927961e+19
+--------------------------------------------------
+Layer: encoder.5.0.conv3
+Total layer relevance: 5.52578974919059e+18
+--------------------------------------------------
+Layer: encoder.5.0.downsample.0
+Total layer relevance: 5.508512573227532e+18
+--------------------------------------------------
+Layer: encoder.5.1.conv1
+Total layer relevance: 3.872769949218898e+17
+--------------------------------------------------
+Layer: encoder.5.1.conv2
+Total layer relevance: 2.525915449833554e+17
+--------------------------------------------------
+Layer: encoder.5.1.conv3
+Total layer relevance: 9.985610843632435e+16
+--------------------------------------------------
+Layer: encoder.5.2.conv1
+Total layer relevance: 3.567452234658611e+16
+--------------------------------------------------
+Layer: encoder.5.2.conv2
+Total layer relevance: 2.738102639735603e+16
+--------------------------------------------------
+Layer: encoder.5.2.conv3
+Total layer relevance: 2724763491368960.0
+--------------------------------------------------
+Layer: encoder.5.3.conv1
+Total layer relevance: 116459413962752.0
+--------------------------------------------------
+Layer: encoder.5.3.conv2
+Total layer relevance: 80858530709504.0
+--------------------------------------------------
+Layer: encoder.5.3.conv3
+Total layer relevance: 16331490459648.0
+--------------------------------------------------
+Layer: encoder.6.0.conv1
+Total layer relevance: 2899066224640.0
+--------------------------------------------------
+Layer: encoder.6.0.conv2
+Total layer relevance: 2911507316736.0
+--------------------------------------------------
+Layer: encoder.6.0.conv3
+Total layer relevance: 383740510208.0
+--------------------------------------------------
+Layer: encoder.6.0.downsample.0
+Total layer relevance: 383431081984.0
+--------------------------------------------------
+Layer: encoder.6.1.conv1
+Total layer relevance: 31491887104.0
+--------------------------------------------------
+Layer: encoder.6.1.conv2
+Total layer relevance: 37038006272.0
+--------------------------------------------------
+Layer: encoder.6.1.conv3
+Total layer relevance: 6729598976.0
+--------------------------------------------------
+Layer: encoder.6.2.conv1
+Total layer relevance: 1562123264.0
+--------------------------------------------------
+Layer: encoder.6.2.conv2
+Total layer relevance: 1699062528.0
+--------------------------------------------------
+Layer: encoder.6.2.conv3
+Total layer relevance: 298577824.0
+--------------------------------------------------
+Layer: encoder.6.3.conv1
+Total layer relevance: 29585836.0
+--------------------------------------------------
+Layer: encoder.6.3.conv2
+Total layer relevance: 37232368.0
+--------------------------------------------------
+Layer: encoder.6.3.conv3
+Total layer relevance: 8725436.0
+--------------------------------------------------
+Layer: encoder.6.4.conv1
+Total layer relevance: 2902516.5
+--------------------------------------------------
+Layer: encoder.6.4.conv2
+Total layer relevance: 4589082.0
+--------------------------------------------------
+Layer: encoder.6.4.conv3
+Total layer relevance: 551782.5625
+--------------------------------------------------
+Layer: encoder.6.5.conv1
+Total layer relevance: 116039.2734375
+--------------------------------------------------
+Layer: encoder.6.5.conv2
+Total layer relevance: 195816.359375
+--------------------------------------------------
+Layer: encoder.6.5.conv3
+Total layer relevance: 52589.484375
+--------------------------------------------------
+Layer: encoder.7.0.conv1
+Total layer relevance: 16227.689453125
+--------------------------------------------------
+Layer: encoder.7.0.conv2
+Total layer relevance: 60260.2890625
+--------------------------------------------------
+Layer: encoder.7.0.conv3
+Total layer relevance: 19463.271484375
+--------------------------------------------------
+Layer: encoder.7.0.downsample.0
+Total layer relevance: 21360.25390625
+--------------------------------------------------
+Layer: encoder.7.1.conv1
+Total layer relevance: 2315.354736328125
+--------------------------------------------------
+Layer: encoder.7.1.conv2
+Total layer relevance: 9737.755859375
+--------------------------------------------------
+Layer: encoder.7.1.conv3
+Total layer relevance: 5312.78955078125
+--------------------------------------------------
+Layer: encoder.7.2.conv1
+Total layer relevance: 2831.41796875
+--------------------------------------------------
+Layer: encoder.7.2.conv2
+Total layer relevance: 5832.3671875
+--------------------------------------------------
+Layer: encoder.7.2.conv3
+Total layer relevance: 2566.26953125
+--------------------------------------------------
+--------------------------------------------------
+Global Pruning Mask
+Pruning-rate: 0.0
+Layer: conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.4.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.3.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.3.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.3.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.4.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.4.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.4.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.5.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.5.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.5.conv3		% of pruned neurons: 0.00%
+Layer: encoder.7.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.7.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.7.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.7.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.7.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.7.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.7.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.7.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.7.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.7.2.conv3		% of pruned neurons: 0.00%
+Sendeing pruning mask to clients...
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0835 | recall: 0.1186 | f1-score: 0.0980 | support: 1282 | mAP: 0.0602
+macro     precision: 0.0380 | recall: 0.0545 | f1-score: 0.0300 | support: 1282 | mAP: 0.1405
+
+==================================================
+ROUND 9/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0021 | recall: 0.0031 | f1-score: 0.0025 | support: 1282 | mAP: 0.0556
+macro     precision: 0.0527 | recall: 0.0273 | f1-score: 0.0020 | support: 1282 | mAP: 0.1230
+
+==================================================
+ROUND 10/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0691 | recall: 0.1638 | f1-score: 0.0972 | support: 1282 | mAP: 0.0574
+macro     precision: 0.0706 | recall: 0.1079 | f1-score: 0.0677 | support: 1282 | mAP: 0.1245
+
+==================================================
+ROUND 11/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0304 | recall: 0.0881 | f1-score: 0.0452 | support: 1282 | mAP: 0.0605
+macro     precision: 0.0063 | recall: 0.0401 | f1-score: 0.0107 | support: 1282 | mAP: 0.1055
+
+==================================================
+ROUND 12/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0508 | recall: 0.1186 | f1-score: 0.0711 | support: 1282 | mAP: 0.0530
+macro     precision: 0.0460 | recall: 0.0671 | f1-score: 0.0393 | support: 1282 | mAP: 0.0977
+
+==================================================
+ROUND 13/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0563 | recall: 0.1193 | f1-score: 0.0765 | support: 1282 | mAP: 0.0547
+macro     precision: 0.0154 | recall: 0.0869 | f1-score: 0.0257 | support: 1282 | mAP: 0.0947
+
+==================================================
+ROUND 14/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0223 | recall: 0.0835 | f1-score: 0.0352 | support: 1282 | mAP: 0.0501
+macro     precision: 0.0060 | recall: 0.1035 | f1-score: 0.0105 | support: 1282 | mAP: 0.0845
+
+==================================================
+ROUND 15/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0212 | recall: 0.0452 | f1-score: 0.0289 | support: 1282 | mAP: 0.0521
+macro     precision: 0.0033 | recall: 0.0600 | f1-score: 0.0060 | support: 1282 | mAP: 0.0806
+
+==================================================
+ROUND 16/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0034 | recall: 0.0101 | f1-score: 0.0051 | support: 1282 | mAP: 0.0511
+macro     precision: 0.0532 | recall: 0.0436 | f1-score: 0.0030 | support: 1282 | mAP: 0.0941
+
+==================================================
+ROUND 17/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0400 | recall: 0.0913 | f1-score: 0.0556 | support: 1282 | mAP: 0.0535
+macro     precision: 0.0780 | recall: 0.0613 | f1-score: 0.0349 | support: 1282 | mAP: 0.1279
+
+==================================================
+ROUND 18/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0641 | recall: 0.1490 | f1-score: 0.0897 | support: 1282 | mAP: 0.0552
+macro     precision: 0.0732 | recall: 0.0786 | f1-score: 0.0513 | support: 1282 | mAP: 0.1102
+
+==================================================
+ROUND 19/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0232 | recall: 0.0382 | f1-score: 0.0288 | support: 1282 | mAP: 0.0520
+macro     precision: 0.0982 | recall: 0.1063 | f1-score: 0.0508 | support: 1282 | mAP: 0.1134
+
+==================================================
+ROUND 20/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0705 | recall: 0.1615 | f1-score: 0.0982 | support: 1282 | mAP: 0.0554
+macro     precision: 0.0335 | recall: 0.1194 | f1-score: 0.0284 | support: 1282 | mAP: 0.0895
+
+[{'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}]

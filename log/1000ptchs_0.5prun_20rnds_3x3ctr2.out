@@ -1,0 +1,2187 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    29135 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Loading BEN data for train...
+    237871 patches indexed
+    237871 filtered patches indexed
+    1000 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+==================================================
+ROUND 1/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0804
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0916
+
+==================================================
+ROUND 2/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0865
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1367
+
+==================================================
+ROUND 3/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0558
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1256
+
+==================================================
+ROUND 4/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0011 | recall: 0.0016 | f1-score: 0.0013 | support: 1282 | mAP: 0.0542
+macro     precision: 0.0021 | recall: 0.0526 | f1-score: 0.0040 | support: 1282 | mAP: 0.1407
+
+==================================================
+ROUND 5/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0593 | recall: 0.0460 | f1-score: 0.0518 | support: 1282 | mAP: 0.0615
+macro     precision: 0.0827 | recall: 0.0205 | f1-score: 0.0313 | support: 1282 | mAP: 0.1433
+
+==================================================
+ROUND 6/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0437 | recall: 0.0335 | f1-score: 0.0379 | support: 1282 | mAP: 0.0616
+macro     precision: 0.0526 | recall: 0.0141 | f1-score: 0.0223 | support: 1282 | mAP: 0.1526
+
+==================================================
+ROUND 7/20
+==================================================
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+Epoch 1/3
+----------
+Epoch 2/3
+----------
+Epoch 3/3
+----------
+micro     precision: 0.0305 | recall: 0.0710 | f1-score: 0.0427 | support: 1282 | mAP: 0.0559
+macro     precision: 0.0772 | recall: 0.0712 | f1-score: 0.0389 | support: 1282 | mAP: 0.1318
+
+==================================================
+ROUND 8/20
+==================================================
+Created train_loader1 with 30 patches.
+Starting relevance computation and pruning mask generation.
+Type of components_relevances: <class 'collections.OrderedDict'>
+Layer: conv1
+Total layer relevance: 3.1490174126593966e+27
+--------------------------------------------------
+Layer: encoder.4.0.conv1
+Total layer relevance: 2.0391252260007423e+27
+--------------------------------------------------
+Layer: encoder.4.0.conv2
+Total layer relevance: 1.3757499088759133e+27
+--------------------------------------------------
+Layer: encoder.4.0.conv3
+Total layer relevance: 3.463488724977818e+26
+--------------------------------------------------
+Layer: encoder.4.0.downsample.0
+Total layer relevance: 3.797203237992075e+26
+--------------------------------------------------
+Layer: encoder.4.1.conv1
+Total layer relevance: 4.76691444747045e+25
+--------------------------------------------------
+Layer: encoder.4.1.conv2
+Total layer relevance: 3.1219149766509566e+25
+--------------------------------------------------
+Layer: encoder.4.1.conv3
+Total layer relevance: 6.563119804203432e+24
+--------------------------------------------------
+Layer: encoder.4.2.conv1
+Total layer relevance: 6.270627653709942e+23
+--------------------------------------------------
+Layer: encoder.4.2.conv2
+Total layer relevance: 3.9325799439928765e+23
+--------------------------------------------------
+Layer: encoder.4.2.conv3
+Total layer relevance: 8.915482547609666e+22
+--------------------------------------------------
+Layer: encoder.5.0.conv1
+Total layer relevance: 3.072904204226766e+22
+--------------------------------------------------
+Layer: encoder.5.0.conv2
+Total layer relevance: 2.4737660263596812e+22
+--------------------------------------------------
+Layer: encoder.5.0.conv3
+Total layer relevance: 5.248921721802269e+21
+--------------------------------------------------
+Layer: encoder.5.0.downsample.0
+Total layer relevance: 5.201222972248882e+21
+--------------------------------------------------
+Layer: encoder.5.1.conv1
+Total layer relevance: 5.168724997337776e+20
+--------------------------------------------------
+Layer: encoder.5.1.conv2
+Total layer relevance: 3.620856453127744e+20
+--------------------------------------------------
+Layer: encoder.5.1.conv3
+Total layer relevance: 3.3552597877165916e+19
+--------------------------------------------------
+Layer: encoder.5.2.conv1
+Total layer relevance: 1.0481142008213668e+18
+--------------------------------------------------
+Layer: encoder.5.2.conv2
+Total layer relevance: 7.389219103640125e+17
+--------------------------------------------------
+Layer: encoder.5.2.conv3
+Total layer relevance: 1.300264841641984e+17
+--------------------------------------------------
+Layer: encoder.5.3.conv1
+Total layer relevance: 2.0675418512162816e+16
+--------------------------------------------------
+Layer: encoder.5.3.conv2
+Total layer relevance: 1.5384316229976064e+16
+--------------------------------------------------
+Layer: encoder.5.3.conv3
+Total layer relevance: 1851078022791168.0
+--------------------------------------------------
+Layer: encoder.6.0.conv1
+Total layer relevance: 189727663718400.0
+--------------------------------------------------
+Layer: encoder.6.0.conv2
+Total layer relevance: 178616952422400.0
+--------------------------------------------------
+Layer: encoder.6.0.conv3
+Total layer relevance: 36097656619008.0
+--------------------------------------------------
+Layer: encoder.6.0.downsample.0
+Total layer relevance: 36454457671680.0
+--------------------------------------------------
+Layer: encoder.6.1.conv1
+Total layer relevance: 3403313840128.0
+--------------------------------------------------
+Layer: encoder.6.1.conv2
+Total layer relevance: 5215095357440.0
+--------------------------------------------------
+Layer: encoder.6.1.conv3
+Total layer relevance: 452186603520.0
+--------------------------------------------------
+Layer: encoder.6.2.conv1
+Total layer relevance: 69557272576.0
+--------------------------------------------------
+Layer: encoder.6.2.conv2
+Total layer relevance: 91323047936.0
+--------------------------------------------------
+Layer: encoder.6.2.conv3
+Total layer relevance: 14152681472.0
+--------------------------------------------------
+Layer: encoder.6.3.conv1
+Total layer relevance: 3040950528.0
+--------------------------------------------------
+Layer: encoder.6.3.conv2
+Total layer relevance: 4722403328.0
+--------------------------------------------------
+Layer: encoder.6.3.conv3
+Total layer relevance: 434282944.0
+--------------------------------------------------
+Layer: encoder.6.4.conv1
+Total layer relevance: 74661008.0
+--------------------------------------------------
+Layer: encoder.6.4.conv2
+Total layer relevance: 118459984.0
+--------------------------------------------------
+Layer: encoder.6.4.conv3
+Total layer relevance: 21408660.0
+--------------------------------------------------
+Layer: encoder.6.5.conv1
+Total layer relevance: 9980955.0
+--------------------------------------------------
+Layer: encoder.6.5.conv2
+Total layer relevance: 18051776.0
+--------------------------------------------------
+Layer: encoder.6.5.conv3
+Total layer relevance: 2691178.0
+--------------------------------------------------
+Layer: encoder.7.0.conv1
+Total layer relevance: 856849.75
+--------------------------------------------------
+Layer: encoder.7.0.conv2
+Total layer relevance: 2655076.25
+--------------------------------------------------
+Layer: encoder.7.0.conv3
+Total layer relevance: 430331.9375
+--------------------------------------------------
+Layer: encoder.7.0.downsample.0
+Total layer relevance: 458535.3125
+--------------------------------------------------
+Layer: encoder.7.1.conv1
+Total layer relevance: 48611.26171875
+--------------------------------------------------
+Layer: encoder.7.1.conv2
+Total layer relevance: 210317.765625
+--------------------------------------------------
+Layer: encoder.7.1.conv3
+Total layer relevance: 38216.1796875
+--------------------------------------------------
+Layer: encoder.7.2.conv1
+Total layer relevance: 15721.978515625
+--------------------------------------------------
+Layer: encoder.7.2.conv2
+Total layer relevance: 38789.6796875
+--------------------------------------------------
+Layer: encoder.7.2.conv3
+Total layer relevance: 12908.576171875
+--------------------------------------------------
+--------------------------------------------------
+Global Pruning Mask
+Pruning-rate: 0.5
+Layer: conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.4.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.3.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.3.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.3.conv3		% of pruned neurons: 16.60%
+Layer: encoder.6.4.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.4.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.4.conv3		% of pruned neurons: 80.37%
+Layer: encoder.6.5.conv1		% of pruned neurons: 9.38%
+Layer: encoder.6.5.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.5.conv3		% of pruned neurons: 98.24%
+Layer: encoder.7.0.conv1		% of pruned neurons: 100.00%
+Layer: encoder.7.0.conv2		% of pruned neurons: 100.00%
+Layer: encoder.7.0.conv3		% of pruned neurons: 99.85%
+Layer: encoder.7.0.downsample.0		% of pruned neurons: 99.80%
+Layer: encoder.7.1.conv1		% of pruned neurons: 100.00%
+Layer: encoder.7.1.conv2		% of pruned neurons: 100.00%
+Layer: encoder.7.1.conv3		% of pruned neurons: 100.00%
+Layer: encoder.7.2.conv1		% of pruned neurons: 100.00%
+Layer: encoder.7.2.conv2		% of pruned neurons: 100.00%
+Layer: encoder.7.2.conv3		% of pruned neurons: 100.00%
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0010 | recall: 0.0016 | f1-score: 0.0012 | support: 1282 | mAP: 0.2037
+macro     precision: 0.0001 | recall: 0.0526 | f1-score: 0.0002 | support: 1282 | mAP: 0.1368
+
+==================================================
+ROUND 9/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.2068
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1121
+
+==================================================
+ROUND 10/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.2046
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0868
+
+==================================================
+ROUND 11/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1641
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1045
+
+==================================================
+ROUND 12/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1003
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0785
+
+==================================================
+ROUND 13/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0787
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0609
+
+==================================================
+ROUND 14/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0715
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0732
+
+==================================================
+ROUND 15/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0719
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0609
+
+==================================================
+ROUND 16/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0720
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0615
+
+==================================================
+ROUND 17/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0722
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0743
+
+==================================================
+ROUND 18/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0708
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0608
+
+==================================================
+ROUND 19/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0711
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0806
+
+==================================================
+ROUND 20/20
+==================================================
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 1/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 2/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+Epoch 3/3
+----------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+------------------------------
+Applying pruning mask...
+------------------------------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.0715
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 1282 | mAP: 0.1053
+
+[{'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}]

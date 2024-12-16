@@ -1,104 +1,0 @@
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
-  warnings.warn(msg)
-training:   0%|          | 0/1 [00:00<?, ?it/s]training: 100%|██████████| 1/1 [00:03<00:00,  3.53s/it]training: 100%|██████████| 1/1 [00:03<00:00,  3.71s/it]
-training:   0%|          | 0/1 [00:00<?, ?it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.74it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.26it/s]
-training:   0%|          | 0/1 [00:00<?, ?it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.77it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.27it/s]
-test:   0%|          | 0/1 [00:00<?, ?it/s]test: 100%|██████████| 1/1 [00:00<00:00,  6.56it/s]test: 100%|██████████| 1/1 [00:00<00:00,  6.55it/s]
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-training:   0%|          | 0/1 [00:00<?, ?it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.74it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.25it/s]
-training:   0%|          | 0/1 [00:00<?, ?it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.82it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.29it/s]
-training:   0%|          | 0/1 [00:00<?, ?it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.79it/s]training: 100%|██████████| 1/1 [00:00<00:00,  1.26it/s]
-test:   0%|          | 0/1 [00:00<?, ?it/s]test: 100%|██████████| 1/1 [00:00<00:00,  6.62it/s]test: 100%|██████████| 1/1 [00:00<00:00,  6.61it/s]
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 in labels with no true nor predicted samples. Use `zero_division` parameter to control this behavior.
-  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/sklearn/metrics/_ranking.py:1030: UserWarning: No positive class found in y_true, recall is set to one for all thresholds.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
-  warnings.warn(msg)
-Traceback (most recent call last):
-  File "/home/paul/projects/CV4RS-orig/train.py", line 35, in <module>
-    train()
-  File "/home/paul/projects/CV4RS-orig/train.py", line 30, in train
-    global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
-  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 507, in train
-    print(f"Type of components_relevances: {type(components_relevances)}")
-UnboundLocalError: local variable 'components_relevances' referenced before assignment
