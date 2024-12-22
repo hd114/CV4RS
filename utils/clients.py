@@ -30,6 +30,9 @@ from utils.pytorch_utils import (
     start_cuda
 )
 
+import random #TODO ME FOR RANDOM SUBSET OF FLCLIENT DS IN DS1
+random.seed(42) # To make country distribution reproducable
+
 '''data_dirs = {
         "images_lmdb": "/data/kaiclasen/BENv2.lmdb",
          "metadata_parquet": "/data/kaiclasen/metadata.parquet",
@@ -147,11 +150,24 @@ class FLCLient:
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path],
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
                                       seasons=["Summer"]),
         )
+
+
+
+        #TODO ME Limit the dataset to a random subset with max 6k samples
+        subset_size = 512 * 12  # Adjust this number to your desired subset size
+        total_indices = list(range(len(self.dataset)))  # All indices
+        random_indices = random.sample(total_indices, min(subset_size, len(total_indices)))  # Random subset of indices
+                                                    # this min is not necessary at all because I apply subset since set is always more than 50k
+                                                    #but for now I will leave it here anyways.. maybe useful in future
+        # Create a subset
+        self.DS1_random_subset_dataset = torch.utils.data.Subset(self.dataset, random_indices)
+        print(f"    {len(self.DS1_random_subset_dataset)} patches indexed - random subset for scenario1")
+
         self.train_loader = DataLoader(
-            self.dataset,
+            self.DS1_random_subset_dataset,
             batch_size=batch_size,
             num_workers=num_workers,
             shuffle=True,
@@ -162,13 +178,13 @@ class FLCLient:
 
         print("\ninit FLClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
-            #max_len= batch_size,
+            max_len= batch_size,#TODO ME                                               SET VERY LOW TO SAVE TIME .. FLClient validation not used
             data_dirs=data_dirs,
-            split="test",
+            split="test", #TODO why test not val?
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path],
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
                                       seasons="Summer"),
         )
         self.val_loader = DataLoader(
@@ -197,7 +213,7 @@ class FLCLient:
             self.train_epoch()
 
         if validate:
-            report = self.validation_round()
+            report = self.validation_round()                                                            #TODO client side report
             self.results = update_results(self.results, report, self.num_classes)
 
         state_after = self.model.state_dict()
@@ -264,19 +280,20 @@ class GlobalClient:
         self.aggregator = Aggregator()
         self.results = init_results(self.num_classes)
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes,
-                     dataset_filter=dataset_filter, device=self.device)
+            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_paths, num_classes=num_classes, #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
+                     batch_size=512, dataset_filter=dataset_filter, device=self.device) #TODO ME SET BATCH SIZE TO 512
             for csv_path in csv_paths
         ]
         print("\ninit GLOBALClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
             data_dirs=data_dirs,
-            split="test",
+            split="test", #TODO why test not val?
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]),
-                                      countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
+                                      countries=csv_paths, #TODO ME ["Finland","Ireland","Serbia"],# "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"],
+                                      seasons="Summer"),
         )
         self.val_loader = DataLoader(
             self.validation_set,
