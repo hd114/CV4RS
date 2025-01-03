@@ -439,7 +439,7 @@ class GlobalClient:
             if com_round == 4:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
-                val_set = self.validation_set
+                #val_set = self.validation_set
                 
                 
                 
@@ -630,7 +630,7 @@ class GlobalClient:
                 #print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_ones:.2f}%")
 
                 # distribute mask among clients
-                print("Sendeing pruning mask to clients...")
+                print("Sending pruning mask to clients...")
                 for client in self.clients:
                     client.set_pruner_and_mask(pruner, global_pruning_mask)
                 
@@ -639,7 +639,9 @@ class GlobalClient:
 
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
-
+            
+            
+            #### hier nochmal prunen vor dem senden!
             for client in self.clients:
                 client.set_model(self.model)
         self.train_time = time.perf_counter() - start

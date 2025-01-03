@@ -1,0 +1,556 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    7150 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    4263 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    7180 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    3248 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 10372 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    5941 filtered patches indexed
+    5941 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 10372 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    1871 filtered patches indexed
+    1871 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 1939 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    1323 filtered patches indexed
+    1323 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 1939 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    32 filtered patches indexed
+    32 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 8775 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    4206 filtered patches indexed
+    4206 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 8775 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    2151 filtered patches indexed
+    2151 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 16438 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    8037 filtered patches indexed
+    8037 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 16438 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4220 filtered patches indexed
+    4220 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 4874 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    1692 filtered patches indexed
+    1692 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 4874 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    2039 filtered patches indexed
+    2039 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    29135 filtered patches indexed
+    29135 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Loading BEN data for train...
+    237871 patches indexed
+    237871 filtered patches indexed
+    237871 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+==================================================
+ROUND 1/40
+==================================================
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.5000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.3368
+macro     precision: 0.0526 | recall: 0.0000 | f1-score: 0.0001 | support: 40183 | mAP: 0.2846
+
+==================================================
+ROUND 2/40
+==================================================
+Finale Anzahl der Pruning-Patches: 17
+Anzahl eindeutiger Klassen: 18
+Klassenverteilung in den Pruning-Patches (Häufigkeiten): {'Marine waters': 9, 'Transitional woodland, shrub': 7, 'Mixed forest': 7, 'Coniferous forest': 6, 'Land principally occupied by agriculture, with significant areas of natural vegetation': 2, 'Inland waters': 1, 'Broad-leaved forest': 2, 'Arable land': 4, 'Urban fabric': 1, 'Industrial or commercial units': 1, 'Coastal wetlands': 2, 'Inland wetlands': 2, 'Pastures': 4, 'Complex cultivation patterns': 1, 'Moors, heathland and sclerophyllous vegetation': 1, 'Natural grassland and sparsely vegetated areas': 1, 'Beaches, dunes, sands': 1, 'Permanent crops': 1}
+[INFO] Erstelle Prune Loader...
+[INFO] 12 Patches nach Filterung übrig.
+[SUCCESS] Prune Loader erfolgreich erstellt.
+Starting relevance computation and pruning mask generation.
+Type of components_relevances: <class 'collections.OrderedDict'>
+Layer: conv1
+Total layer relevance: 5.668538060489976e+27
+--------------------------------------------------
+Layer: encoder.4.0.conv1
+Total layer relevance: 3.462760226160859e+27
+--------------------------------------------------
+Layer: encoder.4.0.conv2
+Total layer relevance: 2.4721393740205174e+27
+--------------------------------------------------
+Layer: encoder.4.0.conv3
+Total layer relevance: 4.417773844724553e+26
+--------------------------------------------------
+Layer: encoder.4.0.downsample.0
+Total layer relevance: 4.432485492058218e+26
+--------------------------------------------------
+Layer: encoder.4.1.conv1
+Total layer relevance: 9.502620578024848e+24
+--------------------------------------------------
+Layer: encoder.4.1.conv2
+Total layer relevance: 6.252244320318985e+24
+--------------------------------------------------
+Layer: encoder.4.1.conv3
+Total layer relevance: 1.7743371163330887e+24
+--------------------------------------------------
+Layer: encoder.4.2.conv1
+Total layer relevance: 1.283888163354617e+23
+--------------------------------------------------
+Layer: encoder.4.2.conv2
+Total layer relevance: 8.290734200101576e+22
+--------------------------------------------------
+Layer: encoder.4.2.conv3
+Total layer relevance: 2.592643042123753e+22
+--------------------------------------------------
+Layer: encoder.5.0.conv1
+Total layer relevance: 2.2683426610164867e+21
+--------------------------------------------------
+Layer: encoder.5.0.conv2
+Total layer relevance: 1.495178610000867e+21
+--------------------------------------------------
+Layer: encoder.5.0.conv3
+Total layer relevance: 4.282171707441524e+20
+--------------------------------------------------
+Layer: encoder.5.0.downsample.0
+Total layer relevance: 4.3194819192919635e+20
+--------------------------------------------------
+Layer: encoder.5.1.conv1
+Total layer relevance: 1.570662695687317e+19
+--------------------------------------------------
+Layer: encoder.5.1.conv2
+Total layer relevance: 1.082323402303629e+19
+--------------------------------------------------
+Layer: encoder.5.1.conv3
+Total layer relevance: 4.0258145461018296e+18
+--------------------------------------------------
+Layer: encoder.5.2.conv1
+Total layer relevance: 5.643865340824781e+17
+--------------------------------------------------
+Layer: encoder.5.2.conv2
+Total layer relevance: 3.831624162523218e+17
+--------------------------------------------------
+Layer: encoder.5.2.conv3
+Total layer relevance: 9.218677431441818e+16
+--------------------------------------------------
+Layer: encoder.5.3.conv1
+Total layer relevance: 6619589353930752.0
+--------------------------------------------------
+Layer: encoder.5.3.conv2
+Total layer relevance: 5013243667939328.0
+--------------------------------------------------
+Layer: encoder.5.3.conv3
+Total layer relevance: 1565491688636416.0
+--------------------------------------------------
+Layer: encoder.6.0.conv1
+Total layer relevance: 179846151929856.0
+--------------------------------------------------
+Layer: encoder.6.0.conv2
+Total layer relevance: 161365276753920.0
+--------------------------------------------------
+Layer: encoder.6.0.conv3
+Total layer relevance: 37886049124352.0
+--------------------------------------------------
+Layer: encoder.6.0.downsample.0
+Total layer relevance: 38902756802560.0
+--------------------------------------------------
+Layer: encoder.6.1.conv1
+Total layer relevance: 3008381845504.0
+--------------------------------------------------
+Layer: encoder.6.1.conv2
+Total layer relevance: 2538180444160.0
+--------------------------------------------------
+Layer: encoder.6.1.conv3
+Total layer relevance: 394991501312.0
+--------------------------------------------------
+Layer: encoder.6.2.conv1
+Total layer relevance: 71157301248.0
+--------------------------------------------------
+Layer: encoder.6.2.conv2
+Total layer relevance: 68611788800.0
+--------------------------------------------------
+Layer: encoder.6.2.conv3
+Total layer relevance: 8943304704.0
+--------------------------------------------------
+Layer: encoder.6.3.conv1
+Total layer relevance: 1213080576.0
+--------------------------------------------------
+Layer: encoder.6.3.conv2
+Total layer relevance: 1445298176.0
+--------------------------------------------------
+Layer: encoder.6.3.conv3
+Total layer relevance: 367678016.0
+--------------------------------------------------
+Layer: encoder.6.4.conv1
+Total layer relevance: 99014432.0
+--------------------------------------------------
+Layer: encoder.6.4.conv2
+Total layer relevance: 132818880.0
+--------------------------------------------------
+Layer: encoder.6.4.conv3
+Total layer relevance: 22701868.0
+--------------------------------------------------
+Layer: encoder.6.5.conv1
+Total layer relevance: 4922563.5
+--------------------------------------------------
+Layer: encoder.6.5.conv2
+Total layer relevance: 7447849.0
+--------------------------------------------------
+Layer: encoder.6.5.conv3
+Total layer relevance: 1182297.75
+--------------------------------------------------
+Layer: encoder.7.0.conv1
+Total layer relevance: 293612.5625
+--------------------------------------------------
+Layer: encoder.7.0.conv2
+Total layer relevance: 818510.875
+--------------------------------------------------
+Layer: encoder.7.0.conv3
+Total layer relevance: 141217.109375
+--------------------------------------------------
+Layer: encoder.7.0.downsample.0
+Total layer relevance: 146373.6875
+--------------------------------------------------
+Layer: encoder.7.1.conv1
+Total layer relevance: 16080.1611328125
+--------------------------------------------------
+Layer: encoder.7.1.conv2
+Total layer relevance: 39786.625
+--------------------------------------------------
+Layer: encoder.7.1.conv3
+Total layer relevance: 5747.271484375
+--------------------------------------------------
+Layer: encoder.7.2.conv1
+Total layer relevance: 1374.72119140625
+--------------------------------------------------
+Layer: encoder.7.2.conv2
+Total layer relevance: 4102.43310546875
+--------------------------------------------------
+Layer: encoder.7.2.conv3
+Total layer relevance: 1380.8466796875
+--------------------------------------------------
+--------------------------------------------------
+Global Pruning Mask
+Pruning-rate: 0.6
+Layer: conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.4.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.4.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.2.conv3		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv1		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv2		% of pruned neurons: 0.00%
+Layer: encoder.5.3.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.0.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.0.downsample.0		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.1.conv3		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv1		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv2		% of pruned neurons: 0.00%
+Layer: encoder.6.2.conv3		% of pruned neurons: 55.57%
+Layer: encoder.6.3.conv1		% of pruned neurons: 7.42%
+Layer: encoder.6.3.conv2		% of pruned neurons: 4.30%
+Layer: encoder.6.3.conv3		% of pruned neurons: 97.85%
+Layer: encoder.6.4.conv1		% of pruned neurons: 100.00%
+Layer: encoder.6.4.conv2		% of pruned neurons: 100.00%
+Layer: encoder.6.4.conv3		% of pruned neurons: 99.90%
+Layer: encoder.6.5.conv1		% of pruned neurons: 100.00%
+Layer: encoder.6.5.conv2		% of pruned neurons: 100.00%
+Layer: encoder.6.5.conv3		% of pruned neurons: 100.00%
+Layer: encoder.7.0.conv1		% of pruned neurons: 100.00%
+Layer: encoder.7.0.conv2		% of pruned neurons: 100.00%
+Layer: encoder.7.0.conv3		% of pruned neurons: 100.00%
+Layer: encoder.7.0.downsample.0		% of pruned neurons: 100.00%
+Layer: encoder.7.1.conv1		% of pruned neurons: 100.00%
+Layer: encoder.7.1.conv2		% of pruned neurons: 100.00%
+Layer: encoder.7.1.conv3		% of pruned neurons: 100.00%
+Layer: encoder.7.2.conv1		% of pruned neurons: 100.00%
+Layer: encoder.7.2.conv2		% of pruned neurons: 100.00%
+Layer: encoder.7.2.conv3		% of pruned neurons: 100.00%
+Sendeing pruning mask to clients...
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2753
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.1345
+
+==================================================
+ROUND 3/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2930
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.1345
+
+==================================================
+ROUND 4/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2931
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.1345
+
+==================================================
+ROUND 5/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2824
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.1345
+
+==================================================
+ROUND 6/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------

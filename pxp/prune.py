@@ -5,7 +5,7 @@ import torch.nn.utils.prune as prune
 
 from pxp.utils import ModelLayerUtils
 
-5
+
 class LocalPruningOperations:
     def __init__(self):
         pass
@@ -242,6 +242,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         interval_indices,
         pruning_percentage,
         least_relevant_first,
+        max_pruning_per_layer=0.95,  # Maximaler Pruning-Anteil pro Layer
     ):
         """
         Generate the indices of concepts/filters to prune from each layer
@@ -251,6 +252,7 @@ class GlobalPruningOperations(LocalPruningOperations):
             interval_indices (dict): interval indices of the concepts/filters for each layer
             pruning_percentage (float): percentage of concepts/filters to prune
             least_relevant_first (bool): whether to prune the least or most relevant concepts/filters
+            max_pruning_per_layer (float): maximum fraction of concepts to prune per layer
 
         Returns:
             dict: Dictionary of indices of concepts/filters to prune for each layer
@@ -260,7 +262,7 @@ class GlobalPruningOperations(LocalPruningOperations):
             [value.flatten() for value in global_concept_maps.values()]
         )
 
-        # Total number of concepts/filters to prune
+        # Total number of concepts/filters to prune globally
         total_num_candidates = int(
             flattened_concept_relevances.shape[0] * pruning_percentage
         )
@@ -272,16 +274,23 @@ class GlobalPruningOperations(LocalPruningOperations):
         )
 
         # Assign the sorted indices to the corresponding layers
-        # ,stating the filters/concepts to prune from each layer
+        # Ensuring max_pruning_per_layer threshold is not exceeded
         global_pruning_indices = OrderedDict([])
-        for layer_name, _ in global_concept_maps.items():
+        for layer_name, relevance in global_concept_maps.items():
             start_index, end_index = interval_indices[layer_name]
-            global_pruning_indices[layer_name] = (
-                pruning_indices[
-                    (pruning_indices >= start_index) & (pruning_indices <= end_index)
-                ]
-                - start_index
-            )
+            layer_relevance = relevance.flatten()
+
+            # Number of candidates per layer
+            layer_total_candidates = len(layer_relevance)
+            layer_pruning_limit = int(layer_total_candidates * max_pruning_per_layer)
+
+            # Prune only up to the max_pruning_per_layer limit
+            layer_indices = pruning_indices[
+                (pruning_indices >= start_index) & (pruning_indices <= end_index)
+            ] - start_index
+            layer_indices = layer_indices[:layer_pruning_limit]  # Limit pruning to max threshold
+
+            global_pruning_indices[layer_name] = layer_indices
 
         return global_pruning_indices
 
