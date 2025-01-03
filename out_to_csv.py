@@ -91,10 +91,16 @@ if df.empty:
     print("Error: DataFrame is empty. Check the input file for proper formatting.")
     sys.exit(1)
 
+# Group by 'Round' and aggregate Micro mAP and Macro mAP
+df_combined = df.groupby('Round', as_index=False).agg({
+    'Micro mAP': 'first',  # Take the first non-NaN value
+    'Macro mAP': 'last'    # Take the last non-NaN value
+})
+
 # Plot mAP values
 plt.figure(figsize=(10, 6))
-plt.plot(df['Round'], df['Micro mAP'], label='Micro mAP', marker='o')
-plt.plot(df['Round'], df['Macro mAP'], label='Macro mAP', marker='x')
+plt.plot(df_combined['Round'], df_combined['Micro mAP'], label='Micro mAP', linestyle='-', linewidth=2)
+plt.plot(df_combined['Round'], df_combined['Macro mAP'], label='Macro mAP', linestyle='--', linewidth=2)
 plt.xlabel('Rounds')
 plt.ylabel('mAP Values')
 plt.title('mAP Values per Round')
