@@ -242,7 +242,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         interval_indices,
         pruning_percentage,
         least_relevant_first,
-        max_pruning_per_layer=0.95,  # Maximaler Pruning-Anteil pro Layer
+        max_pruning_per_layer=0.97,  # Maximal pruning percentage per layer
     ):
         """
         Generate the indices of concepts/filters to prune from each layer
