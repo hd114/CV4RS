@@ -521,6 +521,14 @@ class GlobalClient:
                     "softmax_rule": self.configs["softmax_rule"],
                 }
                 
+                print(f"Used Composite Rules:")
+                print(f"low_level_hidden_layer_rule: {self.configs['low_level_hidden_layer_rule']}")
+                print(f"mid_level_hidden_layer_rule: {self.configs['mid_level_hidden_layer_rule']}")
+                print(f"high_level_hidden_layer_rule: {self.configs['high_level_hidden_layer_rule']}")
+                print(f"fully_connected_layers_rule: {self.configs['fully_connected_layers_rule']}")
+                print(f"softmax_rule: {self.configs['softmax_rule']}")
+                
+                
                 if self.configs["model_architecture"] == "vit_b_16":
                     composite = get_vit_composite(
                         self.configs["model_architecture"], suggested_composite
@@ -589,7 +597,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.99
+                pruning_rate = 0.98
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(

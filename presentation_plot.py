@@ -44,7 +44,7 @@ def plot_micro_mAP(scenario1benchmark, scenario2benchmark, scenario2lrp03, scena
     # Plot each list
     plt.plot(x_values, scenario1benchmark, marker='^', linestyle='--', color='green', linewidth=2, label="Scenario 1 Benchmark")
     plt.plot(x_values, scenario2benchmark, marker='d', linestyle='-.', color='red', linewidth=2, label="Scenario 2 Benchmark")
-    plt.plot(x_values, scenario2lrp03, marker='o', linestyle='-', color='blue', linewidth=2, label="Scenario 2 LRP 0.6 prun, 0.05 retain")
+    plt.plot(x_values, scenario2lrp03, marker='o', linestyle='-', color='blue', linewidth=2, label="Scenario 2 LRP 0.98 prun, 0.05 retain, eeez")
     plt.plot(x_values, scenario2lrp06, marker='s', linestyle='-', color='purple', linewidth=2, label="Scenario 2 LRP-pruning with rate 0.6")
 
     # Vertical line for pruning round

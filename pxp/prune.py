@@ -242,7 +242,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         interval_indices,
         pruning_percentage,
         least_relevant_first,
-        max_pruning_per_layer=0.97,  # Maximal pruning percentage per layer
+        max_pruning_per_layer=0.95,  # Maximal pruning percentage per layer
     ):
         """
         Generate the indices of concepts/filters to prune from each layer
@@ -266,6 +266,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         total_num_candidates = int(
             flattened_concept_relevances.shape[0] * pruning_percentage
         )
+        print("Minimal retained neurons per layer: ", pruning_percentage)
 
         # Sort the concepts/filters by their relevances and get the indices
         _, pruning_indices = flattened_concept_relevances.topk(
