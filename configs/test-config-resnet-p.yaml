@@ -9,7 +9,7 @@ init_relevance: 1
 # Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm
 low_level_hidden_layer_rule: Epsilon
 mid_level_hidden_layer_rule: Epsilon
-high_level_hidden_layer_rule: Epsilon
+high_level_hidden_layer_rule: AlphaBeta
 fully_connected_layers_rule: ZPlus
 # LRP rule for Softmax according to AttnLRP paper
 softmax_rule: Epsilon
