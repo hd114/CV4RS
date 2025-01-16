@@ -6,9 +6,9 @@ random_seed: 0
 mode: Relevance
 init_relevance: 1
 # Optimization strategy according to paper
-# Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm
+# Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm, Flat
 low_level_hidden_layer_rule: Epsilon
-mid_level_hidden_layer_rule: Epsilon
+mid_level_hidden_layer_rule: AlphaBeta
 high_level_hidden_layer_rule: AlphaBeta
 fully_connected_layers_rule: ZPlus
 # LRP rule for Softmax according to AttnLRP paper

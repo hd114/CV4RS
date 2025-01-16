@@ -3,7 +3,7 @@ from zennit.composites import (
     NameMapComposite,
 )
 from zennit.composites import NameLayerMapComposite
-from zennit.rules import Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm
+from zennit.rules import Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm, Flat
 from zennit.layer import Sum
 from zennit.types import AvgPool, Activation, BatchNorm
 
@@ -576,8 +576,9 @@ def get_rule_by_name(rule):
         "Gamma": Gamma,
         "ZPlus": ZPlus,
         "AlphaBeta": AlphaBeta,
+        "Flat": Flat,    # paul
     }
-    if rule in ["ZPlus", "Epsilon"]:
+    if rule in ["ZPlus", "Epsilon", "Flat"]:
         return rules_wrapper[rule]()
     elif rule == "Gamma":
         # return rules_wrapper[rule](rule_config)
