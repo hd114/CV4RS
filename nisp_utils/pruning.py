@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.utils.prune as prune
-from nisp import nisp_mag
+from nisp_utils.nisp import nisp_mag
 
 def prune_by_strategy(model: nn.Module, strategy: str, pruning_rate: float, protected_modules: list[str]) -> tuple[dict,dict]:
     weight_masks = {}
