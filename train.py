@@ -43,7 +43,7 @@ checkpoint_path = ""
 def train():
 	csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"] #this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
 	epochs = 1
-	communication_rounds = 40
+	communication_rounds = 70
 	channels = 10
 	num_classes = 19
 	#model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)

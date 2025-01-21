@@ -8,9 +8,9 @@ init_relevance: 1
 # Optimization strategy according to paper
 # Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm, Flat
 low_level_hidden_layer_rule: Epsilon
-mid_level_hidden_layer_rule: AlphaBeta
-high_level_hidden_layer_rule: AlphaBeta
-fully_connected_layers_rule: ZPlus
+mid_level_hidden_layer_rule: Gamma
+high_level_hidden_layer_rule: Gamma
+fully_connected_layers_rule: Epsilon
 # LRP rule for Softmax according to AttnLRP paper
 softmax_rule: Epsilon
 # A parameter for the optimization process according to
