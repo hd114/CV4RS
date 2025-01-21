@@ -11,6 +11,8 @@ from utils.pytorch_utils import start_cuda
 
 
 def train():
+	scenario = 1 # 1 multiple countries per client, 2 one country per client
+
 	pruning_strategy = "nisp" # random, ln_structured, nisp
 	pruning_round = 4
 	pruning_rate = 0.3
@@ -28,6 +30,7 @@ def train():
 	model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
 	#model = ResNet18("ResNet18", channels=channels, num_cls=num_classes, pretrained=False)
 	global_client = GlobalClient(
+		scenario=scenario,
 		model=model,
 		lmdb_path="",
 		val_path="",

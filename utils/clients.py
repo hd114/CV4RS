@@ -123,6 +123,8 @@ class FLCLient:
             lmdb_path: str,
             val_path: str,
             csv_path: list[str],
+            scenario: int,
+            scenario1_split: pd.DataFrame,
             batch_size: int = 256,
             num_workers: int = 2,
             optimizer_constructor: callable = torch.optim.Adam,
@@ -131,7 +133,7 @@ class FLCLient:
             criterion_kwargs: dict = {"reduction": "mean"},
             num_classes: int = 19,
             device: torch.device = torch.device('cpu'),
-            dataset_filter: str = "serbia",
+            dataset_filter: str = "serbia",                             #TODO seems unused ?!
     ) -> None:
         self.model = model
         self.optimizer_constructor = optimizer_constructor
@@ -139,7 +141,7 @@ class FLCLient:
         self.criterion_constructor = criterion_constructor
         self.criterion_kwargs = criterion_kwargs
         self.num_classes = num_classes
-        self.dataset_filter = dataset_filter
+        self.dataset_filter = dataset_filter                             #TODO seems unused ?!
         self.results = init_results(self.num_classes)
 
         print("\ninit FLClient TRAIN dataset and dataloader")
@@ -151,12 +153,12 @@ class FLCLient:
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
+            patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME was before [csv_path], # to enable passing list of csv_paths
                                       seasons=["Summer"]),
         )
 
 
-
+        """ OLD SCENARIO 1
         #TODO ME Limit the dataset to a random subset with max 6k samples
         subset_size = 512 * 12  # Adjust this number to your desired subset size
         total_indices = list(range(len(self.dataset)))  # All indices
@@ -166,9 +168,10 @@ class FLCLient:
         # Create a subset
         self.DS1_random_subset_dataset = torch.utils.data.Subset(self.dataset, random_indices)
         print(f"    {len(self.DS1_random_subset_dataset)} patches indexed - random subset for scenario1")
+        OLD SCENARIO 1 """
 
         self.train_loader = DataLoader(
-            self.DS1_random_subset_dataset,
+            self.dataset,
             batch_size=batch_size,
             num_workers=num_workers,
             shuffle=True,
@@ -185,7 +188,7 @@ class FLCLient:
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
+            patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
                                       seasons="Summer"),
         )
         self.val_loader = DataLoader(
@@ -261,6 +264,7 @@ class FLCLient:
 class GlobalClient:
     def __init__(
             self,
+            scenario: int,
             model: torch.nn.Module,
             lmdb_path: str,
             val_path: str,
@@ -272,6 +276,7 @@ class GlobalClient:
             state_dict_path: str = None,
             results_path: str = None
     ) -> None:
+        self.scenario = scenario
         self.model = model
         self.device = torch.device(0) if torch.cuda.is_available() else torch.device('cpu')
         print(f'Using device: {self.device}')
@@ -280,10 +285,15 @@ class GlobalClient:
         self.dataset_filter = dataset_filter
         self.aggregator = Aggregator()
         self.results = init_results(self.num_classes)
+
+        shuffled_metadata = pd.read_parquet(data_dirs["metadata_parquet"]).sample(frac=1)
+        df_splits = np.array_split(shuffled_metadata, len(csv_paths))
+
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_paths, num_classes=num_classes, #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
-                     batch_size=512, dataset_filter=dataset_filter, device=self.device) #TODO ME SET BATCH SIZE TO 512
-            for csv_path in csv_paths
+            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path,csv_path=(csv_paths if 1==scenario else csv_path), #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
+                            scenario=scenario, scenario1_split=scenario1_split, # introduced this for scenatio1
+                            num_classes=num_classes, batch_size=512, dataset_filter=dataset_filter, device=self.device) #TODO ME SET BATCH SIZE TO 512
+            for csv_path,scenario1_split in zip(csv_paths,df_splits)
         ]
         print("\ninit GLOBALClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
