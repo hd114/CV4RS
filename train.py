@@ -11,6 +11,11 @@ from utils.pytorch_utils import start_cuda
 
 
 def train():
+	pruning_strategy = "nisp" # random, ln_structured, nisp
+	pruning_round = 4
+	pruning_rate = 0.3
+	protected_modules = ["conv1","FC"]
+
 	csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"]
 	epochs = 1
 	communication_rounds = 40
@@ -28,9 +33,9 @@ def train():
 		val_path="",
 		csv_paths=csv_paths,
 	)
-	global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
+	global_model, global_results = global_client.train(pruning_strategy=pruning_strategy, pruning_round=pruning_round, pruning_rate=pruning_rate, protected_modules=protected_modules, communication_rounds=communication_rounds, epochs=epochs)
 	print(global_results)
 
 
 if __name__ == '__main__':
-    train()
+	train()

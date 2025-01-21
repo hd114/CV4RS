@@ -30,6 +30,7 @@ from utils.pytorch_utils import (
     start_cuda
 )
 
+import nisp_utils.pruning as pruning
 import random #TODO ME FOR RANDOM SUBSET OF FLCLIENT DS IN DS1
 random.seed(42) # To make country distribution reproducable
 
@@ -328,16 +329,24 @@ class GlobalClient:
             elif isinstance(model, ResNet18):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
 
-    def train(self, communication_rounds: int, epochs: int):
+    #def broadcast_pruning_mask(self, mask):            not necessary.. client.set_model creates deepcopy of server model
+    #    for client in self.clients:
+    #        client.set_pruning_mask(mask)
+
+    def train(self, pruning_strategy: str, pruning_round: int, pruning_rate: float, protected_modules: list[str], communication_rounds: int, epochs: int):
         start = time.perf_counter()
         for com_round in range(1, communication_rounds + 1):
             print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
 
+            if com_round == pruning_round:
+                pruning_mask = pruning.prune_by_strategy(model=self.model,strategy=pruning_strategy,pruning_rate=pruning_rate,protected_modules=protected_modules)
+                #self.broadcast_pruning_mask() clients.set_model at end of round creates deepcopy of server model
+
             self.communication_round(epochs)
             report = self.validation_round()
 
-            self.results = update_results(self.results, report, self.num_classes)
+            self.results = update_results(self.results, report, self.num_classes) # TODO metrics
             print_micro_macro(report)
 
             for client in self.clients:

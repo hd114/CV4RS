@@ -14,7 +14,7 @@ def prune_by_strategy(model: nn.Module, strategy: str, pruning_rate: float, prot
         if isinstance(module, (nn.Conv2d,nn.Linear)) and (name not in protected_modules):
             if strategy=="random":
                 prune.random_structured(module, name="weight", amount=pruning_rate, dim=0)
-            elif strategy=="ln":
+            elif strategy=="ln_structured":
                 prune.ln_structured(module, name="weight", amount=pruning_rate, n=2, dim=0)  # Prune filters/output neurons
             elif strategy=="nisp":
                 module_to_prune = dict(model.named_modules())[name]

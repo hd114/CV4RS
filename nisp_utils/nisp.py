@@ -319,7 +319,7 @@ def nisp(custom_resnet: nn.Module, FRL_scores: torch.Tensor, pruning_rate: float
     return scores_dict
 
 def nisp_mag(resnet: nn.Module,pruning_rate: float, protected_modules: list[str]):
-    return nisp(resnet, frl_mag(resnet.FC),pruning_rate,[])
+    return nisp(resnet, frl_mag(resnet.FC),pruning_rate,protected_modules)
 
 if __name__ == '__main__':
     model = ResNet18("r18", pretrained=True) # pretrained=False)
