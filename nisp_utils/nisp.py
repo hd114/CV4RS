@@ -228,7 +228,7 @@ def inf_fs(final_module: nn.Linear) -> torch.Tensor:
 def nisp_leaf_module(custom_resnet: nn.Module, leaf_name: str, leaf_module: nn.Module, importance_scores: torch.Tensor, pruning_rate: float, pause_output_padding: bool, protected_modules: list[str]):
 
     if isinstance(leaf_module, nn.Conv2d):
-        print(leaf_name+".weight.shape: ", leaf_module.weight.shape)
+        #print(leaf_name+".weight.shape: ", leaf_module.weight.shape)
         output_scores = nisp_Conv2d(leaf_module, importance_scores,pause_output_padding)
     elif isinstance(leaf_module, nn.MaxPool2d):
         output_scores = nisp_MaxPool2d(leaf_module, importance_scores,pause_output_padding)
@@ -283,7 +283,7 @@ def nisp(custom_resnet: nn.Module, FRL_scores: torch.Tensor, pruning_rate: float
     scores_dict = {}#"FC":pruned_FRL_scores_flat.detach().clone()}
 
     for name, block in reversed(nisp_blocks):
-        print("\nscores_to_propagate.shape: ",scores_to_propagate.shape)
+        #print("\nscores_to_propagate.shape: ",scores_to_propagate.shape)
 
         pause_output_padding = name == hardcoded_block_pause_outputpadding
 
@@ -313,7 +313,7 @@ def nisp(custom_resnet: nn.Module, FRL_scores: torch.Tensor, pruning_rate: float
                 scores_dict[name] = scores_to_weight_mask(block,scores_to_propagate)
             scores_to_propagate = nisp_leaf_module(custom_resnet, name, block, scores_to_propagate, pruning_rate,pause_output_padding=pause_output_padding, protected_modules=protected_modules)
 
-    print("\nInput layer scores: ", scores_to_propagate.shape)
+    #print("\nInput layer scores: ", scores_to_propagate.shape)
     #print(scores_to_propagate)
 
     return scores_dict

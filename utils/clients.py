@@ -292,7 +292,8 @@ class GlobalClient:
         self.clients = [
             FLCLient(copy.deepcopy(self.model), lmdb_path, val_path,csv_path=(csv_paths if 1==scenario else csv_path), #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
                             scenario=scenario, scenario1_split=scenario1_split, # introduced this for scenatio1
-                            num_classes=num_classes, batch_size=512, dataset_filter=dataset_filter, device=self.device) #TODO ME SET BATCH SIZE TO 512
+                            num_classes=num_classes,# batch_size=512,
+                     dataset_filter=dataset_filter, device=self.device)
             for csv_path,scenario1_split in zip(csv_paths,df_splits)
         ]
         print("\ninit GLOBALClient VALIDATION dataset and dataloader")
@@ -349,7 +350,7 @@ class GlobalClient:
             print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
 
-            if com_round == pruning_round:
+            if ("unpruned" != pruning_strategy) and (com_round == pruning_round):
                 pruning_mask = pruning.prune_by_strategy(model=self.model,strategy=pruning_strategy,pruning_rate=pruning_rate,protected_modules=protected_modules)
                 #self.broadcast_pruning_mask() clients.set_model at end of round creates deepcopy of server model
 
