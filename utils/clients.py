@@ -230,8 +230,8 @@ class FLCLient:
         Train the model for one round of communication, including local standardization.
         """
         # Mittelwert und Standardabweichung berechnen (nur beim ersten Aufruf)
-        if not hasattr(self, "data_mean") or not hasattr(self, "data_std"):
-            self.data_mean, self.data_std = self.calculate_local_mean_and_std()
+        #if not hasattr(self, "data_mean") or not hasattr(self, "data_std"):
+        #    self.data_mean, self.data_std = self.calculate_local_mean_and_std()
 
         state_before = copy.deepcopy(self.model.state_dict())
         self.optimizer = self.optimizer_constructor(self.model.parameters(), **self.optimizer_kwargs)
@@ -276,12 +276,18 @@ class FLCLient:
             labels = batch[4]
 
             # Debugging: Ausgabe der Batch-Dimensionen
-            print(f"[DEBUG] Batch {idx}: Data shape: {data.shape}, Labels shape: {labels.shape}")
+            #print(f"[DEBUG] Batch {idx}: Data shape: {data.shape}, Labels shape: {labels.shape}")
 
             # Standardisierung der Daten
-            if not hasattr(self, "data_mean") or not hasattr(self, "data_std"):
+            '''if not hasattr(self, "data_mean") or not hasattr(self, "data_std"):
                 raise AttributeError("[ERROR] Data mean and std are not defined.")
             data = standardize_data(data, self.data_mean, self.data_std)
+
+            # NaN/Inf-Check nach Standardisierung
+            if torch.isnan(data).any() or torch.isinf(data).any():
+                print("[ERROR] NaN or Inf detected in standardized data.")
+                print(f"[DEBUG] Data stats - Min: {data.min()}, Max: {data.max()}, Mean: {data.mean()}, Std: {data.std()}")
+                raise ValueError("Invalid values in standardized data.")'''
 
             # Daten auf das richtige Gerät verschieben
             data = data.to(device)
@@ -294,12 +300,12 @@ class FLCLient:
             logits = self.model(data)
             if torch.isnan(logits).any() or torch.isinf(logits).any():
                 print("[ERROR] NaN or Inf detected in logits.")
-                print(f"Logits: {logits}")
+                #print(f"[DEBUG] Logits stats - Min: {logits.min()}, Max: {logits.max()}, Mean: {logits.mean()}, Std: {logits.std()}")
                 raise ValueError("Invalid values in logits.")
 
             # Verlust berechnen
             loss = self.criterion(logits, label_new)
-            print(f"[DEBUG] Loss for batch {idx}: {loss.item()}")
+            #print(f"[DEBUG] Loss for batch {idx}: {loss.item()}")
 
             # Rückwärtsdurchlauf und Debugging der Gradienten
             loss.backward()
@@ -307,7 +313,7 @@ class FLCLient:
                 if param.grad is not None:
                     if torch.isnan(param.grad).any() or torch.isinf(param.grad).any():
                         print(f"[ERROR] NaN or Inf detected in gradient of {name}")
-                        raise ValueError("Invalid gradients.")
+                        raise ValueError(f"Invalid gradients in parameter: {name}")
 
             # Optional: Gradient Clipping
             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
@@ -319,7 +325,8 @@ class FLCLient:
             for name, param in self.model.named_parameters():
                 if torch.isnan(param).any() or torch.isinf(param).any():
                     print(f"[ERROR] NaN or Inf detected in model parameters: {name}")
-                    raise ValueError("Invalid model parameters.")
+                    raise ValueError(f"Invalid model parameters in {name}")
+                #print(f"[DEBUG] Parameter {name} stats - Min: {param.min()}, Max: {param.max()}, Mean: {param.mean()}, Std: {param.std()}")
 
         print("[INFO] Training epoch completed successfully.")
 
@@ -478,14 +485,13 @@ class GlobalClient:
         print(f"[INFO] Relevance maps computed for {len(global_concept_maps)} layers.")
 
         # Debugging: Check the generated mask
-        for layer_name, relevance_map in global_concept_maps.items():
+        '''for layer_name, relevance_map in global_concept_maps.items():
             print(f"[DEBUG] Layer: {layer_name}")
             if isinstance(relevance_map, dict):
                 for mask_type, mask in relevance_map.items():
-                    print(
-                        f"  Mask type: {mask_type}, Mask shape: {mask.shape}, Non-zero elements: {torch.sum(mask != 0)}")
+                    print(f"  Mask type: {mask_type}, Mask shape: {mask.shape}, Non-zero elements: {torch.sum(mask != 0)}")
             else:
-                print(f"  Mask shape: {relevance_map.shape}, Non-zero elements: {torch.sum(relevance_map != 0)}")
+                print(f"  Mask shape: {relevance_map.shape}, Non-zero elements: {torch.sum(relevance_map != 0)}")'''
 
         # Generate global pruning mask
         pruning_ops = GlobalPruningOperations(
@@ -535,12 +541,12 @@ class GlobalClient:
             tuple: (global results, client results)
         """
         start = time.perf_counter()
-        pruning_rate = 0.3  # Pruning rate
+        pruning_rate = 0.0  # Pruning rate
         global_pruning_mask = None  # Initialize pruning mask
         pruning_ops = None  # Ensure pruning_ops is initialized outside the loop
 
         # Berechnung von globalem Mittelwert und Standardabweichung
-        print("[INFO] Collecting local mean and std from clients...")
+        '''print("[INFO] Collecting local mean and std from clients...")
         local_means = []
         local_stds = []
         local_sizes = []
@@ -556,7 +562,7 @@ class GlobalClient:
         self.data_mean = sum(m * s for m, s in zip(local_means, local_sizes)) / total_size
         self.data_std = (sum(s ** 2 * (n - 1) for s, n in zip(local_stds, local_sizes)) / (total_size - 1)).sqrt()
 
-        print(f"[INFO] Global data mean: {self.data_mean}, Global data std: {self.data_std}")
+        print(f"[INFO] Global data mean: {self.data_mean}, Global data std: {self.data_std}")'''
 
         # LRP-Pruning initialization
         print("Initializing LRP Pruning...")
@@ -643,7 +649,7 @@ class GlobalClient:
                 try:
                     text_file_name = "pruning_callgraph.txt"
                     with open(text_file_name, "w", encoding="utf-8") as text_file:
-                        full_text_output = profiler.output_text(unicode=True, color=False, show_all=True)
+                        full_text_output = profiler.output_text(unicode=True, color=False, show_all=False)
                         text_file.write(full_text_output)
                     print(f"Full profiling results saved to {os.path.abspath(text_file_name)}")
                 except Exception as e:
@@ -672,10 +678,10 @@ class GlobalClient:
         Perform a validation round and check for NaN/Inf issues in logits, inputs, and predictions.
         """
         # Überprüfen, ob data_mean und data_std definiert sind
-        if not hasattr(self, 'data_mean') or not hasattr(self, 'data_std'):
+        '''if not hasattr(self, 'data_mean') or not hasattr(self, 'data_std'):
             raise AttributeError(
                 "[ERROR] Data mean and std are not defined. Ensure `aggregate_mean_and_std` was executed in the GlobalClient."
-            )
+            )'''
 
         self.model.eval()
         y_true = []
@@ -691,7 +697,7 @@ class GlobalClient:
                 print(f"[DEBUG] Batch {batch_idx}: Data shape: {data.shape}, Labels shape: {labels.shape}")
 
                 # Standardisierung der Daten
-                data = standardize_data(data, self.data_mean, self.data_std)
+                #data = standardize_data(data, self.data_mean, self.data_std)
 
                 # NaN/Inf-Check für standardisierte Eingabedaten
                 if torch.isnan(data).any() or torch.isinf(data).any():
@@ -728,12 +734,16 @@ class GlobalClient:
 
                 y_predicted = torch.zeros_like(probs)
                 y_predicted[
-                    torch.arange(probs.size(0)), topk_indices[:, 0]] = 1  # Höchstwahrscheinliche Klasse aus Top-n
+                    torch.arange(probs.size(0)), topk_indices[:, 0]] = 1.0  # Höchstwahrscheinliche Klasse aus Top-n
 
                 # Debugging: Zeige die Top-n-Wahrscheinlichkeiten und -Indizes
-                print(f"[DEBUG] Top-{n} class probabilities:\n{topk_values}")
-                print(f"[DEBUG] Top-{n} class indices:\n{topk_indices}")
-                print(f"[DEBUG] Argmax prediction (from top-{n} classes):\n{y_predicted}")
+                #print(f"[DEBUG] Top-{n} class probabilities:\n{topk_values}")
+                #print(f"[DEBUG] Top-{n} class indices:\n{topk_indices}")
+                #print(f"[DEBUG] Argmax prediction (from top-{n} classes):\n{y_predicted}")
+
+                # Zeige die Klasse mit der höchsten Wahrscheinlichkeit unter den Top-n-Klassen
+                argmax_class = topk_indices[:, 0]
+                print(f"[DEBUG] Argmax class (highest probability among top-{n}):\n{argmax_class}")
 
                 # Wahrscheinlichkeiten und True Labels speichern
                 predicted_probs += list(probs.numpy())
@@ -777,8 +787,8 @@ class GlobalClient:
             if key in update_aggregation:
                 update = update_aggregation[key].to(self.device)
                 global_state_dict[key] = value + update
-            else:
-                print(f"Skipping missing parameter: {key}")
+            #else:
+                #print(f"Skipping missing parameter: {key}")
         self.model.load_state_dict(global_state_dict)
 
     def save_state_dict(self):

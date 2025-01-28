@@ -35,7 +35,7 @@ class LocalPruningOperations:
         if isinstance(pruning_mask, torch.Tensor) and hasattr(module, 'weight'):
             if pruning_mask.numel() == module.weight.numel():
                 pruning_mask = pruning_mask.view_as(module.weight)
-                print(f"[INFO] Mask reshaped to match layer weight dimensions.")
+                #print(f"[INFO] Mask reshaped to match layer weight dimensions.")
             else:
                 print(
                     f"[ERROR] Mask dimensions {pruning_mask.shape} do not match weight dimensions {module.weight.shape}.")
@@ -433,7 +433,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         # Get the weight or bias shape
         param_shape = getattr(module, weight_or_bias).shape
         if pruning_mask.shape != param_shape:
-            print(f"[WARNING] Adjusting mask shape for {weight_or_bias} in layer: {layer_name}")
+            #print(f"[WARNING] Adjusting mask shape for {weight_or_bias} in layer: {layer_name}")
             try:
                 pruning_mask = pruning_mask.view_as(getattr(module, weight_or_bias))
             except Exception as e:

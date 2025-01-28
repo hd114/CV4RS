@@ -130,8 +130,7 @@ class LatentRelevanceAttributor:
             # Debugging: Grad-Output-Formen überprüfen
             #print(f"Grad output shape: {grad_outputs.shape}")
             if grad_outputs.shape != output.shape:
-                raise ValueError(
-                    f"Mismatch in shape: grad_outputs {grad_outputs.shape} and model output {output.shape}")
+                raise ValueError(f"Mismatch in shape: grad_outputs {grad_outputs.shape} and model output {output.shape}")
 
             (relevance,) = torch.autograd.grad(
                 outputs=output,
@@ -140,7 +139,7 @@ class LatentRelevanceAttributor:
                 retain_graph=False,
                 create_graph=False,
             )
-            print(f"Relevance computation successful. Relevance shape: {relevance.shape}")
+            #print(f"Relevance computation successful. Relevance shape: {relevance.shape}")
         except Exception as e:
             print(f"Error during relevance computation: {e}")
             raise
@@ -241,12 +240,15 @@ class ZennitLatentRelevanceAttributor(LatentRelevanceAttributor):
         for layer_name in self.layers_list_to_track:
             for name, module in model.named_modules():
                 if name == layer_name:
+                    print(f"[INFO] Registering hook for layer: {name}")
                     hook_handles.append(
                         module.register_forward_hook(
                             self.get_hook_function(name, self.latent_output)
                         )
                     )
 
+        if not hook_handles:
+            print("[WARNING] No hooks were registered. Check layer names in `self.layers_list_to_track`.")
         return hook_handles
 
     @staticmethod
@@ -260,12 +262,29 @@ class ZennitLatentRelevanceAttributor(LatentRelevanceAttributor):
         """
 
         def forward_hook_function(module, input, output):
-            # input in first layer is the input data
-            # output in first layer is the output of the first layer
+            # Debugging: Layer name and stats
+            print(f"[DEBUG] Hook called for layer: {layer_name}")
+            
+            # Input stats
+            if isinstance(input, tuple) and len(input) > 0:  # Ensure input exists
+                input_stats = input[0]
+                print(f"[DEBUG] Input stats - Min: {input_stats.min()}, Max: {input_stats.max()}, "
+                    f"Mean: {input_stats.mean()}, Std: {input_stats.std()}")
+                if torch.isnan(input_stats).any() or torch.isinf(input_stats).any():
+                    print(f"[ERROR] NaN or Inf detected in input of layer: {layer_name}")
+            
+            # Output stats
+            print(f"[DEBUG] Output stats - Min: {output.min()}, Max: {output.max()}, "
+                f"Mean: {output.mean()}, Std: {output.std()}")
+            if torch.isnan(output).any() or torch.isinf(output).any():
+                print(f"[ERROR] NaN or Inf detected in output of layer: {layer_name}")
+
+            # Save the output for further analysis
             layer_out[layer_name] = output
-            output.retain_grad()
+            output.retain_grad()  # Retain gradient for later use if needed
 
         return forward_hook_function
+
 
     def clear_latent_info(self):
         self.latent_output = {}
