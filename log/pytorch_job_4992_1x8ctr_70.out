@@ -1,0 +1,1625 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 10372 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    5941 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 10372 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    1871 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 1939 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    1323 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 1939 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    32 filtered patches indexed
+    32 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 8775 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    4206 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 8775 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    2151 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 16438 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    8037 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 16438 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4220 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 4874 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    1692 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 4874 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    2039 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    100 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Round 1/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.1283 | recall: 0.8713 | f1-score: 0.2236 | support: 101 | mAP: 0.0757
+macro     precision: 0.0532 | recall: 0.0984 | f1-score: 0.0500 | support: 101 | mAP: 0.0532
+
+Round 2/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.1250 | recall: 0.9901 | f1-score: 0.2220 | support: 101 | mAP: 0.1243
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0532
+
+Round 3/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 4/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0515
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 5/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0632
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 6/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0713
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 7/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0782
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 8/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.2865 | recall: 0.9901 | f1-score: 0.4444 | support: 101 | mAP: 0.1952
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0602
+
+Round 9/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0400
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0540
+
+Round 10/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.2004 | recall: 0.9901 | f1-score: 0.3333 | support: 101 | mAP: 0.1370
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.1053
+
+Round 11/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0625
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1053
+
+Round 12/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.4975 | recall: 0.9901 | f1-score: 0.6623 | support: 101 | mAP: 0.9917
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0789
+
+Round 13/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0349
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0632
+
+Round 14/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0584
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0789
+
+Round 15/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.1639 | recall: 0.9703 | f1-score: 0.2804 | support: 101 | mAP: 0.0894
+macro     precision: 0.0526 | recall: 0.0516 | f1-score: 0.0521 | support: 101 | mAP: 0.0632
+
+Round 16/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0763
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0789
+
+Round 17/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.3333 | recall: 0.9901 | f1-score: 0.4988 | support: 101 | mAP: 0.3129
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0789
+
+Round 18/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0455
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0540
+
+Round 19/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.2000 | recall: 0.9901 | f1-score: 0.3328 | support: 101 | mAP: 0.1091
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0614
+
+Round 20/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0877
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0789
+
+Round 21/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.1528 | recall: 0.8911 | f1-score: 0.2609 | support: 101 | mAP: 0.0918
+macro     precision: 0.0526 | recall: 0.0474 | f1-score: 0.0499 | support: 101 | mAP: 0.0532
+
+Round 22/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.5000 | recall: 0.9901 | f1-score: 0.6645 | support: 101 | mAP: 0.3076
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0789
+
+Round 23/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0880
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 24/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1922
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1053
+
+Round 25/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0891
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1053
+
+Round 26/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.5000 | recall: 0.9901 | f1-score: 0.6645 | support: 101 | mAP: 0.9914
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0789
+
+Round 27/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0544
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0789
+
+Round 28/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.3378 | recall: 0.9901 | f1-score: 0.5038 | support: 101 | mAP: 0.9752
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0702
+
+Round 29/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0585
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 30/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1392
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0658
+
+Round 31/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0803
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0789
+
+Round 32/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0485
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 33/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0663
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1053
+
+Round 34/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.2740 | recall: 0.9901 | f1-score: 0.4292 | support: 101 | mAP: 0.1900
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0702
+
+Round 35/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0527
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0535
+
+Round 36/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.3610 | recall: 0.9901 | f1-score: 0.5291 | support: 101 | mAP: 0.4348
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0532
+
+Round 37/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0696
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0533
+
+Round 38/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0661
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 39/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0904
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0536
+
+Round 40/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0498
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0702
+
+Round 41/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.4739 | recall: 0.9901 | f1-score: 0.6410 | support: 101 | mAP: 0.9910
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0543
+
+Round 42/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0519
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0702
+
+Round 43/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.5000 | recall: 0.9901 | f1-score: 0.6645 | support: 101 | mAP: 0.3074
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0543
+
+Round 44/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0497
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0702
+
+Round 45/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.5000 | recall: 0.9901 | f1-score: 0.6645 | support: 101 | mAP: 0.8085
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0533
+
+Round 46/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0392
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0567
+
+Round 47/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1895
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0614
+
+Round 48/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1897
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 49/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0467 | recall: 0.0495 | f1-score: 0.0481 | support: 101 | mAP: 0.2074
+macro     precision: 0.0526 | recall: 0.0026 | f1-score: 0.0050 | support: 101 | mAP: 0.0536
+
+Round 50/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.8389
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0547
+
+Round 51/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1350
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0564
+
+Round 52/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1086
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0534
+
+Round 53/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1112
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 54/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1063
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0537
+
+Round 55/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1079
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 56/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1689
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0533
+
+Round 57/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.4503 | recall: 0.7624 | f1-score: 0.5662 | support: 101 | mAP: 0.3463
+macro     precision: 0.0526 | recall: 0.0405 | f1-score: 0.0458 | support: 101 | mAP: 0.0532
+
+Round 58/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0521
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0536
+
+Round 59/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.4184 | recall: 0.9901 | f1-score: 0.5882 | support: 101 | mAP: 0.3072
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0789
+
+Round 60/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0457
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 61/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.2597 | recall: 0.9901 | f1-score: 0.4115 | support: 101 | mAP: 0.1916
+macro     precision: 0.0526 | recall: 0.0526 | f1-score: 0.0526 | support: 101 | mAP: 0.0789
+
+Round 62/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0436
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 63/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0103 | recall: 0.0396 | f1-score: 0.0163 | support: 101 | mAP: 0.1097
+macro     precision: 0.0526 | recall: 0.0021 | f1-score: 0.0040 | support: 101 | mAP: 0.0789
+
+Round 64/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0588
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 65/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0220 | recall: 0.0198 | f1-score: 0.0208 | support: 101 | mAP: 0.2988
+macro     precision: 0.0526 | recall: 0.0011 | f1-score: 0.0021 | support: 101 | mAP: 0.0532
+
+Round 66/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0985
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 67/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1615
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0536
+
+Round 68/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1100
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1053
+
+Round 69/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1132
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0532
+
+Round 70/70
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.0861
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 101 | mAP: 0.1053
+
+[{'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}]

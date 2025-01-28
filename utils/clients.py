@@ -266,7 +266,8 @@ class GlobalClient:
         include_snowy=False,
         include_cloudy=False,
         patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
-        )
+        ) # csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"] #this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
+     
         self.val_loader = DataLoader(
             self.validation_set,
             batch_size=batch_size,
