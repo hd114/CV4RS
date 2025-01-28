@@ -1,0 +1,23 @@
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+training:   0%|          | 0/1 [00:00<?, ?it/s]training:   0%|          | 0/1 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/paul/projects/CV4RS-main/train.py", line 35, in <module>
+    train()
+  File "/home/paul/projects/CV4RS-main/train.py", line 30, in train
+    global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 305, in train
+    self.communication_round(epochs)
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 359, in communication_round
+    model_updates = [client.train_one_round(epochs) for client in self.clients]
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 359, in <listcomp>
+    model_updates = [client.train_one_round(epochs) for client in self.clients]
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 187, in train_one_round
+    self.train_epoch()
+  File "/home/paul/projects/CV4RS-main/utils/clients.py", line 220, in train_epoch
+    data = data.cuda()
+  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/cuda/__init__.py", line 319, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: No CUDA GPUs are available
