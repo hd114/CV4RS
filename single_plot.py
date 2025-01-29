@@ -48,7 +48,7 @@ def plot_micro_mAP(scenario1benchmark, scenario2benchmark, scenario2lrp03, scena
     if len(scenario2benchmark) >= max_rounds:
         plt.plot(x_values, scenario2benchmark[:max_rounds], marker='d', linestyle='-.', color='red', linewidth=2, label="Scenario 2 Benchmark")
     if len(scenario2lrp03) >= max_rounds:
-        plt.plot(x_values, scenario2lrp03[:max_rounds], marker='o', linestyle='-', color='blue', linewidth=2, label="Scenario 2 LRP 0.98 prun, 0.03 retain, egge")
+        plt.plot(x_values, scenario2lrp03[:max_rounds], marker='o', linestyle='-', color='blue', linewidth=2, label="Scenario 2 Fed-Avg, no pruning")
     if len(scenario2lrp06) >= max_rounds:
         plt.plot(x_values, scenario2lrp06[:max_rounds], marker='s', linestyle='-', color='purple', linewidth=2, label="Scenario 2 LRP-pruning with rate 0.6")
 
