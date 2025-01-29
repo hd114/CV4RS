@@ -597,7 +597,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.98
+                pruning_rate = 0.97
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
@@ -614,29 +614,54 @@ class GlobalClient:
                 print("Global Pruning Mask")
                 print(f"Pruning-rate: {pruning_rate}")
             
-                total_global_elements = 0
-                total_global_ones = 0
+                '''total_global_elements = 0
+                total_global_zeros = 0
 
                 for layer, masks in global_pruning_mask.items():
                     total_elements = 0
-                    total_ones = 0
+                    total_zeros = 0
 
                     for mask_type, mask_values in masks.items():
                         if "weight" in mask_values:
                             tensor = mask_values["weight"]
                             total_elements += tensor.numel()
-                            total_ones += torch.sum(tensor == 0).item()
+                            total_zeros += torch.sum(tensor == 0).item()
 
-                    percentage_ones = (total_ones / total_elements) * 100 if total_elements > 0 else 0
-                    print(f"Layer: {layer}\t\t% of pruned neurons: {percentage_ones:.2f}%")
+                    percentage_zeros = (total_zeros / total_elements) * 100 if total_elements > 0 else 0
+                    print(f"Layer: {layer}\t num of pruned neurons: {total_zeros}\t\t % of pruned neurons: {percentage_zeros:.2f}%")
 
                     total_global_elements += total_elements
-                    total_global_ones += total_ones
+                    total_global_zeros += total_zeros
 
                 # Berechnung des prozentualen Anteils aller Einsen
-                global_percentage_ones = (total_global_ones / total_global_elements) * 100 if total_global_elements > 0 else 0
-                #print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_ones:.2f}%")
+                global_percentage_zeros = (total_global_zeros / total_global_elements) * 100 if total_global_elements > 0 else 0
+                print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_zeros:.2f}%")
+                '''
 
+                total_global_elements = 0
+                total_global_zeros = 0  
+                
+                for layer, masks in global_pruning_mask.items():
+                    total_elements = 0
+                    total_zeros = 0
+
+                    for mask_type, mask_values in masks.items():
+                        if "weight" in mask_values and isinstance(mask_values["weight"], torch.Tensor):
+                            tensor = mask_values["weight"]
+                            total_elements += tensor.numel()
+                            total_zeros += torch.sum(tensor == 0).item()
+
+                    percentage_zeros = (total_zeros / total_elements) * 100 if total_elements > 0 else 0
+                    print(f"Layer: {layer:<20} Num neurons: {total_zeros:<12} % pruned neurons: {percentage_zeros:.2f}%")
+
+                    total_global_elements += total_elements
+                    total_global_zeros += total_zeros
+
+                # Berechnung des Gesamtprozentsatzes aller Nullen
+                global_percentage_zeros = (total_global_zeros / total_global_elements) * 100 if total_global_elements > 0 else 0
+                print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_zeros:.2f}%")
+                
+                
                 # distribute mask among clients
                 print("Sending pruning mask to clients...")
                 for client in self.clients:
