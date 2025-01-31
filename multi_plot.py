@@ -76,7 +76,7 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path):
     plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightblue', alpha=0.5, label="Range (min-max)")
 
     # Plot mean line for the other scenarios
-    plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2, label="Average micro mAP LRP (0.98 / 0.04)")
+    plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2, label="Average micro mAP LRP (0.97 / 0.04)")
 
     # Plot Scenario 2 Benchmark separately
     plt.plot(x_values, benchmark_data, linestyle='--', color='red', label="Scenario 2 Benchmark", linewidth=2)

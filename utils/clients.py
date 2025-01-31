@@ -160,7 +160,8 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons=["Summer"]),
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+                                  seasons=["Summer"]),
         normalize=True  # standardisation
         )
         self.train_loader = DataLoader(
@@ -178,7 +179,8 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], seasons="Summer"),
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+                                  seasons="Summer"),
         normalize=True  # standardisation
         )
         self.val_loader = DataLoader(
@@ -597,7 +599,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.97
+                pruning_rate = 0.52
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
@@ -652,7 +654,7 @@ class GlobalClient:
                             total_zeros += torch.sum(tensor == 0).item()
 
                     percentage_zeros = (total_zeros / total_elements) * 100 if total_elements > 0 else 0
-                    print(f"Layer: {layer:<20} Num neurons: {total_zeros:<12} % pruned neurons: {percentage_zeros:.2f}%")
+                    print(f"Layer: {layer:<20} Num neurons pruned: {total_zeros:<12} % neurons pruned: {percentage_zeros:.2f}%")
 
                     total_global_elements += total_elements
                     total_global_zeros += total_zeros
