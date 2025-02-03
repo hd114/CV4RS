@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=pytorch_job
-#SBATCH --gres=gpu:3
+#SBATCH --gres=gpu:1  # please only reserver one GPU -LH
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=72G
 #SBATCH --time=06:00:00
