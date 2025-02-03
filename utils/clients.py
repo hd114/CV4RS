@@ -132,6 +132,8 @@ class FLCLient:
         lmdb_path: str,
         val_path: str,
         csv_path: list[str],
+        scenario: int,
+        scenario1_split: pd.DataFrame,
         batch_size: int = 256,
         num_workers: int = 2,
         optimizer_constructor: callable = torch.optim.Adam,
@@ -160,7 +162,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+        patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME was before [csv_path], # to enable passing list of csv_paths
                                   seasons=["Summer"]),
         normalize=True  # standardisation
         )
@@ -179,7 +181,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+        patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
                                   seasons="Summer"),
         normalize=True  # standardisation
         )
@@ -306,6 +308,7 @@ class FLCLient:
 class GlobalClient:
     def __init__(
         self,
+        scenario: int,
         model: torch.nn.Module,
         lmdb_path: str,
         val_path: str,
@@ -320,6 +323,7 @@ class GlobalClient:
         global config_path
         with open(config_path, "r") as stream:
             self.configs = yaml.safe_load(stream)
+        self.scenario = scenario
         self.model = model
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         print(f'Using device: {self.device}')
@@ -328,10 +332,16 @@ class GlobalClient:
         self.dataset_filter = dataset_filter
         self.aggregator = Aggregator()
         self.results = init_results(self.num_classes)
+        shuffled_metadata = pd.read_parquet(data_dirs["metadata_parquet"]).sample(frac=1)
+        df_splits = np.array_split(shuffled_metadata, len(csv_paths))
+
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
-            for csv_path in csv_paths
+                        FLCLient(copy.deepcopy(self.model), lmdb_path, val_path,csv_path=(csv_paths if 1==scenario else csv_path), #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
+                            scenario=scenario, scenario1_split=scenario1_split, # introduced this for scenatio1
+                            num_classes=num_classes, batch_size=256, dataset_filter=dataset_filter, device=self.device) #TODO ME SET BATCH SIZE TO 512
+            for csv_path,scenario1_split in zip(csv_paths,df_splits)
         ]
+        print("\ninit GLOBALClient VALIDATION dataset and dataloader")
         
         self.validation_set = BENv2DataSet(
         data_dirs=data_dirs,
@@ -599,7 +609,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.52
+                pruning_rate = 0.97
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
