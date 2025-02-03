@@ -74,10 +74,10 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path):
         print(f"{x_val:.2f}, {y_val:.4f}")
 
     # Plot shaded area (min to max range) for the scenarios
-    plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightblue', alpha=0.5, label="Range (min-max)")
+    plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightcoral', alpha=0.2, label="Range (min-max)")
 
     # Plot mean line for the scenarios
-    plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2, label="Average micro mAP Fed-Avg (no pruning)")
+    plt.plot(x_smooth, mean_smooth, linestyle='--', color='red', linewidth=1.5, label="Average micro mAP Fed-Avg (no pruning)")
 
     # Set labels and grid
     plt.xlabel("Communication Round", fontsize=16)

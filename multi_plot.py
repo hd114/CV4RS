@@ -18,13 +18,11 @@ def extract_micro_mAP(file_path):
     """
     micro_mAP_values = []
     pattern = r"micro\s+precision:.*?mAP:\s+(\d+\.\d+)"
-
     with open(file_path, 'r') as file:
         for line in file:
             match = re.search(pattern, line)
             if match:
                 micro_mAP_values.append(float(match.group(1)))
-
     return micro_mAP_values
 
 def smooth_curve(x, y, points=300):
@@ -54,7 +52,6 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path):
         output_path (str): Path to save the plot.
     """
     x_values = np.arange(1, len(micro_mAP_data[0]) + 1)
-
     plt.figure(figsize=(16, 9))
 
     # Separate data for range calculation
@@ -77,11 +74,11 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path):
     for x_val, y_val in zip(x_smooth, mean_smooth):
         print(f"{x_val:.2f}, {y_val:.4f}")
 
-    # Plot shaded area (min to max range) for the other scenarios
-    plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightblue', alpha=0.5, label="Range (min-max)")
+    # Plot shaded area (min to max range) using a helle rote Farbe (lightcoral)
+    plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightcoral', alpha=0.2, label="Range (min-max)")
 
-    # Plot mean line for the other scenarios
-    plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2, label="Average micro mAP Fed-Avg (no pruning)")
+    # Plot mean line for the scenarios as rote, gestrichelte Linie
+    plt.plot(x_smooth, mean_smooth, linestyle='--', color='red', linewidth=1.5, label="Average micro mAP Fed-Avg (no pruning)")
 
     # Plot Scenario 2 Benchmark separately (currently commented out)
     # plt.plot(x_values, benchmark_data, linestyle='--', color='red', label="Scenario 2 Benchmark", linewidth=2)
@@ -140,5 +137,4 @@ if __name__ == "__main__":
     # Plot and save
     output_plot_path = "micro_mAP_multi_.png"
     plot_micro_mAP(micro_mAP_data, labels=labels, output_path=output_plot_path)
-
     print(f"Plot saved to {output_plot_path}")
