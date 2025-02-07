@@ -53,48 +53,50 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path):
         labels (list): List of labels for each scenario.
         output_path (str): Path to save the plot.
     """
+    # x_values: 1 bis Anzahl der Runden (z. B. 1 bis 70)
     x_values = np.arange(1, len(micro_mAP_data[0]) + 1)
 
     plt.figure(figsize=(16, 9))
 
-    # Use all provided datasets for range and average calculation
+    # Berechne Mittelwert, Minimum und Maximum über alle Datensätze
     data_array = np.array(micro_mAP_data)
     mean_values = np.mean(data_array, axis=0)
     min_values = np.min(data_array, axis=0)
     max_values = np.max(data_array, axis=0)
 
-    # Smooth curves for average and range
+    # Smooth curves for average and range (wird für den Plot genutzt)
     x_smooth, mean_smooth = smooth_curve(x_values, mean_values)
     _, min_smooth = smooth_curve(x_values, min_values)
     _, max_smooth = smooth_curve(x_values, max_values)
 
-    # Output the data points for the average line
+    # Ausgabe der unsmoothten Datenpunkte (genau 1 pro Runde, also 70 Werte)
     print("Average line data points (x, y):")
-    for x_val, y_val in zip(x_smooth, mean_smooth):
+    for x_val, y_val in zip(x_values, mean_values):
         print(f"{x_val:.2f}, {y_val:.4f}")
 
-    # Plot shaded area (min to max range) for the scenarios
+    # Plot der schattierten Fläche (Bereich min bis max) in lightcoral
     plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightcoral', alpha=0.2, label="Range (min-max)")
 
-    # Plot mean line for the scenarios
+    # Plot der Durchschnittslinie als rote, gestrichelte Linie
     plt.plot(x_smooth, mean_smooth, linestyle='--', color='red', linewidth=1.5, label="Average micro mAP Fed-Avg (no pruning)")
 
-    # Set labels and grid
+    # Achsenbeschriftung und Grid
     plt.xlabel("Communication Round", fontsize=16)
     plt.ylabel("micro mAP", fontsize=16)
     plt.grid(True, linestyle='--', alpha=0.7)
 
-    # Legend and axis formatting
+    # Legende und Formatierung der Achsen
     plt.legend(fontsize=14, loc='lower right')
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
 
-    # Tight layout and save the figure
+    # Layout optimieren und Plot speichern
     plt.tight_layout()
     plt.savefig(output_path, dpi=300)
     plt.close()
 
 if __name__ == "__main__":
+    # Parse command line arguments
     parser = argparse.ArgumentParser(description="Plot micro mAP values from multiple log files.")
     parser.add_argument("inputs", nargs='+', type=str,
                         help="Paths to the log files and optionally labels if they are not valid file paths.")
@@ -102,7 +104,7 @@ if __name__ == "__main__":
                         help="Labels for each scenario (overrides positional labels if provided).")
     args = parser.parse_args()
 
-    # Separate input arguments into valid file paths and positional labels (if any)
+    # Trenne Eingabeargumente in gültige Dateipfade und optionale Positions-Labels
     file_list = []
     pos_labels = []
     for inp in args.inputs:
@@ -115,9 +117,9 @@ if __name__ == "__main__":
         print("No valid input files provided. Exiting.")
         exit(1)
 
-    # Determine labels: if --labels is provided, use these;
-    # else, if the number of non-file inputs equals the number of files, use them;
-    # otherwise, use default labels.
+    # Bestimme die Labels: Falls --labels angegeben ist, werden diese verwendet,
+    # ansonsten, wenn die Anzahl der nicht existierenden Dateipfade (pos_labels) gleich
+    # der Anzahl der Dateien ist, werden diese verwendet, sonst Default-Labels.
     if args.labels is not None:
         labels = args.labels
         if len(labels) != len(file_list):
@@ -128,16 +130,16 @@ if __name__ == "__main__":
     else:
         labels = [f"Scenario {i+1}" for i in range(len(file_list))]
 
-    # Extract micro mAP values for each input file
+    # Extrahiere die micro mAP Werte für jede Eingabedatei
     micro_mAP_data = []
     for file in file_list:
         data = extract_micro_mAP(file)
         micro_mAP_data.append(data)
 
-    # Desired number of rounds to plot
+    # Gewünschte Anzahl an Runden (z.B. 70)
     desired_rounds = 70
 
-    # Filter out datasets that do not have the required number of rounds
+    # Filtere Datensätze, die nicht mindestens die gewünschte Rundenzahl haben
     filtered_micro_mAP_data = []
     filtered_labels = []
     for data, label in zip(micro_mAP_data, labels):
