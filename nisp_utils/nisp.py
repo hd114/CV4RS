@@ -4,6 +4,8 @@ import torch.nn.functional as F
 import torchvision.models as models
 from utils.pytorch_models import ResNet18, ResNet50
 
+from fixedInfFS import InfFS
+
 def output_padding_based_on_stride(stride_to_deconvolve):
     if isinstance(stride_to_deconvolve, int):
         return stride_to_deconvolve-1
@@ -21,21 +23,19 @@ def nisp_Conv2d(conv_module: nn.Conv2d, scores_to_propagate: torch.Tensor, pause
             Convolution module over which importance scores are to be propagated back.
         scores_to_propagate (torch.Tensor):
             Importance scores of shape (C_out, H_out, W_out) to propagate back over convolution module.
-
+        pause_output_padding (bool):
+            if True doesn't add output padding to the transposed convolution
     Returns:
         S_in (torch.Tensor):
             Convolution input layer importance scores of shape (C_in, H_in, W_in), where H_in and W_in are inferred/resulting from
             conv parameters and scores_to_propagate size.
     """
-    weight_used = torch.abs(conv_module.weight)  # without transposing weights here!!
-    #print("Weight used shape:", weight_used.shape)
-    #print("Input scores shape:", scores.shape)
-    #assert(weight_used.shape[0] == scores_to_propagate.shape[0]) #TODO recheck
+    weight_used = torch.abs(conv_module.weight)
 
     # add batch dimension
     scores_batched = scores_to_propagate.detach().clone().unsqueeze(0)  # Now shape [1, 512, 4, 4]
 
-    S_in_4d = F.conv_transpose2d(
+    batched_propagated_scores = F.conv_transpose2d(
         scores_batched,
         weight_used,
         bias=None,
@@ -43,7 +43,7 @@ def nisp_Conv2d(conv_module: nn.Conv2d, scores_to_propagate: torch.Tensor, pause
         padding=conv_module.padding,
         output_padding=0 if pause_output_padding else output_padding_based_on_stride(conv_module.stride)
     )
-    return S_in_4d.squeeze(0)
+    return batched_propagated_scores.squeeze(0)
 
 def nisp_MaxPool2d(pool_module: nn.MaxPool2d, scores_to_propagate: torch.Tensor, pause_output_padding: bool) -> torch.Tensor:
     """
@@ -56,68 +56,50 @@ def nisp_MaxPool2d(pool_module: nn.MaxPool2d, scores_to_propagate: torch.Tensor,
             Pooling module  over which importance scores are to be propagated back.
         scores_to_propagate (torch.Tensor):
            Importance scores of shape (C, H_out, W_out) to propagate back over max pooling module.
+        pause_output_padding (bool):
+            if True doesn't add output padding to the transposed convolution
 
     Returns:
         S_in (torch.Tensor):
             Pooling input layer importance scores of shape (C, H_in, W_in) resulting from score propagation.
     """
 
-    # PHASE 1) Extract pooling parameters (kernel_size, stride, padding, dilation) for transposed convolution
-    #    Each can be int or tuple, so handle both.
-    if isinstance(pool_module.kernel_size, int):
-        kH, kW = pool_module.kernel_size, pool_module.kernel_size
-    else:
-        kH, kW = pool_module.kernel_size
-
-    if isinstance(pool_module.stride, int):
-        sH, sW = pool_module.stride, pool_module.stride
-    else:
-        sH, sW = pool_module.stride
-
-    if isinstance(pool_module.padding, int):
-        pH, pW = pool_module.padding, pool_module.padding
-    else:
-        pH, pW = pool_module.padding
-
-    if isinstance(pool_module.dilation, int):
-        dH, dW = pool_module.dilation, pool_module.dilation
-    else:
-        dH, dW = pool_module.dilation
-
-    C, H_out, W_out = scores_to_propagate.shape
+    # PHASE 1) Extract pooling params for transposed convolution
+    kernel_height, kernel_width = pool_module.kernel_size, pool_module.kernel_size if isinstance(pool_module.kernel_size,int) else pool_module.kernel_size
+    num_channels, _, _ = scores_to_propagate.shape
 
     # PHASE 2) Build transposed-conv kernel of all ones, shaped (C, 1, kH, kW),
     #    and set groups=C so each channel is handled separately.
     weight_ones = torch.ones(                                                                  # torch.abs(ones) == ones
-        (C, 1, kH, kW),
+        (num_channels, 1, kernel_height, kernel_width),
         dtype=scores_to_propagate.dtype,
         device=scores_to_propagate.device
     )
 
     # We treat S_out as (N=1, C, H_out, W_out) for the transposed convolution.
-    S_out_4d = scores_to_propagate.unsqueeze(0)
+    batched_scores_to_propagate = scores_to_propagate.unsqueeze(0)
 
     #PHASE 3) Perform grouped transposed convolution:
     #    - No bias
     #    - groups=C  ensures per-channel “stamping”
-    S_in_4d = F.conv_transpose2d(
-        S_out_4d,
+    batched_propagated_scores = F.conv_transpose2d(
+        batched_scores_to_propagate,
         weight_ones,
         bias=None,
-        stride=(sH, sW),
-        padding=(pH, pW),
+        stride=pool_module.stride,
+        padding=pool_module.padding,
         output_padding=0 if pause_output_padding else output_padding_based_on_stride(pool_module.stride),
-        groups=C,
-        dilation=(dH, dW)
+        groups=num_channels,
+        dilation=pool_module.dilation
     )
     # S_in_4d now has shape (1, C, H_in, W_in), but each (kH,kW) block is a sum of S_out.
     # We want a uniform distribution, so we divide by (kH*kW).
-    S_in_4d /= (kH * kW)                                                                        #Actually can be ignored
+    batched_propagated_scores /= (kernel_height * kernel_width)                                                                        #Actually can be ignored
 
     # Remove the batch dimension -> (C, H_in, W_in)
-    S_in = S_in_4d.squeeze(0)
+    propagated_scores = batched_propagated_scores.squeeze(0)
 
-    return S_in
+    return propagated_scores
 
 def nisp_AdaptiveAvgPool2d_autograd(
     pool_module: nn.AdaptiveAvgPool2d,
@@ -142,14 +124,12 @@ def nisp_AdaptiveAvgPool2d_autograd(
         S_in (torch.Tensor):
             Pooling input layer importance scores of shape (C, H_in, W_in) resulting from score propagation.
     """
-    C, H_in, W_in = input_shape
-    C_out, H_out, W_out = scores_to_propagate.shape
-    assert C == C_out, "Channel mismatch between scores_to_propagate and input_shape"
+    num_channels, H_in, W_in = input_shape
 
     # 1) Create a dummy input with requires_grad=True
     #    We'll add a batch dimension of 1 => (1, C, H_in, W_in).
     dummy_input = torch.zeros(
-        (1, C, H_in, W_in),
+        (1, num_channels, H_in, W_in),
         dtype=scores_to_propagate.dtype,
         device=scores_to_propagate.device,
         requires_grad=True
@@ -163,9 +143,9 @@ def nisp_AdaptiveAvgPool2d_autograd(
     out.backward(scores_to_propagate.detach().clone().unsqueeze(0))  # scores_to_propagate => (C, H_out, W_out), unsqueeze => (1, C, H_out, W_out)
 
     # 4) The gradient w.r.t. dummy_input is exactly our importance
-    S_in = dummy_input.grad.detach().squeeze(0)  # => shape (C, H_in, W_in)
+    propagated_scores = dummy_input.grad.detach().squeeze(0)  # => shape (C, H_in, W_in)
 
-    return S_in
+    return propagated_scores
 
 def zero_out_smallest_scores(importance_scores: torch.Tensor, pruning_rate: float) -> torch.Tensor:
     """
@@ -183,7 +163,7 @@ def zero_out_smallest_scores(importance_scores: torch.Tensor, pruning_rate: floa
 
     if k > 0:
         threshold = torch.kthvalue(scores_flattened, k).values  # Get the k-th smallest value
-        mask = scores_flattened >= threshold  # Mask: Keep only values >= threshold #TODO check scores distibution and decide between >= and >
+        mask = scores_flattened >= threshold  # Mask: Keep only values >= threshold
         scores_flattened = scores_flattened * mask  # Zero out smallest values
 
     return scores_flattened.view_as(importance_scores)
@@ -218,12 +198,6 @@ def zero_out_smallest_channels(importance_scores: torch.Tensor, pruning_rate: fl
     pruned_scores[smallest_k_indices, :, :] = 0
 
     return pruned_scores
-
-def frl_mag(final_module: nn.Linear) -> torch.Tensor:
-    return torch.abs(final_module.weight).sum(dim=0)
-
-def inf_fs(final_module: nn.Linear) -> torch.Tensor:
-    pass
 
 def nisp_leaf_module(custom_resnet: nn.Module, leaf_name: str, leaf_module: nn.Module, importance_scores: torch.Tensor, pruning_rate: float, pause_output_padding: bool, protected_modules: list[str]):
 
@@ -280,7 +254,7 @@ def nisp(custom_resnet: nn.Module, FRL_scores: torch.Tensor, pruning_rate: float
 
     scores_to_propagate = pruned_FRL_scores_flat.view(custom_resnet.FC_dim, 1, 1) # resnet18 final conv has 512 channels, resnet50 has 2048
 
-    scores_dict = {}#"FC":pruned_FRL_scores_flat.detach().clone()}
+    masks_dict = {}#"FC":pruned_FRL_scores_flat.detach().clone()}
 
     for name, block in reversed(nisp_blocks):
         #print("\nscores_to_propagate.shape: ",scores_to_propagate.shape)
@@ -292,7 +266,7 @@ def nisp(custom_resnet: nn.Module, FRL_scores: torch.Tensor, pruning_rate: float
 
             if block.downsample:
                 ##print(name + ".downsample.0")
-                scores_dict[name + ".downsample.0"] = scores_to_weight_mask(block.downsample._modules["0"],scores_to_propagate) #TODO think about why we assign scores to module before nisping over it; reason is that we use scores for >>OUTPUT<< neuron/channel/filter pruning
+                masks_dict[name + ".downsample.0"] = scores_to_weight_mask(block.downsample._modules["0"],scores_to_propagate) #TODO think about why we assign scores to module before nisping over it; reason is that we use scores for >>OUTPUT<< neuron/channel/filter pruning
                                                                                             #otherwise it would also be residual_scores.detach().clone() instead of scores_to_propagate.detach().clone()
                 residual_scores = nisp_leaf_module(custom_resnet,name+".downsample.0", block.downsample._modules["0"], scores_to_propagate, pruning_rate,pause_output_padding=pause_output_padding,protected_modules=protected_modules)
             #TODO think about this issue: between layers importance score magnitudes can differ.
@@ -301,33 +275,54 @@ def nisp(custom_resnet: nn.Module, FRL_scores: torch.Tensor, pruning_rate: float
             for main_path_module_name, main_path_module in reversed(list(block.named_children())): # named_children instead of modules so that the deeper nested "downsample.0" convolution is skipped over
                 if isinstance(main_path_module, nn.Conv2d):
                     ##print(name+"."+main_path_module_name)
-                    scores_dict[name+"."+main_path_module_name] = scores_to_weight_mask(main_path_module,scores_to_propagate)
+                    masks_dict[name+"."+main_path_module_name] = scores_to_weight_mask(main_path_module,scores_to_propagate)
                     scores_to_propagate = nisp_leaf_module(custom_resnet, name+"."+main_path_module_name, main_path_module, scores_to_propagate, pruning_rate,pause_output_padding=pause_output_padding,protected_modules=protected_modules)
 
             if block.downsample:
                 #assert(torch.equal(scores_to_propagate.shape, residual_scores.shape))
                 scores_to_propagate += residual_scores # skip and main path scores are merged, then propagated;this increases leads to shallow layers automatically having bigger scores than
+
+                scores_to_propagate = zero_out_smallest_channels(scores_to_propagate, pruning_rate)
         else:
             ##print("leaf module",name,type(block))
             if isinstance(block, (nn.Conv2d, nn.Linear)) and (name not in protected_modules):
-                scores_dict[name] = scores_to_weight_mask(block,scores_to_propagate)
+                masks_dict[name] = scores_to_weight_mask(block,scores_to_propagate)
             scores_to_propagate = nisp_leaf_module(custom_resnet, name, block, scores_to_propagate, pruning_rate,pause_output_padding=pause_output_padding, protected_modules=protected_modules)
 
     #print("\nInput layer scores: ", scores_to_propagate.shape)
     #print(scores_to_propagate)
 
-    return scores_dict
+    return masks_dict
+
+def frl_mag(final_module: nn.Linear) -> torch.Tensor:
+    return torch.abs(final_module.weight.detach().clone()).sum(dim=0)
 
 def nisp_mag(resnet: nn.Module,pruning_rate: float, protected_modules: list[str]):
-    return nisp(resnet, frl_mag(resnet.FC),pruning_rate,protected_modules)
+    frl_scores = frl_mag(resnet.FC)
+    return nisp(resnet, frl_scores,pruning_rate,protected_modules)
 
-if __name__ == '__main__':
+def inf_fs_scores(final_module: nn.Linear) -> torch.Tensor:
+    [ranked_indices, FRL_scores] = InfFS().infFS(final_module.weight.detach().clone().numpy(), None, 0.5, 0, 1) # verbose==1 for log prints
+    return torch.Tensor(FRL_scores)
+
+def nisp_fs(resnet: nn.Module,pruning_rate: float, protected_modules: list[str]):
+    frl_scores = inf_fs_scores(resnet.FC)
+    return nisp(resnet, frl_scores,pruning_rate,protected_modules)
+
+if __name__ == 'o__main__':
     model = ResNet18("r18", pretrained=True) # pretrained=False)
     model(torch.randn(1,10,120,120))
 
-    scores = nisp_mag(model, pruning_rate=0.5,protected_modules=["FC"])
-    print(scores.keys())
+    print(model.FC.weight.detach().clone().shape) #torch.transpose(model.FC.weight.detach().clone(),0,1)
+    RANKED = inf_fs_scores(final_module=model.FC)
+    print(RANKED)
+
+if __name__ == '__main__':
+    model = ResNet50("r50", pretrained=True) # pretrained=False)
+    model(torch.randn(1,10,120,120))
+
+    masks = nisp_fs(model, pruning_rate=0.5,protected_modules=["FC"])
+    print(masks.keys())
     print(model.conv1.weight.shape)
-    for key in scores.keys():
-        print(scores[key].shape)
-    #print(scores["conv1"].mean(dim=(1, 2)).view(-1,1,1,1).expand_as(model.conv1.weight).shape)#.max(dim=1,2).values.shape)
+    for key in masks.keys():
+        print(masks[key].shape)
