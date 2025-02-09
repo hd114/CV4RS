@@ -160,7 +160,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], 
                                   seasons=["Summer"]),
         normalize=True  # standardisation
         )
@@ -179,7 +179,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], 
                                   seasons="Summer"),
         normalize=True  # standardisation
         )
@@ -333,13 +333,13 @@ class GlobalClient:
             for csv_path in csv_paths
         ]
         
-        self.validation_set = BENv2DataSet(
+        self.validation_set = BENv2DataSet( 
         data_dirs=data_dirs,
         split="test",
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),  #"Finland", "Ireland", "Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"
         normalize=True # standardisation
         )
         
@@ -358,7 +358,7 @@ class GlobalClient:
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland", "Ireland", "Serbia"], seasons="Summer"),
+            patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=["Finland","Ireland","Serbia"], seasons="Summer"),  #"Finland", "Ireland", "Serbia"
             normalize=True # standardisation
         )
         
@@ -599,7 +599,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.52
+                pruning_rate = 0.37
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(

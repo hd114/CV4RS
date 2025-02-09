@@ -1,27 +1,0 @@
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
-  warnings.warn(
-/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
-  warnings.warn(msg)
-training:   0%|          | 0/58 [00:00<?, ?it/s]training:   0%|          | 0/58 [00:05<?, ?it/s]
-Traceback (most recent call last):
-  File "/home/paul/projects/CV4RS-orig/train.py", line 65, in <module>
-    train()
-  File "/home/paul/projects/CV4RS-orig/train.py", line 60, in train
-    global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
-  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 645, in train
-    self.communication_round(epochs)
-  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 714, in communication_round
-    model_updates = [client.train_one_round(epochs) for client in self.clients]
-  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 714, in <listcomp>
-    model_updates = [client.train_one_round(epochs) for client in self.clients]
-  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 218, in train_one_round
-    self.train_epoch()
-  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 267, in train_epoch
-    loss.backward()
-  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/_tensor.py", line 581, in backward
-    torch.autograd.backward(
-  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
-    _engine_run_backward(
-  File "/faststorage/paul/mamba/envs/pytorch_env/lib/python3.10/site-packages/torch/autograd/graph.py", line 825, in _engine_run_backward
-    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 32.00 MiB. GPU 0 has a total capacity of 31.74 GiB of which 17.38 MiB is free. Process 470974 has 23.24 GiB memory in use. Including non-PyTorch memory, this process has 8.47 GiB memory in use. Of the allocated memory 7.12 GiB is allocated by PyTorch, and 105.99 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
