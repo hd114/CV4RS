@@ -1,0 +1,1590 @@
+Using device: cuda:0
+Pre-filtered 12637 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6279 filtered patches indexed
+    6279 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12637 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3219 filtered patches indexed
+    3219 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12803 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6316 filtered patches indexed
+    6316 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12803 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3222 filtered patches indexed
+    3222 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12840 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6315 filtered patches indexed
+    6315 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12840 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3241 filtered patches indexed
+    3241 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12795 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6277 filtered patches indexed
+    6277 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12795 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3262 filtered patches indexed
+    3262 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12722 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6317 filtered patches indexed
+    6317 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12722 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3204 filtered patches indexed
+    3204 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12680 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6126 filtered patches indexed
+    6126 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12680 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3286 filtered patches indexed
+    3286 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12992 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6364 filtered patches indexed
+    6364 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12992 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3279 filtered patches indexed
+    3279 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12928 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    6340 filtered patches indexed
+    6340 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 12928 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3320 filtered patches indexed
+    3320 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init GLOBALClient VALIDATION dataset and dataloader
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    29135 filtered patches indexed
+    29135 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Loading BEN data for train...
+    237871 patches indexed
+    237871 filtered patches indexed
+    237871 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+==================================================
+ROUND 1/40
+==================================================
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.7300 | recall: 0.2739 | f1-score: 0.3983 | support: 40183 | mAP: 0.5263
+macro     precision: 0.1874 | recall: 0.1293 | f1-score: 0.1261 | support: 40183 | mAP: 0.3152
+
+==================================================
+ROUND 2/40
+==================================================
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.7651 | recall: 0.5633 | f1-score: 0.6489 | support: 40183 | mAP: 0.7355
+macro     precision: 0.3898 | recall: 0.2892 | f1-score: 0.3045 | support: 40183 | mAP: 0.4048
+
+==================================================
+ROUND 3/40
+==================================================
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.7691 | recall: 0.5958 | f1-score: 0.6715 | support: 40183 | mAP: 0.7370
+macro     precision: 0.4195 | recall: 0.3074 | f1-score: 0.3206 | support: 40183 | mAP: 0.4226
+
+==================================================
+ROUND 4/40
+==================================================
+Finale Anzahl der Pruning-Patches: 17
+Anzahl eindeutiger Klassen: 18
+Klassenverteilung in den Pruning-Patches (Häufigkeiten): {'Marine waters': 9, 'Transitional woodland, shrub': 7, 'Mixed forest': 7, 'Coniferous forest': 6, 'Land principally occupied by agriculture, with significant areas of natural vegetation': 2, 'Inland waters': 1, 'Broad-leaved forest': 2, 'Arable land': 4, 'Urban fabric': 1, 'Industrial or commercial units': 1, 'Coastal wetlands': 2, 'Inland wetlands': 2, 'Pastures': 4, 'Complex cultivation patterns': 1, 'Moors, heathland and sclerophyllous vegetation': 1, 'Natural grassland and sparsely vegetated areas': 1, 'Beaches, dunes, sands': 1, 'Permanent crops': 1}
+[INFO] Erstelle Prune Loader...
+[INFO] 2 Patches nach Filterung übrig.
+[SUCCESS] Prune Loader erfolgreich erstellt.
+Used Composite Rules:
+low_level_hidden_layer_rule: Epsilon
+mid_level_hidden_layer_rule: Gamma
+high_level_hidden_layer_rule: Gamma
+fully_connected_layers_rule: Epsilon
+softmax_rule: Epsilon
+Starting relevance computation and pruning mask generation.
+Type of components_relevances: <class 'collections.OrderedDict'>
+Layer: conv1
+Total layer relevance: 4.095873975668368e+20
+--------------------------------------------------
+Layer: encoder.4.0.conv1
+Total layer relevance: 2.2314565615872062e+20
+--------------------------------------------------
+Layer: encoder.4.0.conv2
+Total layer relevance: 1.5356520024552086e+20
+--------------------------------------------------
+Layer: encoder.4.0.conv3
+Total layer relevance: 3.3156685730236334e+19
+--------------------------------------------------
+Layer: encoder.4.0.downsample.0
+Total layer relevance: 3.3162792417817e+19
+--------------------------------------------------
+Layer: encoder.4.1.conv1
+Total layer relevance: 5.488363472892723e+17
+--------------------------------------------------
+Layer: encoder.4.1.conv2
+Total layer relevance: 3.45158140435628e+17
+--------------------------------------------------
+Layer: encoder.4.1.conv3
+Total layer relevance: 9.42664747885527e+16
+--------------------------------------------------
+Layer: encoder.4.2.conv1
+Total layer relevance: 5352345294602240.0
+--------------------------------------------------
+Layer: encoder.4.2.conv2
+Total layer relevance: 3354761910812672.0
+--------------------------------------------------
+Layer: encoder.4.2.conv3
+Total layer relevance: 1927543875698688.0
+--------------------------------------------------
+Layer: encoder.5.0.conv1
+Total layer relevance: 327349723725824.0
+--------------------------------------------------
+Layer: encoder.5.0.conv2
+Total layer relevance: 217173293268992.0
+--------------------------------------------------
+Layer: encoder.5.0.conv3
+Total layer relevance: 76347674198016.0
+--------------------------------------------------
+Layer: encoder.5.0.downsample.0
+Total layer relevance: 76180262748160.0
+--------------------------------------------------
+Layer: encoder.5.1.conv1
+Total layer relevance: 4490979704832.0
+--------------------------------------------------
+Layer: encoder.5.1.conv2
+Total layer relevance: 3467463098368.0
+--------------------------------------------------
+Layer: encoder.5.1.conv3
+Total layer relevance: 807010435072.0
+--------------------------------------------------
+Layer: encoder.5.2.conv1
+Total layer relevance: 101161189376.0
+--------------------------------------------------
+Layer: encoder.5.2.conv2
+Total layer relevance: 86450184192.0
+--------------------------------------------------
+Layer: encoder.5.2.conv3
+Total layer relevance: 19233296384.0
+--------------------------------------------------
+Layer: encoder.5.3.conv1
+Total layer relevance: 1793387776.0
+--------------------------------------------------
+Layer: encoder.5.3.conv2
+Total layer relevance: 1310552832.0
+--------------------------------------------------
+Layer: encoder.5.3.conv3
+Total layer relevance: 507044064.0
+--------------------------------------------------
+Layer: encoder.6.0.conv1
+Total layer relevance: 106954096.0
+--------------------------------------------------
+Layer: encoder.6.0.conv2
+Total layer relevance: 116358728.0
+--------------------------------------------------
+Layer: encoder.6.0.conv3
+Total layer relevance: 14253170.0
+--------------------------------------------------
+Layer: encoder.6.0.downsample.0
+Total layer relevance: 14224466.0
+--------------------------------------------------
+Layer: encoder.6.1.conv1
+Total layer relevance: 635147.5625
+--------------------------------------------------
+Layer: encoder.6.1.conv2
+Total layer relevance: 950974.875
+--------------------------------------------------
+Layer: encoder.6.1.conv3
+Total layer relevance: 323329.5
+--------------------------------------------------
+Layer: encoder.6.2.conv1
+Total layer relevance: 99071.15625
+--------------------------------------------------
+Layer: encoder.6.2.conv2
+Total layer relevance: 175929.34375
+--------------------------------------------------
+Layer: encoder.6.2.conv3
+Total layer relevance: 29130.09765625
+--------------------------------------------------
+Layer: encoder.6.3.conv1
+Total layer relevance: 4332.291015625
+--------------------------------------------------
+Layer: encoder.6.3.conv2
+Total layer relevance: 7456.796875
+--------------------------------------------------
+Layer: encoder.6.3.conv3
+Total layer relevance: 2537.674072265625
+--------------------------------------------------
+Layer: encoder.6.4.conv1
+Total layer relevance: 744.8118896484375
+--------------------------------------------------
+Layer: encoder.6.4.conv2
+Total layer relevance: 1473.0640869140625
+--------------------------------------------------
+Layer: encoder.6.4.conv3
+Total layer relevance: 586.6536865234375
+--------------------------------------------------
+Layer: encoder.6.5.conv1
+Total layer relevance: 348.36199951171875
+--------------------------------------------------
+Layer: encoder.6.5.conv2
+Total layer relevance: 872.0552978515625
+--------------------------------------------------
+Layer: encoder.6.5.conv3
+Total layer relevance: 149.0494842529297
+--------------------------------------------------
+Layer: encoder.7.0.conv1
+Total layer relevance: 30.16489028930664
+--------------------------------------------------
+Layer: encoder.7.0.conv2
+Total layer relevance: 152.7781982421875
+--------------------------------------------------
+Layer: encoder.7.0.conv3
+Total layer relevance: 58.573150634765625
+--------------------------------------------------
+Layer: encoder.7.0.downsample.0
+Total layer relevance: 74.85296630859375
+--------------------------------------------------
+Layer: encoder.7.1.conv1
+Total layer relevance: 7.689927577972412
+--------------------------------------------------
+Layer: encoder.7.1.conv2
+Total layer relevance: 35.692359924316406
+--------------------------------------------------
+Layer: encoder.7.1.conv3
+Total layer relevance: 30.139915466308594
+--------------------------------------------------
+Layer: encoder.7.2.conv1
+Total layer relevance: 7.299872398376465
+--------------------------------------------------
+Layer: encoder.7.2.conv2
+Total layer relevance: 29.98456573486328
+--------------------------------------------------
+Layer: encoder.7.2.conv3
+Total layer relevance: 29.99045181274414
+--------------------------------------------------
+Minimal retained neurons per layer:  0.040000000000000036
+--------------------------------------------------
+Global Pruning Mask
+Pruning-rate: 0.73
+Layer: conv1                Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.downsample.0 Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.1.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.1.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.1.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.2.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.2.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.2.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.0.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.0.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.0.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.0.downsample.0 Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.1.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.1.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.1.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.2.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.2.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.2.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.3.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.3.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.5.3.conv3    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.6.0.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.6.0.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.6.0.conv3    Num neurons pruned: 113851       % neurons pruned: 43.26%
+Layer: encoder.6.0.downsample.0 Num neurons pruned: 219564       % neurons pruned: 41.80%
+Layer: encoder.6.1.conv1    Num neurons pruned: 68675        % neurons pruned: 26.17%
+Layer: encoder.6.1.conv2    Num neurons pruned: 99115        % neurons pruned: 16.80%
+Layer: encoder.6.1.conv3    Num neurons pruned: 252631       % neurons pruned: 96.00%
+Layer: encoder.6.2.conv1    Num neurons pruned: 251125       % neurons pruned: 95.70%
+Layer: encoder.6.2.conv2    Num neurons pruned: 564725       % neurons pruned: 95.70%
+Layer: encoder.6.2.conv3    Num neurons pruned: 252631       % neurons pruned: 96.00%
+Layer: encoder.6.3.conv1    Num neurons pruned: 251125       % neurons pruned: 95.70%
+Layer: encoder.6.3.conv2    Num neurons pruned: 564725       % neurons pruned: 95.70%
+Layer: encoder.6.3.conv3    Num neurons pruned: 252631       % neurons pruned: 96.00%
+Layer: encoder.6.4.conv1    Num neurons pruned: 251125       % neurons pruned: 95.70%
+Layer: encoder.6.4.conv2    Num neurons pruned: 564725       % neurons pruned: 95.70%
+Layer: encoder.6.4.conv3    Num neurons pruned: 252631       % neurons pruned: 96.00%
+Layer: encoder.6.5.conv1    Num neurons pruned: 251125       % neurons pruned: 95.70%
+Layer: encoder.6.5.conv2    Num neurons pruned: 564725       % neurons pruned: 95.70%
+Layer: encoder.6.5.conv3    Num neurons pruned: 252631       % neurons pruned: 96.00%
+Layer: encoder.7.0.conv1    Num neurons pruned: 503275       % neurons pruned: 95.90%
+Layer: encoder.7.0.conv2    Num neurons pruned: 2263019      % neurons pruned: 95.90%
+Layer: encoder.7.0.conv3    Num neurons pruned: 1008558      % neurons pruned: 96.00%
+Layer: encoder.7.0.downsample.0 Num neurons pruned: 2015150      % neurons pruned: 96.00%
+Layer: encoder.7.1.conv1    Num neurons pruned: 1006059      % neurons pruned: 95.90%
+Layer: encoder.7.1.conv2    Num neurons pruned: 2263019      % neurons pruned: 95.90%
+Layer: encoder.7.1.conv3    Num neurons pruned: 1008558      % neurons pruned: 96.00%
+Layer: encoder.7.2.conv1    Num neurons pruned: 1006059      % neurons pruned: 95.90%
+Layer: encoder.7.2.conv2    Num neurons pruned: 2263019      % neurons pruned: 95.90%
+Layer: encoder.7.2.conv3    Num neurons pruned: 1008558      % neurons pruned: 96.00%
+Overall Percentage of pruned neurons across all layers: 82.43%
+Sending pruning mask to clients...
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.7937 | recall: 0.3455 | f1-score: 0.4814 | support: 40183 | mAP: 0.5849
+macro     precision: 0.1255 | recall: 0.1289 | f1-score: 0.1268 | support: 40183 | mAP: 0.4183
+
+==================================================
+ROUND 5/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8303 | recall: 0.4663 | f1-score: 0.5972 | support: 40183 | mAP: 0.7363
+macro     precision: 0.3728 | recall: 0.2238 | f1-score: 0.2486 | support: 40183 | mAP: 0.4571
+
+==================================================
+ROUND 6/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8331 | recall: 0.5871 | f1-score: 0.6888 | support: 40183 | mAP: 0.8094
+macro     precision: 0.5729 | recall: 0.3084 | f1-score: 0.3506 | support: 40183 | mAP: 0.4954
+
+==================================================
+ROUND 7/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8462 | recall: 0.6088 | f1-score: 0.7081 | support: 40183 | mAP: 0.8216
+macro     precision: 0.6158 | recall: 0.3292 | f1-score: 0.3818 | support: 40183 | mAP: 0.5113
+
+==================================================
+ROUND 8/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8495 | recall: 0.6100 | f1-score: 0.7101 | support: 40183 | mAP: 0.8254
+macro     precision: 0.6031 | recall: 0.3590 | f1-score: 0.4236 | support: 40183 | mAP: 0.5189
+
+==================================================
+ROUND 9/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8583 | recall: 0.6262 | f1-score: 0.7241 | support: 40183 | mAP: 0.8373
+macro     precision: 0.6482 | recall: 0.3543 | f1-score: 0.4145 | support: 40183 | mAP: 0.5298
+
+==================================================
+ROUND 10/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8568 | recall: 0.6457 | f1-score: 0.7364 | support: 40183 | mAP: 0.8434
+macro     precision: 0.6235 | recall: 0.3714 | f1-score: 0.4363 | support: 40183 | mAP: 0.5377
+
+==================================================
+ROUND 11/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8566 | recall: 0.6571 | f1-score: 0.7437 | support: 40183 | mAP: 0.8487
+macro     precision: 0.6235 | recall: 0.3914 | f1-score: 0.4597 | support: 40183 | mAP: 0.5445
+
+==================================================
+ROUND 12/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8503 | recall: 0.6805 | f1-score: 0.7560 | support: 40183 | mAP: 0.8562
+macro     precision: 0.6140 | recall: 0.4127 | f1-score: 0.4741 | support: 40183 | mAP: 0.5489
+
+==================================================
+ROUND 13/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8420 | recall: 0.6856 | f1-score: 0.7558 | support: 40183 | mAP: 0.8498
+macro     precision: 0.6247 | recall: 0.4154 | f1-score: 0.4741 | support: 40183 | mAP: 0.5510
+
+==================================================
+ROUND 14/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8438 | recall: 0.6706 | f1-score: 0.7473 | support: 40183 | mAP: 0.8549
+macro     precision: 0.6257 | recall: 0.4121 | f1-score: 0.4771 | support: 40183 | mAP: 0.5577
+
+==================================================
+ROUND 15/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8598 | recall: 0.6788 | f1-score: 0.7587 | support: 40183 | mAP: 0.8587
+macro     precision: 0.6443 | recall: 0.4035 | f1-score: 0.4669 | support: 40183 | mAP: 0.5583
+
+==================================================
+ROUND 16/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8585 | recall: 0.6796 | f1-score: 0.7586 | support: 40183 | mAP: 0.8608
+macro     precision: 0.6323 | recall: 0.4166 | f1-score: 0.4818 | support: 40183 | mAP: 0.5653
+
+==================================================
+ROUND 17/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8558 | recall: 0.7110 | f1-score: 0.7767 | support: 40183 | mAP: 0.8757
+macro     precision: 0.6327 | recall: 0.4400 | f1-score: 0.4976 | support: 40183 | mAP: 0.5726
+
+==================================================
+ROUND 18/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8704 | recall: 0.6964 | f1-score: 0.7738 | support: 40183 | mAP: 0.8782
+macro     precision: 0.6386 | recall: 0.4342 | f1-score: 0.4992 | support: 40183 | mAP: 0.5735
+
+==================================================
+ROUND 19/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8648 | recall: 0.7096 | f1-score: 0.7796 | support: 40183 | mAP: 0.8789
+macro     precision: 0.6503 | recall: 0.4313 | f1-score: 0.4966 | support: 40183 | mAP: 0.5742
+
+==================================================
+ROUND 20/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8705 | recall: 0.7186 | f1-score: 0.7873 | support: 40183 | mAP: 0.8854
+macro     precision: 0.6427 | recall: 0.4477 | f1-score: 0.5086 | support: 40183 | mAP: 0.5825
+
+==================================================
+ROUND 21/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8636 | recall: 0.7227 | f1-score: 0.7869 | support: 40183 | mAP: 0.8882
+macro     precision: 0.6379 | recall: 0.4568 | f1-score: 0.5191 | support: 40183 | mAP: 0.5867
+
+==================================================
+ROUND 22/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8648 | recall: 0.7265 | f1-score: 0.7896 | support: 40183 | mAP: 0.8890
+macro     precision: 0.6424 | recall: 0.4542 | f1-score: 0.5155 | support: 40183 | mAP: 0.5877
+
+==================================================
+ROUND 23/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8685 | recall: 0.7174 | f1-score: 0.7857 | support: 40183 | mAP: 0.8891
+macro     precision: 0.6355 | recall: 0.4610 | f1-score: 0.5231 | support: 40183 | mAP: 0.5888
+
+==================================================
+ROUND 24/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8751 | recall: 0.7282 | f1-score: 0.7949 | support: 40183 | mAP: 0.8958
+macro     precision: 0.6436 | recall: 0.4644 | f1-score: 0.5250 | support: 40183 | mAP: 0.5946
+
+==================================================
+ROUND 25/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8666 | recall: 0.7294 | f1-score: 0.7921 | support: 40183 | mAP: 0.8911
+macro     precision: 0.6420 | recall: 0.4683 | f1-score: 0.5273 | support: 40183 | mAP: 0.5903
+
+==================================================
+ROUND 26/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8800 | recall: 0.7255 | f1-score: 0.7953 | support: 40183 | mAP: 0.8965
+macro     precision: 0.6498 | recall: 0.4627 | f1-score: 0.5270 | support: 40183 | mAP: 0.5955
+
+==================================================
+ROUND 27/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8751 | recall: 0.7378 | f1-score: 0.8006 | support: 40183 | mAP: 0.8977
+macro     precision: 0.6459 | recall: 0.4743 | f1-score: 0.5335 | support: 40183 | mAP: 0.5950
+
+==================================================
+ROUND 28/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8729 | recall: 0.7286 | f1-score: 0.7942 | support: 40183 | mAP: 0.8950
+macro     precision: 0.6482 | recall: 0.4685 | f1-score: 0.5286 | support: 40183 | mAP: 0.5943
+
+==================================================
+ROUND 29/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8664 | recall: 0.7444 | f1-score: 0.8008 | support: 40183 | mAP: 0.8972
+macro     precision: 0.6487 | recall: 0.4751 | f1-score: 0.5313 | support: 40183 | mAP: 0.5957
+
+==================================================
+ROUND 30/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8736 | recall: 0.7322 | f1-score: 0.7967 | support: 40183 | mAP: 0.8973
+macro     precision: 0.6456 | recall: 0.4649 | f1-score: 0.5263 | support: 40183 | mAP: 0.5972
+
+==================================================
+ROUND 31/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8712 | recall: 0.7289 | f1-score: 0.7937 | support: 40183 | mAP: 0.8968
+macro     precision: 0.6391 | recall: 0.4692 | f1-score: 0.5304 | support: 40183 | mAP: 0.5985
+
+==================================================
+ROUND 32/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8649 | recall: 0.7336 | f1-score: 0.7939 | support: 40183 | mAP: 0.8936
+macro     precision: 0.6445 | recall: 0.4738 | f1-score: 0.5327 | support: 40183 | mAP: 0.5990
+
+==================================================
+ROUND 33/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8748 | recall: 0.7461 | f1-score: 0.8054 | support: 40183 | mAP: 0.9027
+macro     precision: 0.6476 | recall: 0.4890 | f1-score: 0.5444 | support: 40183 | mAP: 0.6028
+
+==================================================
+ROUND 34/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8679 | recall: 0.7421 | f1-score: 0.8001 | support: 40183 | mAP: 0.8979
+macro     precision: 0.6429 | recall: 0.4851 | f1-score: 0.5389 | support: 40183 | mAP: 0.6020
+
+==================================================
+ROUND 35/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8677 | recall: 0.7453 | f1-score: 0.8019 | support: 40183 | mAP: 0.8988
+macro     precision: 0.6348 | recall: 0.4887 | f1-score: 0.5413 | support: 40183 | mAP: 0.6008
+
+==================================================
+ROUND 36/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8672 | recall: 0.7541 | f1-score: 0.8068 | support: 40183 | mAP: 0.9026
+macro     precision: 0.6531 | recall: 0.4883 | f1-score: 0.5432 | support: 40183 | mAP: 0.6050
+
+==================================================
+ROUND 37/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8712 | recall: 0.7497 | f1-score: 0.8059 | support: 40183 | mAP: 0.9020
+macro     precision: 0.6439 | recall: 0.4947 | f1-score: 0.5451 | support: 40183 | mAP: 0.6039
+
+==================================================
+ROUND 38/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8731 | recall: 0.7516 | f1-score: 0.8078 | support: 40183 | mAP: 0.9024
+macro     precision: 0.6431 | recall: 0.4890 | f1-score: 0.5424 | support: 40183 | mAP: 0.6048
+
+==================================================
+ROUND 39/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8639 | recall: 0.7581 | f1-score: 0.8076 | support: 40183 | mAP: 0.9026
+macro     precision: 0.6438 | recall: 0.4968 | f1-score: 0.5468 | support: 40183 | mAP: 0.6037
+
+==================================================
+ROUND 40/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.8634 | recall: 0.7574 | f1-score: 0.8069 | support: 40183 | mAP: 0.9015
+macro     precision: 0.6325 | recall: 0.4990 | f1-score: 0.5460 | support: 40183 | mAP: 0.6068
+
+[{'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}, {'0': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '1': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '2': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '3': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '4': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '5': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '6': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '7': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '8': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '9': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '10': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '11': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '12': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '13': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '14': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '15': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '16': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '17': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, '18': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'micro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'macro avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'weighted avg': {'precision': [], 'recall': [], 'f1-score': [], 'support': []}, 'ap_mic': [], 'ap_mac': []}]

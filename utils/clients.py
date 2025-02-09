@@ -609,7 +609,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.97
+                pruning_rate = 0.73
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
