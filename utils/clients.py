@@ -159,7 +159,7 @@ class FLCLient:
         data_dirs=data_dirs,
         # For Mars use these paths
         split="train",
-        img_size=(10, 120, 120),
+        img_size=(10, 120, 120), 
         include_snowy=False,
         include_cloudy=False,
         patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME was before [csv_path], # to enable passing list of csv_paths
@@ -609,7 +609,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.73
+                pruning_rate = 0.37
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
