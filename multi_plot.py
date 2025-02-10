@@ -39,7 +39,7 @@ def smooth_curve(x, y, points=300):
     Returns:
         tuple: Smoothed x and y values.
     """
-    spline = make_interp_spline(x, y, k=3)  # Cubic spline
+    spline = make_interp_spline(x, y, k=1)  # Cubic spline
     x_smooth = np.linspace(x.min(), x.max(), points)
     y_smooth = spline(x_smooth)
     return x_smooth, y_smooth
@@ -81,7 +81,7 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path, benchmark1=None, benchma
     plt.fill_between(x_smooth, min_smooth, max_smooth, color='lightblue', alpha=0.5, label="Range (min-max)")
 
     # Plot average line for input data
-    plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2, label="Average micro mAP LRP (0.97 / 0.04)")
+    plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2, label="Average micro mAP LRP (0.52 / 0.04)")
 
     # Plot benchmark curves if available
     if benchmark1 is not None:

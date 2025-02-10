@@ -8,4 +8,4 @@
 #SBATCH --error=log/pytorch_job_%j.err
 
 # Run your Python script
-python ~/projects/CV4RS-orig/train.py
+python ~/projects/CV4RS-main/train.py
