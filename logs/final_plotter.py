@@ -44,10 +44,10 @@ def plot_micro_mAP_per_rate(to_plot):
     plt.figure(figsize=(16, 9))
 
     plt.plot(x_values, benchmark[2], marker=None, linestyle='solid', color='grey', linewidth=2, label=f"Scenario {scenario} Benchmark")
-    plt.plot(x_values, three[2], marker='^', linestyle='solid', color='green', linewidth=2, label=f"Scenario {scenario} {strategy}-pruning with rate 0.3")  # dashdot
-    plt.plot(x_values, five[2], marker='d', linestyle='solid', color='orange', linewidth=2, label=f"Scenario {scenario} {strategy}-pruning with rate 0.5")  # dashed
-    plt.plot(x_values, seven[2], marker='o', linestyle='solid', color='blue', linewidth=2, label=f"Scenario {scenario} {strategy}-pruning with rate 0.7")  # dashed
-    plt.plot(x_values, ninetyfive[2], marker='s', linestyle='solid', color='purple', linewidth=2, label=f"Scenario {scenario} {strategy}-pruning with rate 0.95")  # dotted
+    plt.plot(x_values, three[2], marker='^', linestyle='solid', color='green', linewidth=2, label=f"Scenario {scenario} {strategy} with rate 0.3")  # dashdot
+    plt.plot(x_values, five[2], marker='d', linestyle='solid', color='orange', linewidth=2, label=f"Scenario {scenario} {strategy} with rate 0.5")  # dashed
+    plt.plot(x_values, seven[2], marker='o', linestyle='solid', color='blue', linewidth=2, label=f"Scenario {scenario} {strategy} with rate 0.7")  # dashed
+    plt.plot(x_values, ninetyfive[2], marker='s', linestyle='solid', color='purple', linewidth=2, label=f"Scenario {scenario} {strategy} with rate 0.95")  # dotted
 
     # Vertical line for pruning round
     pruning_round = 4
@@ -59,13 +59,13 @@ def plot_micro_mAP_per_rate(to_plot):
     plt.grid(True, linestyle='--', alpha=0.7)
 
     # Legend and axis formatting
-    plt.legend(fontsize=14, loc='lower right', bbox_to_anchor=(1, 0.23))
+    plt.legend(fontsize=25, loc='lower right', bbox_to_anchor=(1, 0.23))
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
 
     # Tight layout and save the figure
     plt.tight_layout()
-    plt.savefig(f"plots/t3sce{scenario}_{strategy}.png", dpi=300)
+    plt.savefig(f"plots/t3sce{scenario}_{strategy}.png", dpi=200)
     plt.close()
 
 
@@ -85,7 +85,7 @@ def plot_micro_mAP_per_strat(to_plot):
 
     plt.plot(x_values, benchmark[2], marker=None, linestyle='solid', color='grey', linewidth=2, label=f"Scenario {scenario} Benchmark")
     plt.plot(x_values, random[2], marker='^', linestyle='solid', color='green', linewidth=2, label=f"Scenario {scenario} Random-pruning with rate {rate}")  # dashdot label=f"Scenario {scenario} L2-pruning with rate {rate}")  # dashed
-    plt.plot(x_values, nisp[2], marker='o', linestyle='solid', color='blue', linewidth=2, label=f"Scenario {scenario} Nisp-pruning with rate {rate}")  # dashed
+    plt.plot(x_values, nisp[2], marker='o', linestyle='solid', color='blue', linewidth=2, label=f"Scenario {scenario} FedNISP with rate {rate}")  # dashed
     # plt.plot(x_values, ninetyfive[2], marker='s', linestyle='solid', color='purple', linewidth=2, label=f"Scenario {scenario} {strategy}-pruning with rate 0.95") #dotted
 
     # Vertical line for pruning round
@@ -98,16 +98,52 @@ def plot_micro_mAP_per_strat(to_plot):
     plt.grid(True, linestyle='--', alpha=0.7)
 
     # Legend and axis formatting
-    plt.legend(fontsize=14, loc='lower right', bbox_to_anchor=(1, 0.23))
+    plt.legend(fontsize=25, loc='lower right', bbox_to_anchor=(1, 0.23))
     plt.xticks(fontsize=14)
     plt.yticks(fontsize=14)
 
     # Tight layout and save the figure
     plt.tight_layout()
-    plt.savefig(f"plots/sce{scenario}_{rate}.png", dpi=300)
+    plt.savefig(f"plots/sce{scenario}_{rate}.png", dpi=200)
     plt.close()
 
+def plot_micro_mAP_per_strat_incl_lrp(to_plot):
+    """
+        benchmark, random, nisp #l2,  all are lists of len 3. Each contain name,max value, value list
+        Plot the micro mAP values and save the plot in high resolution.
+    """
+    benchmark, random, nisp, lrp = to_plot #l2,
 
+    scenario = benchmark[0][0]
+    rate = benchmark[1] #random[0].split(" ")[-1]
+
+    x_values = np.arange(1, len(benchmark[2]) + 1)
+
+    plt.figure(figsize=(16, 9))
+
+    plt.plot(x_values, benchmark[2], marker=None, linestyle='solid', color='grey', linewidth=2, label=f"Scenario {scenario} Benchmark")
+    plt.plot(x_values, random[2], marker='^', linestyle='solid', color='green', linewidth=2, label=f"Scenario {scenario} Random-pruning with rate {rate}")  # dashdot label=f"Scenario {scenario} L2-pruning with rate {rate}")  # dashed
+    plt.plot(x_values, nisp[2], marker='o', linestyle='solid', color='blue', linewidth=2, label=f"Scenario {scenario} FedNISP with rate {rate}")  # dashed
+    plt.plot(x_values, lrp[2], marker='s', linestyle='solid', color='purple', linewidth=2, label=f"Scenario {scenario} LRP-pruning with rate {rate}") #dotted
+
+    # Vertical line for pruning round
+    pruning_round = 4
+    plt.axvline(x=pruning_round, color='gray', linestyle='--', linewidth=2, label="Pruning Round 4")
+
+    # Labels and grid
+    plt.xlabel("Communication Round", fontsize=16)
+    plt.ylabel("micro mAP", fontsize=16)
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    # Legend and axis formatting
+    plt.legend(fontsize=25, loc='lower right', bbox_to_anchor=(1, 0.23))
+    plt.xticks(fontsize=14)
+    plt.yticks(fontsize=14)
+
+    # Tight layout and save the figure
+    plt.tight_layout()
+    plt.savefig(f"plots_incl_lrp/sce{scenario}_{rate}.png", dpi=200)
+    plt.close()
 
 def is_log_name(path):
     return path[-4:]==".out"
@@ -134,6 +170,61 @@ if __name__ == "i__main__":
     for name in r18_names:
         extracted = extract_micro_mAP(name)
         print(np.max(extracted),"in round:",extracted.argmax()+1)
+
+
+if __name__ == "__main__":
+    path_names = os.listdir(".")
+    print("len(path_names)==",len(path_names))
+
+    t3_paths = list(filter(is_t3,path_names))
+    print("len(log_names)==",len(t3_paths),"\n\n")
+
+    #t3_logs = sorted(map(remove_job_suffix,t3_names))
+    #print("\n".join(sorted(t3_paths)))
+
+    values = {}
+
+    for t3_path in t3_paths:
+        t3_name = remove_job_suffix(t3_path)
+
+        t3_extracted = extract_micro_mAP(t3_path)
+
+        assert len(t3_extracted) == 40
+
+        if t3_name in values:
+            values[t3_name].append(t3_extracted)
+        else:
+            values[t3_name] = [t3_extracted]
+
+    means = {}
+
+    for key in sorted(values.keys()):
+        #print("\n",key,len(values[key]))
+        means[key] = sum(values[key])/len(values[key])
+        #print(key, means[key])
+        print(key,"\t",means[key].argmax(), max(means[key]) )
+
+
+    ##################################################################################################
+    scenarios = ["1", "2"]
+    strategies = ["random", "nisp","lrp"] # "L2",
+    pruning_rates = ["0.3","0.95"]#, ,"0.5", "0.7",
+
+    for scenario in scenarios:
+        for rate in pruning_rates:
+            benchmark = f"t3sce{scenario}_unpruned"
+            random = f"t3sce{scenario}_random_pr0{rate[2:]}"
+            nisp = f"t3sce{scenario}_nisp_pr0{rate[2:]}"
+            lrp = f"t3sce{scenario}_lrp_pr0{rate[2:]}"
+
+            to_plot = (
+                [scenario, rate, means[benchmark]],
+                ["Random-pruning", -1, means[random]],
+                ["FedNISP", -1, means[nisp]],
+                ["LRP-pruning", -1, means[lrp]],
+            )
+
+            plot_micro_mAP_per_strat_incl_lrp(to_plot)
 
 if __name__ == "__main__":
     path_names = os.listdir(".")
@@ -198,8 +289,8 @@ if __name__ == "__main__":
 
             to_plot = (
                 [scenario, rate, means[benchmark]],
-                ["Random", -1, means[random]],
-                ["Nisp", -1, means[nisp]],
+                ["Random-pruning", -1, means[random]],
+                ["FedNISP", -1, means[nisp]],
             )
 
             plot_micro_mAP_per_strat(to_plot)
