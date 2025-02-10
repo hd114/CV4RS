@@ -142,7 +142,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], 
         seasons=["Summer"]),
         )
         self.train_loader = DataLoader(
@@ -160,7 +160,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=None, #[csv_path], 
+        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], 
         seasons="Summer"),
         )
         self.val_loader = DataLoader(
