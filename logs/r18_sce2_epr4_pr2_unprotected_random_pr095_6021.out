@@ -1,0 +1,3262 @@
+scenario: 			 2 
+pruning strategy: 	 random 
+pruning rate: 		 0.95 
+pruning round: 		 2 
+communication rounds: 60 
+epochs per round:	 4
+Using device: cuda:0
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    7150 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    7180 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 10372 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    5941 filtered patches indexed
+    5941 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 10372 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    1871 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 1939 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    1323 filtered patches indexed
+    1323 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 1939 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    32 filtered patches indexed
+    32 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 8775 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    4206 filtered patches indexed
+    4206 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 8775 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    2151 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 16438 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    8037 filtered patches indexed
+    8037 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 16438 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4220 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient TRAIN dataset and dataloader
+Pre-filtered 4874 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    1692 filtered patches indexed
+    1692 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init FLClient VALIDATION dataset and dataloader
+Pre-filtered 4874 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    2039 filtered patches indexed
+    256 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+
+init GLOBALClient VALIDATION dataset and dataloader
+Pre-filtered 102397 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    26033 filtered patches indexed
+    26033 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Round 1/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.5316 | recall: 0.1878 | f1-score: 0.2776 | support: 76221 | mAP: 0.4450
+macro     precision: 0.2121 | recall: 0.0764 | f1-score: 0.0725 | support: 76221 | mAP: 0.3396
+
+Round 2/60
+----------
+Starting random pruning with rate 0.95
+encoder.4.0.conv1: out of 36864 parameters 35136.0 were pruned.
+encoder.4.0.conv2: out of 36864 parameters 35136.0 were pruned.
+encoder.4.1.conv1: out of 36864 parameters 35136.0 were pruned.
+encoder.4.1.conv2: out of 36864 parameters 35136.0 were pruned.
+encoder.5.0.conv1: out of 73728 parameters 70272.0 were pruned.
+encoder.5.0.conv2: out of 147456 parameters 140544.0 were pruned.
+encoder.5.0.downsample.0: out of 8192 parameters 7808.0 were pruned.
+encoder.5.1.conv1: out of 147456 parameters 140544.0 were pruned.
+encoder.5.1.conv2: out of 147456 parameters 140544.0 were pruned.
+encoder.6.0.conv1: out of 294912 parameters 279936.0 were pruned.
+encoder.6.0.conv2: out of 589824 parameters 559872.0 were pruned.
+encoder.6.0.downsample.0: out of 32768 parameters 31104.0 were pruned.
+encoder.6.1.conv1: out of 589824 parameters 559872.0 were pruned.
+encoder.6.1.conv2: out of 589824 parameters 559872.0 were pruned.
+encoder.7.0.conv1: out of 1179648 parameters 1119744.0 were pruned.
+encoder.7.0.conv2: out of 2359296 parameters 2239488.0 were pruned.
+encoder.7.0.downsample.0: out of 131072 parameters 124416.0 were pruned.
+encoder.7.1.conv1: out of 2359296 parameters 2239488.0 were pruned.
+encoder.7.1.conv2: out of 2359296 parameters 2239488.0 were pruned.
+Out of 11157504 parameters 10593536.0 were pruned.
+
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.3881 | recall: 0.3976 | f1-score: 0.3928 | support: 76221 | mAP: 0.3230
+macro     precision: 0.0613 | recall: 0.1579 | f1-score: 0.0879 | support: 76221 | mAP: 0.1757
+
+Round 3/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6777 | recall: 0.0369 | f1-score: 0.0700 | support: 76221 | mAP: 0.3861
+macro     precision: 0.0357 | recall: 0.0122 | f1-score: 0.0182 | support: 76221 | mAP: 0.2490
+
+Round 4/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.5374 | recall: 0.4143 | f1-score: 0.4679 | support: 76221 | mAP: 0.4917
+macro     precision: 0.2709 | recall: 0.1914 | f1-score: 0.1807 | support: 76221 | mAP: 0.3432
+
+Round 5/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6063 | recall: 0.4010 | f1-score: 0.4827 | support: 76221 | mAP: 0.5501
+macro     precision: 0.3220 | recall: 0.2112 | f1-score: 0.2134 | support: 76221 | mAP: 0.3807
+
+Round 6/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6230 | recall: 0.3772 | f1-score: 0.4699 | support: 76221 | mAP: 0.4907
+macro     precision: 0.3664 | recall: 0.1809 | f1-score: 0.1990 | support: 76221 | mAP: 0.3613
+
+Round 7/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6997 | recall: 0.4112 | f1-score: 0.5180 | support: 76221 | mAP: 0.5993
+macro     precision: 0.4382 | recall: 0.2153 | f1-score: 0.2338 | support: 76221 | mAP: 0.4068
+
+Round 8/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6372 | recall: 0.4265 | f1-score: 0.5110 | support: 76221 | mAP: 0.5052
+macro     precision: 0.3670 | recall: 0.2095 | f1-score: 0.2195 | support: 76221 | mAP: 0.3691
+
+Round 9/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6974 | recall: 0.4744 | f1-score: 0.5647 | support: 76221 | mAP: 0.6384
+macro     precision: 0.4413 | recall: 0.2610 | f1-score: 0.2906 | support: 76221 | mAP: 0.4329
+
+Round 10/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6521 | recall: 0.4533 | f1-score: 0.5348 | support: 76221 | mAP: 0.5581
+macro     precision: 0.3647 | recall: 0.2328 | f1-score: 0.2518 | support: 76221 | mAP: 0.4022
+
+Round 11/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6891 | recall: 0.4712 | f1-score: 0.5597 | support: 76221 | mAP: 0.6549
+macro     precision: 0.4375 | recall: 0.2421 | f1-score: 0.2772 | support: 76221 | mAP: 0.4429
+
+Round 12/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6559 | recall: 0.4924 | f1-score: 0.5625 | support: 76221 | mAP: 0.5675
+macro     precision: 0.3633 | recall: 0.2699 | f1-score: 0.2943 | support: 76221 | mAP: 0.3920
+
+Round 13/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.7035 | recall: 0.4665 | f1-score: 0.5610 | support: 76221 | mAP: 0.6477
+macro     precision: 0.4763 | recall: 0.2503 | f1-score: 0.2931 | support: 76221 | mAP: 0.4402
+
+Round 14/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6699 | recall: 0.4878 | f1-score: 0.5645 | support: 76221 | mAP: 0.5850
+macro     precision: 0.4217 | recall: 0.2621 | f1-score: 0.2885 | support: 76221 | mAP: 0.3832
+
+Round 15/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6842 | recall: 0.5024 | f1-score: 0.5794 | support: 76221 | mAP: 0.6648
+macro     precision: 0.4660 | recall: 0.2765 | f1-score: 0.3157 | support: 76221 | mAP: 0.4483
+
+Round 16/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6517 | recall: 0.5172 | f1-score: 0.5767 | support: 76221 | mAP: 0.6072
+macro     precision: 0.4139 | recall: 0.2852 | f1-score: 0.3022 | support: 76221 | mAP: 0.3902
+
+Round 17/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6794 | recall: 0.4828 | f1-score: 0.5645 | support: 76221 | mAP: 0.6471
+macro     precision: 0.4550 | recall: 0.2631 | f1-score: 0.2931 | support: 76221 | mAP: 0.4313
+
+Round 18/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6667 | recall: 0.4864 | f1-score: 0.5625 | support: 76221 | mAP: 0.6135
+macro     precision: 0.4163 | recall: 0.2745 | f1-score: 0.3036 | support: 76221 | mAP: 0.3950
+
+Round 19/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6589 | recall: 0.5049 | f1-score: 0.5717 | support: 76221 | mAP: 0.6108
+macro     precision: 0.4122 | recall: 0.2798 | f1-score: 0.3061 | support: 76221 | mAP: 0.3888
+
+Round 20/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6728 | recall: 0.4957 | f1-score: 0.5708 | support: 76221 | mAP: 0.6065
+macro     precision: 0.4121 | recall: 0.2798 | f1-score: 0.3105 | support: 76221 | mAP: 0.3911
+
+Round 21/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6632 | recall: 0.5156 | f1-score: 0.5801 | support: 76221 | mAP: 0.6342
+macro     precision: 0.4267 | recall: 0.2912 | f1-score: 0.3189 | support: 76221 | mAP: 0.4027
+
+Round 22/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6645 | recall: 0.5157 | f1-score: 0.5807 | support: 76221 | mAP: 0.5869
+macro     precision: 0.4424 | recall: 0.2936 | f1-score: 0.3157 | support: 76221 | mAP: 0.3837
+
+Round 23/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6559 | recall: 0.5210 | f1-score: 0.5807 | support: 76221 | mAP: 0.6234
+macro     precision: 0.4681 | recall: 0.3020 | f1-score: 0.3227 | support: 76221 | mAP: 0.4021
+
+Round 24/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6547 | recall: 0.5196 | f1-score: 0.5794 | support: 76221 | mAP: 0.5922
+macro     precision: 0.4428 | recall: 0.3072 | f1-score: 0.3283 | support: 76221 | mAP: 0.3837
+
+Round 25/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6447 | recall: 0.5306 | f1-score: 0.5821 | support: 76221 | mAP: 0.5824
+macro     precision: 0.4550 | recall: 0.3096 | f1-score: 0.3278 | support: 76221 | mAP: 0.3949
+
+Round 26/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6563 | recall: 0.5169 | f1-score: 0.5783 | support: 76221 | mAP: 0.6176
+macro     precision: 0.4706 | recall: 0.3026 | f1-score: 0.3259 | support: 76221 | mAP: 0.3997
+
+Round 27/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6517 | recall: 0.5219 | f1-score: 0.5796 | support: 76221 | mAP: 0.5795
+macro     precision: 0.4380 | recall: 0.3035 | f1-score: 0.3255 | support: 76221 | mAP: 0.3894
+
+Round 28/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6573 | recall: 0.5122 | f1-score: 0.5757 | support: 76221 | mAP: 0.5939
+macro     precision: 0.4421 | recall: 0.3014 | f1-score: 0.3270 | support: 76221 | mAP: 0.3924
+
+Round 29/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6460 | recall: 0.4987 | f1-score: 0.5629 | support: 76221 | mAP: 0.5716
+macro     precision: 0.4307 | recall: 0.2967 | f1-score: 0.3230 | support: 76221 | mAP: 0.3893
+
+Round 30/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6414 | recall: 0.5246 | f1-score: 0.5772 | support: 76221 | mAP: 0.5769
+macro     precision: 0.4373 | recall: 0.3147 | f1-score: 0.3329 | support: 76221 | mAP: 0.4011
+
+Round 31/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6387 | recall: 0.5082 | f1-score: 0.5660 | support: 76221 | mAP: 0.5758
+macro     precision: 0.4220 | recall: 0.3036 | f1-score: 0.3283 | support: 76221 | mAP: 0.3900
+
+Round 32/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6445 | recall: 0.5205 | f1-score: 0.5759 | support: 76221 | mAP: 0.5660
+macro     precision: 0.4226 | recall: 0.3066 | f1-score: 0.3285 | support: 76221 | mAP: 0.3825
+
+Round 33/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6454 | recall: 0.5202 | f1-score: 0.5761 | support: 76221 | mAP: 0.6111
+macro     precision: 0.4338 | recall: 0.3085 | f1-score: 0.3347 | support: 76221 | mAP: 0.4096
+
+Round 34/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6323 | recall: 0.5245 | f1-score: 0.5734 | support: 76221 | mAP: 0.5940
+macro     precision: 0.4228 | recall: 0.3128 | f1-score: 0.3339 | support: 76221 | mAP: 0.4043
+
+Round 35/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6281 | recall: 0.5110 | f1-score: 0.5635 | support: 76221 | mAP: 0.5647
+macro     precision: 0.4197 | recall: 0.2995 | f1-score: 0.3220 | support: 76221 | mAP: 0.3815
+
+Round 36/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6249 | recall: 0.5147 | f1-score: 0.5645 | support: 76221 | mAP: 0.6188
+macro     precision: 0.4329 | recall: 0.3193 | f1-score: 0.3418 | support: 76221 | mAP: 0.4222
+
+Round 37/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6270 | recall: 0.5107 | f1-score: 0.5629 | support: 76221 | mAP: 0.5670
+macro     precision: 0.4233 | recall: 0.3098 | f1-score: 0.3334 | support: 76221 | mAP: 0.3969
+
+Round 38/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6387 | recall: 0.5060 | f1-score: 0.5647 | support: 76221 | mAP: 0.5779
+macro     precision: 0.4261 | recall: 0.3075 | f1-score: 0.3339 | support: 76221 | mAP: 0.4047
+
+Round 39/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6188 | recall: 0.5192 | f1-score: 0.5647 | support: 76221 | mAP: 0.5723
+macro     precision: 0.4116 | recall: 0.3173 | f1-score: 0.3354 | support: 76221 | mAP: 0.3958
+
+Round 40/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6226 | recall: 0.5184 | f1-score: 0.5658 | support: 76221 | mAP: 0.5607
+macro     precision: 0.3962 | recall: 0.3147 | f1-score: 0.3296 | support: 76221 | mAP: 0.3918
+
+Round 41/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6181 | recall: 0.5116 | f1-score: 0.5599 | support: 76221 | mAP: 0.5700
+macro     precision: 0.4008 | recall: 0.3152 | f1-score: 0.3327 | support: 76221 | mAP: 0.3991
+
+Round 42/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6297 | recall: 0.4992 | f1-score: 0.5569 | support: 76221 | mAP: 0.5814
+macro     precision: 0.4147 | recall: 0.3028 | f1-score: 0.3294 | support: 76221 | mAP: 0.4041
+
+Round 43/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6276 | recall: 0.4986 | f1-score: 0.5557 | support: 76221 | mAP: 0.5626
+macro     precision: 0.4002 | recall: 0.3024 | f1-score: 0.3253 | support: 76221 | mAP: 0.3883
+
+Round 44/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------
+micro     precision: 0.6229 | recall: 0.5018 | f1-score: 0.5558 | support: 76221 | mAP: 0.5780
+macro     precision: 0.4657 | recall: 0.3127 | f1-score: 0.3375 | support: 76221 | mAP: 0.3985
+
+Round 45/60
+----------
+Epoch 1/4
+----------
+Epoch 2/4
+----------
+Epoch 3/4
+----------
+Epoch 4/4
+----------

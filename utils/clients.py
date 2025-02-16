@@ -304,7 +304,7 @@ class GlobalClient:
             include_snowy=False,
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]),
-                                      countries=csv_paths, #TODO ME ["Finland","Ireland","Serbia"],# "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"],
+                                      countries=["Finland","Ireland","Serbia"],#],#csv_paths, #TODO ME ["Finland","Ireland","Serbia"],# "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"],
                                       seasons="Summer"),
         )
         self.val_loader = DataLoader(
