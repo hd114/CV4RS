@@ -124,6 +124,7 @@ if __name__ == "__main__":
                 name = log_name[0][-1] + " " + "Benchmark"
             value_lists_dict[name] = extract_micro_mAP(log_path)
             max_values[name] = max(value_lists_dict[name])
+            print(name,max_values[name])
             max_value_indices[name] = value_lists_dict[name].index(max_values[name])
 
 

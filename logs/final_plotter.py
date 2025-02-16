@@ -272,12 +272,17 @@ if __name__ == "__main__":
             seven = f"t3sce{scenario}_{strategy}_pr07"
             ninetyfive = f"t3sce{scenario}_{strategy}_pr095"
 
+            if strategy == "random":
+                strategy_title = "Random-pruning"
+            elif strategy == "nisp":
+                strategy_title = "FedNISP"
+
             to_plot = (
                 [scenario,-1,means[benchmark]],
-                [strategy.capitalize(),-1,means[three]],
-                [strategy.capitalize(),-1,means[five]],
-                [strategy.capitalize(),-1,means[seven]],
-                [strategy.capitalize(),-1,means[ninetyfive]]
+                [strategy_title,-1,means[three]],
+                [strategy_title,-1,means[five]],
+                [strategy_title,-1,means[seven]],
+                [strategy_title,-1,means[ninetyfive]]
                 )
 
             plot_micro_mAP_per_rate(to_plot)
@@ -297,7 +302,7 @@ if __name__ == "__main__":
 
 
 
-if __name__ == "o__main__":
+if __name__ == "old__main__":
     scenarios = ["1", "2"]
     strategies = ["Random", "L2", "Nisp"]
     pruning_rates = ["0.3", "0.5", "0.7", "0.95"]
