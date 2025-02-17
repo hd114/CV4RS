@@ -1,12 +1,8 @@
-#import pandas as pd
-#from sklearn.model_selection import train_test_split
-#from pathlib import Path
 from utils.pytorch_models import ResNet18, ResNet50
 #from models.poolformer import create_poolformer_s12
 #from models.ConvMixer import create_convmixer
 #from models.MLPMixer import create_mlp_mixer
 from utils.clients import GlobalClient
-#from utils.pytorch_utils import start_cuda
 
 import argparse
 
@@ -31,16 +27,16 @@ def train():
 	"\nepochs per round:	", args.epr)
 
 
-	scenario = int(args.scenario) # 1 multiple countries per client, 2 one country per client
+	scenario = int(args.scenario) # 1: multiple countries per client, 2: one country per client
 
 	pruning_strategy = args.p_strategy # unpruned, random, l2, nisp
-	pruning_round = int(args.p_round) #4
-	pruning_rate = float(args.p_rate) #0.3
-	protected_modules = ["conv1","FC","encoder.4.0.conv1","encoder.4.0.conv2"]#,"encoder.4.0.conv3","encoder.4.0.downsample.0"]
+	pruning_round = int(args.p_round) # usually 4
+	pruning_rate = float(args.p_rate) # 0.3, 0.5, 0.7, 0.95
+	protected_modules = ["conv1","FC","encoder.4.0.conv1","encoder.4.0.conv2"]#,"encoder.4.0.conv3","encoder.4.0.downsample.0"] # depends on resnet implementation
 
 	csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"]
-	epochs = int(args.epr) #1
-	communication_rounds = int(args.comm) #40
+	epochs = int(args.epr) # usually 1 (per comm. round)
+	communication_rounds = int(args.comm) # usually 40 (but coverges later at around round 70)
 	channels = 10
 	num_classes = 19
 	#model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)

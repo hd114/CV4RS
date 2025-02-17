@@ -47,22 +47,24 @@ class ResNet18(nn.Module):
             self.apply(weights_init_kaiming)
             self.apply(fc_init_weights)
 
-        self.FC_dim = FC_dim #Facilitates reshaping the FRL_scores for the adaptAvgPool module nisp
+        self.FC_dim = FC_dim  # Facilitates reshaping the FRL_scores for the adaptAvgPool module nisp
         # TODO ME necessary addition for adaptiveAvgPool nisp function backward trick
-        self.adaptAvgPool_input_shape = [512, 4, 4] # initialization value based on patch shape (10, 120, 120)
+        self.adaptAvgPool_input_shape = [512, 4, 4]  # initialization value based on patch shape (10, 120, 120)
+
         def adaptAvgPool_input_shape_hook(adaptAvgPoolModule, inputs, outputs):
             # Forward hook that records shape of input to adaptiveAvgPool layer..needed for dummy_input in nisp function
             # `inputs` is a tuple; we want inputs[0].
             x = inputs[0]
-            self.adaptAvgPool_input_shape = x.shape[1:] #ignores batch_size dimension
+            self.adaptAvgPool_input_shape = x.shape[1:]  # ignores batch_size dimension
+
         hook_handle = resnet.avgpool.register_forward_hook(adaptAvgPool_input_shape_hook)
 
-    #TODO ME list the ResidualBlocks
+    # TODO ME list the ResidualBlocks
     def named_residualblocks(self):
         residual_blocks = []
         for name, module in self.named_modules():
             if isinstance(module, models.resnet.BasicBlock):
-                residual_blocks.append([name,module])
+                residual_blocks.append([name, module])
         return residual_blocks
 
     def list_nisp_blocks(self):
@@ -78,7 +80,7 @@ class ResNet18(nn.Module):
 
     def forward(self, x):
         x = self.encoder(x)
-        x = x.view(x.size(0), -1) # Same as x.flatten(start_dim=1)
+        x = x.view(x.size(0), -1)  # Same as x.flatten(start_dim=1)
         logits = self.FC(x)
         return logits
 
@@ -112,19 +114,20 @@ class ResNet50(nn.Module):
         )
         self.FC = nn.Linear(FC_dim, num_cls)
 
-        if not pretrained:                          # previously functions were applied regardless of pretrained value
+        if not pretrained:  # previously functions were applied regardless of pretrained value
             self.apply(weights_init_kaiming)
             self.apply(fc_init_weights)
 
+        self.FC_dim = FC_dim  # Facilitates reshaping the FRL_scores for the adaptAvgPool module nisp
+        # TODO ME necessary addition for adaptiveAvgPool nisp function backward trick
+        self.adaptAvgPool_input_shape = [2048, 4, 4]  # initialization value based on patch shape (10, 120, 120)
 
-        self.FC_dim = FC_dim #Facilitates reshaping the FRL_scores for the adaptAvgPool module nisp
-        #TODO ME necessary addition for adaptiveAvgPool nisp function backward trick
-        self.adaptAvgPool_input_shape = [2048, 4, 4] # initialization value based on patch shape (10, 120, 120)
         def adaptAvgPool_input_shape_hook(adaptAvgPoolModule, inputs, outputs):
             # Forward hook that records shape of input to adaptiveAvgPool layer..needed for dummy_input in nisp function
             # `inputs` is a tuple; we want inputs[0].
             x = inputs[0]
-            self.adaptAvgPool_input_shape = x.shape[1:] #ignores batch_size dimension
+            self.adaptAvgPool_input_shape = x.shape[1:]  # ignores batch_size dimension
+
         hook_handle = resnet.avgpool.register_forward_hook(adaptAvgPool_input_shape_hook)
 
     # TODO ME list the ResidualBlocks
@@ -132,22 +135,22 @@ class ResNet50(nn.Module):
         residual_blocks = []
         for name, module in self.named_modules():
             if isinstance(module, models.resnet.Bottleneck):
-                residual_blocks.append([name,module])
+                residual_blocks.append([name, module])
         return residual_blocks
 
     def list_nisp_blocks(self):
-        conv1_block = ["conv1",self.conv1]
-        maxpool_block = ["encoder.3",self.encoder[3]]
-        avgpool_block = ["encoder.8",self.encoder[-1]]
+        conv1_block = ["conv1", self.conv1]
+        maxpool_block = ["encoder.3", self.encoder[3]]
+        avgpool_block = ["encoder.8", self.encoder[-1]]
         blocks = (
                 [conv1_block, maxpool_block]
-                  + self.named_residualblocks()
-                  + [avgpool_block]
+                + self.named_residualblocks()
+                + [avgpool_block]
         )
         return blocks
 
     def forward(self, x):
         x = self.encoder(x)
-        x = x.view(x.size(0), -1) # Same as x.flatten(start_dim=1)
+        x = x.view(x.size(0), -1)  # Same as x.flatten(start_dim=1)
         logits = self.FC(x)
         return logits

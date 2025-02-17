@@ -9,8 +9,8 @@
 #   RANKED: vector of indicies of x_train from the best to the worst feature.
 
 import numpy as np
-from scipy import stats #TODO ME only these imports were missing, rest is PyIFS package code
-import math             #TODO ME only these imports were missing
+from scipy import stats             # IMPORTANT NOTE: only these imports were missing, rest is PyIFS package code
+import math                         # IMPORTANT NOTE: only these imports were missing
 
 class InfFS:
 

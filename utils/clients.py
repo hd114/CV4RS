@@ -31,14 +31,8 @@ from utils.pytorch_utils import (
 )
 
 import nisp_utils.pruning as pruning
-import random #TODO ME FOR RANDOM SUBSET OF FLCLIENT DS IN DS1
-random.seed(42) # To make country distribution reproducable
-
-'''data_dirs = {
-        "images_lmdb": "/data/kaiclasen/BENv2.lmdb",
-         "metadata_parquet": "/data/kaiclasen/metadata.parquet",
-         "metadata_snow_cloud_parquet": "/data/kaiclasen/metadata_for_patches_with_snow_cloud_or_shadow.parquet",
-    }'''
+import random
+random.seed(42)  # To make scenario 1 country distribution reproducable
 
 data_dirs = {
     "images_lmdb": "/faststorage/BigEarthNet-V2/BigEarthNet-V2-LMDB",
@@ -89,8 +83,8 @@ class PreFilter:
             return True
 
         self.filter_fn = filter_fn
-        #BUG from tqdm import tqdm                                                  wrong place for import probably bug
-        self.filtered_patches = set([x[0] for x in [x for x in metadata.values if filter_fn(x)]]) # set of patch_id of patches that matched filter, not shared with other clients because they use other countries for filter
+        self.filtered_patches = set([x[0] for x in [x for x in metadata.values if filter_fn(
+            x)]])  # set of patch_id of patches that matched filter, not shared with other clients because they use other countries for filter
         print(f"Pre-filtered {len(self.filtered_patches)} patches based on country and season (split ignored)")
 
     def filter(self, patch_id: str) -> bool:
@@ -133,7 +127,7 @@ class FLCLient:
             criterion_kwargs: dict = {"reduction": "mean"},
             num_classes: int = 19,
             device: torch.device = torch.device('cpu'),
-            dataset_filter: str = "serbia",                             #TODO seems unused ?!
+            dataset_filter: str = "serbia",  # unused
     ) -> None:
         self.model = model
         self.optimizer_constructor = optimizer_constructor
@@ -141,22 +135,23 @@ class FLCLient:
         self.criterion_constructor = criterion_constructor
         self.criterion_kwargs = criterion_kwargs
         self.num_classes = num_classes
-        self.dataset_filter = dataset_filter                             #TODO seems unused ?!
+        self.dataset_filter = dataset_filter  # unused
         self.results = init_results(self.num_classes)
 
         print("\ninit FLClient TRAIN dataset and dataloader")
         self.dataset = BENv2DataSet(
-            #max_len= batch_size,
+            # max_len= batch_size,
             data_dirs=data_dirs,
             # For Mars use these paths
             split="train",
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME was before [csv_path], # to enable passing list of csv_paths
-                                      seasons=["Summer"]),
+            patch_prefilter=PreFilter(
+                scenario1_split if scenario == 1 else pd.read_parquet(data_dirs["metadata_parquet"]),
+                countries=csv_path,
+                seasons=["Summer"]),
         )
-
 
         """ OLD SCENARIO 1
         #TODO ME Limit the dataset to a random subset with max 6k samples
@@ -179,17 +174,18 @@ class FLCLient:
         )
         self.device = device
 
-
         print("\ninit FLClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
-            max_len= batch_size,#TODO ME                                               SET VERY LOW TO SAVE TIME .. FLClient validation not used
+            max_len=batch_size,
             data_dirs=data_dirs,
-            split="test", #TODO why test not val?
+            split="test",
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
-            patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME [csv_path], # to enable passing list of csv_paths
-                                      seasons="Summer"),
+            patch_prefilter=PreFilter(
+                scenario1_split if scenario == 1 else pd.read_parquet(data_dirs["metadata_parquet"]),
+                countries=csv_path,
+                seasons="Summer"),
         )
         self.val_loader = DataLoader(
             self.validation_set,
@@ -217,7 +213,7 @@ class FLCLient:
             self.train_epoch()
 
         if validate:
-            report = self.validation_round()                                                            #TODO client side report
+            report = self.validation_round()  # TODO client side report
             self.results = update_results(self.results, report, self.num_classes)
 
         state_after = self.model.state_dict()
@@ -290,21 +286,23 @@ class GlobalClient:
         df_splits = np.array_split(shuffled_metadata, len(csv_paths))
 
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path,csv_path=(csv_paths if 1==scenario else csv_path), #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
-                            scenario=scenario, scenario1_split=scenario1_split, # introduced this for scenatio1
-                            num_classes=num_classes,# batch_size=512,
+            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path,
+                     csv_path=(csv_paths if 1 == scenario else csv_path), #csv_pathS DECIDES WHETHER ONE OR MULTIPLE
+                     scenario=scenario, scenario1_split=scenario1_split,
+                     num_classes=num_classes,  # batch_size=512,
                      dataset_filter=dataset_filter, device=self.device)
-            for csv_path,scenario1_split in zip(csv_paths,df_splits)
+            for csv_path, scenario1_split in zip(csv_paths, df_splits)
         ]
         print("\ninit GLOBALClient VALIDATION dataset and dataloader")
         self.validation_set = BENv2DataSet(
             data_dirs=data_dirs,
-            split="test", #TODO why test not val?
+            split="test",  # why test not val?
             img_size=(10, 120, 120),
             include_snowy=False,
             include_cloudy=False,
             patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]),
-                                      countries=["Finland","Ireland","Serbia"],#],#csv_paths, #TODO ME ["Finland","Ireland","Serbia"],# "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"],
+                                      countries=["Finland", "Ireland", "Serbia"],#,"Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"],
+                                      # or csv_paths
                                       seasons="Summer"),
         )
         self.val_loader = DataLoader(
@@ -340,24 +338,26 @@ class GlobalClient:
             elif isinstance(model, ResNet18):
                 self.results_path = f'results/resnet18_results_{dt}.pkl'
 
-    #def broadcast_pruning_mask(self, mask):            not necessary.. client.set_model creates deepcopy of server model
+    # def broadcast_pruning_mask(self, mask):            not necessary.. client.set_model creates deepcopy of server model
     #    for client in self.clients:
     #        client.set_pruning_mask(mask)
 
-    def train(self, pruning_strategy: str, pruning_round: int, pruning_rate: float, protected_modules: list[str], communication_rounds: int, epochs: int):
+    def train(self, pruning_strategy: str, pruning_round: int, pruning_rate: float, protected_modules: list[str],
+              communication_rounds: int, epochs: int):
         start = time.perf_counter()
         for com_round in range(1, communication_rounds + 1):
             print("Round {}/{}".format(com_round, communication_rounds))
             print("-" * 10)
 
             if ("unpruned" != pruning_strategy) and (com_round == pruning_round):
-                pruning_mask = pruning.prune_by_strategy(model=self.model,strategy=pruning_strategy,pruning_rate=pruning_rate,protected_modules=protected_modules)
-                #self.broadcast_pruning_mask() clients.set_model at end of round creates deepcopy of server model
+                pruning_mask = pruning.prune_by_strategy(model=self.model, strategy=pruning_strategy,
+                                                         pruning_rate=pruning_rate, protected_modules=protected_modules)
+                # self.broadcast_pruning_mask() clients.set_model at end of round creates deepcopy of server model
 
             self.communication_round(epochs)
             report = self.validation_round()
 
-            self.results = update_results(self.results, report, self.num_classes) # TODO metrics
+            self.results = update_results(self.results, report, self.num_classes)  # TODO metrics
             print_micro_macro(report)
 
             for client in self.clients:
