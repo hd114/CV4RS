@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/paul/projects/CV4RS-orig/train.py", line 8, in <module>
+    from utils.clients import GlobalClient
+  File "/home/paul/projects/CV4RS-orig/utils/clients.py", line 506
+    print(f"Softmax Rule: {self.configs["softmax_rule"]}")
+                                         ^^^^^^^^^^^^
+SyntaxError: f-string: unmatched '['

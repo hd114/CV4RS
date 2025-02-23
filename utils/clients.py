@@ -498,6 +498,13 @@ class GlobalClient:
             "softmax_rule": self.configs["softmax_rule"],
         }
 
+        print("Layer Rules:")
+        print(f"Low-Level Hidden Layer Rule: {self.configs['low_level_hidden_layer_rule']}")
+        print(f"Mid-Level Hidden Layer Rule: {self.configs['mid_level_hidden_layer_rule']}")
+        print(f"High-Level Hidden Layer Rule: {self.configs['high_level_hidden_layer_rule']}")
+        print(f"Fully Connected Layers Rule: {self.configs['fully_connected_layers_rule']}")
+        print(f"Softmax Rule: {self.configs["softmax_rule"]}")
+
         if self.configs["model_architecture"] == "vit_b_16":
             composite = get_vit_composite(
                 self.configs["model_architecture"], suggested_composite

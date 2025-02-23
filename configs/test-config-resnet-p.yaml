@@ -53,6 +53,6 @@ layer_types:
   Linear: Linear
   Conv2d: Conv2d
 
-pruning_round: 2   # number of communication round in which the pruning mask is built and distributed
+pruning_round: 5   # number of communication round in which the pruning mask is built and distributed
 pruning_rate: 0.99 # Percentage of neurons that are to be pruned
 retain_rate: 0.05  # Percentage of most important neurons per layer that cannot be pruned
