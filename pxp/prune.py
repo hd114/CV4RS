@@ -1,10 +1,11 @@
 from collections import OrderedDict
-
+import yaml
 import torch
 import torch.nn.utils.prune as prune
 
 from pxp.utils import ModelLayerUtils
 
+config_path = "../CV4RS-orig/configs/test-config-resnet-p.yaml"
 
 class LocalPruningOperations:
     def __init__(self):
@@ -161,6 +162,13 @@ class GlobalPruningOperations(LocalPruningOperations):
     def __init__(self, target_layer, layer_names):
         self.target_layer = target_layer
         self.layer_names = layer_names
+        with open(config_path, "r") as stream:
+            self.configs = yaml.safe_load(stream)
+
+    def get_max_pruning_rate(self):
+        """Calculate the max pruning rate based on the config."""
+        retain_rate = self.configs.get("retain_rate", 0.04)
+        return 1.0 - retain_rate
 
     def generate_global_pruning_mask(
         self,
@@ -242,7 +250,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         interval_indices,
         pruning_percentage,
         least_relevant_first,
-        max_pruning_per_layer=0.96,  # Maximal pruning percentage per layer
+        max_pruning_per_layer=None,
     ):
         """
         Generate the indices of concepts/filters to prune from each layer
@@ -257,6 +265,12 @@ class GlobalPruningOperations(LocalPruningOperations):
         Returns:
             dict: Dictionary of indices of concepts/filters to prune for each layer
         """
+
+        if max_pruning_per_layer is None:
+            max_pruning_per_layer = self.get_max_pruning_rate()
+        print("=" * 50)
+        print(f"Minimal retained neurons per layer: {(1 - max_pruning_per_layer):.2%}")
+
         # Flatten relevances for each layer into a single tensor
         flattened_concept_relevances = torch.cat(
             [value.flatten() for value in global_concept_maps.values()]
@@ -266,7 +280,6 @@ class GlobalPruningOperations(LocalPruningOperations):
         total_num_candidates = int(
             flattened_concept_relevances.shape[0] * pruning_percentage
         )
-        print("Minimal retained neurons per layer: ", (1-max_pruning_per_layer))
 
         # Sort the concepts/filters by their relevances and get the indices
         _, pruning_indices = flattened_concept_relevances.topk(
