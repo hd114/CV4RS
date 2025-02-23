@@ -1,0 +1,221 @@
+Using device: cuda:0
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    14805 filtered patches indexed
+    14805 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 30767 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    8209 filtered patches indexed
+    8209 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7150 filtered patches indexed
+    7150 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 15549 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    4263 filtered patches indexed
+    4263 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    7180 filtered patches indexed
+    7180 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 13683 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    3248 filtered patches indexed
+    3248 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for test...
+    119825 patches indexed
+    15720 filtered patches indexed
+    15720 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Pre-filtered 59999 patches based on country and season (split ignored)
+Loading BEN data for train...
+    237871 patches indexed
+    29135 filtered patches indexed
+    29135 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+Loading BEN data for train...
+    237871 patches indexed
+    237871 filtered patches indexed
+    237871 patches indexed considering max_len
+Merged metadata with snow/cloud metadata
+Loaded 549488 labels
+Loaded 549488 keys
+Loaded mapping created
+==================================================
+ROUND 1/40
+==================================================
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+Epoch 1/1
+----------
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.3622
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2525
+
+==================================================
+ROUND 2/40
+==================================================
+Final number of pruning patches: 17
+Number of unique classes: 18
+Class distribution in the pruning patches (frequencies): {'Marine waters': 9, 'Transitional woodland, shrub': 7, 'Mixed forest': 7, 'Coniferous forest': 6, 'Land principally occupied by agriculture, with significant areas of natural vegetation': 2, 'Inland waters': 1, 'Broad-leaved forest': 2, 'Arable land': 4, 'Urban fabric': 1, 'Industrial or commercial units': 1, 'Coastal wetlands': 2, 'Inland wetlands': 2, 'Pastures': 4, 'Complex cultivation patterns': 1, 'Moors, heathland and sclerophyllous vegetation': 1, 'Natural grassland and sparsely vegetated areas': 1, 'Beaches, dunes, sands': 1, 'Permanent crops': 1}
+[INFO] Creating Prune Loader...
+[INFO] 12 patches remaining after filtering.
+[SUCCESS] Prune Loader successfully created.
+Starting relevance computation and pruning mask generation.
+==================================================
+Minimal retained neurons per layer: 5.00%
+==================================================
+Pruning-rate: 0.99
+Layerwise Pruning Rates:
+Layer: conv1                Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.conv1    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.conv2    Num neurons pruned: 0            % neurons pruned: 0.00%
+Layer: encoder.4.0.conv3    Num neurons pruned: 14235        % neurons pruned: 85.55%
+Layer: encoder.4.0.downsample.0 Num neurons pruned: 14235        % neurons pruned: 85.55%
+Layer: encoder.4.1.conv1    Num neurons pruned: 15420        % neurons pruned: 93.75%
+Layer: encoder.4.1.conv2    Num neurons pruned: 34620        % neurons pruned: 93.75%
+Layer: encoder.4.1.conv3    Num neurons pruned: 15795        % neurons pruned: 94.92%
+Layer: encoder.4.2.conv1    Num neurons pruned: 15420        % neurons pruned: 93.75%
+Layer: encoder.4.2.conv2    Num neurons pruned: 34620        % neurons pruned: 93.75%
+Layer: encoder.4.2.conv3    Num neurons pruned: 15795        % neurons pruned: 94.92%
+Layer: encoder.5.0.conv1    Num neurons pruned: 31097        % neurons pruned: 94.53%
+Layer: encoder.5.0.conv2    Num neurons pruned: 139513       % neurons pruned: 94.53%
+Layer: encoder.5.0.conv3    Num neurons pruned: 62694        % neurons pruned: 94.92%
+Layer: encoder.5.0.downsample.0 Num neurons pruned: 124902       % neurons pruned: 94.92%
+Layer: encoder.5.1.conv1    Num neurons pruned: 62073        % neurons pruned: 94.53%
+Layer: encoder.5.1.conv2    Num neurons pruned: 139513       % neurons pruned: 94.53%
+Layer: encoder.5.1.conv3    Num neurons pruned: 62694        % neurons pruned: 94.92%
+Layer: encoder.5.2.conv1    Num neurons pruned: 62073        % neurons pruned: 94.53%
+Layer: encoder.5.2.conv2    Num neurons pruned: 139513       % neurons pruned: 94.53%
+Layer: encoder.5.2.conv3    Num neurons pruned: 62694        % neurons pruned: 94.92%
+Layer: encoder.5.3.conv1    Num neurons pruned: 62073        % neurons pruned: 94.53%
+Layer: encoder.5.3.conv2    Num neurons pruned: 139513       % neurons pruned: 94.53%
+Layer: encoder.5.3.conv3    Num neurons pruned: 62694        % neurons pruned: 94.92%
+Layer: encoder.6.0.conv1    Num neurons pruned: 124659       % neurons pruned: 94.92%
+Layer: encoder.6.0.conv2    Num neurons pruned: 560115       % neurons pruned: 94.92%
+Layer: encoder.6.0.conv3    Num neurons pruned: 249804       % neurons pruned: 94.92%
+Layer: encoder.6.0.downsample.0 Num neurons pruned: 498636       % neurons pruned: 94.92%
+Layer: encoder.6.1.conv1    Num neurons pruned: 249075       % neurons pruned: 94.92%
+Layer: encoder.6.1.conv2    Num neurons pruned: 560115       % neurons pruned: 94.92%
+Layer: encoder.6.1.conv3    Num neurons pruned: 249804       % neurons pruned: 94.92%
+Layer: encoder.6.2.conv1    Num neurons pruned: 249075       % neurons pruned: 94.92%
+Layer: encoder.6.2.conv2    Num neurons pruned: 560115       % neurons pruned: 94.92%
+Layer: encoder.6.2.conv3    Num neurons pruned: 249804       % neurons pruned: 94.92%
+Layer: encoder.6.3.conv1    Num neurons pruned: 249075       % neurons pruned: 94.92%
+Layer: encoder.6.3.conv2    Num neurons pruned: 560115       % neurons pruned: 94.92%
+Layer: encoder.6.3.conv3    Num neurons pruned: 249804       % neurons pruned: 94.92%
+Layer: encoder.6.4.conv1    Num neurons pruned: 249075       % neurons pruned: 94.92%
+Layer: encoder.6.4.conv2    Num neurons pruned: 560115       % neurons pruned: 94.92%
+Layer: encoder.6.4.conv3    Num neurons pruned: 249804       % neurons pruned: 94.92%
+Layer: encoder.6.5.conv1    Num neurons pruned: 249075       % neurons pruned: 94.92%
+Layer: encoder.6.5.conv2    Num neurons pruned: 560115       % neurons pruned: 94.92%
+Layer: encoder.6.5.conv3    Num neurons pruned: 249804       % neurons pruned: 94.92%
+Layer: encoder.7.0.conv1    Num neurons pruned: 498150       % neurons pruned: 94.92%
+Layer: encoder.7.0.conv2    Num neurons pruned: 2239974      % neurons pruned: 94.92%
+Layer: encoder.7.0.conv3    Num neurons pruned: 997785       % neurons pruned: 94.97%
+Layer: encoder.7.0.downsample.0 Num neurons pruned: 1993625      % neurons pruned: 94.97%
+Layer: encoder.7.1.conv1    Num neurons pruned: 995814       % neurons pruned: 94.92%
+Layer: encoder.7.1.conv2    Num neurons pruned: 2239974      % neurons pruned: 94.92%
+Layer: encoder.7.1.conv3    Num neurons pruned: 997785       % neurons pruned: 94.97%
+Layer: encoder.7.2.conv1    Num neurons pruned: 995814       % neurons pruned: 94.92%
+Layer: encoder.7.2.conv2    Num neurons pruned: 2239974      % neurons pruned: 94.92%
+Layer: encoder.7.2.conv3    Num neurons pruned: 997785       % neurons pruned: 94.97%
+==================================================
+Overall Percentage of pruned neurons across all layers: 94.61%
+==================================================
+Sending pruning mask to clients...
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+[INFO] Pruner and pruning mask received and stored.
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2595
+macro     precision: 0.0000 | recall: 0.0000 | f1-score: 0.0000 | support: 40183 | mAP: 0.2090
+
+==================================================
+ROUND 3/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.1951 | recall: 0.0587 | f1-score: 0.0903 | support: 40183 | mAP: 0.2599
+macro     precision: 0.0780 | recall: 0.0303 | f1-score: 0.0339 | support: 40183 | mAP: 0.1826
+
+==================================================
+ROUND 4/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+micro     precision: 0.3732 | recall: 0.2533 | f1-score: 0.3018 | support: 40183 | mAP: 0.3216
+macro     precision: 0.1468 | recall: 0.1130 | f1-score: 0.0842 | support: 40183 | mAP: 0.2320
+
+==================================================
+ROUND 5/40
+==================================================
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------
+Prune before sending to global...
+Epoch 1/1
+----------

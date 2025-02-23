@@ -2,7 +2,7 @@ import copy
 
 import numpy as np
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, Subset
 from torchvision import transforms
 from tqdm import tqdm
 import time
@@ -291,6 +291,9 @@ class GlobalClient:
         global config_path
         with open(config_path, "r") as stream:
             self.configs = yaml.safe_load(stream)
+        self.layer_types = {
+            key: getattr(torch.nn, value) for key, value in self.configs["layer_types"].items()
+        }
         self.pruning_round = self.configs.get("pruning_round", 4)
         self.model = model
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -404,202 +407,22 @@ class GlobalClient:
             print("=" * 50)
             print("ROUND {}/{}".format(com_round, communication_rounds))
             print("=" * 50)
-        
 
             # Pruning mask generation
             if com_round == self.pruning_round:
-                train_set = self.dataset
-                
-                # List of all available classes
-                all_classes = [
-                    'Transitional woodland, shrub', 'Coastal wetlands', 'Urban fabric', 'Arable land',
-                    'Moors, heathland and sclerophyllous vegetation', 'Inland wetlands', 'Permanent crops',
-                    'Industrial or commercial units', 'Mixed forest', 'Broad-leaved forest',
-                    'Natural grassland and sparsely vegetated areas',
-                    'Land principally occupied by agriculture, with significant areas of natural vegetation',
-                    'Marine waters', 'Beaches, dunes, sands', 'Coniferous forest', 'Pastures',
-                    'Inland waters', 'Agro-forestry areas', 'Complex cultivation patterns'
-                ]
+                self.prepare_pruning_loader()
+                global_pruning_mask = self.compute_relevance_and_generate_mask()
 
-                from collections import defaultdict
+                # Print statistics and distribute mask
+                self.print_pruning_statistics(global_pruning_mask)
+                self.distribute_pruning_mask(global_pruning_mask)
 
-                # Initialize a dictionary to track class frequencies in the patches
-                class_counts = defaultdict(int)
-                collected_classes = set()
-
-                # Iterate over the patches and collect classes until the desired number is reached
-                for patch in train_set.patches:
-                    patch_labels = train_set.BENv2Loader.lbls[patch]
-
-                    # Check if the patch contains new classes
-                    new_labels = [label for label in patch_labels if label not in collected_classes]
-
-                    # Add the patch if it contains new classes
-                    if new_labels:
-                        self.pruning_patches.append(patch)
-
-                        for label in patch_labels:
-                            collected_classes.add(label)
-                            class_counts[label] += 1
-
-                    if len(collected_classes) >= self.configs["domain_restriction_classes"]:
-                        break  # Stop when the required number of classes is collected
-
-                # Count the frequency of each class
-                total_class_counts = defaultdict(int)
-                for patch in self.pruning_patches:
-                    patch_labels = train_set.BENv2Loader.lbls[patch]
-                    for label in patch_labels:
-                        total_class_counts[label] += 1
-
-                print(f"Final number of pruning patches: {len(self.pruning_patches)}")
-                print(f"Number of unique classes: {len(collected_classes)}")
-                print(f"Class distribution in the pruning patches (frequencies): {dict(total_class_counts)}")
-
-                self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
-                
-                '''# RANDOM FEW-SHOT SAMPLE SUBSET (30 patches)
-                original_dataset = self.clients[0].train_loader.dataset
-                assert len(original_dataset) >= 30, "Dataset contains less then 30 patches!"
-                selected_indices = list(range(30)) 
-                subset_dataset = torch.utils.data.Subset(original_dataset, selected_indices)
-
-                # create new Dataloader containing the subset
-                train_loader1 = torch.utils.data.DataLoader(
-                    subset_dataset,
-                    batch_size=self.clients[0].train_loader.batch_size,
-                    shuffle=False,
-                    num_workers=self.clients[0].train_loader.num_workers,
-                    pin_memory=self.clients[0].train_loader.pin_memory
-                )
-                print(f"Created train_loader1 with {len(subset_dataset)} patches.")'''
-
-                
-                suggested_composite = {
-                    "low_level_hidden_layer_rule": self.configs["low_level_hidden_layer_rule"],
-                    "mid_level_hidden_layer_rule": self.configs["mid_level_hidden_layer_rule"],
-                    "high_level_hidden_layer_rule": self.configs["high_level_hidden_layer_rule"],
-                    "fully_connected_layers_rule": self.configs["fully_connected_layers_rule"],
-                    "softmax_rule": self.configs["softmax_rule"],
-                }
-                
-                print(f"Used Composite Rules:")
-                print(f"low_level_hidden_layer_rule: {self.configs['low_level_hidden_layer_rule']}")
-                print(f"mid_level_hidden_layer_rule: {self.configs['mid_level_hidden_layer_rule']}")
-                print(f"high_level_hidden_layer_rule: {self.configs['high_level_hidden_layer_rule']}")
-                print(f"fully_connected_layers_rule: {self.configs['fully_connected_layers_rule']}")
-                print(f"softmax_rule: {self.configs['softmax_rule']}")
-                
-                
-                if self.configs["model_architecture"] == "vit_b_16":
-                    composite = get_vit_composite(
-                        self.configs["model_architecture"], suggested_composite
-                    )
-                else:
-                    composite = get_cnn_composite(
-                        self.configs["model_architecture"], suggested_composite
-                    )
-                    
-                    
-                layer_types = {
-                    "Softmax": torch.nn.Softmax,
-                    "Linear": torch.nn.Linear,
-                    "Conv2d": torch.nn.Conv2d,
-                }
-                            
-                print("Starting relevance computation and pruning mask generation.")
-                
-                component_attributor = ComponentAttribution(
-                    "Relevance",
-                    "CNN",  
-                    layer_types[self.configs["pruning_layer_type"]],
-                )
-                
-                # Berechnung der Relevanzen
-                #print(f"Calling attribute with prune_loader: {self.prune_loader}, composite: {composite}")
-                #print(f"model: {self.model}, device: {self.device}")
-                model_copy = copy.deepcopy(self.model)
-                
-                components_relevances = component_attributor.attribute(
-                    model_copy,
-                    self.prune_loader, # train_loader1, # 
-                    composite,
-                    abs_flag=True,
-                    device=self.device,
-                )
-                
-                '''
-                # return layerwise relevances   
-                for layer_name, relevance in components_relevances.items():
-                    total_relevance = relevance.sum().item()
-                    print("-" * 50)
-                    print(f"Layer: {layer_name}")
-                    print(f"Total layer relevance: {total_relevance}")'''
-                    
-                    
-                    
-                layer_names = component_attributor.layer_names
-                pruner = GlobalPruningOperations(
-                    layer_types[self.configs["pruning_layer_type"]],
-                    layer_names,
-                )
-                
-                ################################################
-                # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = self.configs.get("pruning_rate", 0.97)
-                ################################################
-                
-                global_pruning_mask = pruner.generate_global_pruning_mask(
-                    self.model,
-                    components_relevances,
-                    pruning_precentage=pruning_rate,
-                    subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
-                    least_relevant_first=self.configs["least_relevant_first"],
-                    device=self.device,
-                )
-                #print(f"Global Pruning Mask: {global_pruning_mask}")
-                # print pruning mask statistics:
-                
-                print(f"Pruning-rate: {pruning_rate}")
-                print("=" * 50)
-                print("Layerwise Pruning Rates:")
-
-                total_global_elements = 0
-                total_global_zeros = 0  
-                
-                for layer, masks in global_pruning_mask.items():
-                    total_elements = 0
-                    total_zeros = 0
-
-                    for mask_type, mask_values in masks.items():
-                        if "weight" in mask_values and isinstance(mask_values["weight"], torch.Tensor):
-                            tensor = mask_values["weight"]
-                            total_elements += tensor.numel()
-                            total_zeros += torch.sum(tensor == 0).item()
-
-                    percentage_zeros = (total_zeros / total_elements) * 100 if total_elements > 0 else 0
-                    print(f"Layer: {layer:<20} Num neurons pruned: {total_zeros:<12} % neurons pruned: {percentage_zeros:.2f}%")
-
-                    total_global_elements += total_elements
-                    total_global_zeros += total_zeros
-
-                # Calculation of the total percentage of all zeros
-                global_percentage_zeros = (total_global_zeros / total_global_elements) * 100 if total_global_elements > 0 else 0
-                print("=" * 50)
-                print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_zeros:.2f}%")
-                print("=" * 50)
-                
-                # distribute mask among clients
-                print("Sending pruning mask to clients...")
-                for client in self.clients:
-                    client.set_pruner_and_mask(pruner, global_pruning_mask)
-                
             self.communication_round(epochs)
             report = self.validation_round()
 
             self.results = update_results(self.results, report, self.num_classes)
             print_micro_macro(report)
-            
+
             for client in self.clients:
                 client.set_model(self.model)
 
@@ -609,6 +432,165 @@ class GlobalClient:
         self.save_results()
         self.save_state_dict()
         return self.results, self.client_results
+
+
+    def prepare_pruning_loader(self):
+        """
+        Prepares the pruning dataset and DataLoader.
+        """
+        train_set = self.dataset
+        class_counts = defaultdict(int)
+        collected_classes = set()
+
+        for patch in train_set.patches:
+            patch_labels = train_set.BENv2Loader.lbls[patch]
+            new_labels = [label for label in patch_labels if label not in collected_classes]
+
+            if new_labels:
+                self.pruning_patches.append(patch)
+                for label in patch_labels:
+                    collected_classes.add(label)
+                    class_counts[label] += 1
+
+            if len(collected_classes) >= self.configs["domain_restriction_classes"]:
+                break  
+
+        total_class_counts = defaultdict(int)
+        for patch in self.pruning_patches:
+            patch_labels = train_set.BENv2Loader.lbls[patch]
+            for label in patch_labels:
+                total_class_counts[label] += 1
+
+        print(f"Final number of pruning patches: {len(self.pruning_patches)}")
+        print(f"Number of unique classes: {len(collected_classes)}")
+        print(f"Class distribution in the pruning patches (frequencies): {dict(total_class_counts)}")
+
+        self.prune_loader = create_prune_loader(self.clients[0].train_loader, self.pruning_patches)
+
+        '''# RANDOM FEW-SHOT SAMPLE SUBSET (30 patches)
+        original_dataset = self.clients[0].train_loader.dataset
+        assert len(original_dataset) >= 30, "Dataset contains less then 30 patches!"
+        selected_indices = list(range(30)) 
+        subset_dataset = torch.utils.data.Subset(original_dataset, selected_indices)
+
+        # create new Dataloader containing the subset
+        train_loader1 = torch.utils.data.DataLoader(
+            subset_dataset,
+            batch_size=self.clients[0].train_loader.batch_size,
+            shuffle=False,
+            num_workers=self.clients[0].train_loader.num_workers,
+            pin_memory=self.clients[0].train_loader.pin_memory
+        )
+        print(f"Created train_loader1 with {len(subset_dataset)} patches.")'''
+
+
+    def compute_relevance_and_generate_mask(self):
+        """
+        Computes relevance and generates the pruning mask.
+        """
+        print("Starting relevance computation and pruning mask generation.")
+
+        suggested_composite = {
+            "low_level_hidden_layer_rule": self.configs["low_level_hidden_layer_rule"],
+            "mid_level_hidden_layer_rule": self.configs["mid_level_hidden_layer_rule"],
+            "high_level_hidden_layer_rule": self.configs["high_level_hidden_layer_rule"],
+            "fully_connected_layers_rule": self.configs["fully_connected_layers_rule"],
+            "softmax_rule": self.configs["softmax_rule"],
+        }
+
+        if self.configs["model_architecture"] == "vit_b_16":
+            composite = get_vit_composite(
+                self.configs["model_architecture"], suggested_composite
+            )
+        else:
+            composite = get_cnn_composite(
+                self.configs["model_architecture"], suggested_composite
+            )
+
+        component_attributor = ComponentAttribution(
+            "Relevance",
+            "CNN",
+            self.layer_types[self.configs["pruning_layer_type"]],
+        )
+
+        model_copy = copy.deepcopy(self.model)
+
+        components_relevances = component_attributor.attribute(
+            model_copy,
+            self.prune_loader,
+            composite,
+            abs_flag=True,
+            device=self.device,
+        )
+
+        layer_names = component_attributor.layer_names
+
+        self.pruner = GlobalPruningOperations(
+            self.layer_types[self.configs["pruning_layer_type"]],
+            layer_names,
+        )
+
+        pruning_rate = self.configs.get("pruning_rate", 0.97)
+
+        return self.pruner.generate_global_pruning_mask(
+            self.model,
+            components_relevances,
+            pruning_precentage=pruning_rate,
+            subsequent_layer_pruning=self.configs["subsequent_layer_pruning"],
+            least_relevant_first=self.configs["least_relevant_first"],
+            device=self.device,
+        )
+
+
+
+    def print_pruning_statistics(self, global_pruning_mask):
+        """
+        Prints pruning statistics.
+        """
+        print(f"Pruning-rate: {self.configs.get('pruning_rate', 0.97)}")
+        print("=" * 50)
+        print("Layerwise Pruning Rates:")
+
+        total_global_elements = 0
+        total_global_zeros = 0  
+
+        for layer, masks in global_pruning_mask.items():
+            total_elements = 0
+            total_zeros = 0
+
+            for mask_type, mask_values in masks.items():
+                if "weight" in mask_values and isinstance(mask_values["weight"], torch.Tensor):
+                    tensor = mask_values["weight"]
+                    total_elements += tensor.numel()
+                    total_zeros += torch.sum(tensor == 0).item()
+
+            percentage_zeros = (total_zeros / total_elements) * 100 if total_elements > 0 else 0
+            print(f"Layer: {layer:<20} Num neurons pruned: {total_zeros:<12} % neurons pruned: {percentage_zeros:.2f}%")
+
+            total_global_elements += total_elements
+            total_global_zeros += total_zeros
+
+        global_percentage_zeros = (total_global_zeros / total_global_elements) * 100 if total_global_elements > 0 else 0
+        print("=" * 50)
+        print(f"Overall Percentage of pruned neurons across all layers: {global_percentage_zeros:.2f}%")
+        print("=" * 50)
+
+
+    def distribute_pruning_mask(self, global_pruning_mask):
+        """
+        Distributes the pruning mask to all clients.
+        """
+        print("Sending pruning mask to clients...")
+
+        for client in self.clients:
+            client.set_pruner_and_mask(
+                GlobalPruningOperations(
+                    self.layer_types[self.configs["pruning_layer_type"]],
+                    self.pruner.layer_names  # Verwende `self.pruner` aus `GlobalClient`
+                ),
+                global_pruning_mask
+            )
+
 
 
     def change_sizes(self, labels):
@@ -630,7 +612,7 @@ class GlobalClient:
                 labels = batch[4].to(self.device)
                 label_new = labels.clone()
                 #label_new=np.copy(labels)
-               # label_new=self.change_sizes(label_new)
+            # label_new=self.change_sizes(label_new)
 
                 logits = self.model(data)
                 probs = torch.sigmoid(logits).cpu().numpy()
@@ -680,17 +662,15 @@ class PruneDataSet(BENv2DataSet):
         self.patches = pruning_patches
         self.patches.sort()
 
-def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
-    print("[INFO] Validating the Prune Loader...")
+    def validate_prune_loader(train_loader, prune_loader, pruning_dataset):
+        print("[INFO] Validating the Prune Loader...")
 
-    for batch_idx, (train_batch, prune_batch) in enumerate(zip(train_loader, prune_loader)):
-        for i, (train_item, prune_item) in enumerate(zip(train_batch, prune_batch)):
-            assert train_item.shape[1:] == prune_item.shape[1:], \
-                f"Shape mismatch in batch {batch_idx}, element {i}: {train_item.shape} != {prune_item.shape}"
+        for batch_idx, (train_batch, prune_batch) in enumerate(zip(train_loader, prune_loader)):
+            for i, (train_item, prune_item) in enumerate(zip(train_batch, prune_batch)):
+                assert train_item.shape[1:] == prune_item.shape[1:], \
+                    f"Shape mismatch in batch {batch_idx}, element {i}: {train_item.shape} != {prune_item.shape}"
 
-    print("[SUCCESS] Prune Loader structure validated!")
-
-from torch.utils.data import DataLoader, Subset
+        print("[SUCCESS] Prune Loader structure validated!")
 
 def create_prune_loader(train_loader, pruning_patches):
     """
