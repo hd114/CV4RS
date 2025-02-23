@@ -269,7 +269,7 @@ class GlobalPruningOperations(LocalPruningOperations):
         if max_pruning_per_layer is None:
             max_pruning_per_layer = self.get_max_pruning_rate()
         print("=" * 50)
-        print(f"Minimal retained neurons per layer: {(1 - max_pruning_per_layer):.2%}")
+        print(f"Retain rate: {(1 - max_pruning_per_layer):.2%}")
 
         # Flatten relevances for each layer into a single tensor
         flattened_concept_relevances = torch.cat(

@@ -5,14 +5,7 @@ random_seed: 0
 # Options: Relevance, Random, IntGrad
 mode: Relevance
 init_relevance: 1
-# Optimization strategy according to paper
-# Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm, Flat
-low_level_hidden_layer_rule: Epsilon
-mid_level_hidden_layer_rule: Gamma
-high_level_hidden_layer_rule: Gamma
-fully_connected_layers_rule: Epsilon
-# LRP rule for Softmax according to AttnLRP paper
-softmax_rule: Epsilon
+
 # A parameter for the optimization process according to
 # paper, stating whether we should prioritize pruning
 # relevances near zero, or negatively large relevances
@@ -29,18 +22,15 @@ pruning_layer_type: Conv2d # for CNN
 #          Softmax # this
 subsequent_layer_pruning: Both
 
-
 model_architecture: resnet50
 # Checkpoint path of model
 checkpoint_path: None
 # Restricting output of the model (simpling the task) according to paper
 domain_restriction_classes: 19
 
-
 validation_dataloader_batchsize: 8
 pruning_dataloader_batchsize: 1
 reference_samples_per_class: 10
-
 
 wandb: False
 wandb_api_key: 
@@ -48,11 +38,20 @@ wandb_project_name:
 
 ### for CV4RS ###
 
+# Optimization strategy according to paper
+# Gamma, Epsilon, ZPlus, AlphaBeta, Pass, Norm, Flat
+low_level_hidden_layer_rule: Epsilon
+mid_level_hidden_layer_rule: Gamma
+high_level_hidden_layer_rule: Gamma
+fully_connected_layers_rule: Epsilon
+# LRP rule for Softmax according to AttnLRP paper
+softmax_rule: Epsilon
+
 layer_types:
   Softmax: Softmax
   Linear: Linear
   Conv2d: Conv2d
 
-pruning_round: 5   # number of communication round in which the pruning mask is built and distributed
+pruning_round: 4   # number of communication round in which the pruning mask is built and distributed
 pruning_rate: 0.99 # Percentage of neurons that are to be pruned
 retain_rate: 0.05  # Percentage of most important neurons per layer that cannot be pruned

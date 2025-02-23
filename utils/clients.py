@@ -125,6 +125,8 @@ class FLCLient:
         lmdb_path: str,
         val_path: str,
         csv_path: list[str],
+        scenario: int,
+        scenario1_split: pd.DataFrame,
         batch_size: int = 256,
         num_workers: int = 2,
         optimizer_constructor: callable = torch.optim.Adam,
@@ -153,7 +155,7 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], 
+        patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME was before [csv_path], # to enable passing list of csv_paths
                                   seasons=["Summer"]),
         normalize=True  # standardisation
         )
@@ -172,8 +174,8 @@ class FLCLient:
         img_size=(10, 120, 120),
         include_snowy=False,
         include_cloudy=False,
-        patch_prefilter=PreFilter(pd.read_parquet(data_dirs["metadata_parquet"]), countries=[csv_path], 
-                                  seasons="Summer"),
+        patch_prefilter=PreFilter(scenario1_split if scenario==1 else pd.read_parquet(data_dirs["metadata_parquet"]), countries=csv_path, #TODO ME was before [csv_path], # to enable passing list of csv_paths
+                                  seasons=["Summer"]),
         normalize=True  # standardisation
         )
         self.val_loader = DataLoader(
@@ -278,6 +280,7 @@ class GlobalClient:
     def __init__(
         self,
         model: torch.nn.Module,
+        scenario: int,
         lmdb_path: str,
         val_path: str,
         csv_paths: list[str],
@@ -294,6 +297,7 @@ class GlobalClient:
         self.layer_types = {
             key: getattr(torch.nn, value) for key, value in self.configs["layer_types"].items()
         }
+        self.scenario = scenario
         self.pruning_round = self.configs.get("pruning_round", 4)
         self.model = model
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -303,10 +307,17 @@ class GlobalClient:
         self.dataset_filter = dataset_filter
         self.aggregator = Aggregator()
         self.results = init_results(self.num_classes)
+        shuffled_metadata = pd.read_parquet(data_dirs["metadata_parquet"]).sample(frac=1)
+        df_splits = np.array_split(shuffled_metadata, len(csv_paths))
+
         self.clients = [
-            FLCLient(copy.deepcopy(self.model), lmdb_path, val_path, csv_path, num_classes=num_classes, dataset_filter=dataset_filter, device=self.device)
-            for csv_path in csv_paths
+                        FLCLient(copy.deepcopy(self.model), lmdb_path, val_path,csv_path=(csv_paths if 1==scenario else csv_path), #TODO ME csv_pathS  ---- THIS DECIDES WHETHER ONE COUNTRY PER CLIENT OR MULTIPLE
+                            scenario=scenario, scenario1_split=scenario1_split, # introduced this for scenatio1
+                            num_classes=num_classes, batch_size=256, dataset_filter=dataset_filter, device=self.device) #TODO ME SET BATCH SIZE TO 512
+            for csv_path,scenario1_split in zip(csv_paths,df_splits)
         ]
+        print("\ninit GLOBALClient VALIDATION dataset and dataloader")
+        
         
         self.validation_set = BENv2DataSet( 
         data_dirs=data_dirs,
@@ -503,7 +514,7 @@ class GlobalClient:
         print(f"Mid-Level Hidden Layer Rule: {self.configs['mid_level_hidden_layer_rule']}")
         print(f"High-Level Hidden Layer Rule: {self.configs['high_level_hidden_layer_rule']}")
         print(f"Fully Connected Layers Rule: {self.configs['fully_connected_layers_rule']}")
-        print(f"Softmax Rule: {self.configs["softmax_rule"]}")
+        print(f"Softmax Rule: {self.configs['softmax_rule']}")
 
         if self.configs["model_architecture"] == "vit_b_16":
             composite = get_vit_composite(
@@ -555,6 +566,7 @@ class GlobalClient:
         Prints pruning statistics.
         """
         print(f"Pruning-rate: {self.configs.get('pruning_rate', 0.97)}")
+        print(f"Scenario: {self.scenario}")
         print("=" * 50)
         print("Layerwise Pruning Rates:")
 
@@ -698,7 +710,7 @@ def create_prune_loader(train_loader, pruning_patches):
 
     # Filter out patches that are not in pruning_patches
     prune_dataset.patches = [patch for patch in prune_dataset.patches if patch in pruning_patches]
-    print(f"[INFO] {len(prune_dataset.patches)} patches remaining after filtering.")
+    #print(f"[INFO] {len(prune_dataset.patches)} patches remaining after filtering.")
 
     # Update dependent attributes
     prune_dataset.BENv2Loader.lbls = {patch: lbl for patch, lbl in prune_dataset.BENv2Loader.lbls.items() if patch in pruning_patches}

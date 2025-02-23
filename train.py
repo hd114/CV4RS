@@ -10,24 +10,26 @@ from utils.pytorch_utils import start_cuda
 
 
 def train():
-	csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"] #this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
-	epochs = 1
-	communication_rounds = 40
-	channels = 10
-	num_classes = 19
+    csv_paths = ["Finland","Ireland","Serbia", "Austria", "Belgium", "Lithuania", "Portugal", "Switzerland"] #this means that there are 3 clients that includes the images of a specific country. You can add Austria, Belgium, Lithuania, Portugal, Switzerland
+    scenario = 2 # 1 multiple countries per client, 2 one country per client 
+    epochs = 1
+    communication_rounds = 40
+    channels = 10
+    num_classes = 19
 	#model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)
 	#model = create_mlp_mixer(channels, num_classes)
 	#model = create_convmixer(channels=channels, num_classes=num_classes, pretrained=False)
     #model = create_poolformer_s12(in_chans=channels, num_classes=num_classes)
-	model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
-	global_client = GlobalClient(
+    model = ResNet50("ResNet50", channels=channels, num_cls=num_classes, pretrained=False)
+    global_client = GlobalClient(
+        scenario=scenario,
 		model=model,
 		lmdb_path="",
 		val_path="",
 		csv_paths=csv_paths,
 	)
-	global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
-	print(global_results)
+    global_model, global_results = global_client.train(communication_rounds=communication_rounds, epochs=epochs)
+    print(global_results)
 
 
 if __name__ == '__main__':
