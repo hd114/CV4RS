@@ -48,7 +48,7 @@ def smooth_curve(x, y, points=300):
     Returns:
         tuple: Smoothed x and y values.
     """
-    spline = make_interp_spline(x, y, k=3)  # Cubic spline
+    spline = make_interp_spline(x, y, k=1)  # Cubic spline
     x_smooth = np.linspace(x.min(), x.max(), points)
     y_smooth = spline(x_smooth)
     return x_smooth, y_smooth
@@ -101,16 +101,17 @@ def plot_micro_mAP(micro_mAP_data, labels, output_path):
     
     # Plot: Durchschnittslinie der anderen Szenarien (Spline-geglättet)
     plt.plot(x_smooth, mean_smooth, color='blue', linewidth=2,
-             label="Average micro mAP, LRP 97% prun + 4% retain")
+             label="Average micro mAP, LRP 97% prun + 5% retain, egge")
     
     # Plot: Benchmark-Daten (Spline-geglättet, k=3) als rote, gestrichelte Linie
     if benchmark_data is not None:
         x_bench, bench_smooth = smooth_curve(x_values, np.array(benchmark_data))
         plt.plot(x_bench, bench_smooth, linestyle='--', color='red', linewidth=2,
-                 label="Scenario 2 Benchmark (Spline k=3)")
+                 #label="Scenario 2 Benchmark (Spline k=3)")
+                 label="Scenario 2 Benchmark")
     
     # Füge eine senkrechte graue, gestrichelte Linie bei Round 4 ein
-    plt.axvline(x=4, color='gray', linestyle='-.', linewidth=1.5, label='Pruning Round')
+    plt.axvline(x=12, color='gray', linestyle='-.', linewidth=1.5, label='Pruning Round')
     
     # Achsenbeschriftung und Grid
     plt.xlabel("Communication Round", fontsize=16)

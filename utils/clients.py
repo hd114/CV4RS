@@ -438,7 +438,7 @@ class GlobalClient:
         
 
             # Pruning mask generation
-            if com_round == 4:
+            if com_round == 12:
                 # Trainings- und Validierungsdatensatz setzen
                 train_set = self.dataset
                 #val_set = self.validation_set
@@ -599,7 +599,7 @@ class GlobalClient:
                 
                 ################################################
                 # prune the model based on the pre-computed attibution flow (relevance values)
-                pruning_rate = 0.37
+                pruning_rate = 0.99
                 ################################################
                 
                 global_pruning_mask = pruner.generate_global_pruning_mask(
